@@ -21,11 +21,12 @@ Live demostration and documentation is [HERE](http://jszen.com/jquery-date-range
 ##Configuration##
 
 Usage: 
-
+```javascript
 	$('#dom-id').dateRangePicker(configObject);
+```
 
 The default configuration object is:
-
+```javascript
 	{
 		format: 'YYYY-MM-DD',
 		seperator: ' to ',
@@ -44,6 +45,7 @@ The default configuration object is:
 		minDays: 0,
 		maxDays: 0
 	}
+```
 
 You can use the following keys in the configObject to overwrite the default configuration:
 
@@ -86,7 +88,7 @@ if this is 0, means do not limit maximum days</i>
 ##Events##
 
 Two events will be triggered on the date range picker DOM
-
+```javascript
 	$('#dom-id')
 	.dateRangePicker()
 	.bind('datepicker-change',function(event,obj)
@@ -103,3 +105,4 @@ Two events will be triggered on the date range picker DOM
 	{
 		console.log('close');
 	});
+```
