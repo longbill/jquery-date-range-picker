@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Date Picker Demo</title>
+		<link rel="stylesheet" href="daterangepicker.css" />
+		<script src="jquery-1.5.1.min.js"></script>
+		<script src="moment.min.js"></script>
+		<script src="daterangepicker.min.js"></script>
+		<script src="demo.js"></script>
+		<style>
+		#wrapper
+		{
+			width:800px;
+			margin:0 auto;
+			color:#333;
+			font-family:Tahoma;
+			line-height:1.5;
+			font-size:14px;
+		}
+		</style>
+	</head>
+	<body>
+
+		<div id="wrapper">
+			<h1>jQuery Date Range Picker</h1>
+
+			<p>
+				jQuery Date Range Picker is a jQuery plugin that allows user to select a date range. 
+			</p>
+			<p>
+				Requires <a href="http://jquery.com/" target=_blank>jQuery</a> 1.3.2+ (MIT LICENSE), <a href="http://momentjs.com/" target=_blank>Moment</a> 2.0.0+ (MIT LICENSE)
+			</p>
+			<p>
+				Supports IE6+, Firefox, Chrome, Safari and other standard HTML5 browsers.
+			</p>
+			<p>
+				Supports multi-language, you can choose a defined language or set it to auto-detect mode. <br>
+				You can also define new languages for it.
+			</p>
+			<p>
+				The HTML DOMs generated is fully CSS styled, you can change the skin by editting the CSS file easily.
+			<p>
+
+			<p>
+				I accept further customization job if you require more functions. My personal blog is <a href="http://jszen.com" target=_blank>http://jszen.com</a>
+			</p>
+
+			<h2>Demonstrations</h2>
+
+			<p>
+				Default settings: <input id="date-range1" size="40" value="">
+			</p>
+
+			<p>
+				Default settings with default value: <input id="date-range2" size="40" value="2012-01-01 to 2012-02-11">
+			</p>
+
+			<p>
+				Force to Chinese: <input id="date-range3" size="40" value="">
+			</p>
+
+			<p>
+				Force to English: <input id="date-range4" size="40" value="">
+			</p>
+
+			<p>
+				Use custom language: <input id="date-range4-1" size="40" value="">
+			</p>
+
+			<p>
+				Select a date range after 2014-11-20: <input id="date-range5" size="40" value="">
+			</p>
+
+			<p>
+				Select a date range between 2013-01-10 to 2013-02-10: <input id="date-range6" size="40" value="">
+			</p>
+
+			<p>
+				Select a date range between 3 days and 7 days: <input id="date-range7" size="40" value="">
+			</p>
+
+			<p>
+				Set start of week to Monday: <input id="date-range8" size="40" value="">
+			</p>
+
+			<p>
+				Use SPAN instead of INPUT: <span id="date-range9" style="background-color:#49e; color:white;padding:3px; cursor:pointer; border-radius:4px;">select</span>
+			</p>
+
+			<p>
+				User another date format: <input id="date-range10" size="60" value="">
+			</p>
+
+			<p>
+				Change the seperator between date strings: <input id="date-range11" size="40" value="">
+			</p>
+
+			<h2>Configuration</h2>
+			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
+			<p>
+				The default configuration object is:<br>
+				<pre>{
+	format: 'YYYY-MM-DD',
+	seperator: ' to ',
+	language: 'auto',
+	startOfWeek: 'sunday',// or sunday
+	getValue: function()
+	{
+		return this.value;
+	},
+	setValue: function(s)
+	{
+		this.value = s;
+	},
+	startDate: false,
+	endDate: false,
+	minDays: 0,
+	maxDays: 0
+}</pre>
+			</p>
+			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
+
+<pre>
+<b>format (String)</b>
+	<i>The date format string used for Moment.
+	click <a href="http://momentjs.com/docs/#/displaying/format/" target=_blank>here</a> to see Moment documentation</i>
+
+<b>seperator (String)</b>
+	<i>The seperator string used between date strings</i>
+
+<b>language (String)</b>
+	<i>pre-defined languages are "en" and "cn", you can define your own 
+ 	language then set this to the name of new language.
+	You can also set this to "auto" to make it auto detect browser language.</i>
+
+<b>startOfWeek (String)</b>
+	<i>"sunday" or "monday"</i>
+
+<b>getValue (Function)</b>
+	<i>This function is called when get date range string from DOM
+	When it is called, the context of this function is set to the datepicker DOM</i>
+
+<b>setValue (Function)</b>
+	<i>This function is called when set date range string to DOM</i>
+
+<b>startDate (String or false)</b>
+	<i>This string defines the earliest date which is allowed for the user</i>
+
+<b>endDate (String or false)</b>
+	<i>This string defines the latest date which is allowed for the user</i>
+	
+<b>minDays (Number)</b>
+	<i>This number defines the minimum days of the selected range
+	if this is 0, means do not limit minimum days</i>
+
+<b>maxDays (Number)</b>
+	<i>This number defines the maximum days of the selected range
+	if this is 0, means do not limit maximum days</i>	
+</pre>
+		
+
+	<h2>Events</h2>
+	<p>Two events will be triggerred on the date range picker DOM</p>
+<pre>$('#dom-id')
+.dateRangePicker()
+.bind('datepicker-change',function(event,obj)
+{
+	console.log(obj);
+	// obj will be something like this:
+	// {
+	// 		date1: (Date object of the earlier date),
+	// 		date2: (Date object of the later date),
+	//	 	value: "2013-06-05 to 2013-06-07"
+	// }
+})
+.bind('datepicker-close',function()
+{
+	console.log('close');
+});
+</pre>
+
+	<h2>License</h2>
+	<pre>
+This date range picker plugin is under <a href="http://themeforest.net/licenses/tools" target=_blank>Codecanyon Tools License</a>
+
+jquery-1.5.1.min.js is under MIT LICENSE
+
+moment.js & moment.min.js are under MIT LICENSE
+	</pre>
+
+	</body>
+</html>
