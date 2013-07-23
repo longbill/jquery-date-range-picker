@@ -22,29 +22,29 @@ Live demostration and documentation is [HERE](http://jszen.com/jquery-date-range
 
 Usage: 
 ```javascript
-	$('#dom-id').dateRangePicker(configObject);
+$('#dom-id').dateRangePicker(configObject);
 ```
 
 The default configuration object is:
 ```javascript
+{
+	format: 'YYYY-MM-DD',
+	seperator: ' to ',
+	language: 'auto',
+	startOfWeek: 'sunday',// or monday
+	getValue: function()
 	{
-		format: 'YYYY-MM-DD',
-		seperator: ' to ',
-		language: 'auto',
-		startOfWeek: 'sunday',// or sunday
-		getValue: function()
-		{
-			return this.value;
-		},
-		setValue: function(s)
-		{
-			this.value = s;
-		},
-		startDate: false,
-		endDate: false,
-		minDays: 0,
-		maxDays: 0
-	}
+		return this.value;
+	},
+	setValue: function(s)
+	{
+		this.value = s;
+	},
+	startDate: false,
+	endDate: false,
+	minDays: 0,
+	maxDays: 0
+}
 ```
 
 You can use the following keys in the configObject to overwrite the default configuration:
@@ -89,20 +89,20 @@ if this is 0, means do not limit maximum days</i>
 
 Two events will be triggered on the date range picker DOM
 ```javascript
-	$('#dom-id')
-	.dateRangePicker()
-	.bind('datepicker-change',function(event,obj)
-	{
-		console.log(obj);
-		// obj will be something like this:
-		// {
-		// 		date1: (Date object of the earlier date),
-		// 		date2: (Date object of the later date),
-		//	 	value: "2013-06-05 to 2013-06-07"
-		// }
-	})
-	.bind('datepicker-close',function()
-	{
-		console.log('close');
-	});
+$('#dom-id')
+.dateRangePicker()
+.bind('datepicker-change',function(event,obj)
+{
+	console.log(obj);
+	// obj will be something like this:
+	// {
+	// 		date1: (Date object of the earlier date),
+	// 		date2: (Date object of the later date),
+	//	 	value: "2013-06-05 to 2013-06-07"
+	// }
+})
+.bind('datepicker-close',function()
+{
+	console.log('close');
+});
 ```
