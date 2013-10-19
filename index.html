@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="daterangepicker.css" />
 		<script src="jquery-1.5.1.min.js"></script>
 		<script src="moment.min.js"></script>
-		<script src="daterangepicker.min.js"></script>
+		<script src="daterangepicker.js"></script>
 		<script src="demo.js"></script>
 		<style>
 		#wrapper
@@ -89,7 +89,31 @@
 			</p>
 
 			<p>
-				User another date format: <input id="date-range10" size="60" value="">
+				Use two inputs: <span id="two-inputs"><input id="date-range200" size="20" value=""> to <input id="date-range201" size="20" value=""></span>
+			</p>
+
+			<p>
+				Use another date format: <input id="date-range10" size="60" value="">
+			</p>
+
+			<p>
+				Use future date shortcuts: <input id="date-range101" size="60" value="">
+			</p>
+
+			<p>
+				Use past date shortcuts: <input id="date-range102" size="60" value="">
+			</p>
+
+			<p>
+				Use custom shortcuts: <input id="date-range100" size="60" value="">
+			</p>
+
+			<p>
+				Hide shortcuts: <input id="date-range104" size="60" value="">
+			</p>
+
+			<p>
+				Auto-close after selection: <input id="date-range103" size="60" value="">
 			</p>
 
 			<p>
@@ -116,7 +140,16 @@
 	startDate: false,
 	endDate: false,
 	minDays: 0,
-	maxDays: 0
+	maxDays: 0,
+	showShortcuts: true,
+	shortcuts: 
+	{
+		//'prev-days': [1,3,5,7],
+		'next-days': [3,5,7],
+		//'prev' : ['week','month','year'],
+		'next' : ['week','month','year']
+	},
+	customShortcuts : []
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -156,7 +189,13 @@
 
 <b>maxDays (Number)</b>
 	<i>This number defines the maximum days of the selected range
-	if this is 0, means do not limit maximum days</i>	
+	if this is 0, means do not limit maximum days</i>
+<b>showShortcuts (Boolean)</b>
+	<i>hide or show shortcuts area</i>	
+<b>shortcuts (Object)</b>
+	<i>define the shortcuts buttons. there are some built in shortcuts, see source code</i>	
+<b>customShortcuts (Array)</b>
+	<i>define custom shortcut buttons. see demo.js</i>	
 </pre>
 		
 
@@ -173,6 +212,10 @@
 	// 		date2: (Date object of the later date),
 	//	 	value: "2013-06-05 to 2013-06-07"
 	// }
+})
+.bind('datepicker-apply',function(event,obj)
+{
+	console.log(obj);
 })
 .bind('datepicker-close',function()
 {

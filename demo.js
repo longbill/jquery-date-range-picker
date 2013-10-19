@@ -55,6 +55,58 @@ $(function()
 		language:'en'
 	});
 
+	$('#date-range100').dateRangePicker(
+	{
+		shortcuts : null,
+		startOfWeek: 'sunday',
+		language:'en',
+		customShortcuts: 
+		[
+			{
+				name: 'this week',
+				dates : function()
+				{
+					var start = moment().day(0).toDate();
+					var end = moment().day(6).toDate();
+					// start.setDate(1);
+					// end.setDate(30);
+					return [start,end];
+				}
+			}
+		]
+	}).bind('datepicker-apply',function(event,obj)
+	{
+		console.log(obj);
+	});
+
+	$('#date-range101').dateRangePicker(
+	{
+		shortcuts : 
+		{
+			'next-days': [3,5,7],
+			'next': ['week','month','year']
+		}
+	});
+
+	$('#date-range102').dateRangePicker(
+	{
+		shortcuts : 
+		{
+			'prev-days': [3,5,7],
+			'prev': ['week','month','year']
+		}
+	});
+
+	$('#date-range104').dateRangePicker(
+	{
+		showShortcuts:false
+	});
+
+	$('#date-range103').dateRangePicker(
+	{
+		autoClose: true
+	});
+
 	$('#date-range4-1').dateRangePicker(
 	{
 		language: 'custom'
@@ -91,6 +143,23 @@ $(function()
 		setValue: function(s)
 		{
 			this.innerHTML = s;
+		}
+	});
+
+	$('#two-inputs').dateRangePicker(
+	{
+		seperator : ' to ',
+		getValue: function()
+		{
+			if ($('#date-range200').val() && $('#date-range201').val() )
+				return $('#date-range200').val() + ' to ' + $('#date-range201').val();
+			else
+				return '';
+		},
+		setValue: function(s,s1,s2)
+		{
+			$('#date-range200').val(s1);
+			$('#date-range201').val(s2);
 		}
 	});
 

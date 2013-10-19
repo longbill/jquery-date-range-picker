@@ -43,7 +43,16 @@ The default configuration object is:
 	startDate: false,
 	endDate: false,
 	minDays: 0,
-	maxDays: 0
+	maxDays: 0,
+	showShortcuts: true,
+	shortcuts: 
+	{
+		//'prev-days': [1,3,5,7],
+		'next-days': [3,5,7],
+		//'prev' : ['week','month','year'],
+		'next' : ['week','month','year']
+	},
+	customShortcuts : []
 }
 ```
 
@@ -85,6 +94,16 @@ if this is 0, means do not limit minimum days</i>
 <i style="display:block; margin-left:2em;">This number defines the maximum days of the selected range
 if this is 0, means do not limit maximum days</i>
 
+<b>showShortcuts (Boolean)</b>
+<i style="display:block; margin-left:2em;">hide or show shortcuts area</i>	
+
+<b>shortcuts (Object)</b>
+<i style="display:block; margin-left:2em;">define the shortcuts buttons. there are some built in shortcuts, see source code</i>	
+
+<b>customShortcuts (Array)</b>
+<i style="display:block; margin-left:2em;">define custom shortcut buttons. see demo.js</i>	
+
+
 ##Events##
 
 Two events will be triggered on the date range picker DOM
@@ -100,6 +119,10 @@ $('#dom-id')
 	// 		date2: (Date object of the later date),
 	//	 	value: "2013-06-05 to 2013-06-07"
 	// }
+})
+.bind('datepicker-apply',function(event,obj)
+{
+	console.log(obj);
 })
 .bind('datepicker-close',function()
 {

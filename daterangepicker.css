@@ -102,6 +102,9 @@
 	cursor:pointer;
 }
 
+.date-picker-wrapper .month-wrapper table .day.real-today { background-color: rgb(255, 230, 132); }
+.date-picker-wrapper .month-wrapper table .day.real-today.checked { background-color: rgb(112, 204, 213); }
+
 
 .date-picker-wrapper table .caption
 {
