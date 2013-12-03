@@ -347,6 +347,17 @@
 									start = data[0];
 									end = data[1];
 								}
+								
+								// if only one date is specified then just move calendars there
+								// move calendars to show this date's month and next months
+								if (data && data.length == 1)
+								{
+									movetodate = data[0];
+									showMonth(movetodate,'month1');
+									showMonth(nextMonth(movetodate),'month2');
+									showGap();
+								}
+								
 								break;
 							}
 						}
