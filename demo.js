@@ -1,4 +1,3 @@
-
 $(function()
 {
 	
@@ -71,6 +70,15 @@ $(function()
 					// start.setDate(1);
 					// end.setDate(30);
 					return [start,end];
+				}
+			},
+			{
+				name: 'Oct 2014',
+				dates : function()
+				{
+					//move calendars to show this date's month and next month
+					var movetodate = moment().set('year', 2014).set('month', 10).toDate();
+					return [movetodate];
 				}
 			}
 		]

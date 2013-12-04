@@ -66,8 +66,8 @@
 			'next-week':'Week',
 			'next-month':'Month',
 			'next-year':'Year',
-			'less-than' : 'Date range should longer than %d days',
-			'more-than' : 'Date range should less than %d days',
+			'less-than' : 'Date range should not be more than %d days',
+			'more-than' : 'Date range should not be less than %d days',
 			'default-more' : 'Please select a date range longer than %d days',
 			'default-less' : 'Please select a date range less than %d days',
 			'default-range' : 'Please select a date range between %d and %d days',
@@ -347,6 +347,17 @@
 									start = data[0];
 									end = data[1];
 								}
+								
+								// if only one date is specified then just move calendars there
+								// move calendars to show this date's month and next months
+								if (data && data.length == 1)
+								{
+									movetodate = data[0];
+									showMonth(movetodate,'month1');
+									showMonth(nextMonth(movetodate),'month2');
+									showGap();
+								}
+								
 								break;
 							}
 						}
