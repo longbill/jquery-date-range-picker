@@ -139,7 +139,6 @@
 			}
 			$(this).data('date-picker-openned',true);
 			
-			$(this).css('background-position','100% 100%');
 			
 			box = createDom().hide();
 			$(document.body).append(box);
@@ -567,7 +566,7 @@
 				$(box).slideUp(200,function()
 				{
 					box.remove();
-					$(self).data('date-picker-openned',false).css('background-position','0 0');
+					$(self).data('date-picker-openned',false);
 				});
 				$(document).unbind('.datepicker');
 				$(self).trigger('datepicker-close');

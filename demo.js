@@ -61,6 +61,7 @@ $(function()
 		language:'en',
 		customShortcuts: 
 		[
+			//if return an array of two dates, it will select the date range between the two dates
 			{
 				name: 'this week',
 				dates : function()
@@ -72,12 +73,13 @@ $(function()
 					return [start,end];
 				}
 			},
+			//if only return an array of one date, it will display the month which containing the date. and it will not select any date range
 			{
 				name: 'Oct 2014',
 				dates : function()
 				{
 					//move calendars to show this date's month and next month
-					var movetodate = moment().set('year', 2014).set('month', 10).toDate();
+					var movetodate = moment('2014-10','YYYY-MM').toDate();
 					return [movetodate];
 				}
 			}
