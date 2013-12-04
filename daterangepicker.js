@@ -7,7 +7,7 @@
 (function($)
 {
 
-	$.dateRangePickerLanguages = 
+	$.dateRangePickerLanguages =
 	{
 		'cn':
 		{
@@ -88,6 +88,7 @@
 		opt = $.extend(
 		{
 			autoClose: false,
+            autoSelect:false,
 			format: 'YYYY-MM-DD',
 			seperator: ' to ',
 			language: 'auto',
@@ -105,7 +106,7 @@
 			minDays: 0,
 			maxDays: 0,
 			showShortcuts: true,
-			shortcuts: 
+			shortcuts:
 			{
 				//'prev-days': [1,3,5,7],
 				'next-days': [3,5,7],
@@ -138,14 +139,14 @@
 				return;
 			}
 			$(this).data('date-picker-openned',true);
-			
-			$(this).css('background-position','100% 100%');
-			
+
+            //$(this).css('background-position','100% 100%');
+
 			box = createDom().hide();
 			$(document.body).append(box);
 
 
-			
+
 
 			var offset = $(this).offset();
 			if (offset.left < 460) //left to right
@@ -172,12 +173,12 @@
 
 			showMonth(defaultTime,'month1');
 			showMonth(nextMonth(defaultTime),'month2');
-			
+
 			//showSelectedInfo();
-			
+
 			box.slideDown(200);
 
-			
+
 			var defaultTopText = '';
 			if (opt.minDays && opt.maxDays)
 				defaultTopText = lang('default-range');
@@ -187,11 +188,11 @@
 				defaultTopText = lang('default-less');
 			else
 				defaultTopText = lang('default-default');
-			
-			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
-			
 
-			
+			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
+
+
+
 			var defaults = opt.getValue.call(self).split( opt.seperator );
 
 			if (defaults && defaults.length >= 2)
@@ -210,24 +211,24 @@
 			{
 				initted = true;
 			},0);
-			
+
 			// if (opt.start && opt.end)
 			// {
 			// 	setDateRange(new Date(opt.start), new Date(opt.end));
 			// }
-			
+
 			box.click(function(evt)
 			{
 				evt.stopPropagation();
 			});
-			
+
 			$(document).unbind('.datepicker').bind('click.datepicker',function()
 			{
 				//if (box.find('.apply-btn').hasClass('disabled')) return;
 				closeDatePicker();
 
 			});
-			
+
 			box.find('.next').click(function()
 			{
 				var isMonth2 = $(this).parents('table').hasClass('month2');
@@ -237,7 +238,7 @@
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
-			
+
 			box.find('.prev').click(function()
 			{
 				var isMonth2 = $(this).parents('table').hasClass('month2');
@@ -248,8 +249,8 @@
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
-			
-			
+
+
 			box.bind('click',function(evt)
 			{
 				if ($(evt.target).hasClass('day') && $(evt.target).hasClass('toMonth'))
@@ -262,25 +263,28 @@
 			.css('user-select', 'none')
 			.bind('selectstart', function(e)
 			{
-				e.preventDefault(); return false; 
+				e.preventDefault(); return false;
 			});
-			
+
 			box.find('.apply-btn').click(function()
 			{
-				// if (opt.start && opt.end)
-				// {
-				// 	opt.setValue.call(self,getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end)));
-				// }
 				closeDatePicker();
-				var dateRange = getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end));
-				$(self).trigger('datepicker-apply',
-				{
-					'value': dateRange,
-					'date1' : new Date(opt.start),
-					'date2' : new Date(opt.end)
-				});
+				if (!$(this).hasClass("disabled")) {
+					var dateRange = getDateString(new Date(opt.start)) + opt.seperator + getDateString(new Date(opt.end));
+					if (opt.autoSelect == false) {
+						opt.setValue.call(self, dateRange);
+					}
+					$(self).trigger('datepicker-apply',
+						{
+							'value': dateRange,
+							'date1': new Date(opt.start),
+							'date2': new Date(opt.end)
+						});
+				}
+
+
 			});
-			
+
 			box.find('[shortcut]').click(function()
 			{
 				var shortcut = $(this).attr('shortcut');
@@ -299,7 +303,7 @@
 						var stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
 					else
 						var stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
-					
+
 					end = new Date(end.getTime() - 86400000);
 					while(end.getDay() != stopDay) end = new Date(end.getTime() + dir*86400000);
 					start = new Date(end.getTime() + dir*86400000*6);
@@ -307,7 +311,7 @@
 				else if (shortcut.indexOf('month') != -1)
 				{
 					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
-					if (dir == 1) 
+					if (dir == 1)
 						start = nextMonth(end);
 					else
 						start = prevMonth(end);
@@ -369,8 +373,8 @@
 					checkSelectionValid();
 				}
 			});
-			
-			
+
+
 			function dayClicked(day)
 			{
 				if (day.hasClass('invalid')) return;
@@ -399,7 +403,7 @@
 				showSelectedInfo();
 				showSelectedDays();
 			}
-			
+
 			function checkSelectionValid()
 			{
 				var days = Math.ceil( (opt.end - opt.start) / 86400000 ) + 1;
@@ -448,14 +452,17 @@
 				{
 					box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
 				}
-				
+
 				if (opt.start && opt.end)
 				{
 					box.find('.selected-days').show().find('.selected-days-num').html(Math.round((opt.end-opt.start)/86400000)+1);
 					box.find('.apply-btn').removeClass('disabled');
 					var dateRange = getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end));
-					opt.setValue.call(self,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
-					
+
+                    if(opt.autoSelect==true){
+					    opt.setValue.call(self,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+
+                    }
 					if (initted)
 					{
 						$(self).trigger('datepicker-change',
@@ -472,7 +479,7 @@
 					box.find('.apply-btn').addClass('disabled');
 				}
 			}
-			
+
 			function setDateRange(date1,date2)
 			{
 				if (date1.getTime() > date2.getTime())
@@ -492,7 +499,7 @@
 					showGap();
 					return;
 				}
-				
+
 				opt.start = date1.getTime();
 				opt.end = date2.getTime();
 				if (compare_month(date1,date2) == 0)
@@ -505,8 +512,8 @@
 
 				showSelectedInfo();
 			}
-			
-			
+
+
 			function showSelectedDays()
 			{
 				if (!opt.start && !opt.end) return;
@@ -527,8 +534,8 @@
 					}
 				});
 			}
-			
-			
+
+
 			function showMonth(date,month)
 			{
 				date = moment(date).toDate();
@@ -537,18 +544,18 @@
 				box.find('.'+month+' tbody').html(createMonthHTML(date));
 				opt[month] = date;
 			}
-			
+
 			function nameMonth(m)
 			{
 				return lang('month-name')[m];
 			}
-			
+
 			function getDateString(d)
 			{
 				return moment(d).format(opt.format);
 			}
-			
-			
+
+
 			function showGap()
 			{
 				showSelectedDays();
@@ -561,20 +568,20 @@
 				else
 					box.find('.gap').hide();
 			}
-			
+
 			function closeDatePicker()
 			{
 				$(box).slideUp(200,function()
 				{
 					box.remove();
-					$(self).data('date-picker-openned',false).css('background-position','0 0');
+                    $(self).data('date-picker-openned',false);//.css('background-position','0 0');
 				});
 				$(document).unbind('.datepicker');
 				$(self).trigger('datepicker-close');
 			}
-			
+
 		});
-		
+
 		return this;
 
 		function compare_month(m1,m2)
@@ -592,7 +599,7 @@
 			if (p == 0) return 0;
 			return -1;
 		}
-		
+
 		function nextMonth(month)
 		{
 			month = moment(month).toDate();
@@ -600,7 +607,7 @@
 			while(month.getMonth() == toMonth) month = new Date(month.getTime()+86400000);
 			return month;
 		}
-		
+
 		function prevMonth(month)
 		{
 			month = moment(month).toDate();
@@ -608,8 +615,8 @@
 			while(month.getMonth() == toMonth) month = new Date(month.getTime()-86400000);
 			return month;
 		}
-		
-		
+
+
 		function createDom()
 		{
 			var html = '<div class="date-picker-wrapper">'
@@ -737,7 +744,7 @@
 			html.push('</div>');
 			return html.join('');
 		}
-		
+
 		function createMonthHTML(d)
 		{
 			var days = [];
@@ -813,6 +820,6 @@
 			return (t in langs)? langs[t] : t;
 		}
 
-		
+
 	};
 })(jQuery);
