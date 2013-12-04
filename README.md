@@ -31,7 +31,7 @@ The default configuration object is:
 ```javascript
 {
 	format: 'YYYY-MM-DD',
-	seperator: ' to ',
+	separator: ' to ',
 	language: 'auto',
 	startOfWeek: 'sunday',// or monday
 	getValue: function()
@@ -64,8 +64,8 @@ You can use the following keys in the configObject to overwrite the default conf
 <i style="display:block; margin-left:2em;">The date format string used for Moment.
 click <a href="http://momentjs.com/docs/#/displaying/format/" target=_blank>here</a> to see Moment documentation</i>
 
-<b>seperator (String)</b>
-<i style="display:block; margin-left:2em;">The seperator string used between date strings</i>
+<b>separator (String)</b>
+<i style="display:block; margin-left:2em;">The separator string used between date strings</i>
 
 <b>language (String)</b>
 <i style="display:block; margin-left:2em;">pre-defined languages are "en" and "cn", you can define your own 

@@ -158,7 +158,7 @@ $(function()
 
 	$('#two-inputs').dateRangePicker(
 	{
-		seperator : ' to ',
+		separator : ' to ',
 		getValue: function()
 		{
 			if ($('#date-range200').val() && $('#date-range201').val() )
@@ -180,7 +180,7 @@ $(function()
 
 	$('#date-range11').dateRangePicker(
 	{
-		seperator : ' ~ '
+		separator : ' ~ '
 	}).bind('datepicker-change',function(e,r)
 	{
 		try

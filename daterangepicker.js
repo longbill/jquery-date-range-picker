@@ -89,7 +89,7 @@
 		{
 			autoClose: false,
 			format: 'YYYY-MM-DD',
-			seperator: ' to ',
+			separator: ' to ',
 			language: 'auto',
 			startOfWeek: 'sunday',// or monday
 			getValue: function()
@@ -191,7 +191,7 @@
 			
 
 			
-			var defaults = opt.getValue.call(self).split( opt.seperator );
+			var defaults = opt.getValue.call(self).split( opt.separator );
 
 			if (defaults && defaults.length >= 2)
 			{
@@ -268,10 +268,10 @@
 			{
 				// if (opt.start && opt.end)
 				// {
-				// 	opt.setValue.call(self,getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end)));
+				// 	opt.setValue.call(self,getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end)));
 				// }
 				closeDatePicker();
-				var dateRange = getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end));
+				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				$(self).trigger('datepicker-apply',
 				{
 					'value': dateRange,
@@ -452,7 +452,7 @@
 				{
 					box.find('.selected-days').show().find('.selected-days-num').html(Math.round((opt.end-opt.start)/86400000)+1);
 					box.find('.apply-btn').removeClass('disabled');
-					var dateRange = getDateString(new Date(opt.start))+ opt.seperator +getDateString(new Date(opt.end));
+					var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 					opt.setValue.call(self,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 					
 					if (initted)
@@ -614,7 +614,7 @@
 			var html = '<div class="date-picker-wrapper">'
 				+'<div class="top-bar">\
 					<div class="normal-top">\
-						<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b> '+opt.seperator+' <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>\
+						<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b> '+opt.separator+' <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>\
 					</div>\
 					<div class="error-top">error</div>\
 					<div class="default-top">default</div>\
