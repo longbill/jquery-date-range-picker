@@ -196,6 +196,9 @@
 .time {
 	position: relative;
 }
+.time input[type=range] {
+  vertical-align: middle;
+}
 .time1, .time2 {
 	width: 180px;
 	padding: 0 5px;

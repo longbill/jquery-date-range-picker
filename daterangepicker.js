@@ -171,8 +171,13 @@
 			showMonth(nextMonth(defaultTime),'month2');
 
 			if (opt.time.enabled) {
-				showTime(defaultTime,'time1');
-				showTime(nextMonth(defaultTime),'time2');
+				if (opt.start && opt.end) {
+					showTime(moment(opt.start).toDate(),'time1');
+					showTime(moment(opt.end).toDate(),'time2');
+				} else {
+					showTime(defaultTime,'time1');
+					showTime(defaultTime,'time2');
+				}
 			}
 			
 			//showSelectedInfo();
@@ -392,28 +397,33 @@
 			}
 
 			function setTime (name, hour, minute) {
-				var h,m;
 				hour && ($("." + name + " .hour-val").text(hour));
 				minute && ($("." + name + " .minute-val").text(minute));
-				if (name == "time1" && opt.start) {
-					h = hour || moment(opt.start).format("HH");
-					m = minute || moment(opt.start).format("mm");
-					opt.start = moment(opt.start)
-						.startOf('day')
-						.add("h", h)
-						.add("m", m)
-						.valueOf();
+				switch (name) {
+					case "time1":
+						if (opt.start) {
+							setRange("start", moment(opt.start));
+						}
+						setRange("startTime", moment(opt.startTime || moment().valueOf()));
+						break;
+					case "time2":
+						if (opt.end) {
+							setRange("end", moment(opt.end));
+						}
+						setRange("endTime", moment(opt.endTime || moment().valueOf()));
+						break;
 				}
-				if (name == "time2" && opt.end) {
-					h = hour || moment(opt.end).format("HH");
-					m = minute || moment(opt.end).format("mm");
-					opt.end = moment(opt.end)
+				function setRange(name, timePoint) {
+					var h = timePoint.format("HH"),
+						m = timePoint.format("mm");
+					opt[name] = timePoint
 						.startOf('day')
-						.add("h", h)
-						.add("m", m)
+						.add("h", hour || h)
+						.add("m", minute || m)
 						.valueOf();
 				}
 				showSelectedInfo();
+				showSelectedDays();
 			}
 
 			function dayClicked(day)
@@ -436,8 +446,19 @@
 					opt.end = opt.start;
 					opt.start = tmp;
 				}
-				opt.start = parseInt(opt.start);
-				opt.end = parseInt(opt.end);
+
+				opt.start = parseInt(
+					moment(parseInt(opt.start))
+						.startOf('day')
+						.add('h', moment(opt.startTime).format("HH"))
+						.add('m', moment(opt.startTime).format("mm")).valueOf()
+					);
+				opt.end = parseInt(
+					moment(parseInt(opt.end))
+						.startOf('day')
+						.add('h', moment(opt.endTime).format("HH"))
+						.add('m', moment(opt.endTime).format("mm")).valueOf()
+					);
 
 				checkSelectionValid();
 
