@@ -50,7 +50,6 @@
 	background-color:#fff;
 	padding:5px;
 	cursor:default;
-	height:178px;
 	position:relative;
 	_overflow:hidden;
 }
@@ -192,4 +191,22 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
 	background: -moz-linear-gradient(top,  #fff,  #ededed);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+/*time styling*/
+.time {
+	position: relative;
+}
+.time1, .time2 {
+	width: 180px;
+	padding: 0 5px;
+	text-align: center;
+}
+.time1 {
+	float: left;
+}
+.time2 {
+	float: right;	
+}
+.hour, .minute {
+	text-align: right;
 }

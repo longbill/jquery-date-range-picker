@@ -85,7 +85,7 @@
 	$.fn.dateRangePicker = function(opt)
 	{
 		if (!opt) opt = {};
-		opt = $.extend(
+		opt = $.extend(true,
 		{
 			autoClose: false,
 			format: 'YYYY-MM-DD',
@@ -102,6 +102,9 @@
 			},
 			startDate: false,
 			endDate: false,
+			time: {
+				enabled: false
+			},
 			minDays: 0,
 			maxDays: 0,
 			showShortcuts: true,
@@ -120,8 +123,6 @@
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
 		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format).toDate();
-
-
 
 		var langs = getLanguages();
 		var box;
@@ -142,9 +143,6 @@
 			
 			box = createDom().hide();
 			$(document.body).append(box);
-
-
-			
 
 			var offset = $(this).offset();
 			if (offset.left < 460) //left to right
@@ -171,6 +169,11 @@
 
 			showMonth(defaultTime,'month1');
 			showMonth(nextMonth(defaultTime),'month2');
+
+			if (opt.time.enabled) {
+				showTime(defaultTime,'time1');
+				showTime(nextMonth(defaultTime),'time2');
+			}
 			
 			//showSelectedInfo();
 			
@@ -369,7 +372,50 @@
 				}
 			});
 			
+			box.find(".time1 input[type=range]").bind("change", function (e) {
+				var target = e.target,
+					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
+					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
+				setTime("time1", hour, min);
+			});
+
+			box.find(".time2 input[type=range]").bind("change", function (e) {
+				var target = e.target,
+					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
+					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
+				setTime("time2", hour, min);
+			});
 			
+			function initTime (name, date) {
+				$("." + name + " input[type=range].hour-range").val(moment(date).hours());
+				$("." + name + " input[type=range].minute-range").val(moment(date).minutes());
+			}
+
+			function setTime (name, hour, minute) {
+				var h,m;
+				hour && ($("." + name + " .hour-val").text(hour));
+				minute && ($("." + name + " .minute-val").text(minute));
+				if (name == "time1" && opt.start) {
+					h = hour || moment(opt.start).format("HH");
+					m = minute || moment(opt.start).format("mm");
+					opt.start = moment(opt.start)
+						.startOf('day')
+						.add("h", h)
+						.add("m", m)
+						.valueOf();
+				}
+				if (name == "time2" && opt.end) {
+					h = hour || moment(opt.end).format("HH");
+					m = minute || moment(opt.end).format("mm");
+					opt.end = moment(opt.end)
+						.startOf('day')
+						.add("h", h)
+						.add("m", m)
+						.valueOf();
+				}
+				showSelectedInfo();
+			}
+
 			function dayClicked(day)
 			{
 				if (day.hasClass('invalid')) return;
@@ -505,7 +551,6 @@
 				showSelectedInfo();
 			}
 			
-			
 			function showSelectedDays()
 			{
 				if (!opt.start && !opt.end) return;
@@ -527,7 +572,6 @@
 				});
 			}
 			
-			
 			function showMonth(date,month)
 			{
 				date = moment(date).toDate();
@@ -536,7 +580,14 @@
 				box.find('.'+month+' tbody').html(createMonthHTML(date));
 				opt[month] = date;
 			}
-			
+
+			function showTime(date,name)
+			{
+				box.find('.' + name).append(getTimeHTML());
+				initTime(name, date);
+				setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			}
+
 			function nameMonth(m)
 			{
 				return lang('month-name')[m];
@@ -546,7 +597,6 @@
 			{
 				return moment(d).format(opt.format);
 			}
-			
 			
 			function showGap()
 			{
@@ -607,8 +657,21 @@
 			while(month.getMonth() == toMonth) month = new Date(month.getTime()-86400000);
 			return month;
 		}
-		
-		
+
+		function getTimeHTML()
+		{
+			var timeHtml = '<div>'
+				+'<span>Time: <span class="hour-val">00</span>:<span class="minute-val">00</span></span>'
+				+'</div>'
+				+'<div class="hour">'
+				+'<label>Hour: <input type="range" class="hour-range" name="hour" min="0" max="24"></label>'
+				+'</div>'
+				+'<div class="minute">'
+				+'<label>Minute: <input type="range" class="minute-range" name="minute" min="0" max="59"></label>'
+				+'</div>';
+			return timeHtml;
+		}
+
 		function createDom()
 		{
 			var html = '<div class="date-picker-wrapper">'
@@ -624,6 +687,8 @@
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr>'
 				+'<tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 				+'<div class="gap">'+getGapHTML()+'</div><table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				+'<div style="clear:both;height:0;font-size:0;"></div>'
+				+'<div class="time"><div class="time1"></div><div class="time2"></div></div>'
 				+'<div style="clear:both;height:0;font-size:0;"></div>'
 				+'</div>';
 

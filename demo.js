@@ -36,10 +36,16 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
-	
-	
-	
-	
+	$('#date-range0').dateRangePicker({
+		startOfWeek: 'monday',
+    separator : ' ~ ',
+    format: 'DD.MM.YYYY HH:mm',
+		time: {
+			enabled: true
+		}
+	}).bind('datepicker-change', function(e,r) {
+    console.log("datepicker-change args: ", arguments);
+  });
 	
 	$('#date-range1').dateRangePicker();
 	$('#date-range2').dateRangePicker();
