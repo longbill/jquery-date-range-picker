@@ -171,9 +171,9 @@
 			showMonth(nextMonth(defaultTime),'month2');
 
 			if (opt.time.enabled) {
-				if (opt.start && opt.end) {
-					showTime(moment(opt.start).toDate(),'time1');
-					showTime(moment(opt.end).toDate(),'time2');
+				if ((opt.startDate && opt.endDate) || (opt.start && opt.end)) {
+					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
+					showTime(moment(opt.end || opt.endDate).toDate(),'time2');
 				} else {
 					showTime(defaultTime,'time1');
 					showTime(defaultTime,'time2');
