@@ -422,6 +422,7 @@
 						.add("m", minute || m)
 						.valueOf();
 				}
+				checkSelectionValid();
 				showSelectedInfo();
 				showSelectedDays();
 			}
@@ -431,37 +432,49 @@
 				if (day.hasClass('invalid')) return;
 				var time = day.attr('time');
 				day.addClass('checked');
+				function changeTime (name) {
+					opt[name] = parseInt(
+						moment(parseInt(time))
+							.startOf('day')
+							.add('h', moment(opt[name + "Time"]).format("HH"))
+							.add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
+						);
+				}
+				function swapTime () {
+					initTime("time1", opt.start);
+					initTime("time2", opt.end);
+					setTime("time1", moment(opt.start).format("HH"), moment(opt.start).format("mm"));
+					setTime("time2", moment(opt.end).format("HH"), moment(opt.end).format("mm"));
+				}
 				if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 				{
 					opt.start = time;
 					opt.end = false;
+					if (opt.time.enabled) {
+						changeTime("start");
+					}
 				}
 				else if (opt.start)
 				{
 					opt.end = time;
+					if (opt.time.enabled) {
+						changeTime("end");
+					}
 				}
 				if (opt.start && opt.end && opt.start > opt.end)
 				{
 					var tmp = opt.end;
 					opt.end = opt.start;
 					opt.start = tmp;
+					if (opt.time.enabled) {
+						swapTime();
+					}
 				}
 
-				opt.start = parseInt(
-					moment(parseInt(opt.start))
-						.startOf('day')
-						.add('h', moment(opt.startTime).format("HH"))
-						.add('m', moment(opt.startTime).format("mm")).valueOf()
-					);
-				opt.end = parseInt(
-					moment(parseInt(opt.end))
-						.startOf('day')
-						.add('h', moment(opt.endTime).format("HH"))
-						.add('m', moment(opt.endTime).format("mm")).valueOf()
-					);
+				opt.start = parseInt(opt.start);
+				opt.end = parseInt(opt.end);
 
 				checkSelectionValid();
-
 				showSelectedInfo();
 				showSelectedDays();
 			}
@@ -578,10 +591,17 @@
 				box.find('.day').each(function()
 				{
 					if (!$(this).hasClass('toMonth')) return;
-					var time = $(this).attr('time');
+					var time = parseInt($(this).attr('time')),
+						start = opt.start,
+						end = opt.end;
+					if (opt.time.enabled) {
+						time = moment(time).startOf('day').valueOf();
+						start = moment(start || moment().valueOf()).startOf('day').valueOf();
+						end = moment(end || moment().valueOf()).startOf('day').valueOf();
+					}
 					if (
-						(opt.start && opt.end && opt.end >= time && opt.start <= time )
-						|| ( opt.start && !opt.end && opt.start == time )
+						(opt.start && opt.end && end >= time && start <= time )
+						|| ( opt.start && !opt.end && start == time )
 					)
 					{
 						$(this).addClass('checked');
