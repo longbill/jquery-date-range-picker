@@ -40,6 +40,7 @@ $(function()
 		startOfWeek: 'monday',
     separator : ' ~ ',
     format: 'DD.MM.YYYY HH:mm',
+    autoClose: true,
 		time: {
 			enabled: true
 		}

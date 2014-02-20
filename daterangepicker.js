@@ -481,6 +481,10 @@
 				checkSelectionValid();
 				showSelectedInfo();
 				showSelectedDays();
+				if (initted && opt.start && opt.end)
+				{
+					if (opt.autoClose) closeDatePicker();
+				}
 			}
 			
 			function checkSelectionValid()
@@ -547,7 +551,6 @@
 							'date1' : new Date(opt.start),
 							'date2' : new Date(opt.end)
 						});
-						if (opt.autoClose) closeDatePicker();
 					}
 				}
 				else
