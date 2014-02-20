@@ -481,12 +481,16 @@
 				checkSelectionValid();
 				showSelectedInfo();
 				showSelectedDays();
+				autoclose();
+			}
+			
+			function autoclose () {
 				if (initted && opt.start && opt.end)
 				{
 					if (opt.autoClose) closeDatePicker();
 				}
 			}
-			
+
 			function checkSelectionValid()
 			{
 				var days = Math.ceil( (opt.end - opt.start) / 86400000 ) + 1;
@@ -590,6 +594,7 @@
 				showGap();
 
 				showSelectedInfo();
+				autoclose();
 			}
 			
 			function showSelectedDays()
