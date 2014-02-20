@@ -49,7 +49,11 @@
 			<h2>Demonstrations</h2>
 
 			<p>
-				Default settings: <input id="date-range1" size="40" value="">
+				Default settings: <input id="date-range0" size="40" value="">
+			</p>
+
+			<p>
+				Default settings with time enabled: <input id="date-range1" size="40" value="">
 			</p>
 
 			<p>
@@ -142,6 +146,9 @@
 	minDays: 0,
 	maxDays: 0,
 	showShortcuts: true,
+	time: {
+		enabled: false
+	},
 	shortcuts: 
 	{
 		//'prev-days': [1,3,5,7],
@@ -193,7 +200,9 @@
 <b>showShortcuts (Boolean)</b>
 	<i>hide or show shortcuts area</i>	
 <b>shortcuts (Object)</b>
-	<i>define the shortcuts buttons. there are some built in shortcuts, see source code</i>	
+	<i>define the shortcuts buttons. there are some built in shortcuts, see source code</i>
+<b>time (Object)</b>
+	<i>If enabled adds time selection controls.</i>	
 <b>customShortcuts (Array)</b>
 	<i>define custom shortcut buttons. see demo.js</i>	
 </pre>

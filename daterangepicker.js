@@ -85,7 +85,7 @@
 	$.fn.dateRangePicker = function(opt)
 	{
 		if (!opt) opt = {};
-		opt = $.extend(
+		opt = $.extend(true,
 		{
 			autoClose: false,
 			format: 'YYYY-MM-DD',
@@ -102,6 +102,9 @@
 			},
 			startDate: false,
 			endDate: false,
+			time: {
+				enabled: false
+			},
 			minDays: 0,
 			maxDays: 0,
 			showShortcuts: true,
@@ -120,8 +123,6 @@
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
 		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format).toDate();
-
-
 
 		var langs = getLanguages();
 		var box;
@@ -142,9 +143,6 @@
 			
 			box = createDom().hide();
 			$(document.body).append(box);
-
-
-			
 
 			var offset = $(this).offset();
 			if (offset.left < 460) //left to right
@@ -171,6 +169,16 @@
 
 			showMonth(defaultTime,'month1');
 			showMonth(nextMonth(defaultTime),'month2');
+
+			if (opt.time.enabled) {
+				if ((opt.startDate && opt.endDate) || (opt.start && opt.end)) {
+					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
+					showTime(moment(opt.end || opt.endDate).toDate(),'time2');
+				} else {
+					showTime(defaultTime,'time1');
+					showTime(defaultTime,'time2');
+				}
+			}
 			
 			//showSelectedInfo();
 			
@@ -369,7 +377,70 @@
 				}
 			});
 			
+			box.find(".time1 input[type=range]").bind("change", function (e) {
+				var target = e.target,
+					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
+					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
+				setTime("time1", hour, min);
+			});
+
+			box.find(".time2 input[type=range]").bind("change", function (e) {
+				var target = e.target,
+					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
+					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
+				setTime("time2", hour, min);
+			});
 			
+			function renderTime (name, date) {
+				$("." + name + " input[type=range].hour-range").val(moment(date).hours());
+				$("." + name + " input[type=range].minute-range").val(moment(date).minutes());
+				setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			}
+
+			function changeTime (name, date) {
+				opt[name] = parseInt(
+					moment(parseInt(date))
+						.startOf('day')
+						.add('h', moment(opt[name + "Time"]).format("HH"))
+						.add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
+					);
+			}
+			function swapTime () {
+				renderTime("time1", opt.start);
+				renderTime("time2", opt.end);
+			}
+
+			function setTime (name, hour, minute) {
+				hour && ($("." + name + " .hour-val").text(hour));
+				minute && ($("." + name + " .minute-val").text(minute));
+				switch (name) {
+					case "time1":
+						if (opt.start) {
+							setRange("start", moment(opt.start));
+						}
+						setRange("startTime", moment(opt.startTime || moment().valueOf()));
+						break;
+					case "time2":
+						if (opt.end) {
+							setRange("end", moment(opt.end));
+						}
+						setRange("endTime", moment(opt.endTime || moment().valueOf()));
+						break;
+				}
+				function setRange(name, timePoint) {
+					var h = timePoint.format("HH"),
+						m = timePoint.format("mm");
+					opt[name] = timePoint
+						.startOf('day')
+						.add("h", hour || h)
+						.add("m", minute || m)
+						.valueOf();
+				}
+				checkSelectionValid();
+				showSelectedInfo();
+				showSelectedDays();
+			}
+
 			function dayClicked(day)
 			{
 				if (day.hasClass('invalid')) return;
@@ -379,26 +450,43 @@
 				{
 					opt.start = time;
 					opt.end = false;
+					if (opt.time.enabled) {
+						changeTime("start", opt.start);
+					}
 				}
 				else if (opt.start)
 				{
 					opt.end = time;
+					if (opt.time.enabled) {
+						changeTime("end", opt.end);
+					}
 				}
 				if (opt.start && opt.end && opt.start > opt.end)
 				{
 					var tmp = opt.end;
 					opt.end = opt.start;
 					opt.start = tmp;
+					if (opt.time.enabled) {
+						swapTime();
+					}
 				}
+
 				opt.start = parseInt(opt.start);
 				opt.end = parseInt(opt.end);
 
 				checkSelectionValid();
-
 				showSelectedInfo();
 				showSelectedDays();
+				autoclose();
 			}
 			
+			function autoclose () {
+				if (initted && opt.start && opt.end)
+				{
+					if (opt.autoClose) closeDatePicker();
+				}
+			}
+
 			function checkSelectionValid()
 			{
 				var days = Math.ceil( (opt.end - opt.start) / 86400000 ) + 1;
@@ -463,7 +551,6 @@
 							'date1' : new Date(opt.start),
 							'date2' : new Date(opt.end)
 						});
-						if (opt.autoClose) closeDatePicker();
 					}
 				}
 				else
@@ -498,13 +585,16 @@
 				{
 					date2 = nextMonth(date1);
 				}
+				if (opt.time.enabled) {
+					renderTime("time1", date1);
+					renderTime("time2", date2);
+				}
 				showMonth(date1,'month1');
 				showMonth(date2,'month2');
 				showGap();
-
 				showSelectedInfo();
+				autoclose();
 			}
-			
 			
 			function showSelectedDays()
 			{
@@ -512,10 +602,17 @@
 				box.find('.day').each(function()
 				{
 					if (!$(this).hasClass('toMonth')) return;
-					var time = $(this).attr('time');
+					var time = parseInt($(this).attr('time')),
+						start = opt.start,
+						end = opt.end;
+					if (opt.time.enabled) {
+						time = moment(time).startOf('day').valueOf();
+						start = moment(start || moment().valueOf()).startOf('day').valueOf();
+						end = moment(end || moment().valueOf()).startOf('day').valueOf();
+					}
 					if (
-						(opt.start && opt.end && opt.end >= time && opt.start <= time )
-						|| ( opt.start && !opt.end && opt.start == time )
+						(opt.start && opt.end && end >= time && start <= time )
+						|| ( opt.start && !opt.end && start == time )
 					)
 					{
 						$(this).addClass('checked');
@@ -527,7 +624,6 @@
 				});
 			}
 			
-			
 			function showMonth(date,month)
 			{
 				date = moment(date).toDate();
@@ -536,7 +632,13 @@
 				box.find('.'+month+' tbody').html(createMonthHTML(date));
 				opt[month] = date;
 			}
-			
+
+			function showTime(date,name)
+			{
+				box.find('.' + name).append(getTimeHTML());
+				renderTime(name, date);
+			}
+
 			function nameMonth(m)
 			{
 				return lang('month-name')[m];
@@ -546,7 +648,6 @@
 			{
 				return moment(d).format(opt.format);
 			}
-			
 			
 			function showGap()
 			{
@@ -607,8 +708,21 @@
 			while(month.getMonth() == toMonth) month = new Date(month.getTime()-86400000);
 			return month;
 		}
-		
-		
+
+		function getTimeHTML()
+		{
+			var timeHtml = '<div>'
+				+'<span>Time: <span class="hour-val">00</span>:<span class="minute-val">00</span></span>'
+				+'</div>'
+				+'<div class="hour">'
+				+'<label>Hour: <input type="range" class="hour-range" name="hour" min="0" max="24"></label>'
+				+'</div>'
+				+'<div class="minute">'
+				+'<label>Minute: <input type="range" class="minute-range" name="minute" min="0" max="59"></label>'
+				+'</div>';
+			return timeHtml;
+		}
+
 		function createDom()
 		{
 			var html = '<div class="date-picker-wrapper">'
@@ -624,6 +738,8 @@
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr>'
 				+'<tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 				+'<div class="gap">'+getGapHTML()+'</div><table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				+'<div style="clear:both;height:0;font-size:0;"></div>'
+				+'<div class="time"><div class="time1"></div><div class="time2"></div></div>'
 				+'<div style="clear:both;height:0;font-size:0;"></div>'
 				+'</div>';
 

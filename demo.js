@@ -36,12 +36,17 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
+	$('#date-range0').dateRangePicker();
+	$('#date-range1').dateRangePicker({
+		startOfWeek: 'monday',
+    separator : ' ~ ',
+    format: 'DD.MM.YYYY HH:mm',
+    autoClose: true,
+		time: {
+			enabled: true
+		}
+	});
 	
-	
-	
-	
-	
-	$('#date-range1').dateRangePicker();
 	$('#date-range2').dateRangePicker();
 
 	$('#date-range3').dateRangePicker(
