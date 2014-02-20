@@ -47,6 +47,9 @@ The default configuration object is:
 	minDays: 0,
 	maxDays: 0,
 	showShortcuts: true,
+	time: {
+		enabled: false
+	},
 	shortcuts: 
 	{
 		//'prev-days': [1,3,5,7],
@@ -98,6 +101,9 @@ if this is 0, means do not limit maximum days</i>
 
 <b>showShortcuts (Boolean)</b>
 <i style="display:block; margin-left:2em;">hide or show shortcuts area</i>	
+
+<b>time (Object)</b>
+<i style="display:block; margin-left:2em;">If enabled adds time selection controls.</i>	
 
 <b>shortcuts (Object)</b>
 <i style="display:block; margin-left:2em;">define the shortcuts buttons. there are some built in shortcuts, see source code</i>	
