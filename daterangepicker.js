@@ -373,6 +373,10 @@
 				if (start && end)
 				{
 					setDateRange(start,end);
+					if (opt.time.enabled) {
+						renderTime("time1", start);
+						renderTime("time2", end);
+					}
 					checkSelectionValid();
 				}
 			});
@@ -391,9 +395,23 @@
 				setTime("time2", hour, min);
 			});
 			
-			function initTime (name, date) {
+			function renderTime (name, date) {
 				$("." + name + " input[type=range].hour-range").val(moment(date).hours());
 				$("." + name + " input[type=range].minute-range").val(moment(date).minutes());
+				setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			}
+
+			function changeTime (name, date) {
+				opt[name] = parseInt(
+					moment(parseInt(date))
+						.startOf('day')
+						.add('h', moment(opt[name + "Time"]).format("HH"))
+						.add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
+					);
+			}
+			function swapTime () {
+				renderTime("time1", opt.start);
+				renderTime("time2", opt.end);
 			}
 
 			function setTime (name, hour, minute) {
@@ -432,33 +450,19 @@
 				if (day.hasClass('invalid')) return;
 				var time = day.attr('time');
 				day.addClass('checked');
-				function changeTime (name) {
-					opt[name] = parseInt(
-						moment(parseInt(time))
-							.startOf('day')
-							.add('h', moment(opt[name + "Time"]).format("HH"))
-							.add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
-						);
-				}
-				function swapTime () {
-					initTime("time1", opt.start);
-					initTime("time2", opt.end);
-					setTime("time1", moment(opt.start).format("HH"), moment(opt.start).format("mm"));
-					setTime("time2", moment(opt.end).format("HH"), moment(opt.end).format("mm"));
-				}
 				if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 				{
 					opt.start = time;
 					opt.end = false;
 					if (opt.time.enabled) {
-						changeTime("start");
+						changeTime("start", opt.start);
 					}
 				}
 				else if (opt.start)
 				{
 					opt.end = time;
 					if (opt.time.enabled) {
-						changeTime("end");
+						changeTime("end", opt.end);
 					}
 				}
 				if (opt.start && opt.end && opt.start > opt.end)
@@ -625,8 +629,7 @@
 			function showTime(date,name)
 			{
 				box.find('.' + name).append(getTimeHTML());
-				initTime(name, date);
-				setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+				renderTime(name, date);
 			}
 
 			function nameMonth(m)
