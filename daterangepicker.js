@@ -373,10 +373,6 @@
 				if (start && end)
 				{
 					setDateRange(start,end);
-					if (opt.time.enabled) {
-						renderTime("time1", start);
-						renderTime("time2", end);
-					}
 					checkSelectionValid();
 				}
 			});
@@ -589,10 +585,13 @@
 				{
 					date2 = nextMonth(date1);
 				}
+				if (opt.time.enabled) {
+					renderTime("time1", date1);
+					renderTime("time2", date2);
+				}
 				showMonth(date1,'month1');
 				showMonth(date2,'month2');
 				showGap();
-
 				showSelectedInfo();
 				autoclose();
 			}
