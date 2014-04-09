@@ -57,7 +57,10 @@ The default configuration object is:
 		//'prev' : ['week','month','year'],
 		'next' : ['week','month','year']
 	},
-	customShortcuts : []
+	customShortcuts : [],
+	inline:false,
+	container: 'body', 
+	alwaysOpen:false
 }
 ```
 
@@ -111,6 +114,14 @@ if this is 0, means do not limit maximum days</i>
 <b>customShortcuts (Array)</b>
 <i style="display:block; margin-left:2em;">define custom shortcut buttons. see demo.js</i>	
 
+<b>inline (Boolean)</b>
+<i>whether to render the date range picker dom in inline mode instead of overlay mode, if set to true, please set `container` too</i>
+
+<b>container (String, css selector || DOM Object)</b>
+<i>where should the date range picker dom should be renderred to</i>
+	
+<b>alwaysOpen (Boolean)</b>
+<i>if you use inline mode, you may want the date range picker widget to be renderred when the page loads. set this to true will also hide the "close" button</i>
 
 ##Events##
 
