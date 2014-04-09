@@ -1,6 +1,6 @@
 #jQuery Date Range Picker Plugin#
 
-v0.0.2
+v0.0.3
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
