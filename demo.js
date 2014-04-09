@@ -37,11 +37,12 @@ $(function()
 	};
 	
 	$('#date-range0').dateRangePicker();
-	$('#date-range1').dateRangePicker({
+	$('#date-range1').dateRangePicker(
+	{
 		startOfWeek: 'monday',
-    separator : ' ~ ',
-    format: 'DD.MM.YYYY HH:mm',
-    autoClose: true,
+    	separator : ' ~ ',
+    	format: 'DD.MM.YYYY HH:mm',
+    	autoClose: false,
 		time: {
 			enabled: true
 		}
@@ -108,7 +109,9 @@ $(function()
 		shortcuts : 
 		{
 			'prev-days': [3,5,7],
-			'prev': ['week','month','year']
+			'prev': ['week','month','year'],
+			'next-days':null,
+			'next':null
 		}
 	});
 
@@ -193,4 +196,6 @@ $(function()
 			console.log(r);
 		}catch(e){}
 	});
+
+	$('#date-range12').dateRangePicker({ inline:true,container: '#date-range12-container', alwaysOpen:true });
 });

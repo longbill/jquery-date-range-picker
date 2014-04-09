@@ -94,11 +94,11 @@
 			startOfWeek: 'sunday',// or monday
 			getValue: function()
 			{
-				return this.value;
+				return $(this).val();
 			},
 			setValue: function(s)
 			{
-				this.value = s;
+				$(this).val(s);
 			},
 			startDate: false,
 			endDate: false,
@@ -115,7 +115,10 @@
 				//'prev' : ['week','month','year'],
 				'next' : ['week','month','year']
 			},
-			customShortcuts : []
+			customShortcuts : [],
+			inline:false,
+			container:'body',
+			alwaysOpen:false
 		},opt);
 
 		opt.start = false;
@@ -126,11 +129,32 @@
 
 		var langs = getLanguages();
 		var box;
-
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
-			var initted = false;
 			evt.stopPropagation();
+			init_datepicker.call(this);
+		});
+
+		if (opt.alwaysOpen)
+		{
+			init_datepicker.call(this);
+		}
+
+		return this;
+
+
+
+
+
+
+
+
+
+
+
+		function init_datepicker()
+		{
+			var initted = false;
 			var self = this;
 
 			if ($(this).data('date-picker-openned'))
@@ -142,24 +166,36 @@
 			
 			
 			box = createDom().hide();
-			$(document.body).append(box);
+			$(opt.container).append(box);
 
-			var offset = $(this).offset();
-			if (offset.left < 460) //left to right
+			if (!opt.inline)
 			{
-				box.css(
+				var offset = $(this).offset();
+				if (offset.left < 460) //left to right
 				{
-					top: offset.top+$(this).outerHeight() + parseInt( 0 + $('body').css('border-top'),10 ),
-					left: offset.left
-				});
+					box.css(
+					{
+						top: offset.top+$(this).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+						left: offset.left
+					});
+				}
+				else
+				{
+					box.css(
+					{
+						top: offset.top+$(this).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+						left: offset.left + $(self).width() - box.width() - 16
+					});
+				}
 			}
 			else
 			{
-				box.css(
-				{
-					top: offset.top+$(this).outerHeight() + parseInt( 0 + $('body').css('border-top'),10 ),
-					left: offset.left + $(self).width() - box.width() - 16
-				});
+				box.css({position:'static'});
+			}
+
+			if (opt.alwaysOpen)
+			{
+				box.find('.apply-btn').hide();
 			}
 
 			var defaultTime = new Date();
@@ -232,7 +268,6 @@
 			{
 				//if (box.find('.apply-btn').hasClass('disabled')) return;
 				closeDatePicker();
-
 			});
 			
 			box.find('.next').click(function()
@@ -664,6 +699,7 @@
 			
 			function closeDatePicker()
 			{
+				if (opt.alwaysOpen) return;
 				$(box).slideUp(200,function()
 				{
 					box.remove();
@@ -673,9 +709,9 @@
 				$(self).trigger('datepicker-close');
 			}
 			
-		});
+		}
 		
-		return this;
+		
 
 		function compare_month(m1,m2)
 		{
@@ -841,7 +877,7 @@
 		function getGapHTML()
 		{
 			var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
-			for(var i=0;i<13;i++)
+			for(var i=0;i<20;i++)
 			{
 				html.push('<div class="gap-line">\
 					<div class="gap-1"></div>\

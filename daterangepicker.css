@@ -127,20 +127,20 @@
 	display:none;
 	top:0px;
 	left:204px;
-	z-index:3;
+	z-index: 1;
 	width:15px;
-	height:188px;
+	height: 100%;
 	background-color:red;
 	font-size:0;
 	line-height:0;
 }
-.date-picker-wrapper .gap .gap-lines { height:188px; overflow:hidden; }
+.date-picker-wrapper .gap .gap-lines { height: 100%; overflow:hidden; }
 .date-picker-wrapper .gap .gap-line { height:15px;width:15px; position:relative;  }
 .date-picker-wrapper .gap .gap-line .gap-1 { z-index:1; height:0; border-left:8px solid white; border-top:8px solid #eee;border-bottom:8px solid #eee; }
 .date-picker-wrapper .gap .gap-line .gap-2 { position:absolute; right:0; top:0px; z-index:2; height:0; border-left:8px solid transparent; border-top:8px solid white; }
 .date-picker-wrapper .gap .gap-line .gap-3 { position:absolute; right:0; top:8px; z-index:2; height:0; border-left:8px solid transparent; border-bottom:8px solid white; }
 .date-picker-wrapper .gap .gap-top-mask { width: 6px; height:1px; position:absolute; top: -1px; left: 1px; background-color: #eee; z-index:3; }
-.date-picker-wrapper .gap .gap-bottom-mask { width: 6px; height:1px; position:absolute; bottom: -1px; left: 8px; background-color: #eee; z-index:3; }
+.date-picker-wrapper .gap .gap-bottom-mask { width: 6px; height:1px; position:absolute; bottom: -1px; left: 7px; background-color: #eee; z-index:3; }
 
 .date-picker-wrapper .selected-days
 {
