@@ -28,6 +28,9 @@
 	font-family:Arial;
 	box-shadow:3px 3px 10px rgba(0,0,0,0.5);
 }
+.date-picker-wrapper.single-date {
+	width:auto;
+}
 .date-picker-wrapper .footer
 {
 	font-size:11px;
@@ -63,11 +66,14 @@
 	width:190px;
 	float:right;
 }
-.date-picker-wrapper .month-wrapper table th,.date-picker-wrapper .month-wrapper table td
+.date-picker-wrapper .month-wrapper table th,
+.date-picker-wrapper .month-wrapper table td
 {
 	vertical-align:middle;
 	text-align:center;
 	line-height:14px;
+	margin : 0px;
+	padding : 0px;
 }
 .date-picker-wrapper .month-wrapper table .day
 {

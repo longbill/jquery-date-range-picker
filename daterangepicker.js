@@ -10,38 +10,6 @@
 
 	$.dateRangePickerLanguages = 
 	{
-		'cn':
-		{
-			'selected': '已选择:',
-			'day':'天',
-			'days': '天',
-			'apply': '确定',
-			'week-1' : '一',
-			'week-2' : '二',
-			'week-3' : '三',
-			'week-4' : '四',
-			'week-5' : '五',
-			'week-6' : '六',
-			'week-7' : '日',
-			'month-name': ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-			'shortcuts' : '快捷选择',
-			'past': '过去',
-			'following':'将来',
-			'previous' : '&nbsp;&nbsp;&nbsp;',
-			'prev-week' : '上周',
-			'prev-month' : '上个月',
-			'prev-year' : '去年',
-			'next': '&nbsp;&nbsp;&nbsp;',
-			'next-week':'下周',
-			'next-month':'下个月',
-			'next-year':'明年',
-			'less-than' : '所选日期范围不能大于%d天',
-			'more-than' : '所选日期范围不能小于%d天',
-			'default-more' : '请选择大于%d天的日期范围',
-			'default-less' : '请选择小于%d天的日期范围',
-			'default-range' : '请选择%d天到%d天的日期范围',
-			'default-default': '请选择一个日期范围'
-		},
 		'en':
 		{
 			'selected': 'Selected:',
@@ -70,6 +38,7 @@
 			'less-than' : 'Date range should not be more than %d days',
 			'more-than' : 'Date range should not be less than %d days',
 			'default-more' : 'Please select a date range longer than %d days',
+			'default-single' : 'Please select a date',
 			'default-less' : 'Please select a date range less than %d days',
 			'default-range' : 'Please select a date range between %d and %d days',
 			'default-default': 'Please select a date range'
@@ -89,7 +58,7 @@
 		opt = $.extend(true,
 		{
 			autoClose: false,
-			format: 'YYYY-MM-DD',
+			format: 'MMM Do YYYY',
 			separator: ' to ',
 			language: 'auto',
 			startOfWeek: 'sunday',// or monday
@@ -108,7 +77,7 @@
 			},
 			minDays: 0,
 			maxDays: 0,
-			showShortcuts: true,
+			showShortcuts: false,
 			shortcuts: 
 			{
 				//'prev-days': [1,3,5,7],
@@ -119,7 +88,8 @@
 			customShortcuts : [],
 			inline:false,
 			container:'body',
-			alwaysOpen:false
+			alwaysOpen:false,
+			singleDate:false,
 		},opt);
 
 		opt.start = false;
@@ -189,7 +159,7 @@
 					});
 				}
 			}
-			else
+				else
 			{
 				box.css({position:'static'});
 			}
@@ -223,7 +193,9 @@
 
 			
 			var defaultTopText = '';
-			if (opt.minDays && opt.maxDays)
+			if (opt.singleDate)
+				defaultTopText = lang('default-single');
+			else if (opt.minDays && opt.maxDays)
 				defaultTopText = lang('default-range');
 			else if (opt.minDays)
 				defaultTopText = lang('default-more');
@@ -276,7 +248,7 @@
 				var isMonth2 = $(this).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = nextMonth(month);
-				if (!isMonth2 && compare_month(month,opt.month2) >= 0) return;
+				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
@@ -482,7 +454,13 @@
 				if (day.hasClass('invalid')) return;
 				var time = day.attr('time');
 				day.addClass('checked');
-				if ((opt.start && opt.end) || (!opt.start && !opt.end) )
+				if ( opt.singleDate ) {
+					opt.start = time;
+					opt.end = false;
+					if (opt.time.enabled) {
+						changeTime("start", opt.start);
+					}
+				} else if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 				{
 					opt.start = time;
 					opt.end = false;
@@ -497,7 +475,7 @@
 						changeTime("end", opt.end);
 					}
 				}
-				if (opt.start && opt.end && opt.start > opt.end)
+				if (!opt.singleDate && opt.start && opt.end && opt.start > opt.end)
 				{
 					var tmp = opt.end;
 					opt.end = opt.start;
@@ -526,7 +504,13 @@
 			function checkSelectionValid()
 			{
 				var days = Math.ceil( (opt.end - opt.start) / 86400000 ) + 1;
-				if ( opt.maxDays && days > opt.maxDays)
+				if (opt.singleDate) { // Validate if only start is there
+					if (opt.start && !opt.end)
+						box.find('.top-bar').removeClass('error').addClass('normal');
+					else
+						box.find('.top-bar').removeClass('error').removeClass('normal');
+				}
+				else if ( opt.maxDays && days > opt.maxDays)
 				{
 					opt.start = false;
 					opt.end = false;
@@ -548,7 +532,7 @@
 						box.find('.top-bar').removeClass('error').removeClass('normal');
 				}
 
-				if (opt.start && opt.end)
+				if ( (opt.singleDate && opt.start && !opt.end) || (!opt.singleDate && opt.start && opt.end) )
 				{
 					box.find('.apply-btn').removeClass('disabled');
 				}
@@ -572,7 +556,20 @@
 					box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
 				}
 				
-				if (opt.start && opt.end)
+				if (opt.start && opt.singleDate) {
+					box.find('.apply-btn').removeClass('disabled');
+					var dateRange = getDateString(new Date(opt.start));
+					opt.setValue.call(self, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+					
+					if (initted)
+					{
+						$(self).trigger('datepicker-change',
+						{
+							'value': dateRange,
+							'date1' : new Date(opt.start),
+						});
+					}
+				} else if (opt.start && opt.end)
 				{
 					box.find('.selected-days').show().find('.selected-days-num').html(Math.round((opt.end-opt.start)/86400000)+1);
 					box.find('.apply-btn').removeClass('disabled');
@@ -762,21 +759,36 @@
 
 		function createDom()
 		{
-			var html = '<div class="date-picker-wrapper">'
+			var html = '<div class="date-picker-wrapper'
+			if ( opt.singleDate ) {
+				html += ' single-date'
+			}			
+			html += '">'
 				+'<div class="top-bar">\
 					<div class="normal-top">\
-						<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b> '+opt.separator+' <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>\
-					</div>\
+						<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>'
+			if ( ! opt.singleDate ) {
+				html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>'
+			}			
+			html += '</div>\
 					<div class="error-top">error</div>\
 					<div class="default-top">default</div>\
 					<input type="button" class="apply-btn disabled" value="'+lang('apply')+'" />\
 				</div>'
 				+'<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr>'
-				+'<tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
-				+'<div class="gap">'+getGapHTML()+'</div><table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
-				+'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'<div class="time"><div class="time1"></div><div class="time2"></div></div>'
+				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+			if ( ! opt.singleDate ) {
+				html += '<div class="gap">'+getGapHTML()+'</div>'	
+					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+			}		
+				//+'</div>'
+			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
+				+'<div class="time">' 
+				+'<div class="time1"></div>' 
+			if ( ! opt.singleDate ) {
+				html += '<div class="time2"></div>'
+			}
+			html += '</div>'
 				+'<div style="clear:both;height:0;font-size:0;"></div>'
 				+'</div>';
 
