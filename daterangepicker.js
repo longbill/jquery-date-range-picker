@@ -897,9 +897,15 @@
 			var lastMonth = new Date(d.getTime() - 86400000);
 			var now = new Date();
 
-			if (d.getDay() > 0)
+			var dayOfWeek = d.getDay();
+			if((dayOfWeek == 0) && (opt.startOfWeek == 'monday')) {
+				// add one week
+				dayOfWeek = 7;
+			}
+                    
+			if (dayOfWeek > 0)
 			{
-				for(var i = d.getDay(); i>0; i--)
+				for (var i = dayOfWeek; i > 0; i--)
 				{
 					var day = new Date(d.getTime() - 86400000*i);
 					var valid = true;
