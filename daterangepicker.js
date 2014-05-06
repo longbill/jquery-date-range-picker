@@ -109,7 +109,7 @@
 			},
 			minDays: 0,
 			maxDays: 0,
-			showShortcuts: false,
+			showShortcuts: true,
 			shortcuts: 
 			{
 				//'prev-days': [1,3,5,7],
