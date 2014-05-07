@@ -60,7 +60,8 @@ The default configuration object is:
 	customShortcuts : [],
 	inline:false,
 	container: 'body', 
-	alwaysOpen:false
+	alwaysOpen:false,
+	singleDate:false
 }
 ```
 
@@ -122,6 +123,10 @@ if this is 0, means do not limit maximum days</i>
 	
 <b>alwaysOpen (Boolean)</b>
 <i>if you use inline mode, you may want the date range picker widget to be renderred when the page loads. set this to true will also hide the "close" button</i>
+
+<b>singleDate (Boolean)</b>
+<i>choose a single date instead of a date range.</i>
+
 
 ##Events##
 
