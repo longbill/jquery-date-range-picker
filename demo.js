@@ -198,4 +198,6 @@ $(function()
 	});
 
 	$('#date-range12').dateRangePicker({ inline:true,container: '#date-range12-container', alwaysOpen:true });
+
+	$('#date-range13').dateRangePicker({ singleDate : true, showShortcuts: false });
 });
