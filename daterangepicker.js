@@ -40,6 +40,7 @@
 			'default-more' : '请选择大于%d天的日期范围',
 			'default-less' : '请选择小于%d天的日期范围',
 			'default-range' : '请选择%d天到%d天的日期范围',
+			'default-single':'请选择一个日期',
 			'default-default': '请选择一个日期范围'
 		},
 		'en':
@@ -121,7 +122,7 @@
 			inline:false,
 			container:'body',
 			alwaysOpen:false,
-			singleDate:false,
+			singleDate:false
 		},opt);
 
 		opt.start = false;
