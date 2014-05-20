@@ -41,7 +41,7 @@
 	color:#666;
 	font-weight:700;
 }
-.date-picker-wrapper a 
+.date-picker-wrapper a
 {
 	color: rgb(107, 180, 214);
 	text-decoration:underline;
@@ -152,33 +152,33 @@
 {
 	display:none;
 }
-.date-picker-wrapper .top-bar
+.date-picker-wrapper .drp_top-bar
 {
 	line-height:40px;
 	height:40px;
 	position:relative;
 }
-.date-picker-wrapper .top-bar .error-top { display:none; }
-.date-picker-wrapper .top-bar .normal-top { display:none; }
-.date-picker-wrapper .top-bar .default-top { display:block; }
+.date-picker-wrapper .drp_top-bar .error-top { display:none; }
+.date-picker-wrapper .drp_top-bar .normal-top { display:none; }
+.date-picker-wrapper .drp_top-bar .default-top { display:block; }
 
-.date-picker-wrapper .top-bar.error .default-top { display:none; }
-.date-picker-wrapper .top-bar.error .error-top { display:block; color:red; }
+.date-picker-wrapper .drp_top-bar.error .default-top { display:none; }
+.date-picker-wrapper .drp_top-bar.error .error-top { display:block; color:red; }
 
-.date-picker-wrapper .top-bar.normal .default-top { display:none; }
-.date-picker-wrapper .top-bar.normal .normal-top { display:block; }
+.date-picker-wrapper .drp_top-bar.normal .default-top { display:none; }
+.date-picker-wrapper .drp_top-bar.normal .normal-top { display:block; }
 
-.date-picker-wrapper .top-bar .apply-btn
+.date-picker-wrapper .drp_top-bar .apply-btn
 {
 	position:absolute;
-	right: 0px; 
+	right: 0px;
 	top: 6px;
 	padding:3px 5px;
 	margin:0;
 	font-size:12px;
 	border-radius:4px;
 	cursor:pointer;
-	
+
 	color: #d9eef7;
 	border: solid 1px #0076a3;
 	background: #0095cd;
@@ -188,7 +188,7 @@
 	color:white;
 }
 
-.date-picker-wrapper .top-bar .apply-btn.disabled
+.date-picker-wrapper .drp_top-bar .apply-btn.disabled
 {
 	cursor: pointer;
 	color: #606060;
@@ -214,7 +214,7 @@
 	float: left;
 }
 .time2 {
-	float: right;	
+	float: right;
 }
 .hour, .minute {
 	text-align: right;
