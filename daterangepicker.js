@@ -599,7 +599,7 @@
 						$(self).trigger('datepicker-change',
 						{
 							'value': dateRange,
-							'date1' : new Date(opt.start),
+							'date1' : new Date(opt.start)
 						});
 					}
 				} else if (opt.start && opt.end)
