@@ -219,3 +219,6 @@
 .hour, .minute {
 	text-align: right;
 }
+.hide {
+	display: none;
+}

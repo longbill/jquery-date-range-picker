@@ -806,7 +806,7 @@
 			html += '</div>\
 					<div class="error-top">error</div>\
 					<div class="default-top">default</div>\
-					<input type="button" class="apply-btn disabled" value="'+lang('apply')+'" />\
+					<input type="button" class="apply-btn disabled '+ getHideClass() +'" value="'+lang('apply')+'" />\
 				</div>'
 				+'<div class="month-wrapper">'
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
@@ -894,6 +894,14 @@
 
 
 			return $(html);
+		}
+
+		function getHideClass() 
+		{
+			if (opt.autoClose === true) {
+				return 'hide';
+			}
+			return '';
 		}
 
 		function getWeekHead()
