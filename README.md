@@ -62,7 +62,8 @@ The default configuration object is:
 	inline:false,
 	container: 'body', 
 	alwaysOpen:false,
-	singleDate:false
+	singleDate:false,
+	batchMode:false
 }
 ```
 
@@ -127,6 +128,10 @@ if this is 0, means do not limit maximum days</i>
 
 <b>singleDate (Boolean)</b>
 <i>choose a single date instead of a date range.</i>
+
+<b>batchMode (Boolean)</b>
+<i> auto batch select mode </i>
+<i> false (default), week or month</i>
 
 
 ##Events##
