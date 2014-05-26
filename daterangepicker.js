@@ -122,7 +122,8 @@
 			inline:false,
 			container:'body',
 			alwaysOpen:false,
-			singleDate:false
+			singleDate:false,
+			batchMode: false 
 		},opt);
 
 		opt.start = false;
@@ -300,7 +301,7 @@
 			
 			box.bind('click',function(evt)
 			{
-				if ($(evt.target).hasClass('day') && $(evt.target).hasClass('toMonth'))
+				if ($(evt.target).hasClass('day'))
 				{
 					dayClicked($(evt.target));
 				}
@@ -493,6 +494,17 @@
 					if (opt.time.enabled) {
 						changeTime("start", opt.start);
 					}
+				} else if  (opt.batchMode === 'week') {
+					if (opt.startOfWeek === 'monday') {
+						opt.start = moment(parseInt(time)).startOf('isoweek').valueOf();
+						opt.end = moment(parseInt(time)).endOf('isoweek').valueOf();
+					} else {
+						opt.end = moment(parseInt(time)).endOf('week').valueOf();
+						opt.start = moment(parseInt(time)).startOf('week').valueOf();
+					}
+				} else if (opt.batchMode === 'month') {
+					opt.start = moment(parseInt(time)).startOf('month').valueOf();
+					opt.end = moment(parseInt(time)).endOf('month').valueOf();
 				} else if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 				{
 					opt.start = time;
@@ -580,6 +592,17 @@
 				{
 					box.find('.apply-btn').addClass('disabled');
 				}
+
+        if (opt.batchMode) {
+          if ( (opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0)
+              || (opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)  )
+          {
+            opt.start = false;
+            opt.end = false;
+            box.find('.day').removeClass('checked');
+          }
+        }
+
 			}
 
 			function showSelectedInfo()
@@ -674,7 +697,6 @@
 				if (!opt.start && !opt.end) return;
 				box.find('.day').each(function()
 				{
-					if (!$(this).hasClass('toMonth')) return;
 					var time = parseInt($(this).attr('time')),
 						start = opt.start,
 						end = opt.end;
