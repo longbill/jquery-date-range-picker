@@ -201,5 +201,5 @@ $(function()
 
 	$('#date-range13').dateRangePicker({ autoClose: true, singleDate : true, showShortcuts: false });
 
-	$('#date-range14').dateRangePicker({ batchMode: 'week', showShortcuts: false });
+	$('#date-range14').dateRangePicker({ batchMode: 'week', showShortcuts: false, endDate:'2013-01-06' });
 });

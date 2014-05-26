@@ -592,6 +592,17 @@
 				{
 					box.find('.apply-btn').addClass('disabled');
 				}
+
+        if (opt.batchMode) {
+          if ( (opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0)
+              || (opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)  )
+          {
+            opt.start = false;
+            opt.end = false;
+            box.find('.day').removeClass('checked');
+          }
+        }
+
 			}
 
 			function showSelectedInfo()
