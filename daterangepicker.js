@@ -122,7 +122,8 @@
 			inline:false,
 			container:'body',
 			alwaysOpen:false,
-			singleDate:false
+			singleDate:false,
+			batchMode: false 
 		},opt);
 
 		opt.start = false;
@@ -493,6 +494,17 @@
 					if (opt.time.enabled) {
 						changeTime("start", opt.start);
 					}
+				} else if  (opt.batchMode === 'week') {
+					if (opt.startOfWeek === 'monday') {
+						opt.start = moment(parseInt(time)).startOf('isoweek').valueOf();
+						opt.end = moment(parseInt(time)).endOf('isoweek').valueOf();
+					} else {
+						opt.end = moment(parseInt(time)).endOf('week').valueOf();
+						opt.start = moment(parseInt(time)).startOf('week').valueOf();
+					}
+				} else if (opt.batchMode === 'month') {
+					opt.start = moment(parseInt(time)).startOf('month').valueOf();
+					opt.end = moment(parseInt(time)).endOf('month').valueOf();
 				} else if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 				{
 					opt.start = time;

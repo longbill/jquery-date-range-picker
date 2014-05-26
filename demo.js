@@ -200,4 +200,6 @@ $(function()
 	$('#date-range12').dateRangePicker({ inline:true,container: '#date-range12-container', alwaysOpen:true });
 
 	$('#date-range13').dateRangePicker({ autoClose: true, singleDate : true, showShortcuts: false });
+
+	$('#date-range14').dateRangePicker({ batchMode: 'week', showShortcuts: false });
 });
