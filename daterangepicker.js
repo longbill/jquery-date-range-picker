@@ -300,7 +300,7 @@
 			
 			box.bind('click',function(evt)
 			{
-				if ($(evt.target).hasClass('day') && $(evt.target).hasClass('toMonth'))
+				if ($(evt.target).hasClass('day'))
 				{
 					dayClicked($(evt.target));
 				}
@@ -674,7 +674,6 @@
 				if (!opt.start && !opt.end) return;
 				box.find('.day').each(function()
 				{
-					if (!$(this).hasClass('toMonth')) return;
 					var time = parseInt($(this).attr('time')),
 						start = opt.start,
 						end = opt.end;
