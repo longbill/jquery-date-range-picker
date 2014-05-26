@@ -528,9 +528,16 @@
 			}
 			
 			function autoclose () {
-				if (initted && opt.start && opt.end)
-				{
-					if (opt.autoClose) closeDatePicker();
+				if (opt.singleDate === true) {
+					if (initted && opt.start )
+					{
+						if (opt.autoClose) closeDatePicker();
+					}
+				} else {
+					if (initted && opt.start && opt.end)
+					{
+						if (opt.autoClose) closeDatePicker();
+					}
 				}
 			}
 
