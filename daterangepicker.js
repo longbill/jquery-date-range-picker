@@ -1,4 +1,4 @@
-﻿// daterangepicker.js
+// daterangepicker.js
 // version : 0.0.4
 // author : Chunlong Liu
 // last updated at: 2014-05-07
@@ -8,7 +8,7 @@
 (function($)
 {
 
-	$.dateRangePickerLanguages = 
+	$.dateRangePickerLanguages =
 	{
 		'cn':
 		{
@@ -111,7 +111,7 @@
 			minDays: 0,
 			maxDays: 0,
 			showShortcuts: true,
-			shortcuts: 
+			shortcuts:
 			{
 				//'prev-days': [1,3,5,7],
 				'next-days': [3,5,7],
@@ -168,8 +168,8 @@
 				return;
 			}
 			$(this).data('date-picker-openned',true);
-			
-			
+
+
 			box = createDom().hide();
 			$(opt.container).append(box);
 
@@ -220,12 +220,12 @@
 					showTime(defaultTime,'time2');
 				}
 			}
-			
+
 			//showSelectedInfo();
-			
+
 			box.slideDown(200);
 
-			
+
 			var defaultTopText = '';
 			if (opt.singleDate)
 				defaultTopText = lang('default-single');
@@ -237,11 +237,11 @@
 				defaultTopText = lang('default-less');
 			else
 				defaultTopText = lang('default-default');
-			
-			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
-			
 
-			
+			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
+
+
+
 			var defaults = opt.getValue.call(self).split( opt.separator );
 
 			if (defaults && defaults.length >= 2)
@@ -260,23 +260,23 @@
 			{
 				initted = true;
 			},0);
-			
+
 			// if (opt.start && opt.end)
 			// {
 			// 	setDateRange(new Date(opt.start), new Date(opt.end));
 			// }
-			
+
 			box.click(function(evt)
 			{
 				evt.stopPropagation();
 			});
-			
+
 			$(document).unbind('.datepicker').bind('click.datepicker',function()
 			{
 				//if (box.find('.apply-btn').hasClass('disabled')) return;
 				closeDatePicker();
 			});
-			
+
 			box.find('.next').click(function()
 			{
 				var isMonth2 = $(this).parents('table').hasClass('month2');
@@ -286,7 +286,7 @@
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
-			
+
 			box.find('.prev').click(function()
 			{
 				var isMonth2 = $(this).parents('table').hasClass('month2');
@@ -297,8 +297,8 @@
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
-			
-			
+
+
 			box.bind('click',function(evt)
 			{
 				if ($(evt.target).hasClass('day'))
@@ -311,9 +311,9 @@
 			.css('user-select', 'none')
 			.bind('selectstart', function(e)
 			{
-				e.preventDefault(); return false; 
+				e.preventDefault(); return false;
 			});
-			
+
 			box.find('.apply-btn').click(function()
 			{
 				// if (opt.start && opt.end)
@@ -329,7 +329,7 @@
 					'date2' : new Date(opt.end)
 				});
 			});
-			
+
 			box.find('[shortcut]').click(function()
 			{
 				var shortcut = $(this).attr('shortcut');
@@ -348,7 +348,7 @@
 						var stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
 					else
 						var stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
-					
+
 					end = new Date(end.getTime() - 86400000);
 					while(end.getDay() != stopDay) end = new Date(end.getTime() + dir*86400000);
 					start = new Date(end.getTime() + dir*86400000*6);
@@ -356,7 +356,7 @@
 				else if (shortcut.indexOf('month') != -1)
 				{
 					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
-					if (dir == 1) 
+					if (dir == 1)
 						start = nextMonth(end);
 					else
 						start = prevMonth(end);
@@ -396,7 +396,7 @@
 									start = data[0];
 									end = data[1];
 								}
-								
+
 								// if only one date is specified then just move calendars there
 								// move calendars to show this date's month and next months
 								if (data && data.length == 1)
@@ -406,7 +406,7 @@
 									showMonth(nextMonth(movetodate),'month2');
 									showGap();
 								}
-								
+
 								break;
 							}
 						}
@@ -418,7 +418,7 @@
 					checkSelectionValid();
 				}
 			});
-			
+
 			box.find(".time1 input[type=range]").bind("change", function (e) {
 				var target = e.target,
 					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
@@ -432,7 +432,7 @@
 					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
 				setTime("time2", hour, min);
 			});
-			
+
 			function renderTime (name, date) {
 				$("." + name + " input[type=range].hour-range").val(moment(date).hours());
 				$("." + name + " input[type=range].minute-range").val(moment(date).minutes());
@@ -538,7 +538,7 @@
 				showSelectedDays();
 				autoclose();
 			}
-			
+
 			function autoclose () {
 				if (opt.singleDate === true) {
 					if (initted && opt.start )
@@ -558,30 +558,30 @@
 				var days = Math.ceil( (opt.end - opt.start) / 86400000 ) + 1;
 				if (opt.singleDate) { // Validate if only start is there
 					if (opt.start && !opt.end)
-						box.find('.top-bar').removeClass('error').addClass('normal');
+						box.find('.drp_top-bar').removeClass('error').addClass('normal');
 					else
-						box.find('.top-bar').removeClass('error').removeClass('normal');
+						box.find('.drp_top-bar').removeClass('error').removeClass('normal');
 				}
 				else if ( opt.maxDays && days > opt.maxDays)
 				{
 					opt.start = false;
 					opt.end = false;
 					box.find('.day').removeClass('checked');
-					box.find('.top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('less-than').replace('%d',opt.maxDays) );
+					box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('less-than').replace('%d',opt.maxDays) );
 				}
 				else if ( opt.minDays && days < opt.minDays)
 				{
 					opt.start = false;
 					opt.end = false;
 					box.find('.day').removeClass('checked');
-					box.find('.top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('more-than').replace('%d',opt.minDays) );
+					box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('more-than').replace('%d',opt.minDays) );
 				}
 				else
 				{
 					if (opt.start || opt.end)
-						box.find('.top-bar').removeClass('error').addClass('normal');
+						box.find('.drp_top-bar').removeClass('error').addClass('normal');
 					else
-						box.find('.top-bar').removeClass('error').removeClass('normal');
+						box.find('.drp_top-bar').removeClass('error').removeClass('normal');
 				}
 
 				if ( (opt.singleDate && opt.start && !opt.end) || (!opt.singleDate && opt.start && opt.end) )
@@ -618,12 +618,12 @@
 				{
 					box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
 				}
-				
+
 				if (opt.start && opt.singleDate) {
 					box.find('.apply-btn').removeClass('disabled');
 					var dateRange = getDateString(new Date(opt.start));
 					opt.setValue.call(self, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
-					
+
 					if (initted)
 					{
 						$(self).trigger('datepicker-change',
@@ -638,7 +638,7 @@
 					box.find('.apply-btn').removeClass('disabled');
 					var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 					opt.setValue.call(self,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
-					
+
 					if (initted)
 					{
 						$(self).trigger('datepicker-change',
@@ -654,7 +654,7 @@
 					box.find('.apply-btn').addClass('disabled');
 				}
 			}
-			
+
 			function setDateRange(date1,date2)
 			{
 				if (date1.getTime() > date2.getTime())
@@ -674,7 +674,7 @@
 					showGap();
 					return;
 				}
-				
+
 				opt.start = date1.getTime();
 				opt.end = date2.getTime();
 				if (compare_month(date1,date2) == 0)
@@ -691,7 +691,7 @@
 				showSelectedInfo();
 				autoclose();
 			}
-			
+
 			function showSelectedDays()
 			{
 				if (!opt.start && !opt.end) return;
@@ -718,7 +718,7 @@
 					}
 				});
 			}
-			
+
 			function showMonth(date,month)
 			{
 				date = moment(date).toDate();
@@ -738,12 +738,12 @@
 			{
 				return lang('month-name')[m];
 			}
-			
+
 			function getDateString(d)
 			{
 				return moment(d).format(opt.format);
 			}
-			
+
 			function showGap()
 			{
 				showSelectedDays();
@@ -756,7 +756,7 @@
 				else
 					box.find('.gap').hide();
 			}
-			
+
 			function closeDatePicker()
 			{
 				if (opt.alwaysOpen) return;
@@ -768,10 +768,10 @@
 				$(document).unbind('.datepicker');
 				$(self).trigger('datepicker-close');
 			}
-			
+
 		}
-		
-		
+
+
 
 		function compare_month(m1,m2)
 		{
@@ -788,7 +788,7 @@
 			if (p == 0) return 0;
 			return -1;
 		}
-		
+
 		function nextMonth(month)
 		{
 			month = moment(month).toDate();
@@ -796,7 +796,7 @@
 			while(month.getMonth() == toMonth) month = new Date(month.getTime()+86400000);
 			return month;
 		}
-		
+
 		function prevMonth(month)
 		{
 			month = moment(month).toDate();
@@ -824,14 +824,14 @@
 			var html = '<div class="date-picker-wrapper'
 			if ( opt.singleDate ) {
 				html += ' single-date'
-			}			
+			}
 			html += '">'
-				+'<div class="top-bar">\
+				+'<div class="drp_top-bar">\
 					<div class="normal-top">\
 						<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>'
 			if ( ! opt.singleDate ) {
 				html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>'
-			}			
+			}
 			html += '</div>\
 					<div class="error-top">error</div>\
 					<div class="default-top">default</div>\
@@ -840,13 +840,13 @@
 				+'<div class="month-wrapper">'
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 			if ( ! opt.singleDate ) {
-				html += '<div class="gap">'+getGapHTML()+'</div>'	
+				html += '<div class="gap">'+getGapHTML()+'</div>'
 					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
-			}		
+			}
 				//+'</div>'
 			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'<div class="time">' 
-				+'<div class="time1"></div>' 
+				+'<div class="time">'
+				+'<div class="time1"></div>'
 			if ( ! opt.singleDate ) {
 				html += '<div class="time2"></div>'
 			}
@@ -971,7 +971,7 @@
 			html.push('</div>');
 			return html.join('');
 		}
-		
+
 		function createMonthHTML(d)
 		{
 			var days = [];
@@ -984,7 +984,7 @@
 				// add one week
 				dayOfWeek = 7;
 			}
-                    
+
 			if (dayOfWeek > 0)
 			{
 				for (var i = dayOfWeek; i > 0; i--)
@@ -1053,6 +1053,6 @@
 			return (t in langs)? langs[t] : t;
 		}
 
-		
+
 	};
 })(jQuery);
