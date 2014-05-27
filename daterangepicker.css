@@ -31,6 +31,7 @@
 .date-picker-wrapper.single-date {
 	width:auto;
 }
+.date-picker-wrapper.no-shortcuts { padding-bottom:12px;}
 .date-picker-wrapper .footer
 {
 	font-size:11px;
@@ -100,6 +101,8 @@
 	line-height:20px;
 	font-weight:100;
 }
+
+.date-picker-wrapper .month-wrapper table .day.has-tooltip { cursor:help !important;}
 
 .date-picker-wrapper .month-wrapper table .day.toMonth.valid
 {

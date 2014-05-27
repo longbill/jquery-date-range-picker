@@ -197,9 +197,72 @@ $(function()
 		}catch(e){}
 	});
 
-	$('#date-range12').dateRangePicker({ inline:true,container: '#date-range12-container', alwaysOpen:true });
+	$('#date-range12').dateRangePicker(
+	{
+		inline:true,
+		container: '#date-range12-container', 
+		alwaysOpen:true 
+	});
 
-	$('#date-range13').dateRangePicker({ autoClose: true, singleDate : true, showShortcuts: false });
+	$('#date-range13').dateRangePicker(
+	{
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false 
+	});
 
-	$('#date-range14').dateRangePicker({ batchMode: 'week', showShortcuts: false, endDate:'2013-01-06' });
+	$('#date-range14').dateRangePicker(
+	{
+		batchMode: 'week',
+		showShortcuts: false
+	});
+
+	$('#date-range15').dateRangePicker(
+	{
+		showShortcuts: false,
+		beforeShowDay: function(t)
+		{
+			var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+			var _class = '';
+			var _tooltip = valid ? '' : 'weekends are disabled';
+			return [valid,_class,_tooltip];
+		}
+	});
+
+	$('#date-range16').dateRangePicker(
+	{
+		showShortcuts: false,
+		format: 'YYYY-MM-DD'
+	});
+
+	$('#date-range16-open').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').open();
+	});
+
+	$('#date-range16-close').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').close();
+	});
+
+	$('#date-range16-set').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').setDateRange('2013-11-20','2014-08-25');
+	});
+
+	$('#date-range16-clear').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').clear();
+	});
+
+	$('#date-range16-destroy').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').destroy();
+	});
+
 });

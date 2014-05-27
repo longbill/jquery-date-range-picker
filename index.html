@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="daterangepicker.css" />
 		<script src="jquery-1.5.1.min.js"></script>
 		<script src="moment.min.js"></script>
-		<script src="daterangepicker.js"></script>
+		<script src="jquery.daterangepicker.js"></script>
 		<script src="demo.js"></script>
 		<style>
 		#wrapper
@@ -18,6 +18,9 @@
 			line-height:1.5;
 			font-size:14px;
 		}
+		.demo { margin:30px 0;}
+		.date-picker-wrapper .month-wrapper table .day.lalala { background-color:orange; }
+		.options { display:none; border-left:6px solid #8ae; padding:10px; font-size:12px; line-height:1.4; background-color:#eee; border-radius:4px;}
 		</style>
 	</head>
 	<body>
@@ -45,97 +48,347 @@
 			<p>
 				I accept further customization job if you require more functions. My personal blog is <a href="http://jszen.com" target=_blank>http://jszen.com</a>
 			</p>
+			
+			<p>Fork me on Github <a href="https://github.com/longbill/jquery-date-range-picker">https://github.com/longbill/jquery-date-range-picker</a></p>
+
+	
+			<h2>Installation</h2>
+
+			<pre>&lt;link rel="stylesheet" href="daterangepicker.css" />
+&lt;script src="moment.min.js">&lt;/script>
+&lt;script src="jquery.daterangepicker.js">&lt;/script>
+			</pre>
+
 
 			<h2>Demonstrations</h2>
 
-			<p>
-				Default settings: <input id="date-range0" size="40" value="">
-			</p>
+			<div class="demo">
+				Default settings: <input id="date-range0" size="40" value=""> 
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{}</pre>
+			</div>
 
-			<p>
+			<div>
 				Default settings with time enabled: <input id="date-range1" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startOfWeek: 'monday',
+	separator : ' ~ ',
+	format: 'DD.MM.YYYY HH:mm',
+	autoClose: false,
+	time: {
+		enabled: true
+	}
+}</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Default settings with default value: <input id="date-range2" size="40" value="2013-10-01 to 2013-11-04">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{}</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Force to Chinese: <input id="date-range3" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	language:'cn'
+}</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Force to English: <input id="date-range4" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	language:'en'
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use custom language: <input id="date-range4-1" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	language: 'custom'
+}			</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Select a date range after 2014-11-20: <input id="date-range5" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startDate: '2014-11-20'
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Select a date range between 2013-01-10 to 2013-02-10: <input id="date-range6" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startDate: '2013-01-10',
+	endDate: '2013-02-10'
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Select a date range between 3 days and 7 days: <input id="date-range7" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	minDays: 3,
+	maxDays: 7
+}			</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Set start of week to Monday: <input id="date-range8" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startOfWeek: 'monday'
+}			</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use SPAN instead of INPUT: <span id="date-range9" style="background-color:#49e; color:white;padding:3px; cursor:pointer; border-radius:4px;">select</span>
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	getValue: function()
+	{
+		return this.innerHTML;
+	},
+	setValue: function(s)
+	{
+		this.innerHTML = s;
+	}
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use two inputs: <span id="two-inputs"><input id="date-range200" size="20" value=""> to <input id="date-range201" size="20" value=""></span>
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	separator : ' to ',
+	getValue: function()
+	{
+		if ($('#date-range200').val() && $('#date-range201').val() )
+			return $('#date-range200').val() + ' to ' + $('#date-range201').val();
+		else
+			return '';
+	},
+	setValue: function(s,s1,s2)
+	{
+		$('#date-range200').val(s1);
+		$('#date-range201').val(s2);
+	}
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use another date format: <input id="date-range10" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	format: 'dddd MMM Do, YYYY'  //more formats at http://momentjs.com/docs/#/displaying/format/
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use future date shortcuts: <input id="date-range101" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	shortcuts : 
+	{
+		'next-days': [3,5,7],
+		'next': ['week','month','year']
+	}
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use past date shortcuts: <input id="date-range102" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	shortcuts : 
+	{
+		'prev-days': [3,5,7],
+		'prev': ['week','month','year'],
+		'next-days':null,
+		'next':null
+	}
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Use custom shortcuts: <input id="date-range100" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	shortcuts : null,
+	startOfWeek: 'sunday',
+	language:'en',
+	customShortcuts: 
+	[
+		//if return an array of two dates, it will select the date range between the two dates
+		{
+			name: 'this week',
+			dates : function()
+			{
+				var start = moment().day(0).toDate();
+				var end = moment().day(6).toDate();
+				return [start,end];
+			}
+		},
+		//if only return an array of one date, it will display the month which containing the date. and it will not select any date range
+		{
+			name: 'Oct 2014',
+			dates : function()
+			{
+				//move calendars to show this date's month and next month
+				var movetodate = moment('2014-10','YYYY-MM').toDate();
+				return [movetodate];
+			}
+		}
+	]
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Hide shortcuts: <input id="date-range104" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showShortcuts:false
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Auto-close after selection: <input id="date-range103" size="60" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	autoClose: true
+}				</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				Change the separator between date strings: <input id="date-range11" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	separator : ' ~ '
+}	</pre>
+			</div>
 
-			<p>
+			<div class="demo">
 				In-line mode: <input id="date-range12" size="40" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	inline:true,
+	container: '#date-range12-container', 
+	alwaysOpen:true 
+}				</pre>
 				<div id="date-range12-container"></div>
-			</p>
+			</div>
 
-			<p>
+			<div class="demo">
 				Single Date mode: <input id="date-range13" size="40" value="">
-			</p>
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	autoClose: true,
+	singleDate : true,
+	showShortcuts: false 
+}				</pre>
+			</div>
 
-			<p>
-				 Week Batch Mode: <input id="date-range14" size="40" value="">
-			</p>
+			<div class="demo">
+				 Batch mode ( week ): <input id="date-range14" size="60" value="">
+				 <a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	batchMode: 'week', 
+	showShortcuts: false
+}				</pre>
+			</div>
+
+			<div class="demo">
+				Disable some dates: <input id="date-range15" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showShortcuts: false,
+	beforeShowDay: function(t)
+	{
+		var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+		var _class = '';
+		var _tooltip = valid ? '' : 'weekends are disabled';
+		return [valid,_class,_tooltip];
+	}
+}				</pre>
+			</div>
+
+
+			<div class="demo">
+				Control by script: 
+				<button id="date-range16-open">Open</button> 
+				<button id="date-range16-close">Close</button> 
+				<button id="date-range16-set">Set Date Range</button> 
+				<button id="date-range16-clear">Clear Selection</button> 
+				<button id="date-range16-destroy">Destroy</button> 
+				<br>
+				<input id="date-range16" size="60" value="">
+
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+$('#date-range16').dateRangePicker(
+{
+	showShortcuts: false,
+	format: 'YYYY-MM-DD'
+});
+
+$('#date-range16-open').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').open();
+});
+
+$('#date-range16-close').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').close();
+});
+
+$('#date-range16-set').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').setDateRange('2013-11-20','2014-08-25');
+});
+
+$('#date-range16-clear').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').clear();
+});
+
+$('#date-range16-destroy').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').destroy();
+});				</pre>
+			</div>
 
 
 			<h2>Configuration</h2>
@@ -174,7 +427,9 @@
 	inline:false,
 	container: 'body', 
 	alwaysOpen:false,
-	singleDate:false
+	singleDate:false,
+	batchMode:false,
+	beforeShowDay: [function]
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -206,7 +461,7 @@
 	<i>This string defines the earliest date which is allowed for the user, same format as `format`</i>
 
 <b>endDate (String or false)</b>
-	<i>This string defines the latest date which is allowed for the user</i>
+	<i>This string defines the latest date which is allowed for the user, same format as `format`</i>
 	
 <b>minDays (Number)</b>
 	<i>This number defines the minimum days of the selected range
@@ -244,14 +499,21 @@
 	<i>choose a single date instead of a date range.
 	</i>
 		
-<b>batchMode (Boolean)</b>
+<b>batchMode (false / 'week' / 'month')</b>
 	<i> auto batch select mode </i>
 	<i> false (default), week or month</i>
+
+<b>beforeShowDay (Function)</b>
+	<i>A function that takes a date as a parameter and must return an array with:
+	[0]: true/false indicating whether or not this date is selectable
+	[1]: a CSS class name to add to the date's cell or "" for the default presentation
+	[2]: an optional popup tooltip for this date
+	The function is called for each day in the datepicker before it is displayed.</i>
 
 </pre>
 
 	<h2>Events</h2>
-	<p>Two events will be triggerred on the date range picker DOM</p>
+	<p>3 events will be triggerred on the date range picker DOM</p>
 <pre>$('#dom-id')
 .dateRangePicker()
 .bind('datepicker-change',function(event,obj)
@@ -274,10 +536,37 @@
 });
 </pre>
 
+<br>
+
+	<h2>APIs</h2>
+	<p></p>
+<pre>//after you called  $(dom).dateRangePicker();
+
+$(dom).data('dateRangePicker')
+	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object
+	.clear(); 	// clear date range
+	.close(); 	// close date range picker overlay
+	.open();	// open date range picker overlay
+	.destroy();	// destroy all date range picker related things
+</pre>
+
 	<h2>License</h2>
 	<pre>
 This date range picker plugin is under MIT LICENSE
 	</pre>
+
+
+
+	<script>
+	$(function()
+	{
+		$('a.show-option').click(function(evt)
+		{
+			evt.preventDefault();
+			$(this).siblings('.options').slideToggle();
+		});
+	})
+	</script>
 
 	</body>
 </html>
