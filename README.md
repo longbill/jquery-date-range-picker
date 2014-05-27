@@ -1,6 +1,6 @@
 #jQuery Date Range Picker Plugin#
 
-v0.0.4
+v0.0.5
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
@@ -16,9 +16,12 @@ Live demostration and documentation is [HERE](http://jszen.com/jquery-date-range
 ![screenshot](https://raw.github.com/longbill/jquery-date-range-picker/master/preview.jpg)
 
 
-##what's new in 0.0.4##
+##what's new in 0.0.5##
 
-* enable single date picker mode
+* enable crontrol by script
+* enable batch mode ( select week or month by one click )
+* fixed some position issues
+* fixed some time related bugs
 
 
 ##Configuration##
@@ -63,7 +66,8 @@ The default configuration object is:
 	container: 'body', 
 	alwaysOpen:false,
 	singleDate:false,
-	batchMode:false
+	batchMode:false,
+	beforeShowDay: [function]
 }
 ```
 
@@ -92,10 +96,10 @@ When it is called, the context of this function is set to the datepicker DOM</i>
 <i style="display:block; margin-left:2em;">This function is called when set date range string to DOM</i>
 
 <b>startDate (String or false)</b>
-<i style="display:block; margin-left:2em;">This string defines the earliest date which is allowed for the user</i>
+<i style="display:block; margin-left:2em;">This string defines the earliest date which is allowed for the user, same format as `format`</i>
 
 <b>endDate (String or false)</b>
-<i style="display:block; margin-left:2em;">This string defines the latest date which is allowed for the user</i>
+<i style="display:block; margin-left:2em;">This string defines the latest date which is allowed for the user, same format as `format`</i>
 
 <b>minDays (Number)</b>
 <i style="display:block; margin-left:2em;">This number defines the minimum days of the selected range
@@ -129,9 +133,16 @@ if this is 0, means do not limit maximum days</i>
 <b>singleDate (Boolean)</b>
 <i>choose a single date instead of a date range.</i>
 
-<b>batchMode (Boolean)</b>
+<b>batchMode (false / 'week' / 'month')</b>
 <i> auto batch select mode </i>
 <i> false (default), week or month</i>
+
+<b>beforeShowDay (Function)</b>
+<i>A function that takes a date as a parameter and must return an array with:
+[0]: true/false indicating whether or not this date is selectable
+[1]: a CSS class name to add to the date's cell or "" for the default presentation
+[2]: an optional popup tooltip for this date
+The function is called for each day in the datepicker before it is displayed.</i>
 
 
 ##Events##
@@ -158,4 +169,16 @@ $('#dom-id')
 {
 	console.log('close');
 });
+```
+
+###APIs###
+
+after you called  $(dom).dateRangePicker();
+```javascript
+$(dom).data('dateRangePicker')
+	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object
+	.clear(); 	// clear date range
+	.close(); 	// close date range picker overlay
+	.open();	// open date range picker overlay
+	.destroy();	// destroy all date range picker related things
 ```
