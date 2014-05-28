@@ -456,7 +456,7 @@
 		function open(animationTime)
 		{
 			calcPosition();
-			var __default_string = opt.getValue.call(self);
+			var __default_string = opt.getValue.call(selfDom);
 			var defaults = __default_string ? __default_string.split( opt.separator ) : '';
 
 			if (defaults && defaults.length >= 2)
