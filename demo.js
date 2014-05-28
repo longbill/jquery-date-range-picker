@@ -156,11 +156,11 @@ $(function()
 	{
 		getValue: function()
 		{
-			return $(this).html();
+			return this.innerHTML;
 		},
 		setValue: function(s)
 		{
-			$(this).html(s);
+			this.innerHTML = s;
 		}
 	});
 
