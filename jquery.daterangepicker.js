@@ -545,8 +545,8 @@
 				} else {
 					r = moment(parseInt(time)).startOf('week').valueOf();
 				}
-      } else if (opt.batchMode === 'month') {
-				opt.start = moment(parseInt(time)).startOf('month').valueOf();
+      } else if (opt.batchMode === 'month-range') {
+				r = moment(parseInt(time)).startOf('month').valueOf();
       }
 
       return r;
@@ -556,13 +556,13 @@
     {
       var r = time;
       if  (opt.batchMode === 'week-range') {
-        if (opt.startOfWeek === 'monday') {
+        if (opt.startOfWeek === 'monday-range') {
 					r = moment(parseInt(time)).endOf('isoweek').valueOf();
 				} else {
 					r = moment(parseInt(time)).endOf('week').valueOf();
 				}
       } else if (opt.batchMode === 'month') {
-				opt.start = moment(parseInt(time)).endOf('month').valueOf();
+				r = moment(parseInt(time)).endOf('month').valueOf();
       }
 
       return r;
@@ -616,8 +616,8 @@
 			if (!opt.singleDate && opt.start && opt.end && opt.start > opt.end)
 			{
 				var tmp = opt.end;
-				opt.end = opt.start;
-				opt.start = tmp;
+				opt.end = handleEnd(opt.start);
+				opt.start = handleStart(tmp);
 				if (opt.time.enabled) {
 					swapTime();
 				}
@@ -801,7 +801,7 @@
 				}
 				if (
 					(opt.start && opt.end && end >= time && start <= time )
-					|| ( opt.start && !opt.end && start == time )
+					|| ( opt.start && !opt.end && moment(start).format('YYYY-MM-DD') == moment(time).format('YYYY-MM-DD') )
 				)
 				{
 					$(this).addClass('checked');
