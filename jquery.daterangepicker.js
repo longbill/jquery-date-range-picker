@@ -536,6 +536,39 @@
 			showSelectedDays();
 		}
 
+    function handleStart(time)
+    {
+      var r = time;
+      if  (opt.batchMode === 'week-range') {
+        if (opt.startOfWeek === 'monday') {
+					r = moment(parseInt(time)).startOf('isoweek').valueOf();
+				} else {
+					r = moment(parseInt(time)).startOf('week').valueOf();
+				}
+      } else if (opt.batchMode === 'month') {
+				opt.start = moment(parseInt(time)).startOf('month').valueOf();
+      }
+
+      return r;
+    }
+
+    function handleEnd(time)
+    {
+      var r = time;
+      if  (opt.batchMode === 'week-range') {
+        if (opt.startOfWeek === 'monday') {
+					r = moment(parseInt(time)).endOf('isoweek').valueOf();
+				} else {
+					r = moment(parseInt(time)).endOf('week').valueOf();
+				}
+      } else if (opt.batchMode === 'month') {
+				opt.start = moment(parseInt(time)).endOf('month').valueOf();
+      }
+
+      return r;
+    }
+
+
 		function dayClicked(day)
 		{
 			if (day.hasClass('invalid')) return;
@@ -566,7 +599,7 @@
 			}
 			else if ((opt.start && opt.end) || (!opt.start && !opt.end) )
 			{
-				opt.start = time;
+				opt.start = handleStart(time);
 				opt.end = false;
 				if (opt.time.enabled) {
 					changeTime("start", opt.start);
@@ -574,7 +607,7 @@
 			}
 			else if (opt.start)
 			{
-				opt.end = time;
+				opt.end = handleEnd(time);
 				if (opt.time.enabled) {
 					changeTime("end", opt.end);
 				}

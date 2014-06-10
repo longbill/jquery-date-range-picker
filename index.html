@@ -324,6 +324,17 @@
 }				</pre>
 			</div>
 
+    <div class="demo">
+				Batch mode ( week-range ): <input id="date-range14-2" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	batchMode: 'week-range', 
+	showShortcuts: false
+}				</pre>			
+    </div>
+
+
 			<div class="demo">
 				Disable some dates: <input id="date-range15" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
@@ -339,6 +350,9 @@
 	}
 }				</pre>
 			</div>
+
+			
+
 
 
 			<div class="demo">
@@ -501,7 +515,7 @@ $('#date-range16-destroy').click(function(evt)
 		
 <b>batchMode (false / 'week' / 'month')</b>
 	<i> auto batch select mode </i>
-	<i> false (default), week or month</i>
+	<i> false (default), week, month, week-range, month-range</i>
 
 <b>beforeShowDay (Function)</b>
 	<i>A function that takes a date as a parameter and must return an array with:

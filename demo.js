@@ -217,6 +217,12 @@ $(function()
 		showShortcuts: false
 	});
 
+  $('#date-range14-2').dateRangePicker(
+	{
+		batchMode: 'week-range',
+		showShortcuts: false
+	});
+
 	$('#date-range15').dateRangePicker(
 	{
 		showShortcuts: false,
