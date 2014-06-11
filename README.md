@@ -135,7 +135,7 @@ if this is 0, means do not limit maximum days</i>
 
 <b>batchMode (false / 'week' / 'month')</b>
 <i> auto batch select mode </i>
-<i> false (default), week or month</i>
+<i> false (default), week, month, week-range, month-range</i>
 
 <b>beforeShowDay (Function)</b>
 <i>A function that takes a date as a parameter and must return an array with:
