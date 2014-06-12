@@ -468,7 +468,10 @@
 					defaults[0] = defaults[0].replace(/(\d+)(th|nd|st)/,'$1');
 					defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
 				}
+        // set initiated  to avoid triggerring datepicker-change event 
+        initiated = false;
 				setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
+        initiated = true;
 			}
 			box.slideDown(animationTime);
 		}
