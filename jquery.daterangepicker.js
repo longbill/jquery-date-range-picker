@@ -75,6 +75,39 @@
 			'default-less' : 'Please select a date range less than %d days',
 			'default-range' : 'Please select a date range between %d and %d days',
 			'default-default': 'Please select a date range'
+		},
+		'it':
+		{
+			'selected': 'Selezionati:',
+			'day':'Giorno',
+			'days': 'Giorni',
+			'apply': 'Chiudi',
+			'week-1' : 'LU',
+			'week-2' : 'MA',
+			'week-3' : 'ME',
+			'week-4' : 'GI',
+			'week-5' : 'VE',
+			'week-6' : 'SA',
+			'week-7' : 'DO',
+			'month-name': ['GENNAIO','FEBBRAIO','MARZO','APRILE','MAGGIO','GIUGNO','LUGLIO','AGOSTO','SETTEMBRE','OTTOBRE','NOVEMBRE','DICEMBRE'],
+			'shortcuts' : 'Scorciatoie',
+			'past': 'Scorso',
+			'following':'Successivo',
+			'previous' : 'Precedente',
+			'prev-week' : 'Settimana',
+			'prev-month' : 'Mese',
+			'prev-year' : 'Anno',
+			'next':'Prossimo',
+			'next-week':'Settimana',
+			'next-month':'Mese',
+			'next-year':'Anno',
+			'less-than' : 'L\'intervallo non dev\'essere maggiore di %d giorni',
+			'more-than' : 'L\'intervallo non dev\'essere minore di %d giorni',
+			'default-more' : 'Seleziona un intervallo maggiore di %d giorni',
+			'default-single' : 'Seleziona una data',
+			'default-less' : 'Seleziona un intervallo minore di %d giorni',
+			'default-range' : 'Seleziona un intervallo compreso tra i %d e i %d giorni',
+			'default-default': 'Seleziona un intervallo di date'
 		}
 	};
 
@@ -123,7 +156,7 @@
 			container:'body',
 			alwaysOpen:false,
 			singleDate:false,
-			batchMode: false 
+			batchMode: false
 		},opt);
 
 		opt.start = false;
@@ -175,7 +208,7 @@
 				$(document).unbind('click.datepicker',closeDatePicker);
 			}
 		});
-		
+
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
@@ -202,7 +235,7 @@
 			$(this).data('date-picker-opened',true);
 
 
-			
+
 
 
 			box = createDom().hide();
@@ -242,7 +275,7 @@
 
 			//showSelectedInfo();
 
-			
+
 
 
 			var defaultTopText = '';
@@ -260,7 +293,7 @@
 			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
 
 
-			
+
 
 			setTimeout(function()
 			{
@@ -468,7 +501,7 @@
 					defaults[0] = defaults[0].replace(/(\d+)(th|nd|st)/,'$1');
 					defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
 				}
-        // set initiated  to avoid triggerring datepicker-change event 
+        // set initiated  to avoid triggerring datepicker-change event
         initiated = false;
 				setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
         initiated = true;
@@ -1017,7 +1050,7 @@
 			return $(html);
 		}
 
-		function getHideClass() 
+		function getHideClass()
 		{
 			if (opt.autoClose === true) {
 				return 'hide';
