@@ -142,6 +142,39 @@
 			'default-range' : 'Por favor selecciona un rango entre %d y %d dias',
 			'default-default': 'Por favor selecciona un rango de fechas.'
 		},
+		'de':
+		{
+			'selected': 'Auswahl:',
+			'day':'Tag',
+			'days': 'Tage',
+			'apply': 'Schließen',
+			'week-1' : 'MO',
+			'week-2' : 'DI',
+			'week-3' : 'MI',
+			'week-4' : 'DO',
+			'week-5' : 'FR',
+			'week-6' : 'SA',
+			'week-7' : 'SO',
+			'month-name': ['JANUAR','FEBRUAR','MÄRZ','APRIL','MAI','JUNI','JULI','AUGUST','SEPTEMBER','OKTOBER','NOVEMBER','DEZEMBER'],
+			'shortcuts' : 'Schnellwahl',
+			'past': 'Vorherige',
+			'following':'Folgende',
+			'previous' : 'Vorherige',
+			'prev-week' : 'Woche',
+			'prev-month' : 'Monat',
+			'prev-year' : 'Jahr',
+			'next':'Nächste',
+			'next-week':'Woche',
+			'next-month':'Monat',
+			'next-year':'Jahr',
+			'less-than' : 'Datumsbereich darf nicht größer sein als %d Tage',
+			'more-than' : 'Datumsbereich darf nicht kleiner sein als %d Tage',
+			'default-more' : 'Bitte mindestens %d Tage auswählen',
+			'default-single' : 'Bitte ein Datum auswählen',
+			'default-less' : 'Bitte weniger als %d Tage auswählen',
+			'default-range' : 'Bitte einen Datumsbereich zwischen %d und %d Tagen auswählen',
+			'default-default': 'Bitte ein Start- und Enddatum auswählen'
+		},
 	};
 
 
