@@ -174,7 +174,7 @@
 			'default-less' : 'Bitte weniger als %d Tage auswählen',
 			'default-range' : 'Bitte einen Datumsbereich zwischen %d und %d Tagen auswählen',
 			'default-default': 'Bitte ein Start- und Enddatum auswählen'
-		},
+		}
 	};
 
 
