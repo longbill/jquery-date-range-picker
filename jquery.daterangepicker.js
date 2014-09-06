@@ -174,6 +174,39 @@
 			'default-less' : 'Bitte weniger als %d Tage auswählen',
 			'default-range' : 'Bitte einen Datumsbereich zwischen %d und %d Tagen auswählen',
 			'default-default': 'Bitte ein Start- und Enddatum auswählen'
+		},
+		'ru':
+		{
+			'selected': 'Выбрано:',
+			'day': 'День',
+			'days': 'Дней',
+			'apply': 'Закрыть',
+			'week-1': 'ПН',
+			'week-2': 'ВТ',
+			'week-3': 'СР',
+			'week-4': 'ЧТ',
+			'week-5': 'ПТ',
+			'week-6': 'СБ',
+			'week-7': 'ВС',
+			'month-name': ['ЯНВАРЬ','ФЕВРАЛЬ','МАРТ','АПРЕЛЬ','МАЙ','ИЮНЬ','ИЮЛЬ','АВГУСТ','СЕНТЯБРЬ','ОКТЯБРЬ','НОЯБРЬ','ДЕКАБРЬ'],
+			'shortcuts': 'Быстрый выбор',
+			'past': 'Прошедшие',
+			'following': 'Следующие',
+			'previous': '&nbsp;&nbsp;&nbsp;',
+			'prev-week': 'Неделя',
+			'prev-month': 'Месяц',
+			'prev-year': 'Год',
+			'next': '&nbsp;&nbsp;&nbsp;',
+			'next-week': 'Неделя',
+			'next-month': 'Месяц',
+			'next-year': 'Год',
+			'less-than': 'Диапазон не может быть больше %d дней',
+			'more-than': 'Диапазон не может быть меньше %d дней',
+			'default-more': 'Пожалуйста выберите диапазон больше %d дней',
+			'default-single': 'Пожалуйста выберите дату',
+			'default-less': 'Пожалуйста выберите диапазон меньше %d дней',
+			'default-range': 'Пожалуйста выберите диапазон между %d и %d днями',
+			'default-default': 'Пожалуйста выберите диапазон'
 		}
 	};
 
