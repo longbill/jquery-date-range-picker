@@ -692,7 +692,7 @@
     {
       var r = time;
       if  (opt.batchMode === 'week-range') {
-        if (opt.startOfWeek === 'monday-range') {
+        if (opt.startOfWeek === 'monday') {
 					r = moment(parseInt(time)).endOf('isoweek').valueOf();
 				} else {
 					r = moment(parseInt(time)).endOf('week').valueOf();
