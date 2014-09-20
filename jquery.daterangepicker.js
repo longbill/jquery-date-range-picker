@@ -620,8 +620,8 @@
 			opt[name] = parseInt(
 				moment(parseInt(date))
 					.startOf('day')
-					.add('h', moment(opt[name + "Time"]).format("HH"))
-					.add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
+					.add(moment(opt[name + "Time"]).format("HH"), 'h')
+					.add(moment(opt[name + "Time"]).format("mm"), 'm').valueOf()
 				);
 		}
 
@@ -652,8 +652,8 @@
 					m = timePoint.format("mm");
 				opt[name] = timePoint
 					.startOf('day')
-					.add("h", hour || h)
-					.add("m", minute || m)
+					.add(hour || h, 'h')
+					.add(minute || m, 'm')
 					.valueOf();
 			}
 			checkSelectionValid();
@@ -1223,7 +1223,7 @@
 			var toMonth = d.getMonth();
 			for(var i=0; i<40; i++)
 			{
-				var today = moment(d).add('days', i).toDate();
+				var today = moment(d).add(i, 'days').toDate();
 				var valid = true;
 				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
 				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
