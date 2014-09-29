@@ -907,7 +907,7 @@
 
 			opt.start = date1.getTime();
 			opt.end = date2.getTime();
-			if (compare_month(date1,date2) == 0)
+			if (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0)
 			{
 				date2 = nextMonth(date1);
 			}
