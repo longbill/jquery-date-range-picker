@@ -1223,7 +1223,7 @@
 			var toMonth = d.getMonth();
 			for(var i=0; i<40; i++)
 			{
-				var today = moment(d).add('days', i).toDate();
+				var today = moment(d).add(i,'days').toDate();
 				var valid = true;
 				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
 				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
