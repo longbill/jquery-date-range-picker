@@ -867,7 +867,11 @@
 			{
 				box.find('.selected-days').show().find('.selected-days-num').html(Math.round((opt.end-opt.start)/86400000)+1);
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				if(opt.mergeSameDate && opt.start === opt.end){
+					dateRange = getDateString(new Date(opt.start));
+				}else{
+					dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				}
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 				if (initiated)
 				{
