@@ -12,36 +12,36 @@
 	{
 		'cn':
 		{
-			'selected': '已选择:',
-			'day':'天',
-			'days': '天',
-			'apply': '确定',
-			'week-1' : '一',
-			'week-2' : '二',
-			'week-3' : '三',
-			'week-4' : '四',
-			'week-5' : '五',
-			'week-6' : '六',
-			'week-7' : '日',
-			'month-name': ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-			'shortcuts' : '快捷选择',
-			'past': '过去',
-			'following':'将来',
+			'selected': '???:',
+			'day':'?',
+			'days': '?',
+			'apply': '??',
+			'week-1' : '?',
+			'week-2' : '?',
+			'week-3' : '?',
+			'week-4' : '?',
+			'week-5' : '?',
+			'week-6' : '?',
+			'week-7' : '?',
+			'month-name': ['??','??','??','??','??','??','??','??','??','??','???','???'],
+			'shortcuts' : '????',
+			'past': '??',
+			'following':'??',
 			'previous' : '&nbsp;&nbsp;&nbsp;',
-			'prev-week' : '上周',
-			'prev-month' : '上个月',
-			'prev-year' : '去年',
+			'prev-week' : '??',
+			'prev-month' : '???',
+			'prev-year' : '??',
 			'next': '&nbsp;&nbsp;&nbsp;',
-			'next-week':'下周',
-			'next-month':'下个月',
-			'next-year':'明年',
-			'less-than' : '所选日期范围不能大于%d天',
-			'more-than' : '所选日期范围不能小于%d天',
-			'default-more' : '请选择大于%d天的日期范围',
-			'default-less' : '请选择小于%d天的日期范围',
-			'default-range' : '请选择%d天到%d天的日期范围',
-			'default-single':'请选择一个日期',
-			'default-default': '请选择一个日期范围'
+			'next-week':'??',
+			'next-month':'???',
+			'next-year':'??',
+			'less-than' : '??????????%d?',
+			'more-than' : '??????????%d?',
+			'default-more' : '?????%d??????',
+			'default-less' : '?????%d??????',
+			'default-range' : '???%d??%d??????',
+			'default-single':'???????',
+			'default-default': '?????????'
 		},
 		'en':
 		{
@@ -177,36 +177,36 @@
 		},
 		'ru':
 		{
-			'selected': 'Выбрано:',
-			'day': 'День',
-			'days': 'Дней',
-			'apply': 'Закрыть',
-			'week-1': 'ПН',
-			'week-2': 'ВТ',
-			'week-3': 'СР',
-			'week-4': 'ЧТ',
-			'week-5': 'ПТ',
-			'week-6': 'СБ',
-			'week-7': 'ВС',
-			'month-name': ['ЯНВАРЬ','ФЕВРАЛЬ','МАРТ','АПРЕЛЬ','МАЙ','ИЮНЬ','ИЮЛЬ','АВГУСТ','СЕНТЯБРЬ','ОКТЯБРЬ','НОЯБРЬ','ДЕКАБРЬ'],
-			'shortcuts': 'Быстрый выбор',
-			'past': 'Прошедшие',
-			'following': 'Следующие',
+			'selected': '???????:',
+			'day': '????',
+			'days': '????',
+			'apply': '???????',
+			'week-1': '??',
+			'week-2': '??',
+			'week-3': '??',
+			'week-4': '??',
+			'week-5': '??',
+			'week-6': '??',
+			'week-7': '??',
+			'month-name': ['??????','???????','????','??????','???','????','????','??????','????????','???????','??????','???????'],
+			'shortcuts': '??????? ?????',
+			'past': '?????????',
+			'following': '?????????',
 			'previous': '&nbsp;&nbsp;&nbsp;',
-			'prev-week': 'Неделя',
-			'prev-month': 'Месяц',
-			'prev-year': 'Год',
+			'prev-week': '??????',
+			'prev-month': '?????',
+			'prev-year': '???',
 			'next': '&nbsp;&nbsp;&nbsp;',
-			'next-week': 'Неделя',
-			'next-month': 'Месяц',
-			'next-year': 'Год',
-			'less-than': 'Диапазон не может быть больше %d дней',
-			'more-than': 'Диапазон не может быть меньше %d дней',
-			'default-more': 'Пожалуйста выберите диапазон больше %d дней',
-			'default-single': 'Пожалуйста выберите дату',
-			'default-less': 'Пожалуйста выберите диапазон меньше %d дней',
-			'default-range': 'Пожалуйста выберите диапазон между %d и %d днями',
-			'default-default': 'Пожалуйста выберите диапазон'
+			'next-week': '??????',
+			'next-month': '?????',
+			'next-year': '???',
+			'less-than': '???????? ?? ????? ???? ?????? %d ????',
+			'more-than': '???????? ?? ????? ???? ?????? %d ????',
+			'default-more': '?????????? ???????? ???????? ?????? %d ????',
+			'default-single': '?????????? ???????? ????',
+			'default-less': '?????????? ???????? ???????? ?????? %d ????',
+			'default-range': '?????????? ???????? ???????? ????? %d ? %d ?????',
+			'default-default': '?????????? ???????? ????????'
 		}
 	};
 
@@ -591,19 +591,28 @@
 			var __default_string = opt.getValue.call(selfDom);
 			var defaults = __default_string ? __default_string.split( opt.separator ) : '';
 
-			if (defaults && defaults.length >= 2)
+			if (defaults && ((defaults.length==1 && opt.singleDate) || defaults.length>=2))
 			{
 				var ___format = opt.format;
 				if (___format.match(/Do/))
 				{
+
 					___format = ___format.replace(/Do/,'D');
 					defaults[0] = defaults[0].replace(/(\d+)(th|nd|st)/,'$1');
-					defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
+					if(defaults.length >= 2){
+						defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
+					}
 				}
-        // set initiated  to avoid triggerring datepicker-change event
-        initiated = false;
-				setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
-        initiated = true;
+        		// set initiated  to avoid triggerring datepicker-change event 
+        		initiated = false;
+        		if(defaults.length >= 2){
+					setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
+				}
+				else if(defaults.length==1 && opt.singleDate){
+					setSingleDate(moment(defaults[0], ___format).toDate());
+				}
+
+        		initiated = true;
 			}
 			box.slideDown(animationTime);
 		}
@@ -921,7 +930,35 @@
 			showSelectedInfo();
 			autoclose();
 		}
+		
+		function setSingleDate(date1)
+		{
+			
+			var valid = true;
+			if (opt.startDate && compare_day(date1,opt.startDate) < 0) valid = false;
+			if (opt.endDate && compare_day(date1,opt.endDate) > 0) valid = false;
+			if (!valid)
+			{
+				showMonth(opt.startDate,'month1');
+				
+				//showGap();
+				return;
+			}
 
+			opt.start = date1.getTime();
+			
+			
+			if (opt.time.enabled) {
+				renderTime("time1", date1);
+				
+			}
+			showMonth(date1,'month1');
+			//showMonth(date2,'month2');
+			showGap();
+			showSelectedInfo();
+			autoclose();
+		}
+		
 		function showSelectedDays()
 		{
 			if (!opt.start && !opt.end) return;
