@@ -272,6 +272,7 @@
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
+			$(document).trigger('click.datepicker');
 			evt.stopPropagation();
 			open(200);
 		});
