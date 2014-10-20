@@ -233,7 +233,9 @@
 			},
 			setValue: function(s)
 			{
-				$(this).val(s);
+				if(!$(this).attr('readonly') && !$(this).is(':disabled')){
+					$(this).val(s);
+				}
 			},
 			startDate: false,
 			endDate: false,
