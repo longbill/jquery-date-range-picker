@@ -387,7 +387,7 @@
 				box.find('.apply-btn').hide();
 			}
 
-			var defaultTime = new Date();
+			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
 			if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
 			if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
 
