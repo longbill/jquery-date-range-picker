@@ -379,7 +379,7 @@
 			}
 			else
 			{
-				box.css({position:'static'});
+				box.addClass("inline-wrapper").css({position:'static'});
 			}
 
 			if (opt.alwaysOpen)
