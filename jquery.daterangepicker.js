@@ -207,39 +207,6 @@
 			'default-less': 'Пожалуйста выберите диапазон меньше %d дней',
 			'default-range': 'Пожалуйста выберите диапазон между %d и %d днями',
 			'default-default': 'Пожалуйста выберите диапазон'
-		},
-		'fr':
-		{
-			'selected': 'Sélection:',
-			'day':'Jour',
-			'days': 'Jours',
-			'apply': 'Fermer',
-			'week-1' : 'LU',
-			'week-2' : 'MA',
-			'week-3' : 'ME',
-			'week-4' : 'JE',
-			'week-5' : 'VE',
-			'week-6' : 'SA',
-			'week-7' : 'DI',
-			'month-name': ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'],
-			'shortcuts' : 'Raccourcis',
-			'past': 'Passé',
-			'following':'Suivant',
-			'previous' : 'Précédent',
-			'prev-week' : 'Semaine',
-			'prev-month' : 'Mois',
-			'prev-year' : 'Année',
-			'next':'Suivant',
-			'next-week':'Semaine',
-			'next-month':'Mois',
-			'next-year':'Année',
-			'less-than' : 'L\'intervalle ne doit pas être supérieure à %d jours',
-			'more-than' : 'L\'intervalle ne doit pas être inférieure à %d jours',
-			'default-more' : 'Merci de choisir une intervalle supérieure à %d jours',
-			'default-single' : 'Merci de choisir une date',
-			'default-less' : 'Merci de choisir une intervalle inférieure %d jours',
-			'default-range' : 'Merci de choisir une intervalle comprise entre %d et %d jours',
-			'default-default': 'Merci de choisir une date'
 		}
 	};
 
@@ -379,7 +346,7 @@
 			}
 			else
 			{
-				box.addClass("inline-wrapper").css({position:'static'});
+				box.css({position:'static'});
 			}
 
 			if (opt.alwaysOpen)
@@ -387,7 +354,7 @@
 				box.find('.apply-btn').hide();
 			}
 
-			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
+			var defaultTime = new Date();
 			if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
 			if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
 
@@ -444,7 +411,7 @@
 				var isMonth2 = $(this).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = nextMonth(month);
-				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0) return;
+				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
@@ -455,11 +422,10 @@
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = prevMonth(month);
 				//if (isMonth2 && month.getFullYear()+''+month.getMonth() <= opt.month1.getFullYear()+''+opt.month1.getMonth()) return;
-				if (isMonth2 && compare_month(month,opt.month1) <= 0) return;
+				if (isMonth2 && compare_month(month,opt.month1) <= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
-
 
 			box.bind('click',function(evt)
 			{
@@ -698,7 +664,7 @@
 		{
 			opt.start = false;
 			opt.end = false;
-			box.find('.day.checked').removeClass('checked');
+			box.find('.day.checked').removeClass('checked first');
 			opt.setValue.call(selfDom, '');
 			checkSelectionValid();
 			showSelectedInfo();
@@ -828,14 +794,14 @@
 			{
 				opt.start = false;
 				opt.end = false;
-				box.find('.day').removeClass('checked');
+				box.find('.day').removeClass('checked first');
 				box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('less-than').replace('%d',opt.maxDays) );
 			}
 			else if ( opt.minDays && days < opt.minDays)
 			{
 				opt.start = false;
 				opt.end = false;
-				box.find('.day').removeClass('checked');
+				box.find('.day').removeClass('checked first');
 				box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html( lang('more-than').replace('%d',opt.minDays) );
 			}
 			else
@@ -862,7 +828,7 @@
 				{
 					opt.start = false;
 					opt.end = false;
-					box.find('.day').removeClass('checked');
+					box.find('.day').removeClass('checked first');
 				}
 			}
 		}
@@ -977,7 +943,7 @@
 				}
 				else
 				{
-					$(this).removeClass('checked');
+					$(this).removeClass('checked first');
 				}
 			});
 		}
@@ -1213,7 +1179,19 @@
 					<th>'+lang('week-6')+'</th>';
 			}
 		}
-
+    function isMonthOutOfBounds(month)
+    {
+      var month = moment(month);
+      if (opt.startDate && month.endOf('month').isBefore(opt.startDate))
+      {
+        return true;
+      }
+      if (opt.endDate && month.startOf('month').isAfter(opt.endDate)) 
+      {
+        return true;
+      }
+      return false;
+    }
 		function getGapHTML()
 		{
 			var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
