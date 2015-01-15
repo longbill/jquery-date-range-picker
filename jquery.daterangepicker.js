@@ -299,7 +299,9 @@
 			},
 			setValue: function(s)
 			{
-				$(this).val(s);
+				if(!$(this).attr('readonly') && !$(this).is(':disabled')){
+					$(this).val(s);
+				}
 			},
 			startDate: false,
 			endDate: false,
@@ -339,6 +341,7 @@
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
+			$(document).trigger('click.datepicker');
 			evt.stopPropagation();
 			open(opt.duration);
 		});
@@ -658,19 +661,28 @@
 			var __default_string = opt.getValue.call(selfDom);
 			var defaults = __default_string ? __default_string.split( opt.separator ) : '';
 
-			if (defaults && defaults.length >= 2)
+			if (defaults && ((defaults.length==1 && opt.singleDate) || defaults.length>=2))
 			{
 				var ___format = opt.format;
 				if (___format.match(/Do/))
 				{
+
 					___format = ___format.replace(/Do/,'D');
 					defaults[0] = defaults[0].replace(/(\d+)(th|nd|st)/,'$1');
-					defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
+					if(defaults.length >= 2){
+						defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
+					}
 				}
-        // set initiated  to avoid triggerring datepicker-change event
-        initiated = false;
-				setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
-        initiated = true;
+        		// set initiated  to avoid triggerring datepicker-change event 
+        		initiated = false;
+        		if(defaults.length >= 2){
+					setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
+				}
+				else if(defaults.length==1 && opt.singleDate){
+					setSingleDate(moment(defaults[0], ___format).toDate());
+				}
+
+        		initiated = true;
 			}
 			box.slideDown(animationTime);
 		}
@@ -984,6 +996,34 @@
 			}
 			showMonth(date1,'month1');
 			showMonth(date2,'month2');
+			showGap();
+			showSelectedInfo();
+			autoclose();
+		}
+		
+		function setSingleDate(date1)
+		{
+			
+			var valid = true;
+			if (opt.startDate && compare_day(date1,opt.startDate) < 0) valid = false;
+			if (opt.endDate && compare_day(date1,opt.endDate) > 0) valid = false;
+			if (!valid)
+			{
+				showMonth(opt.startDate,'month1');
+				
+				//showGap();
+				return;
+			}
+
+			opt.start = date1.getTime();
+			
+			
+			if (opt.time.enabled) {
+				renderTime("time1", date1);
+				
+			}
+			showMonth(date1,'month1');
+			//showMonth(date2,'month2');
 			showGap();
 			showSelectedInfo();
 			autoclose();
