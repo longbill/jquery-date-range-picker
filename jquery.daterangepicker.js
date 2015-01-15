@@ -321,7 +321,8 @@
 			container:'body',
 			alwaysOpen:false,
 			singleDate:false,
-			batchMode: false
+			batchMode: false,
+			duration: 200
 		},opt);
 
 		opt.start = false;
@@ -339,7 +340,7 @@
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
 			evt.stopPropagation();
-			open(200);
+			open(opt.duration);
 		});
 
 		init_datepicker.call(this);
@@ -1056,7 +1057,7 @@
 		function closeDatePicker()
 		{
 			if (opt.alwaysOpen) return;
-			$(box).slideUp(200,function()
+			$(box).slideUp(opt.duration,function()
 			{
 				$(self).data('date-picker-opened',false);
 			});
