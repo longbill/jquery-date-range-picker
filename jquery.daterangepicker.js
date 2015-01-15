@@ -478,7 +478,7 @@
 				var isMonth2 = $(this).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = nextMonth(month);
-				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0) return;
+				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
@@ -489,7 +489,7 @@
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = prevMonth(month);
 				//if (isMonth2 && month.getFullYear()+''+month.getMonth() <= opt.month1.getFullYear()+''+opt.month1.getMonth()) return;
-				if (isMonth2 && compare_month(month,opt.month1) <= 0) return;
+				if (isMonth2 && compare_month(month,opt.month1) <= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
 			});
@@ -1247,6 +1247,19 @@
 					<th>'+lang('week-6')+'</th>';
 			}
 		}
+                function isMonthOutOfBounds(month)
+                {
+                        var month = moment(month);
+                        if (opt.startDate && month.endOf('month').isBefore(opt.startDate))
+                        {
+                                return true;
+                        }
+                        if (opt.endDate && month.startOf('month').isAfter(opt.endDate)) 
+                        {
+                                return true;
+                        }
+                        return false;
+                }
 
 		function getGapHTML()
 		{
