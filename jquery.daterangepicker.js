@@ -368,6 +368,7 @@
 			clear: clearSelection,
 			close: closeDatePicker,
 			open: open,
+			getDatePicker: getDatePicker,
 			destroy: function()
 			{
 				$(self).unbind('.datepicker');
@@ -665,6 +666,12 @@
 		                    }
 		                }
 			}
+		}
+		
+		// Return the date picker wrapper element
+		function getDatePicker()
+		{
+			return box;
 		}
 
 		function open(animationTime)
