@@ -341,9 +341,10 @@
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
+			var isOpen = box.is(':visible');
 			$(document).trigger('click.datepicker');
 			evt.stopPropagation();
-			open(opt.duration);
+			if(!isOpen) open(opt.duration);
 		});
 
 		init_datepicker.call(this);
