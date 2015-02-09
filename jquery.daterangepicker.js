@@ -324,7 +324,8 @@
 			alwaysOpen:false,
 			singleDate:false,
 			batchMode: false,
-			duration: 200
+			duration: 200,
+			stickyMonths: false
 		},opt);
 
 		opt.start = false;
@@ -480,16 +481,31 @@
 
 			box.find('.next').click(function()
 			{
+				if(!opt.stickyMonths) gotoNextMonth();
+				else gotoNextMonth_stickily()
+			});
+
+			function gotoNextMonth() {
 				var isMonth2 = $(this).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = nextMonth(month);
 				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
-			});
+			}
+
+			function gotoNextMonth_stickily() {
+
+			}
+
 
 			box.find('.prev').click(function()
 			{
+				if(!pt.stickyMonths) gotoPrevMonth();
+				else gotoPrevMonth_stickily();
+			});
+
+			function gotoPrevMonth() {
 				var isMonth2 = $(this).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = prevMonth(month);
@@ -497,7 +513,11 @@
 				if (isMonth2 && compare_month(month,opt.month1) <= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
-			});
+			}
+
+			function gotoPrevMonth_stickily() {
+
+			}
 
 
 			box.bind('click',function(evt)
