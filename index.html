@@ -351,10 +351,6 @@
 }				</pre>
 			</div>
 
-			
-
-
-
 			<div class="demo">
 				Control by script: 
 				<button id="date-range16-open">Open</button> 
@@ -404,6 +400,17 @@ $('#date-range16-destroy').click(function(evt)
 });				</pre>
 			</div>
 
+			<div class="demo">
+				Sticky months: <input id="date-range17" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	stickyMonths: true,
+	startDate: '2013-01-10',
+	endDate: '2013-05-10'
+}				</pre>
+			</div>
+
 
 			<h2>Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
@@ -443,7 +450,8 @@ $('#date-range16-destroy').click(function(evt)
 	alwaysOpen:false,
 	singleDate:false,
 	batchMode:false,
-	beforeShowDay: [function]
+	beforeShowDay: [function],
+	stickyMonths: false
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -523,6 +531,10 @@ $('#date-range16-destroy').click(function(evt)
 	[1]: a CSS class name to add to the date's cell or "" for the default presentation
 	[2]: an optional popup tooltip for this date
 	The function is called for each day in the datepicker before it is displayed.</i>
+
+<b>stickyMonths (Boolean)</b>
+	<i>If true, there will only be one previous and one next button. Clicking them will change
+	both the months. This setting will have no effect if singleDate option is set to true</i>
 
 </pre>
 
