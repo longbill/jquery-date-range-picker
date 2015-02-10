@@ -650,6 +650,8 @@
         }
 
         function setTime(name, hour, minute) {
+            var tmp;
+
             hour && (box.find("." + name + " .hour-val").text(hour));
             minute && (box.find("." + name + " .minute-val").text(minute));
             switch (name) {
@@ -669,27 +671,23 @@
 
             function setRange(name, timePoint) {
                 var h = timePoint.format("HH"),
-                    m = timePoint.format("mm"),
-                    tmp;
+                    m = timePoint.format("mm");
                 opt[name] = timePoint
                     .startOf('day')
                     .add(hour || h, "h")
                     .add(minute || m, "m")
                     .valueOf();
+            }
 
-                if (!opt.singleDate) {
-                    if (opt.start && opt.end && opt.start > opt.end){
-                        tmp = opt.start;
-                        opt.start = opt.end;
-                        opt.end = tmp;
-                    }
-                    if (opt.startTime && opt.endTime && opt.startTime > opt.endTime){
-                        tmp = opt.startTime;
-                        opt.startTime = opt.endTime;
-                        opt.endTime = tmp;
-                    }
+            if (!opt.singleDate) {
+                if (opt.start && opt.end && opt.start > opt.end){
+                    console.log('start > end');
+                    tmp = opt.start;
+                    opt.start = opt.end;
+                    opt.end = tmp;
                 }
             }
+            
             checkSelectionValid();
             showSelectedInfo();
             showSelectedDays();
