@@ -328,11 +328,13 @@
         var selfDom = $(self).get(0);
 
         $(this).unbind('.datepicker').bind('click.datepicker', function (evt) {
-            var isOpen = box.is(':visible');
             $(document).trigger('click.datepicker');
             evt.stopPropagation();
             open(opt.duration);
-            if (!isOpen) open(opt.duration);
+            setTimeout(function(){
+                var isOpen = box.is(':visible');
+                if (!isOpen) open(opt.duration);
+            }, opt.duration);
         });
 
         init_datepicker.call(this);
@@ -637,8 +639,8 @@
             opt[name] = parseInt(
                 moment(parseInt(date))
                 .startOf('day')
-                .add('h', moment(opt[name + "Time"]).format("HH"))
-                .add('m', moment(opt[name + "Time"]).format("mm")).valueOf()
+                .add(moment(opt[name + "Time"]).format("HH"), 'h')
+                .add(moment(opt[name + "Time"]).format("mm"), 'm').valueOf()
             );
         }
 
@@ -667,12 +669,26 @@
 
             function setRange(name, timePoint) {
                 var h = timePoint.format("HH"),
-                    m = timePoint.format("mm");
+                    m = timePoint.format("mm"),
+                    tmp;
                 opt[name] = timePoint
                     .startOf('day')
-                    .add("h", hour || h)
-                    .add("m", minute || m)
+                    .add(hour || h, "h")
+                    .add(minute || m, "m")
                     .valueOf();
+
+                if (!opt.singleDate) {
+                    if (opt.start && opt.end && opt.start > opt.end){
+                        tmp = opt.start;
+                        opt.start = opt.end;
+                        opt.end = tmp;
+                    }
+                    if (opt.startTime && opt.endTime && opt.startTime > opt.endTime){
+                        tmp = opt.startTime;
+                        opt.startTime = opt.endTime;
+                        opt.endTime = tmp;
+                    }
+                }
             }
             checkSelectionValid();
             showSelectedInfo();
@@ -885,7 +901,7 @@
             opt.start = date1.getTime();
             opt.end = date2.getTime();
             if (compare_month(date1, date2) == 0) {
-                date2 = nextMonth(date1);
+                date2 = nextMonth(date2);
             }
             if (opt.time.enabled) {
                 renderTime("time1", date1);

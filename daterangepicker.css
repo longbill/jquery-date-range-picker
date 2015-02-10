@@ -230,9 +230,10 @@
 }
 .time input[type=range] {
   vertical-align: middle;
+  width: 180px;
 }
 .time1, .time2 {
-	width: 180px;
+	width: 260px;
 	padding: 0 5px;
 	text-align: center;
 }
@@ -244,6 +245,7 @@
 }
 .hour, .minute {
 	text-align: right;
+	padding-right: 10px;
 }
 .hide {
 	display: none;
