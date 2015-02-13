@@ -1,14 +1,14 @@
 // daterangepicker.js
 // version : 0.0.5
 // author : Chunlong Liu
-// last updated at: 2015-02-04 by renxia
+// last updated at: 2015-02-13 by renxia
 // license : MIT
 // www.jszen.com
 // demo: http://lzw.me/pages/demo/daterangepicker
 
 (function (factory) {
 	if ("function" === typeof define && define.amd) {//AMD
-		define(["jquery"], factory);
+		define(['jquery'], factory);
 	} else if ('object' === typeof exports && 'object' === typeof module) { //CommonJS
 		factory(require('jquery'));
 	} else if (jQuery && !jQuery.fn.dateRangePicker) {
@@ -338,13 +338,10 @@
         var selfDom = $(self).get(0);
 
         $(this).unbind('.datepicker').bind('click.datepicker', function (evt) {
+            var isOpen = box.is(':visible');
             $(document).trigger('click.datepicker');
             evt.stopPropagation();
-            open(opt.duration);
-            setTimeout(function(){
-                var isOpen = box.is(':visible');
-                if (!isOpen) open(opt.duration);
-            }, opt.duration);
+            if (!isOpen) open(opt.duration);
         });
 
         init_datepicker.call(this);
