@@ -6,7 +6,17 @@
 // www.jszen.com
 // demo: http://lzw.me/pages/demo/daterangepicker
 
-(function ($) {
+(function (factory) {
+	if ("function" === typeof define && define.amd) {//AMD
+		define(["jquery"], factory);
+	} else if ('object' === typeof exports && 'object' === typeof module) { //CommonJS
+		factory(require('jquery'));
+	} else if (jQuery && !jQuery.fn.dateRangePicker) {
+		factory(jQuery);
+	} else {
+		throw new Error('Not found jQuery.');
+	}
+})(function ($) {
     $.dateRangePickerLanguages = {
         'cn': {
             'selected': '已选择:',
@@ -1261,4 +1271,4 @@
             return (t in langs) ? langs[t] : t;
         }
     };
-})(jQuery);
+});
