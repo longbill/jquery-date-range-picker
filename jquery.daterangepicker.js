@@ -1044,6 +1044,12 @@
 			{
 				date2 = nextMonth(date1);
 			}
+
+			if(opt.stickyMonths && compare_month(date2,opt.endDate) > 0) {
+				date1 = prevMonth(date1);
+				date2 = prevMonth(date2);
+			}
+
 			if (opt.time.enabled) {
 				renderTime("time1", date1);
 				renderTime("time2", date2);
