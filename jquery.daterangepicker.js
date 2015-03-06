@@ -323,6 +323,7 @@
 			container:'body',
 			alwaysOpen:false,
 			singleDate:false,
+			lookBehind: false,
 			batchMode: false,
 			duration: 200
 		},opt);
@@ -427,12 +428,20 @@
 			}
 
 			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
-			if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
-			if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
+			if (opt.lookBehind) {
+				if (opt.startDate && compare_month(defaultTime, opt.startDate) < 0 ) defaultTime = nextMonth(moment(opt.startDate).toDate());
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
 
+				showMonth(prevMonth(defaultTime),'month1');
+				showMonth(defaultTime,'month2');
 
-			showMonth(defaultTime,'month1');
-			showMonth(nextMonth(defaultTime),'month2');
+			} else {
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
+					
+				showMonth(defaultTime,'month1');
+				showMonth(nextMonth(defaultTime),'month2');
+			}
 
 			if (opt.time.enabled) {
 				if ((opt.startDate && opt.endDate) || (opt.start && opt.end)) {
@@ -1008,7 +1017,11 @@
 			opt.end = date2.getTime();
 			if (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0)
 			{
-				date2 = nextMonth(date1);
+				if (opt.lookBehind) {
+					date1 = prevMonth(date2);
+				} else {
+					date2 = nextMonth(date1);
+				}
 			}
 			if (opt.time.enabled) {
 				renderTime("time1", date1);
