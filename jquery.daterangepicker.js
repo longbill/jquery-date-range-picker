@@ -325,7 +325,8 @@
 			singleDate:false,
 			lookBehind: false,
 			batchMode: false,
-			duration: 200
+			duration: 200,
+			stickyMonths: false
 		},opt);
 
 		opt.start = false;
@@ -489,24 +490,57 @@
 
 			box.find('.next').click(function()
 			{
-				var isMonth2 = $(this).parents('table').hasClass('month2');
+				if(!opt.stickyMonths) gotoNextMonth(this);
+				else gotoNextMonth_stickily(this)
+			});
+
+			function gotoNextMonth(self) {
+				var isMonth2 = $(self).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = nextMonth(month);
 				if (!opt.singleDate && !isMonth2 && compare_month(month,opt.month2) >= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
-			});
+			}
+
+			function gotoNextMonth_stickily(self) {
+				var nextMonth1 = nextMonth(opt.month1);
+
+				var nextMonth2 = nextMonth(opt.month2);
+
+				if(isMonthOutOfBounds(nextMonth2)) return;
+				if (!opt.singleDate && compare_month(nextMonth1,nextMonth2) >= 0) return;
+				showMonth(nextMonth1, 'month1');
+				showMonth(nextMonth2, 'month2');
+			}
+
 
 			box.find('.prev').click(function()
 			{
-				var isMonth2 = $(this).parents('table').hasClass('month2');
+				if(!opt.stickyMonths) gotoPrevMonth(this);
+				else gotoPrevMonth_stickily(this);
+			});
+
+			function gotoPrevMonth(self) {
+				var isMonth2 = $(self).parents('table').hasClass('month2');
 				var month = isMonth2 ? opt.month2 : opt.month1;
 				month = prevMonth(month);
 				//if (isMonth2 && month.getFullYear()+''+month.getMonth() <= opt.month1.getFullYear()+''+opt.month1.getMonth()) return;
 				if (isMonth2 && compare_month(month,opt.month1) <= 0 || isMonthOutOfBounds(month)) return;
 				showMonth(month,isMonth2 ? 'month2' : 'month1');
 				showGap();
-			});
+			}
+
+			function gotoPrevMonth_stickily(self) {
+				var prevMonth1 = prevMonth(opt.month1);
+
+				var prevMonth2 = prevMonth(opt.month2);
+
+				if(isMonthOutOfBounds(prevMonth1)) return;
+				if(!opt.singleDate && compare_month(prevMonth2,prevMonth1) <= 0) return;
+				showMonth(prevMonth2, 'month2');
+				showMonth(prevMonth1, 'month1');
+			}
 
 
 			box.bind('click',function(evt)
@@ -1015,7 +1049,7 @@
 
 			opt.start = date1.getTime();
 			opt.end = date2.getTime();
-			if (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0)
+			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0))
 			{
 				if (opt.lookBehind) {
 					date1 = prevMonth(date2);
@@ -1023,6 +1057,12 @@
 					date2 = nextMonth(date1);
 				}
 			}
+
+			if(opt.stickyMonths && compare_month(date2,opt.endDate) > 0) {
+				date1 = prevMonth(date1);
+				date2 = prevMonth(date2);
+			}
+
 			if (opt.time.enabled) {
 				renderTime("time1", date1);
 				renderTime("time2", date2);
@@ -1202,10 +1242,10 @@
 					<input type="button" class="apply-btn disabled '+ getHideClass() +'" value="'+lang('apply')+'" />\
 				</div>'
 				+'<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 			if ( ! opt.singleDate ) {
 				html += '<div class="gap">'+getGapHTML()+'</div>'
-					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
 			}
 				//+'</div>'
 			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
