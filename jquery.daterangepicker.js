@@ -10,6 +10,39 @@
 
 	$.dateRangePickerLanguages =
 	{
+		'az':
+		{
+			'selected': 'Seçildi:',
+			'day':' gün',
+			'days': ' gün',
+			'apply': 'tətbiq',
+			'week-1' : '1',
+			'week-2' : '2',
+			'week-3' : '3',
+			'week-4' : '4',
+			'week-5' : '5',
+			'week-6' : '6',
+			'week-7' : '7',
+			'month-name': ['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'],
+			'shortcuts' : 'Qısayollar',
+			'past': 'Keçmiş',
+			'following':'Növbəti',
+			'previous' : '&nbsp;&nbsp;&nbsp;',
+			'prev-week' : 'Öncəki həftə',
+			'prev-month' : 'Öncəki ay',
+			'prev-year' : 'Öncəki il',
+			'next': '&nbsp;&nbsp;&nbsp;',
+			'next-week':'Növbəti həftə',
+			'next-month':'Növbəti ay',
+			'next-year':'Növbəti il',
+			'less-than' : 'Tarix aralığı %d gündən çox olmamalıdır',
+			'more-than' : 'Tarix aralığı %d gündən az olmamalıdır',
+			'default-more' : '%d gündən çox bir tarix seçin',
+			'default-single' : 'Tarix seçin',
+			'default-less' : '%d gündən az bir tarix seçin',
+			'default-range' : '%d və %d gün aralığında tarixlər seçin',
+			'default-default': 'Tarix aralığı seçin'
+		},
 		'cn':
 		{
 			'selected': '已选择:',
