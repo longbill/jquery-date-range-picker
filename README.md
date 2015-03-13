@@ -63,11 +63,15 @@ The default configuration object is:
 		'next' : ['week','month','year']
 	},
 	customShortcuts : [],
-	inline:false,
+	inline: false,
 	container: 'body', 
-	alwaysOpen:false,
-	singleDate:false,
-	batchMode:false,
+	alwaysOpen: false,
+	singleDate: false,
+	lookBehind: false,
+	batchMode: false,
+	duration: 200,
+	stickyMonths: false,
+	defaultTime: new Date(),
 	beforeShowDay: [function]
 }
 ```

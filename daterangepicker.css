@@ -16,21 +16,20 @@
 }
 .date-picker-wrapper
 {
-	position: absolute;
-	z-index: 99999;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	background-color: #fff;
-	width: 560px;
+	position:absolute;
+	z-index:1;
+	border:1px solid #bfbfbf;
+	background-color:#efefef;
+	width:428px;
 	padding: 5px 12px;
-	font-size: 14px;
-	line-height: 30px;
-	color: #333;
-	font-family: Arial;
-	box-shadow: 3px 3px 10px rgba(150, 230, 250, 0.5);
+	font-size:12px;
+	line-height:20px;
+	color:#aaa;
+	font-family:Arial;
+	box-shadow:3px 3px 10px rgba(0,0,0,0.5);
 }
 .date-picker-wrapper.single-date {
-	width:290px;
+	width:auto;
 }
 .date-picker-wrapper.no-shortcuts { padding-bottom:12px;}
 .date-picker-wrapper .footer
@@ -48,25 +47,6 @@
 	color: rgb(107, 180, 214);
 	text-decoration:underline;
 }
-.date-picker-wrapper .footer a{
-	text-decoration:none;
-	padding: 1px 5px;
-	font-size: 12px;
-	line-height: 1.5;
-	border-radius: 3px;
-	color: #fff;
-	background-color: #5bc0de;
-	border-color: #46b8da;
-	
-	display: inline-block;
-	margin-bottom: 0;
-	font-weight: normal;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	cursor: pointer;
-	border: 1px solid transparent;
-}
 .date-picker-wrapper .month-wrapper
 {
 	border:1px solid #bfbfbf;
@@ -79,11 +59,12 @@
 }
 .date-picker-wrapper .month-wrapper table
 {
-	/*width:260px;*/
+	width:190px;
 	float:left;
 }
 .date-picker-wrapper .month-wrapper table.month2
 {
+	width:190px;
 	float:right;
 }
 .date-picker-wrapper .month-wrapper table th,
@@ -97,10 +78,9 @@
 }
 .date-picker-wrapper .month-wrapper table .day
 {
-	height: 30px;
-	width: 36px;
-	line-height: 30px;
-	font-size:14px;
+	height:19px;
+	line-height:19px;
+	font-size:12px;
 	margin-bottom:1px;
 	color:#999;
 	cursor:default;
@@ -113,8 +93,7 @@
 }
 .date-picker-wrapper .month-wrapper table .day.checked
 {
-	background-color: rgb(47, 98, 155);
-	color: #fff!important;
+	background-color: rgb(156, 219, 247);
 }
 .date-picker-wrapper .month-wrapper table .week-name
 {
@@ -131,8 +110,8 @@
 	cursor:pointer;
 }
 
-.date-picker-wrapper .month-wrapper table .day.real-today { background-color: #08f;color: #fff!important;font-weight: bold;border-radius: 6px;}
-.date-picker-wrapper .month-wrapper table .day.real-today.checked { background-color: rgb(7, 162, 26);border-radius: 0; }
+.date-picker-wrapper .month-wrapper table .day.real-today { background-color: rgb(255, 230, 132); }
+.date-picker-wrapper .month-wrapper table .day.real-today.checked { background-color: rgb(112, 204, 213); }
 
 
 .date-picker-wrapper table .caption
@@ -156,7 +135,7 @@
 	position:absolute;
 	display:none;
 	top:0px;
-	left:258px;
+	left:204px;
 	z-index: 1;
 	width:15px;
 	height: 100%;
@@ -204,14 +183,12 @@
 	cursor:pointer;
 	
 	color: #d9eef7;
-	border: solid 1px #357ebd;
-	background: #428bca;
-	/*
+	border: solid 1px #0076a3;
+	background: #0095cd;
 	background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
-	background: -moz-linear-gradient(top,  #00adee,  #0078a5);*/
+	background: -moz-linear-gradient(top,  #00adee,  #0078a5);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
 	color:white;
-	line-height: 1.5;
 }
 
 .date-picker-wrapper .drp_top-bar .apply-btn.disabled
@@ -230,10 +207,9 @@
 }
 .time input[type=range] {
   vertical-align: middle;
-  width: 180px;
 }
 .time1, .time2 {
-	width: 260px;
+	width: 180px;
 	padding: 0 5px;
 	text-align: center;
 }
@@ -245,18 +221,7 @@
 }
 .hour, .minute {
 	text-align: right;
-	padding-right: 10px;
 }
 .hide {
 	display: none;
-}
-.date-picker-wrapper .month-wrapper table .day.checked.checkedfrist{
-	border-radius: 18px 0 0 18px;
-	background: #7511F3;
-	color: #fff;
-}
-.date-picker-wrapper .month-wrapper table .day.checked.checkedlast{
-	border-radius: 0 18px 18px 0;
-	background: #7511F3;
-	color: #fff;
 }

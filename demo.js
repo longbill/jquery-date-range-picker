@@ -271,4 +271,11 @@ $(function()
 		$('#date-range16').data('dateRangePicker').destroy();
 	});
 
+	$('#date-range17').dateRangePicker(
+	{
+		stickyMonths: true,
+		startDate: '2013-01-10',
+		endDate: '2013-05-10'
+	});
+
 });

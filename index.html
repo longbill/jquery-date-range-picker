@@ -21,6 +21,24 @@
 		.demo { margin:30px 0;}
 		.date-picker-wrapper .month-wrapper table .day.lalala { background-color:orange; }
 		.options { display:none; border-left:6px solid #8ae; padding:10px; font-size:12px; line-height:1.4; background-color:#eee; border-radius:4px;}
+		#switchThemes{
+			width: 80px;
+			height: 50px;
+			background: #000;
+			color: #fff;
+			font-size: 1.1em;
+			border-radius: 10px;
+			padding: 5px;
+			text-align: center;
+			cursor: pointer;
+			position: fixed;
+			bottom: 100px;
+			right: 100px;
+		}
+		#switchThemes.bootstrap {
+			color: #ff0;
+			background: #5bc0de;
+		}
 		</style>
 	</head>
 	<body>
@@ -351,10 +369,6 @@
 }				</pre>
 			</div>
 
-			
-
-
-
 			<div class="demo">
 				Control by script: 
 				<button id="date-range16-open">Open</button> 
@@ -404,6 +418,17 @@ $('#date-range16-destroy').click(function(evt)
 });				</pre>
 			</div>
 
+			<div class="demo">
+				Sticky months: <input id="date-range17" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	stickyMonths: true,
+	startDate: '2013-01-10',
+	endDate: '2013-05-10'
+}				</pre>
+			</div>
+
 
 			<h2>Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
@@ -443,7 +468,8 @@ $('#date-range16-destroy').click(function(evt)
 	alwaysOpen:false,
 	singleDate:false,
 	batchMode:false,
-	beforeShowDay: [function]
+	beforeShowDay: [function],
+	stickyMonths: false
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -524,6 +550,10 @@ $('#date-range16-destroy').click(function(evt)
 	[2]: an optional popup tooltip for this date
 	The function is called for each day in the datepicker before it is displayed.</i>
 
+<b>stickyMonths (Boolean)</b>
+	<i>If true, there will only be one previous and one next button. Clicking them will change
+	both the months. This setting will have no effect if singleDate option is set to true</i>
+
 </pre>
 
 	<h2>Events</h2>
@@ -570,7 +600,7 @@ This date range picker plugin is under MIT LICENSE
 	</pre>
 
 
-
+<div id="switchThemes"><span>Switch Themes</span></div>
 	<script>
 	$(function()
 	{
@@ -578,6 +608,20 @@ This date range picker plugin is under MIT LICENSE
 		{
 			evt.preventDefault();
 			$(this).siblings('.options').slideToggle();
+		});
+		
+		$('#switchThemes').click(function() {
+			var themesList = ['daterangepicker.css', 'daterangepicker-bootstrap.css'],
+				$link = $('link:eq(0)'),
+				current = $link.attr('href');
+
+			if ($.inArray(current, themesList) === 0) {
+				$link.attr('href', themesList[1]);
+				$(this).addClass('bootstrap');
+			} else {
+				$link.attr('href', themesList[0]);
+				$(this).removeClass('bootstrap');
+			}
 		});
 	})
 	</script>
