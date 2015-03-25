@@ -306,6 +306,39 @@
 			'default-less' : 'Merci de choisir une intervalle inférieure %d jours',
 			'default-range' : 'Merci de choisir une intervalle comprise entre %d et %d jours',
 			'default-default': 'Merci de choisir une date'
+		},
+		'hu':
+		{
+			'selected': 'Kiválasztva:',
+			'day':'Nap',
+			'days': 'Nap',
+			'apply': 'Ok',
+			'week-1' : 'H',
+			'week-2' : 'K',
+			'week-3' : 'Sz',
+			'week-4' : 'Cs',
+			'week-5' : 'P',
+			'week-6' : 'Sz',
+			'week-7' : 'V',
+			'month-name': ['Január','Február','Március','Április','Május','Június','Július','Augusztus','Szeptember','Október','November','December'],
+			'shortcuts' : 'Gyorsválasztó',
+			'past': 'Múlt',
+			'following':'Következő',
+			'previous' : 'Előző',
+			'prev-week' : 'Hét',
+			'prev-month' : 'Hónap',
+			'prev-year' : 'Év',
+			'next':'Következő',
+			'next-week':'Hét',
+			'next-month':'Hónap',
+			'next-year':'Év',
+			'less-than' : 'A kiválasztás nem lehet több %d napnál',
+			'more-than' : 'A kiválasztás nem lehet több %d napnál',
+			'default-more' : 'Válassz ki egy időszakot ami hosszabb mint %d nap',
+			'default-single' : 'Válassz egy napot',
+			'default-less' : 'Válassz ki egy időszakot ami rövidebb mint %d nap',
+			'default-range' : 'Válassz ki egy %d - %d nap hosszú időszakot',
+			'default-default': 'Válassz ki egy időszakot'
 		}
 	};
 
