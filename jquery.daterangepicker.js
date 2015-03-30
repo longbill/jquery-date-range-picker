@@ -805,10 +805,10 @@
         		// set initiated  to avoid triggerring datepicker-change event 
         		initiated = false;
         		if(defaults.length >= 2){
-					setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
+					setDateRange(moment(defaults[0], ___format, opt.language).toDate(),moment(defaults[1], ___format, opt.language).toDate());
 				}
 				else if(defaults.length==1 && opt.singleDate){
-					setSingleDate(moment(defaults[0], ___format).toDate());
+					setSingleDate(moment(defaults[0], ___format, opt.language).toDate());
 				}
 
         		initiated = true;
