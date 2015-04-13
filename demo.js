@@ -60,6 +60,23 @@ $(function()
 		language:'en'
 	});
 
+	$('#date-range105').dateRangePicker(
+	{
+		showCustomValues: true,
+		customValueLabel: 'Dynamic Ranges',
+		customValues:
+		[
+			{
+				name: 'MTD',
+				value: 'Month To Date'
+			},
+			{
+				name: 'YTD',
+				value: 'Year To Date'
+			}
+		]
+	})
+
 	$('#date-range100').dateRangePicker(
 	{
 		shortcuts : null,

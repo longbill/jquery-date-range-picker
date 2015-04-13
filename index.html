@@ -265,6 +265,30 @@
 			</div>
 
 			<div class="demo">
+				Use custom values: <input id="date-range105" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	language:'en',
+	customValueLabel: 'Dynamic Ranges',
+	showCustomValues: true,
+	customValues:
+		//if return an array of two dates, it will select the date range between the two dates
+		[
+			{
+				name: 'MTD',
+				value: 'Month To Date'
+			},
+			{
+				name: 'YTD',
+				value: 'Year To Date'
+			}
+		]
+}				</pre>
+			</div>
+
+
+			<div class="demo">
 				Hide shortcuts: <input id="date-range104" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
