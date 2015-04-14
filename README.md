@@ -67,7 +67,9 @@ The default configuration object is:
 	alwaysOpen:false,
 	singleDate:false,
 	batchMode:false,
-	beforeShowDay: [function]
+	beforeShowDay: [function],
+	dayDivAttrs: [],
+	dayTdAttrs: []
 }
 ```
 
@@ -144,6 +146,45 @@ if this is 0, means do not limit maximum days</i>
 [2]: an optional popup tooltip for this date
 The function is called for each day in the datepicker before it is displayed.</i>
 
+<b>dayDivAttrs (Array(Function))</b>
+<i>An array of functions that take the today as a parameter and must return an object, e.g. `{title: "unavailable", class: " red-unavailable "}`.
+The returned objects then merge, adding up existing keys (in order of callbacks in the array), so strings with same keys get concatenated and numbers result in the sum of them.
+The resulting object then turns into `div` tag of the day attributes.</i>
+
+```javascript
+{
+	dayDivAttrs: [
+		function(date){ // let's put bg colors and price per day attributes from php-prepared data array or put the default one
+			if(date == undefined) return {};
+			return ( rentdates(moment(date.time)) )?
+				{price: rentdates(moment(date.time)).price, title: '€' + rentdates(moment(date.time)).price}:
+				{price: rentprice, title: '€' + rentprice};
+		},                                        
+		function(date){ // let's underline saturdays and assign a title
+			if(date == undefined) return {};
+			return (moment(date.time).day()==6)?{'style': 'border-left: 2px lightgreen solid;border-right: 2px lightgreen solid;', 'title': '\nSaturday is the check-in day of week.'}:{};
+		},
+	]
+}
+```
+
+<b>dayTdAttrs (Array(Function))</b>
+<i>An array of functions that take the today as a parameter and must return an object, e.g. `{style: " background-color: red; "}`.
+The returned objects then merge, adding up existing keys (in order of callbacks in the array), so strings with same keys get concatenated and numbers result in the sum of them.
+The resulting object then turns into `td` tag of the day attributes.</i>
+
+```javascript
+{
+	dayTdAttrs: [
+		function(date){ // let's put bg colors from php-prepared data array
+			if(date == undefined) return {};
+			return ( rentdates(moment(date.time)) )?
+				{style: 'background-color: ' + rentdates(moment(date.time)).color + ';'}:
+				{};
+		},
+	]
+}
+```
 
 ##Events##
 
