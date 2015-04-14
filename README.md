@@ -69,7 +69,8 @@ The default configuration object is:
 	batchMode:false,
 	beforeShowDay: [function],
 	dayDivAttrs: [],
-	dayTdAttrs: []
+	dayTdAttrs: [],
+	applyBtnClass: ''
 }
 ```
 
@@ -185,6 +186,10 @@ The resulting object then turns into `td` tag of the day attributes.</i>
 	]
 }
 ```
+
+<b>applyBtnClass (String)</b>
+<i> Additional classes to add to the apply button </i>
+
 
 ##Events##
 
