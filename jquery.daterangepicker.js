@@ -392,7 +392,9 @@
 			lookBehind: false,
 			batchMode: false,
 			duration: 200,
-			stickyMonths: false
+			stickyMonths: false,
+			dayDivAttrs: [],
+			dayTdAttrs: []
 		},opt);
 
 		opt.start = false;
@@ -1466,6 +1468,32 @@
 			return html.join('');
 		}
 
+		function attributesCallbacks(initialObject,callbacksArray,today)
+		{
+			var resultObject = jQuery.extend(true, {}, initialObject);
+
+			callbacksArray.forEach(function(cbAttr,cbAttrIndex,cbAttrArray){
+				var addAttributes = cbAttr(this);
+				for(var attr in addAttributes){
+					if(resultObject.hasOwnProperty(attr)){
+						resultObject[attr] += addAttributes[attr];
+					}else{
+						resultObject[attr] = addAttributes[attr];
+					}
+				}
+			},today);
+
+			attrString = '';
+
+			for(var attr in resultObject){
+				if(resultObject.hasOwnProperty(attr)){
+					attrString += attr + '="' + resultObject[attr] + '" ';
+				}
+			}
+
+			return attrString;
+		}
+
 		function createMonthHTML(d)
 		{
 			var days = [];
@@ -1519,7 +1547,14 @@
 						today.tooltip = _r[2] || '';
 						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
 					}
-					html.push('<td><div time="'+today.time+'" title="'+today.tooltip+'" class="day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')+'">'+today.day+'</div></td>');
+
+					todayDivAttr = {
+						time: today.time,
+						title: today.tooltip,
+						class: 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
+					};
+
+					html.push('<td ' + attributesCallbacks({},opt.dayTdAttrs,today) + '><div ' + attributesCallbacks(todayDivAttr,opt.dayDivAttrs,today) + '>'+today.day+'</div></td>');
 				}
 				html.push('</tr>');
 			}
