@@ -464,15 +464,6 @@
 		return this;
 
 
-
-
-
-
-
-
-
-
-
 		function init_datepicker()
 		{
 			var self = this;
@@ -483,9 +474,6 @@
 				return;
 			}
 			$(this).data('date-picker-opened',true);
-
-
-
 
 
 			box = createDom().hide();
@@ -516,7 +504,7 @@
 			} else {
 				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
 				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
-					
+
 				showMonth(defaultTime,'month1');
 				showMonth(nextMonth(defaultTime),'month2');
 			}
@@ -534,8 +522,6 @@
 			//showSelectedInfo();
 
 
-
-
 			var defaultTopText = '';
 			if (opt.singleDate)
 				defaultTopText = lang('default-single');
@@ -549,8 +535,6 @@
 				defaultTopText = lang('default-default');
 
 			box.find('.default-top').html( defaultTopText.replace(/\%d/,opt.minDays).replace(/\%d/,opt.maxDays));
-
-
 
 
 			setTimeout(function()
@@ -771,16 +755,16 @@
 			if (!opt.inline)
 			{
 				var offset = $(self).offset();
-		                if ($(opt.container).css("position") == "relative") 
+		                if ($(opt.container).css("position") == "relative")
 		                {
 		                    var containerOffset = $(opt.container).offset();
 		                    box.css(
 		                    {
-		                        top: offset.top - containerOffset.top + $(self).outerHeight() + 4, 
+		                        top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
 		                        left: offset.left - containerOffset.left
 		                    });
-		                } 
-		                else 
+		                }
+		                else
 		                {
 		                    if (offset.left < 460) //left to right
 		                    {
@@ -801,7 +785,7 @@
 		                }
 			}
 		}
-		
+
 		// Return the date picker wrapper element
 		function getDatePicker()
 		{
@@ -826,7 +810,7 @@
 						defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/,'$1');
 					}
 				}
-        		// set initiated  to avoid triggerring datepicker-change event 
+        		// set initiated  to avoid triggerring datepicker-change event
         		initiated = false;
         		if(defaults.length >= 2){
 					setDateRange(moment(defaults[0], ___format, moment.locale(opt.language)).toDate(),moment(defaults[1], ___format, moment.locale(opt.language)).toDate());
@@ -839,7 +823,6 @@
 			}
 			box.slideDown(animationTime);
 		}
-
 
 
 		function renderTime (name, date) {
@@ -1174,27 +1157,27 @@
 			showSelectedInfo();
 			autoclose();
 		}
-		
+
 		function setSingleDate(date1)
 		{
-			
+
 			var valid = true;
 			if (opt.startDate && compare_day(date1,opt.startDate) < 0) valid = false;
 			if (opt.endDate && compare_day(date1,opt.endDate) > 0) valid = false;
 			if (!valid)
 			{
 				showMonth(opt.startDate,'month1');
-				
+
 				//showGap();
 				return;
 			}
 
 			opt.start = date1.getTime();
-			
-			
+
+
 			if (opt.time.enabled) {
 				renderTime("time1", date1);
-				
+
 			}
 			showMonth(date1,'month1');
 			//showMonth(date2,'month2');
@@ -1483,7 +1466,7 @@
                         {
                                 return true;
                         }
-                        if (opt.endDate && month.startOf('month').isAfter(opt.endDate)) 
+                        if (opt.endDate && month.startOf('month').isAfter(opt.endDate))
                         {
                                 return true;
                         }
