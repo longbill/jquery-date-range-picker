@@ -807,10 +807,10 @@
         		// set initiated  to avoid triggerring datepicker-change event 
         		initiated = false;
         		if(defaults.length >= 2){
-					setDateRange(moment(defaults[0], ___format, opt.language == 'auto' ? undefined : opt.language).toDate(),moment(defaults[1], ___format, opt.language).toDate());
+					setDateRange(moment(defaults[0], ___format, moment.locale(opt.language)).toDate(),moment(defaults[1], ___format, moment.locale(opt.language)).toDate());
 				}
 				else if(defaults.length==1 && opt.singleDate){
-					setSingleDate(moment(defaults[0], ___format, opt.language == 'auto' ? undefined : opt.language).toDate());
+					setSingleDate(moment(defaults[0], ___format, moment.locale(opt.language)).toDate());
 				}
 
         		initiated = true;
@@ -1521,7 +1521,7 @@
 			var toMonth = d.getMonth();
 			for(var i=0; i<40; i++)
 			{
-				var today = moment(d).add(i,'days').toDate();
+				var today = moment(d).add('days',i).toDate();
 				var valid = true;
 				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
 				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
