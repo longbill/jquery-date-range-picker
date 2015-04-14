@@ -124,6 +124,7 @@
 			'week-7' : 'SU',
 			'month-name': ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'],
 			'shortcuts' : 'Shortcuts',
+			'custom-values': 'Custom Values',
 			'past': 'Past',
 			'following':'Following',
 			'previous' : 'Previous',
@@ -636,6 +637,19 @@
 					'date1' : new Date(opt.start),
 					'date2' : new Date(opt.end)
 				});
+			});
+
+			box.find('[custom]').click(function()
+			{
+				var valueName = $(this).attr('custom');
+				opt.start = false;
+				opt.end = false;
+				box.find('.day.checked').removeClass('checked');
+				opt.setValue.call(selfDom, valueName);
+				checkSelectionValid();
+				showSelectedInfo();
+				showSelectedDays();
+				closeDatePicker();
 			});
 
 			box.find('[shortcut]').click(function()
@@ -1397,6 +1411,21 @@
 					{
 						var sh = opt.customShortcuts[i];
 						html+= '&nbsp;<span class="custom-shortcut"><a href="javascript:;" shortcut="custom">'+sh.name+'</a></span>';
+					}
+				}
+
+				// Add Custom Values Dom
+				if (opt.showCustomValues)
+				{
+					html += '<div class="customValues"><b>'+(opt.customValueLabel || lang('custom-values'))+'</b>';
+
+					if (opt.customValues)
+					{
+						for(var i=0;i<opt.customValues.length;i++)
+						{
+							var val = opt.customValues[i];
+								html+= '&nbsp;<span class="custom-value"><a href="javascript:;" custom="'+ val.value+'">'+val.name+'</a></span>';
+						}
 					}
 				}
 
