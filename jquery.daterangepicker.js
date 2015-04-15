@@ -822,7 +822,10 @@
 
         		initiated = true;
 			}
-			box.slideDown(animationTime);
+			box.slideDown(animationTime, function(){
+				$(self).trigger('datepicker-opened', {relatedTarget: box});
+			});
+			$(self).trigger('datepicker-open', {relatedTarget: box});
 		}
 
 
@@ -1258,9 +1261,10 @@
 			$(box).slideUp(opt.duration,function()
 			{
 				$(self).data('date-picker-opened',false);
+				$(self).trigger('datepicker-closed', {relatedTarget: box});
 			});
 			//$(document).unbind('.datepicker');
-			$(self).trigger('datepicker-close');
+			$(self).trigger('datepicker-close', {relatedTarget: box});
 		}
 
 		function compare_month(m1,m2)
