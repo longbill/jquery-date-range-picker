@@ -211,9 +211,23 @@ $('#dom-id')
 {
 	console.log(obj);
 })
+.bind('datepicker-open',function()
+{
+  console.loge('open');
+})
+.bind('datepicker-opened',function()
+{
+  // fires event after animation finishes
+  console.loge('opened');
+})
 .bind('datepicker-close',function()
 {
 	console.log('close');
+})
+.bind('datepicker-closed',function()
+{
+  // fires event after animation finishes
+  console.loge('closed');
 });
 ```
 
