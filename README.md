@@ -28,7 +28,7 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 
 ##Configuration##
 
-Usage: 
+Usage:
 ```javascript
 $('#dom-id').dateRangePicker(configObject);
 ```
@@ -56,7 +56,7 @@ The default configuration object is:
 	time: {
 		enabled: false
 	},
-	shortcuts: 
+	shortcuts:
 	{
 		//'prev-days': [1,3,5,7],
 		'next-days': [3,5,7],
@@ -65,7 +65,7 @@ The default configuration object is:
 	},
 	customShortcuts : [],
 	inline:false,
-	container: 'body', 
+	container: 'body',
 	alwaysOpen:false,
 	singleDate:false,
 	batchMode:false,
@@ -86,7 +86,7 @@ click <a href="http://momentjs.com/docs/#/displaying/format/" target=_blank>here
 <i style="display:block; margin-left:2em;">The separator string used between date strings</i>
 
 <b>language (String)</b>
-<i style="display:block; margin-left:2em;">pre-defined languages are "en" and "cn", you can define your own 
+<i style="display:block; margin-left:2em;">pre-defined languages are "en" and "cn", you can define your own
 language then set this to the name of new language.
 You can also set this to "auto" to make it auto detect browser language.</i>
 
@@ -115,23 +115,23 @@ if this is 0, means do not limit minimum days</i>
 if this is 0, means do not limit maximum days</i>
 
 <b>showShortcuts (Boolean)</b>
-<i style="display:block; margin-left:2em;">hide or show shortcuts area</i>	
+<i style="display:block; margin-left:2em;">hide or show shortcuts area</i>
 
 <b>time (Object)</b>
-<i style="display:block; margin-left:2em;">If enabled adds time selection controls.</i>	
+<i style="display:block; margin-left:2em;">If enabled adds time selection controls.</i>
 
 <b>shortcuts (Object)</b>
-<i style="display:block; margin-left:2em;">define the shortcuts buttons. there are some built in shortcuts, see source code</i>	
+<i style="display:block; margin-left:2em;">define the shortcuts buttons. there are some built in shortcuts, see source code</i>
 
 <b>customShortcuts (Array)</b>
-<i style="display:block; margin-left:2em;">define custom shortcut buttons. see demo.js</i>	
+<i style="display:block; margin-left:2em;">define custom shortcut buttons. see demo.js</i>
 
 <b>inline (Boolean)</b>
 <i>whether to render the date range picker dom in inline mode instead of overlay mode, if set to true, please set `container` too</i>
 
 <b>container (String, css selector || DOM Object)</b>
 <i>where should the date range picker dom should be renderred to</i>
-	
+
 <b>alwaysOpen (Boolean)</b>
 <i>if you use inline mode, you may want the date range picker widget to be renderred when the page loads. set this to true will also hide the "close" button</i>
 
@@ -162,7 +162,7 @@ The resulting object then turns into `div` tag of the day attributes.</i>
 			return ( rentdates(moment(date.time)) )?
 				{price: rentdates(moment(date.time)).price, title: '€' + rentdates(moment(date.time)).price}:
 				{price: rentprice, title: '€' + rentprice};
-		},                                        
+		},
 		function(date){ // let's underline saturdays and assign a title
 			if(date == undefined) return {};
 			return (moment(date.time).day()==6)?{'style': 'border-left: 2px lightgreen solid;border-right: 2px lightgreen solid;', 'title': '\nSaturday is the check-in day of week.'}:{};
