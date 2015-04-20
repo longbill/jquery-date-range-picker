@@ -1347,9 +1347,10 @@
 				+'<div style="clear:both;height:0;font-size:0;"></div>'
 				+'</div>';
 
+			html += '<div class="footer">';
 			if (opt.showShortcuts)
 			{
-				html += '<div class="footer"><b>'+lang('shortcuts')+'</b>';
+				html += '<div class="shortcuts"><b>'+lang('shortcuts')+'</b>';
 
 				var data = opt.shortcuts;
 				if (data)
@@ -1409,25 +1410,25 @@
 						html+= '&nbsp;<span class="custom-shortcut"><a href="javascript:;" shortcut="custom">'+sh.name+'</a></span>';
 					}
 				}
+				html += '</div>';
+			}
 
-				// Add Custom Values Dom
-				if (opt.showCustomValues)
+			// Add Custom Values Dom
+			if (opt.showCustomValues)
+			{
+				html += '<div class="customValues"><b>'+(opt.customValueLabel || lang('custom-values'))+'</b>';
+
+				if (opt.customValues)
 				{
-					html += '<div class="customValues"><b>'+(opt.customValueLabel || lang('custom-values'))+'</b>';
-
-					if (opt.customValues)
+					for(var i=0;i<opt.customValues.length;i++)
 					{
-						for(var i=0;i<opt.customValues.length;i++)
-						{
-							var val = opt.customValues[i];
-								html+= '&nbsp;<span class="custom-value"><a href="javascript:;" custom="'+ val.value+'">'+val.name+'</a></span>';
-						}
+						var val = opt.customValues[i];
+							html+= '&nbsp;<span class="custom-value"><a href="javascript:;" custom="'+ val.value+'">'+val.name+'</a></span>';
 					}
 				}
-
-				html +='</div>';
 			}
-			html += '</div>';
+
+			html += '</div></div>';
 
 
 			return $(html);
