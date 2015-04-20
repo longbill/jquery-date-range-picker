@@ -640,9 +640,9 @@
 				box.find('.day.checked').removeClass('checked');
 				opt.setValue.call(selfDom, valueName);
 				checkSelectionValid();
-				showSelectedInfo();
+				showSelectedInfo(true);
 				showSelectedDays();
-				closeDatePicker();
+				if (opt.autoClose) closeDatePicker();
 			});
 
 			box.find('[shortcut]').click(function()
@@ -1050,7 +1050,7 @@
 			}
 		}
 
-		function showSelectedInfo()
+		function showSelectedInfo(forceValid)
 		{
 			box.find('.start-day').html('...');
 			box.find('.end-day').html('...');
@@ -1094,6 +1094,10 @@
 						'date2' : new Date(opt.end)
 					});
 				}
+			}
+			else if (forceValid)
+			{
+				box.find('.apply-btn').removeClass('disabled');
 			}
 			else
 			{
