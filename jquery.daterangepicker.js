@@ -7,13 +7,16 @@
 
 (function (factory) {
 		if (typeof define === 'function' && define.amd) {
-				// AMD. Register as an anonymous module.
-				define(['jquery'], factory);
+			// AMD. Register as an anonymous module.
+			define(['jquery', 'moment'], factory);
+		} else if (typeof exports === 'object' && typeof module !== 'undefined') {
+			// CommonJS. Register as a module
+			module.exports = factory(require('jquery'), require('moment')); 
 		} else {
-				// Browser globals
-				factory(jQuery);
+			// Browser globals
+			factory(jQuery, moment);
 		}
-}(function ($)
+}(function ($, moment)
 {
 
 	$.dateRangePickerLanguages =
@@ -350,13 +353,6 @@
 			'default-default': 'Válassz ki egy időszakot'
 		}
 	};
-
-
-	if (window['moment'] === undefined)
-	{
-		if (window['console'] && console['warn']) console.warn('Please import moment.js before daterangepicker.js');
-		return;
-	}
 
 	$.fn.dateRangePicker = function(opt)
 	{
