@@ -819,7 +819,6 @@
         		initiated = true;
 			}
 			box.slideDown(animationTime);
-			$(self).trigger('datepicker-open');
 		}
 
 
