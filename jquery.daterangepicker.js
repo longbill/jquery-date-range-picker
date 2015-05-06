@@ -819,6 +819,7 @@
         		initiated = true;
 			}
 			box.slideDown(animationTime);
+			$(self).trigger('datepicker-open');
 		}
 
 
@@ -1259,6 +1260,15 @@
 			{
 				$(self).data('date-picker-opened',false);
 			});
+			if (opt.end && !(justClose === true)) {
+				$(self).trigger('drp-apply', {
+					'periodType': opt.periodType,
+					'date1' : new Date(opt.start),
+					'date2' : new Date(opt.end)
+				});
+			} else if (justClose === true) {
+				$(self).trigger('datepicker-close-without-changes');
+			}
 			//$(document).unbind('.datepicker');
 			$(self).trigger('datepicker-close');
 		}
