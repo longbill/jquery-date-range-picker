@@ -195,10 +195,14 @@ The resulting object then turns into `td` tag of the day attributes.</i>
 
 ##Events##
 
-Three events will be triggered on the date range picker DOM
+Five events will be triggered on the date range picker DOM
 ```javascript
 $('#dom-id')
 .dateRangePicker()
+.bind('datepicker-open',function()
+{
+	console.log('open');
+})
 .bind('datepicker-change',function(event,obj)
 {
 	console.log(obj);
@@ -212,6 +216,10 @@ $('#dom-id')
 .bind('datepicker-apply',function(event,obj)
 {
 	console.log(obj);
+})
+.bind('datepicker-close-without-changes',function()
+{
+	console.log('close');
 })
 .bind('datepicker-close',function()
 {
