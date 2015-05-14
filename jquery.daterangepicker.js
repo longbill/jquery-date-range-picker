@@ -819,7 +819,10 @@
 
         		initiated = true;
 			}
-			box.slideDown(animationTime);
+			box.slideDown(animationTime, function(){
+				$(self).trigger('datepicker-opened', {relatedTarget: box});
+			});
+			$(self).trigger('datepicker-open', {relatedTarget: box});
 		}
 
 
@@ -1259,9 +1262,10 @@
 			$(box).slideUp(opt.duration,function()
 			{
 				$(self).data('date-picker-opened',false);
+				$(self).trigger('datepicker-closed', {relatedTarget: box});
 			});
 			//$(document).unbind('.datepicker');
-			$(self).trigger('datepicker-close');
+			$(self).trigger('datepicker-close', {relatedTarget: box});
 		}
 
 		function compare_month(m1,m2)
@@ -1344,9 +1348,10 @@
 				+'<div style="clear:both;height:0;font-size:0;"></div>'
 				+'</div>';
 
+			html += '<div class="footer">';
 			if (opt.showShortcuts)
 			{
-				html += '<div class="footer"><b>'+lang('shortcuts')+'</b>';
+				html += '<div class="shortcuts"><b>'+lang('shortcuts')+'</b>';
 
 				var data = opt.shortcuts;
 				if (data)
@@ -1406,25 +1411,25 @@
 						html+= '&nbsp;<span class="custom-shortcut"><a href="javascript:;" shortcut="custom">'+sh.name+'</a></span>';
 					}
 				}
+				html += '</div>';
+			}
 
-				// Add Custom Values Dom
-				if (opt.showCustomValues)
+			// Add Custom Values Dom
+			if (opt.showCustomValues)
+			{
+				html += '<div class="customValues"><b>'+(opt.customValueLabel || lang('custom-values'))+'</b>';
+
+				if (opt.customValues)
 				{
-					html += '<div class="customValues"><b>'+(opt.customValueLabel || lang('custom-values'))+'</b>';
-
-					if (opt.customValues)
+					for(var i=0;i<opt.customValues.length;i++)
 					{
-						for(var i=0;i<opt.customValues.length;i++)
-						{
-							var val = opt.customValues[i];
-								html+= '&nbsp;<span class="custom-value"><a href="javascript:;" custom="'+ val.value+'">'+val.name+'</a></span>';
-						}
+						var val = opt.customValues[i];
+							html+= '&nbsp;<span class="custom-value"><a href="javascript:;" custom="'+ val.value+'">'+val.name+'</a></span>';
 					}
 				}
-
-				html +='</div>';
 			}
-			html += '</div>';
+
+			html += '</div></div>';
 
 
 			return $(html);
@@ -1577,7 +1582,7 @@
 					todayDivAttr = {
 						time: today.time,
 						title: today.tooltip,
-						class: 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
+						'class': 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
 					};
 
 					html.push('<td ' + attributesCallbacks({},opt.dayTdAttrs,today) + '><div ' + attributesCallbacks(todayDivAttr,opt.dayDivAttrs,today) + '>'+today.day+'</div></td>');
