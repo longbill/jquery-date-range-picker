@@ -440,7 +440,6 @@
 					d1 = moment(d1,opt.format).toDate();
 					d2 = moment(d2,opt.format).toDate();
 				}
-				silent === true ? true : false;
 				setDateRange(d1,d2,silent);
 			},
 			clear: clearSelection,
@@ -1050,7 +1049,7 @@
 			}
 		}
 
-		function showSelectedInfo(forceValid, silent)
+		function showSelectedInfo(forceValid,silent)
 		{
 			box.find('.start-day').html('...');
 			box.find('.end-day').html('...');
@@ -1159,7 +1158,7 @@
 			showMonth(date1,'month1');
 			showMonth(date2,'month2');
 			showGap();
-			showSelectedInfo(false, silent);
+			showSelectedInfo(false,silent);
 			autoclose();
 		}
 
