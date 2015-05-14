@@ -215,12 +215,12 @@ $('#dom-id')
 })
 .bind('datepicker-open',function()
 {
-  console.loge('open');
+  console.log('open');
 })
 .bind('datepicker-opened',function()
 {
   // fires event after animation finishes
-  console.loge('opened');
+  console.log('opened');
 })
 .bind('datepicker-close',function()
 {
@@ -229,7 +229,7 @@ $('#dom-id')
 .bind('datepicker-closed',function()
 {
   // fires event after animation finishes
-  console.loge('closed');
+  console.log('closed');
 });
 ```
 
