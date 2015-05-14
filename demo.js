@@ -256,6 +256,8 @@ $(function()
 	{
 		showShortcuts: false,
 		format: 'YYYY-MM-DD'
+	}).bind('datepicker-change', function(evt, obj) {
+		alert('date1: ' + obj.date1 + ' / date2: ' + obj.date2);
 	});
 
 	$('#date-range16-open').click(function(evt)
@@ -274,6 +276,12 @@ $(function()
 	{
 		evt.stopPropagation();
 		$('#date-range16').data('dateRangePicker').setDateRange('2013-11-20','2014-08-25');
+	});
+
+	$('#date-range16-set-silent').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').setDateRange('2014-11-03','2015-02-12', true);
 	});
 
 	$('#date-range16-clear').click(function(evt)

@@ -433,14 +433,14 @@
 		// expose some api
 		$(this).data('dateRangePicker',
 		{
-			setDateRange : function(d1,d2)
+			setDateRange : function(d1,d2,silent)
 			{
 				if (typeof d1 == 'string' && typeof d2 == 'string')
 				{
 					d1 = moment(d1,opt.format).toDate();
 					d2 = moment(d2,opt.format).toDate();
 				}
-				setDateRange(d1,d2);
+				setDateRange(d1,d2,silent);
 			},
 			clear: clearSelection,
 			close: closeDatePicker,
@@ -1049,7 +1049,7 @@
 			}
 		}
 
-		function showSelectedInfo(forceValid)
+		function showSelectedInfo(forceValid,silent)
 		{
 			box.find('.start-day').html('...');
 			box.find('.end-day').html('...');
@@ -1084,7 +1084,7 @@
 				box.find('.apply-btn').removeClass('disabled');
 				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
-				if (initiated)
+				if (initiated && !silent)
 				{
 					$(self).trigger('datepicker-change',
 					{
@@ -1104,7 +1104,7 @@
 			}
 		}
 
-		function setDateRange(date1,date2)
+		function setDateRange(date1,date2,silent)
 		{
 			if (date1.getTime() > date2.getTime())
 			{
@@ -1158,7 +1158,7 @@
 			showMonth(date1,'month1');
 			showMonth(date2,'month2');
 			showGap();
-			showSelectedInfo();
+			showSelectedInfo(false,silent);
 			autoclose();
 		}
 
