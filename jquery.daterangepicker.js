@@ -1126,7 +1126,13 @@
 
 			opt.start = date1.getTime();
 			opt.end = date2.getTime();
-			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0))
+
+      if (opt.time.enabled) {
+				renderTime("time1", date1);
+				renderTime("time2", date2);
+			}
+
+				if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0))
 			{
 				if (opt.lookBehind) {
 					date1 = prevMonth(date2);
@@ -1151,10 +1157,6 @@
 				}
 			}
 
-			if (opt.time.enabled) {
-				renderTime("time1", date1);
-				renderTime("time2", date2);
-			}
 			showMonth(date1,'month1');
 			showMonth(date2,'month2');
 			showGap();
