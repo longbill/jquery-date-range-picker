@@ -1502,8 +1502,8 @@
 		{
 			var resultObject = jQuery.extend(true, {}, initialObject);
 
-			callbacksArray.forEach(function(cbAttr,cbAttrIndex,cbAttrArray){
-				var addAttributes = cbAttr(this);
+			jQuery.each(callbacksArray, function(cbAttrIndex, cbAttr){
+				var addAttributes = cbAttr(today);
 				for(var attr in addAttributes){
 					if(resultObject.hasOwnProperty(attr)){
 						resultObject[attr] += addAttributes[attr];
@@ -1511,7 +1511,7 @@
 						resultObject[attr] = addAttributes[attr];
 					}
 				}
-			},today);
+			});
 
 			attrString = '';
 

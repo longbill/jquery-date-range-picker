@@ -97,6 +97,7 @@
 }
 .date-picker-wrapper .month-wrapper table .day.checked
 {
+	background-color: rgb(156, 219, 247);
 	background-color: rgba(156, 219, 247, 0.5);
 }
 .date-picker-wrapper .month-wrapper table .week-name
