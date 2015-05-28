@@ -27,6 +27,7 @@
 	color:#aaa;
 	font-family:Arial;
 	box-shadow:3px 3px 10px rgba(0,0,0,0.5);
+	-webkit-box-sizing: initial;
 }
 .date-picker-wrapper.single-date {
 	width:auto;
@@ -42,14 +43,14 @@
 	color:#666;
 	font-weight:700;
 }
-.date-picker-wrapper a 
+.date-picker-wrapper a
 {
 	color: rgb(107, 180, 214);
 	text-decoration:underline;
 }
 .date-picker-wrapper .month-name
 {
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 .date-picker-wrapper .month-wrapper
 {
@@ -60,6 +61,7 @@
 	cursor:default;
 	position:relative;
 	_overflow:hidden;
+	overflow: hidden;
 }
 .date-picker-wrapper .month-wrapper table
 {
@@ -104,7 +106,7 @@
 	height:20px;
 	line-height:20px;
 	font-weight:100;
-  text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .date-picker-wrapper .month-wrapper table .day.has-tooltip { cursor:help !important;}
@@ -179,14 +181,14 @@
 .date-picker-wrapper .drp_top-bar .apply-btn
 {
 	position:absolute;
-	right: 0px; 
+	right: 0px;
 	top: 6px;
 	padding:3px 5px;
 	margin:0;
 	font-size:12px;
 	border-radius:4px;
 	cursor:pointer;
-	
+	line-height: initial;
 	color: #d9eef7;
 	border: solid 1px #0076a3;
 	background: #0095cd;
@@ -211,7 +213,7 @@
 	position: relative;
 }
 .time input[type=range] {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 .time1, .time2 {
 	width: 180px;
@@ -222,10 +224,19 @@
 	float: left;
 }
 .time2 {
-	float: right;	
+	float: right;
 }
+
+.time1 input[type=range], .time2 input[type=range] {
+	display: inline-block;
+}
+
+.time1 label, .time2 label {
+	font-size: 12px;
+}
+
 .hour, .minute {
-	text-align: right;
+	text-align: left;
 }
 .hide {
 	display: none;
