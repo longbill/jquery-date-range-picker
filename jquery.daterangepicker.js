@@ -450,6 +450,7 @@
 			{
 				$(self).unbind('.datepicker');
 				$(self).data('dateRangePicker','');
+				$(self).data('date-picker-opened',null);
 				box.remove();
 				$(window).unbind('resize.datepicker',calcPosition);
 				$(document).unbind('click.datepicker',closeDatePicker);
