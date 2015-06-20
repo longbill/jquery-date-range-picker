@@ -213,9 +213,23 @@ $('#dom-id')
 {
 	console.log(obj);
 })
+.bind('datepicker-open',function()
+{
+  console.log('open');
+})
+.bind('datepicker-opened',function()
+{
+  // fires event after animation finishes
+  console.log('opened');
+})
 .bind('datepicker-close',function()
 {
 	console.log('close');
+})
+.bind('datepicker-closed',function()
+{
+  // fires event after animation finishes
+  console.log('closed');
 });
 ```
 
@@ -224,7 +238,7 @@ $('#dom-id')
 after you called  $(dom).dateRangePicker();
 ```javascript
 $(dom).data('dateRangePicker')
-	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object
+	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object, set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
 	.clear(); 	// clear date range
 	.close(); 	// close date range picker overlay
 	.open();	// open date range picker overlay
