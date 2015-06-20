@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Date Picker Demo</title>
 		<link rel="stylesheet" href="daterangepicker.css" />
 		<script src="jquery-1.11.2.min.js"></script>
@@ -21,6 +22,8 @@
 		.demo { margin:30px 0;}
 		.date-picker-wrapper .month-wrapper table .day.lalala { background-color:orange; }
 		.options { display:none; border-left:6px solid #8ae; padding:10px; font-size:12px; line-height:1.4; background-color:#eee; border-radius:4px;}
+		.date-picker-wrapper.date-range-picker19 .day.first-date-selected { background-color: red !important; }
+		.date-picker-wrapper.date-range-picker19 .day.last-date-selected { background-color: orange !important; }
 		</style>
 	</head>
 	<body>
@@ -324,7 +327,7 @@
 	container: '#date-range12-container', 
 	alwaysOpen:true 
 }				</pre>
-				<div id="date-range12-container"></div>
+				<div id="date-range12-container" style="width:456px;"></div>
 			</div>
 
 			<div class="demo">
@@ -380,6 +383,7 @@
 				<button id="date-range16-open">Open</button> 
 				<button id="date-range16-close">Close</button> 
 				<button id="date-range16-set">Set Date Range</button> 
+				<button id="date-range16-set-silent">Set Date Range (no event / silent: true)</button> 
 				<button id="date-range16-clear">Clear Selection</button> 
 				<button id="date-range16-destroy">Destroy</button> 
 				<br>
@@ -391,6 +395,8 @@ $('#date-range16').dateRangePicker(
 {
 	showShortcuts: false,
 	format: 'YYYY-MM-DD'
+}).bind('datepicker-change', function(evt, obj) {
+	alert('date1: ' + obj.date1 + ' / date2: ' + obj.date2);
 });
 
 $('#date-range16-open').click(function(evt)
@@ -409,6 +415,12 @@ $('#date-range16-set').click(function(evt)
 {
 	evt.stopPropagation();
 	$('#date-range16').data('dateRangePicker').setDateRange('2013-11-20','2014-08-25');
+});
+
+$('#date-range16-set-silent').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').setDateRange('2014-11-03','2015-02-12', true);
 });
 
 $('#date-range16-clear').click(function(evt)
@@ -436,32 +448,105 @@ $('#date-range16-destroy').click(function(evt)
 			</div>
 
 
+			<div class="demo">
+				Use custom top bar: <input id="date-range18" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	customTopBar: 'Foo Bar'
+}</pre>
+			</div>
+
+			<div class="demo">
+				Different class names of first and second selected dates: <input id="date-range19" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	extraClass: 'date-range-picker19'
+}
+.date-picker-wrapper.date-range-picker19 .day.first-date-selected { background-color: red !important; }
+.date-picker-wrapper.date-range-picker19 .day.last-date-selected { background-color: orange !important; }</pre>
+			</div>
+
+			<div class="demo">
+				Hide hovering tooltip: <input id="date-range20" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	hoveringTooltip: false
+}</pre>
+			</div>
+
+			<div class="demo">
+				Customize hovering tooltip: <input id="date-range21" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	hoveringTooltip: function(days)
+	{
+		var D = ['One','Two', 'Three','Four','Five'];
+		return D[days] ? D[days] : days;
+	}
+}</pre>
+			</div>
+
+			<div class="demo">
+				Extra content on calendar: <input id="date-range22" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showDateFilter: function(time, date)
+	{
+		return '&lt;div style="padding:0 5px;">\
+					&lt;span style="font-weight:bold">'+date+'&lt;/span>\
+					&lt;div style="opacity:0.3;">$'+Math.round(Math.random()*999)+'&lt;/div>\
+				&lt;/div>';
+	}
+}</pre>
+			</div>
+
+			<div class="demo">
+				Single Month Mode: <input id="date-range23" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	singleMonth: true,
+	showShortcuts: false,
+	showTopbar: false
+}</pre>
+			</div>
+
+
 			<h2>Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
 			<p>
 				The default configuration object is:<br>
 				<pre>{
+	autoClose: false,
 	format: 'YYYY-MM-DD',
 	separator: ' to ',
 	language: 'auto',
-	startOfWeek: 'sunday',// or sunday
+	startOfWeek: 'sunday',// or monday
 	getValue: function()
 	{
-		return this.value;
+		return $(this).val();
 	},
 	setValue: function(s)
 	{
-		this.value = s;
+		if(!$(this).attr('readonly') && !$(this).is(':disabled') && s != $(this).val())
+		{
+			$(this).val(s);
+		}
 	},
 	startDate: false,
 	endDate: false,
-	minDays: 0,
-	maxDays: 0,
-	showShortcuts: true,
 	time: {
 		enabled: false
 	},
-	shortcuts: 
+	minDays: 0,
+	maxDays: 0,
+	showShortcuts: true,
+	shortcuts:
 	{
 		//'prev-days': [1,3,5,7],
 		'next-days': [3,5,7],
@@ -470,12 +555,22 @@ $('#date-range16-destroy').click(function(evt)
 	},
 	customShortcuts : [],
 	inline:false,
-	container: 'body', 
+	container:'body',
 	alwaysOpen:false,
 	singleDate:false,
-	batchMode:false,
-	beforeShowDay: [function],
-	stickyMonths: false
+	lookBehind: false,
+	batchMode: false,
+	duration: 200,
+	stickyMonths: false,
+	dayDivAttrs: [],
+	dayTdAttrs: [],
+	applyBtnClass: '',
+	singleMonth: 'auto',
+	hoveringTooltip: function(days)
+	{
+		return days > 1 ? days + ' days' : '';
+	},
+	showTopbar: true
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -560,14 +655,42 @@ $('#date-range16-destroy').click(function(evt)
 	<i>If true, there will only be one previous and one next button. Clicking them will change
 	both the months. This setting will have no effect if singleDate option is set to true</i>
 
+<b>singleMonth (Boolean || 'auto') Default value: 'auto'</b>
+	<i>If true, it will show only one month instead of two months. You can select date range 
+	in the one month view. If this is set to 'auto', it will be changed to true if the screen width
+	is lower than 480.</i>
+
+<b>showDateFilter ( Function(Int time, Int date) )</b>
+	<i>This is a callback function when creating each date element in the calendar. First paramter will
+	be the timestamp of that day. Second parameter will be the date of that month.</i>
+
+<b>customTopBar ( Function || String)</b>
+	<i>If you set this parameter, it will use this value in the top bar.</i>
+
+<b>extraClass (String)</b>
+	<i>Set extra class name to the date range picker dom.</i>
+
+<b>showTopbar (Boolean)</b>
+	<i>If show the top bar.</i>
+
 </pre>
 
 	<h2>Events</h2>
-	<p>3 events will be triggerred on the date range picker DOM</p>
+	<p>events will be triggerred on the date range picker DOM</p>
 <pre>$('#dom-id')
 .dateRangePicker()
+.bind('datepicker-first-date-selected', function(event, obj)
+{
+	/* This event will be triggered when first date is selected */
+	console.log(obj);
+	// obj will be something like this:
+	// {
+	// 		date1: (Date object of the earlier date)
+	// }
+})
 .bind('datepicker-change',function(event,obj)
 {
+	/* This event will be triggered when second date is selected */
 	console.log(obj);
 	// obj will be something like this:
 	// {
@@ -578,12 +701,29 @@ $('#date-range16-destroy').click(function(evt)
 })
 .bind('datepicker-apply',function(event,obj)
 {
+	/* This event will be triggered when user clicks on the apply button */
 	console.log(obj);
 })
 .bind('datepicker-close',function()
 {
-	console.log('close');
-});
+	/* This event will be triggered before date range picker close animation */
+	console.log('before close');
+})
+.bind('datepicker-closed',function()
+{
+	/* This event will be triggered after date range picker close animation */
+	console.log('after close');
+})
+.bind('datepicker-open',function()
+{
+	/* This event will be triggered before date range picker open animation */
+	console.log('before open');
+})
+.bind('datepicker-opened',function()
+{
+	/* This event will be triggered after date range picker open animation */
+	console.log('after open');
+})
 </pre>
 
 <br>
@@ -593,7 +733,7 @@ $('#date-range16-destroy').click(function(evt)
 <pre>//after you called  $(dom).dateRangePicker();
 
 $(dom).data('dateRangePicker')
-	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object
+	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object, set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
 	.clear(); 	// clear date range
 	.close(); 	// close date range picker overlay
 	.open();	// open date range picker overlay

@@ -36,7 +36,10 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
-	$('#date-range0').dateRangePicker();
+	$('#date-range0').dateRangePicker(
+	{
+	});
+
 	$('#date-range1').dateRangePicker(
 	{
 		startOfWeek: 'monday',
@@ -256,6 +259,8 @@ $(function()
 	{
 		showShortcuts: false,
 		format: 'YYYY-MM-DD'
+	}).bind('datepicker-change', function(evt, obj) {
+		alert('date1: ' + obj.date1 + ' / date2: ' + obj.date2);
 	});
 
 	$('#date-range16-open').click(function(evt)
@@ -276,6 +281,12 @@ $(function()
 		$('#date-range16').data('dateRangePicker').setDateRange('2013-11-20','2014-08-25');
 	});
 
+	$('#date-range16-set-silent').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').setDateRange('2014-11-03','2015-02-12', true);
+	});
+
 	$('#date-range16-clear').click(function(evt)
 	{
 		evt.stopPropagation();
@@ -291,8 +302,50 @@ $(function()
 	$('#date-range17').dateRangePicker(
 	{
 		stickyMonths: true,
-		startDate: '2013-01-10',
-		endDate: '2013-05-10'
+		showShortcuts: false
 	});
+
+	$('#date-range18').dateRangePicker(
+	{
+		customTopBar: 'Foo Bar'
+	});
+
+	$('#date-range19').dateRangePicker(
+	{
+		extraClass: 'date-range-picker19'
+	});
+
+	$('#date-range20').dateRangePicker(
+	{
+		hoveringTooltip: false
+	});
+
+	$('#date-range21').dateRangePicker(
+	{
+		hoveringTooltip: function(days)
+		{
+			var D = ['','<span style="white-space:nowrap;">Please select another date</span>','Two', 'Three','Four','Five'];
+			return D[days] ? D[days] : days+' days';
+		}
+	});
+
+	$('#date-range22').dateRangePicker(
+	{
+		showDateFilter: function(time, date)
+		{
+			return '<div style="padding:0 5px;">\
+						<span style="font-weight:bold">'+date+'</span>\
+						<div style="opacity:0.3;">$'+Math.round(Math.random()*999)+'</div>\
+					</div>';
+		}
+	});
+
+	$('#date-range23').dateRangePicker(
+	{
+		singleMonth: true,
+		showShortcuts: false,
+		showTopbar: false
+	});
+
 
 });
