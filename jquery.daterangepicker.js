@@ -1285,18 +1285,12 @@
 
 		function nextMonth(month)
 		{
-			month = moment(month).toDate();
-			var toMonth = month.getMonth();
-			while(month.getMonth() == toMonth) month = new Date(month.getTime()+86400000);
-			return month;
+			return moment(month).startOf('month').add(1, 'month').toDate();
 		}
 
 		function prevMonth(month)
 		{
-			month = moment(month).toDate();
-			var toMonth = month.getMonth();
-			while(month.getMonth() == toMonth) month = new Date(month.getTime()-86400000);
-			return month;
+			return moment(month).startOf('month').subtract(1, 'month').toDate();
 		}
 
 		function getTimeHTML()
