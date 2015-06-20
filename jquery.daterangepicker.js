@@ -1272,18 +1272,22 @@
 
 		function compare_month(m1,m2)
 		{
-			var p = parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
-			if (p > 0 ) return 1;
-			if (p == 0) return 0;
-			return -1;
+			compare_dates(m1,m2,'month');
 		}
 
 		function compare_day(m1,m2)
 		{
-			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
-			if (p > 0 ) return 1;
-			if (p == 0) return 0;
-			return -1;
+			compare_dates(m1,m2,'day');
+		}
+
+		function compare_dates(m1,m2,granularity) {
+			if (m1.isBefore(m2,granularity)) {
+				return 1;
+			} else if (m1.isSame(m2,granularity)) {
+				return 0;
+			} else {
+				return -1;
+			}
 		}
 
 		function nextMonth(month)
