@@ -1271,7 +1271,7 @@
 			}
 			else if (opt.start && opt.end)
 			{
-				box.find('.selected-days').show().find('.selected-days-num').html(Math.round((opt.end-opt.start)/86400000)+1);
+				box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start)+1);
 				box.find('.apply-btn').removeClass('disabled');
 				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
@@ -1293,6 +1293,14 @@
 			{
 				box.find('.apply-btn').addClass('disabled');
 			}
+		}
+
+		function countDays(start,end)
+		{
+			var t1 = moment(start), t2 = moment(end);
+			var day1 = t1.year() * 365 + t1.dayOfYear();
+			var day2 = t2.year() * 365 + t2.dayOfYear();
+			return Math.abs( day1 - day2 );
 		}
 
 		function setDateRange(date1,date2,silent)
@@ -1503,18 +1511,12 @@
 
 		function nextMonth(month)
 		{
-			month = moment(month).toDate();
-			var toMonth = month.getMonth();
-			while(month.getMonth() == toMonth) month = new Date(month.getTime()+86400000);
-			return month;
+			return moment(month).add(1, 'months').toDate();
 		}
 
 		function prevMonth(month)
 		{
-			month = moment(month).toDate();
-			var toMonth = month.getMonth();
-			while(month.getMonth() == toMonth) month = new Date(month.getTime()-86400000);
-			return month;
+			return moment(month).add(-1, 'months').toDate();
 		}
 
 		function getTimeHTML()
