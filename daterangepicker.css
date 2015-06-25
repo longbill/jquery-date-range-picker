@@ -228,6 +228,10 @@
 
 .date-picker-wrapper .time input[type=range] {
   vertical-align: middle;
+  width:129px;
+  padding:0;
+  margin:0;
+  height:20px;
 }
 .date-picker-wrapper .time1, .time2 {
 	width: 180px;
