@@ -36,7 +36,10 @@ $(function()
 		'default-default': 'This is costom language'
 	};
 	
-	$('#date-range0').dateRangePicker();
+	$('#date-range0').dateRangePicker(
+	{
+	});
+
 	$('#date-range1').dateRangePicker(
 	{
 		startOfWeek: 'monday',
@@ -299,8 +302,50 @@ $(function()
 	$('#date-range17').dateRangePicker(
 	{
 		stickyMonths: true,
-		startDate: '2013-01-10',
-		endDate: '2013-05-10'
+		showShortcuts: false
 	});
+
+	$('#date-range18').dateRangePicker(
+	{
+		customTopBar: 'Foo Bar'
+	});
+
+	$('#date-range19').dateRangePicker(
+	{
+		extraClass: 'date-range-picker19'
+	});
+
+	$('#date-range20').dateRangePicker(
+	{
+		hoveringTooltip: false
+	});
+
+	$('#date-range21').dateRangePicker(
+	{
+		hoveringTooltip: function(days)
+		{
+			var D = ['','<span style="white-space:nowrap;">Please select another date</span>','Two', 'Three','Four','Five'];
+			return D[days] ? D[days] : days+' days';
+		}
+	});
+
+	$('#date-range22').dateRangePicker(
+	{
+		showDateFilter: function(time, date)
+		{
+			return '<div style="padding:0 5px;">\
+						<span style="font-weight:bold">'+date+'</span>\
+						<div style="opacity:0.3;">$'+Math.round(Math.random()*999)+'</div>\
+					</div>';
+		}
+	});
+
+	$('#date-range23').dateRangePicker(
+	{
+		singleMonth: true,
+		showShortcuts: false,
+		showTopbar: false
+	});
+
 
 });
