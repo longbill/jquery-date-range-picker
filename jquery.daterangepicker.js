@@ -1370,6 +1370,7 @@
 			showMonth(date1,'month1');
 			showMonth(date2,'month2');
 			showGap();
+			checkSelectionValid();
 			showSelectedInfo(false,silent);
 			autoclose();
 		}
