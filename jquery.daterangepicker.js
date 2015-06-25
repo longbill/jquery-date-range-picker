@@ -434,16 +434,23 @@
 		var initiated = false;
 		var self = this;
 		var selfDom = $(self).get(0);
+		var domChangeTimer;
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
 			var isOpen = box.is(':visible');
-			$(document).trigger('click.datepicker');
 			evt.stopPropagation();
 			if(!isOpen) open(opt.duration);
 		}).bind('change.datepicker', function(evt)
 		{
 			checkAndSetDefaultValue();
+		}).bind('keyup.datepicker',function()
+		{
+			try{ clearTimeout(domChangeTimer); }catch(e){}
+			domChangeTimer = setTimeout(function()
+			{
+				checkAndSetDefaultValue();
+			},2000);
 		});
 
 		init_datepicker.call(this);
@@ -585,7 +592,8 @@
 				evt.stopPropagation();
 			});
 
-			$(document).bind('click.datepicker',function()
+			//if user click other place of the webpage, close date range picker window
+			$(document).bind('click.datepicker',function(evt)
 			{
 				if (box.is(':visible')) closeDatePicker();
 			});
