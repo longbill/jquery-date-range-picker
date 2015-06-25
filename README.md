@@ -24,6 +24,7 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 * add single month mode
 * enable adding elements on each day element
 * available to hide the top bar
+* no longer support IE6,7
 * fix many bugs and style issues
 
 ##what's new in 0.0.5##
