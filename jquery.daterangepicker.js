@@ -570,6 +570,12 @@
 
 			setTimeout(function()
 			{
+				var gapMargin = box.find('.gap').css('margin-left');
+				if (gapMargin) gapMargin = parseInt(gapMargin);
+				var w1 = box.find('.month1').width();
+				var w2 = box.find('.gap').width() + ( gapMargin ? gapMargin*2 : 0 );
+				var w3 = box.find('.month2').width();
+				box.find('.month-wrapper').width(w1 + w2 + w3);
 				initiated = true;
 			},0);
 

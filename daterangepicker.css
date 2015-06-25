@@ -110,7 +110,7 @@
 }
 
 .date-picker-wrapper .month-wrapper table .day.has-tooltip { cursor:help !important;}
-
+.date-picker-wrapper .time label { white-space:nowrap; }
 .date-picker-wrapper .month-wrapper table .day.toMonth.valid
 {
 	color:#333;
