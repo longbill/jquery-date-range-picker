@@ -1,11 +1,11 @@
 #jQuery Date Range Picker Plugin#
 
-v0.0.5
+v0.0.7
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
 * Requires jQuery 1.3.2+, Moment 2.2.0+
-* Supports IE6+, Firefox, Chrome, Safari and other standard HTML5 browsers.
+* Supports IE8+, Firefox, Chrome, Safari and other standard HTML5 browsers.
 * Supports multi-language
 * Fully CSS styled
 * Written by Chunlong ( jszen.com )
@@ -17,6 +17,14 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 
 ![screenshot](https://raw.github.com/longbill/jquery-date-range-picker/master/preview.jpg)
 
+##what's new in 0.0.7##
+
+* add hovering effect on day elements
+* add sticky month mode
+* add single month mode
+* enable adding elements on each day element
+* available to hide the top bar
+* fix many bugs and style issues
 
 ##what's new in 0.0.5##
 
@@ -192,15 +200,47 @@ The resulting object then turns into `td` tag of the day attributes.</i>
 <b>applyBtnClass (String)</b>
 <i> Additional classes to add to the apply button </i>
 
+<b>stickyMonths (Boolean)</b>
+<i>If true, there will only be one previous and one next button. Clicking them will change
+	both the months. This setting will have no effect if singleDate option is set to true</i>
+
+<b>singleMonth (Boolean || 'auto') Default value: 'auto'</b>
+<i>If true, it will show only one month instead of two months. You can select date range 
+in the one month view. If this is set to 'auto', it will be changed to true if the screen width
+is lower than 480.</i>
+
+<b>showDateFilter ( Function(Int time, Int date) )</b>
+<i>This is a callback function when creating each date element in the calendar. First paramter will
+be the timestamp of that day. Second parameter will be the date of that month.</i>
+
+<b>customTopBar ( Function || String)</b>
+<i>If you set this parameter, it will use this value in the top bar.</i>
+
+<b>extraClass (String)</b>
+<i>Set extra class name to the date range picker dom.</i>
+
+<b>showTopbar (Boolean)</b>
+<i>If show the top bar.</i>
+
 
 ##Events##
 
-Three events will be triggered on the date range picker DOM
+Events will be triggered on the date range picker DOM
 ```javascript
 $('#dom-id')
 .dateRangePicker()
+.bind('datepicker-first-date-selected', function(event, obj)
+{
+	/* This event will be triggered when first date is selected */
+	console.log(obj);
+	// obj will be something like this:
+	// {
+	// 		date1: (Date object of the earlier date)
+	// }
+})
 .bind('datepicker-change',function(event,obj)
 {
+	/* This event will be triggered when second date is selected */
 	console.log(obj);
 	// obj will be something like this:
 	// {
@@ -211,26 +251,29 @@ $('#dom-id')
 })
 .bind('datepicker-apply',function(event,obj)
 {
+	/* This event will be triggered when user clicks on the apply button */
 	console.log(obj);
-})
-.bind('datepicker-open',function()
-{
-  console.log('open');
-})
-.bind('datepicker-opened',function()
-{
-  // fires event after animation finishes
-  console.log('opened');
 })
 .bind('datepicker-close',function()
 {
-	console.log('close');
+	/* This event will be triggered before date range picker close animation */
+	console.log('before close');
 })
 .bind('datepicker-closed',function()
 {
-  // fires event after animation finishes
-  console.log('closed');
-});
+	/* This event will be triggered after date range picker close animation */
+	console.log('after close');
+})
+.bind('datepicker-open',function()
+{
+	/* This event will be triggered before date range picker open animation */
+	console.log('before open');
+})
+.bind('datepicker-opened',function()
+{
+	/* This event will be triggered after date range picker open animation */
+	console.log('after open');
+})
 ```
 
 ###APIs###
@@ -244,3 +287,7 @@ $(dom).data('dateRangePicker')
 	.open();	// open date range picker overlay
 	.destroy();	// destroy all date range picker related things
 ```
+
+
+###LICENSE###
+This date range picker plugin is under MIT LICENSE
