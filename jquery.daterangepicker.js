@@ -585,7 +585,10 @@
 				evt.stopPropagation();
 			});
 
-			$(document).bind('click.datepicker',closeDatePicker);
+			$(document).bind('click.datepicker',function()
+			{
+				if (box.is(':visible')) closeDatePicker();
+			});
 
 			box.find('.next').click(function()
 			{
