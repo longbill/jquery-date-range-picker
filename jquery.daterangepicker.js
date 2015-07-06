@@ -1831,8 +1831,6 @@
 						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
 					}
 
-					if (!isValidTime(today.time)) today.valid = false;
-
 					todayDivAttr = {
 						time: today.time,
 						title: today.tooltip,
