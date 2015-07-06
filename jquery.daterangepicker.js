@@ -1059,7 +1059,7 @@
 				});
 				dayHovering(day);
 			}
-			updateSelectableRange(day);
+			updateSelectableRange(time);
 
 			checkSelectionValid();
 			showSelectedInfo();
@@ -1067,13 +1067,19 @@
 			autoclose();
 		}
 
-		function updateSelectableRange(day)
+		function updateSelectableRange(time)
 		{
 			box.find('.day.invalid.tmp').removeClass('tmp').removeClass('invalid').addClass('valid');
 			if (opt.start && !opt.end)
 			{
-				var time = parseInt(day.attr('time'));
 				var firstInvalid = 0, lastInvalid = 143403840000000; //a really large number
+
+				if (opt.maxDays > 0) {
+					var dur = opt.maxDays * 86400000;
+					lastInvalid = time + dur;
+					firstInvalid = time - dur;
+				}
+
 				box.find('.day.toMonth.invalid').not('.tmp').each(function()
 				{
 					var _time = parseInt($(this).attr('time'));
@@ -1463,6 +1469,7 @@
 			var monthName = nameMonth(date.getMonth());
 			box.find('.'+month+' .month-name').html(monthName+' '+date.getFullYear());
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
+			if (opt.start) updateSelectableRange(opt.start);
 			opt[month] = date;
 		}
 
