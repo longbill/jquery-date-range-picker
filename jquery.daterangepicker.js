@@ -11,7 +11,7 @@
 			define(['jquery', 'moment'], factory);
 		} else if (typeof exports === 'object' && typeof module !== 'undefined') {
 			// CommonJS. Register as a module
-			module.exports = factory(require('jquery'), require('moment')); 
+			module.exports = factory(require('jquery'), require('moment'));
 		} else {
 			// Browser globals
 			factory(jQuery, moment);
@@ -536,8 +536,8 @@
 				showMonth(prevMonth(defaultTime),'month1');
 				showMonth(defaultTime,'month2');
 
-			} 
-			else 
+			}
+			else
 			{
 				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
 				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
@@ -546,7 +546,7 @@
 				showMonth(nextMonth(defaultTime),'month2');
 			}
 
-			if (opt.time.enabled) 
+			if (opt.time.enabled)
 			{
 				if ((opt.startDate && opt.endDate) || (opt.start && opt.end)) {
 					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
@@ -953,18 +953,18 @@
 		function handleStart(time)
 		{
 			var r = time;
-			if  (opt.batchMode === 'week-range') 
+			if  (opt.batchMode === 'week-range')
 			{
-				if (opt.startOfWeek === 'monday') 
+				if (opt.startOfWeek === 'monday')
 				{
 					r = moment(parseInt(time)).startOf('isoweek').valueOf();
-				} 
-				else 
+				}
+				else
 				{
 					r = moment(parseInt(time)).startOf('week').valueOf();
 				}
 			}
-			else if (opt.batchMode === 'month-range') 
+			else if (opt.batchMode === 'month-range')
 			{
 				r = moment(parseInt(time)).startOf('month').valueOf();
 			}
@@ -974,18 +974,18 @@
 		function handleEnd(time)
 		{
 			var r = time;
-			if  (opt.batchMode === 'week-range') 
+			if  (opt.batchMode === 'week-range')
 			{
-				if (opt.startOfWeek === 'monday') 
+				if (opt.startOfWeek === 'monday')
 				{
 					r = moment(parseInt(time)).endOf('isoweek').valueOf();
-				} 
-				else 
+				}
+				else
 				{
 					r = moment(parseInt(time)).endOf('week').valueOf();
 				}
-			} 
-			else if (opt.batchMode === 'month') 
+			}
+			else if (opt.batchMode === 'month')
 			{
 				r = moment(parseInt(time)).endOf('month').valueOf();
 			}
@@ -1067,44 +1067,31 @@
 			autoclose();
 		}
 
+		function isValidTime(time) {
+			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
+			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
+
+			if (opt.start && !opt.end && !opt.singleDate) {
+				var selectedTime = opt.start;
+				var max = (opt.maxDays > 0) ? opt.maxDays * 86400000 : null;
+				var min = (opt.minDays > 0) ? opt.minDays * 86400000 : null;
+				if (max != null && (time > selectedTime + max || time < selectedTime - max)) return false;
+				if (min != null && (time < selectedTime + min && time > selectedTime - min)) return false;
+			}
+
+			return true;
+		}
+
 		function updateSelectableRange(time)
 		{
-			box.find('.day.invalid.tmp').removeClass('tmp').removeClass('invalid').addClass('valid');
-			if (opt.start && !opt.end)
+			box.find('.day.toMonth').each(function()
 			{
-				var firstInvalid = 0, lastInvalid = 143403840000000; //a really large number
-
-				if (opt.maxDays > 0) {
-					var dur = opt.maxDays * 86400000;
-					lastInvalid = time + dur;
-					firstInvalid = time - dur;
-				}
-
-				box.find('.day.toMonth.invalid').not('.tmp').each(function()
-				{
-					var _time = parseInt($(this).attr('time'));
-					if (_time > time && _time < lastInvalid)
-					{
-						lastInvalid = _time;
-					}
-					else if (_time < time && _time > firstInvalid)
-					{
-						firstInvalid = _time;
-					}
-				});
-				box.find('.day.toMonth.valid').each(function()
-				{
-					var time = parseInt($(this).attr('time'));
-					if ( time <= firstInvalid || time >= lastInvalid)
-					{
-						$(this).addClass('invalid').addClass('tmp').removeClass('valid');
-					}
-				});
-			}
-			else
-			{
-
-			}
+				var time = parseInt($(this).attr('time'));
+				if (!isValidTime(time))
+					$(this).addClass('invalid').addClass('tmp').removeClass('valid');
+				else
+					$(this).addClass('valid').addClass('tmp').removeClass('invalid');
+			});
 		}
 
 		function dayHovering(day)
@@ -1175,7 +1162,7 @@
 						var _left = posDay.left - posBox.left;
 						var _top = posDay.top - posBox.top;
 						_left += day.width()/2;
-							
+
 
 						var $tip = box.find('.date-range-length-tip');
 						var w = $tip.css({'visibility':'hidden', 'display':'none'}).html(tooltip).width();
@@ -1350,7 +1337,7 @@
 			opt.start = date1.getTime();
 			opt.end = date2.getTime();
 
-			if (opt.time.enabled) 
+			if (opt.time.enabled)
 			{
 				renderTime("time1", date1);
 				renderTime("time2", date2);
@@ -1469,7 +1456,6 @@
 			var monthName = nameMonth(date.getMonth());
 			box.find('.'+month+' .month-name').html(monthName+' '+date.getFullYear());
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
-			if (opt.start) updateSelectableRange(opt.start);
 			opt[month] = date;
 		}
 
@@ -1586,7 +1572,7 @@
 					html += '</div>';
 				}
 
-			
+
 				html += '<div class="error-top">error</div>\
 						<div class="default-top">default</div>\
 						<input type="button" class="apply-btn disabled'+ getApplyBtnClass() +'" value="'+lang('apply')+'" />';
@@ -1596,7 +1582,7 @@
 			html += '<div class="month-wrapper">'
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
-			if ( hasMonth2() ) 
+			if ( hasMonth2() )
 			{
 				html += '<div class="gap">'+getGapHTML()+'</div>'
 					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
@@ -1813,9 +1799,7 @@
 				for (var i = dayOfWeek; i > 0; i--)
 				{
 					var day = new Date(d.getTime() - 86400000*i);
-					var valid = true;
-					if (opt.startDate && compare_day(day,opt.startDate) < 0) valid = false;
-					if (opt.endDate && compare_day(day,opt.endDate) > 0) valid = false;
+					var valid = isValidTime(day.getTime());
 					days.push({type:'lastMonth',day: day.getDate(),time:day.getTime(), valid:valid });
 				}
 			}
@@ -1823,9 +1807,7 @@
 			for(var i=0; i<40; i++)
 			{
 				var today = moment(d).add(i, 'days').toDate();
-				var valid = true;
-				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
-				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
+				var valid = isValidTime(today.getTime());
 				days.push({type: today.getMonth() == toMonth ? 'toMonth' : 'nextMonth',day: today.getDate(),time:today.getTime(), valid:valid });
 			}
 			var html = [];
@@ -1848,6 +1830,8 @@
 						today.tooltip = _r[2] || '';
 						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
 					}
+
+					if (!isValidTime(today.time)) today.valid = false;
 
 					todayDivAttr = {
 						time: today.time,
