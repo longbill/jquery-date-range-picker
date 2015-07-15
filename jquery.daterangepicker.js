@@ -411,7 +411,7 @@
 			singleMonth: 'auto',
 			hoveringTooltip: function(days)
 			{
-				return days > 1 ? days + ' days' : '';
+				return days > 1 ? days + ' ' + lang('days') : '';
 			},
 			showTopbar: true
 		},opt);
@@ -1158,7 +1158,7 @@
 						}
 						else if (opt.hoveringTooltip === true && days > 1)
 						{
-							tooltip = days + ' days';
+							tooltip = days + ' ' + lang('days');
 						}
 					}
 					if (tooltip)
