@@ -147,7 +147,7 @@ if this is 0, means do not limit maximum days</i>
 <b>singleDate (Boolean)</b>
 <i>choose a single date instead of a date range.</i>
 
-<b>batchMode (false / 'week' / 'month')</b>
+<b>batchMode (false / 'week' / 'workweek' / 'weekend' / 'month', 'week-range', 'month-range')</b>
 <i> auto batch select mode </i>
 <i> false (default), week, month, week-range, month-range</i>
 
@@ -211,7 +211,7 @@ in the one month view. If this is set to 'auto', it will be changed to true if t
 is lower than 480.</i>
 
 <b>showDateFilter ( Function(Int time, Int date) )</b>
-<i>This is a callback function when creating each date element in the calendar. First paramter will
+<i>This is a callback function when creating each date element in the calendar. First parameter will
 be the timestamp of that day. Second parameter will be the date of that month.</i>
 
 <b>customTopBar ( Function || String)</b>
