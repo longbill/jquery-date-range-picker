@@ -154,7 +154,10 @@
 			'default-single' : 'Bitte ein Datum auswählen',
 			'default-less' : 'Bitte weniger als %d Tage auswählen',
 			'default-range' : 'Bitte einen Datumsbereich zwischen %d und %d Tagen auswählen',
-			'default-default': 'Bitte ein Start- und Enddatum auswählen'
+			'default-default': 'Bitte ein Start- und Enddatum auswählen',
+			'Time': 'Zeit',
+			'hour': 'Stunde',
+			'minute': 'Minute',
 		},
         'en':
         {
@@ -448,7 +451,7 @@
 			singleMonth: 'auto',
 			hoveringTooltip: function(days)
 			{
-				return days > 1 ? days + ' days' : '';
+				return days > 1 ? days + ' '+lang('days') : '';
 			},
 			showTopbar: true
 		},opt);
