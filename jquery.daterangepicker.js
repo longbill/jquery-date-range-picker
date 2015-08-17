@@ -479,7 +479,6 @@
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
 			var isOpen = box.is(':visible');
-			evt.stopPropagation();
 			if(!isOpen) open(opt.duration);
 		}).bind('change.datepicker', function(evt)
 		{
@@ -635,7 +634,9 @@
 			//if user click other place of the webpage, close date range picker window
 			$(document).bind('click.datepicker',function(evt)
 			{
-				if (box.is(':visible')) closeDatePicker();
+			    if (evt.target != self[0]) {
+			        if (box.is(':visible')) closeDatePicker();
+			    }
 			});
 
 			box.find('.next').click(function()
@@ -1198,7 +1199,7 @@
 						}
 						else if (opt.hoveringTooltip === true && days > 1)
 						{
-							tooltip = days + ' days';
+							tooltip = days + ' '+lang('days');
 						}
 					}
 					if (tooltip)
