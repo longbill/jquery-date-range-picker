@@ -1016,16 +1016,16 @@
 					opt.start = moment(parseInt(time)).startOf('week').valueOf();
 				}
 			}
-            else if  (opt.batchMode === 'workweek')
-            {
-                opt.start = moment(parseInt(time)).day(1).valueOf();
-                opt.end = moment(parseInt(time)).day(5).valueOf();
-            }
-            else if  (opt.batchMode === 'weekend')
-            {
-                opt.start = moment(parseInt(time)).day(6).valueOf();
-                opt.end = moment(parseInt(time)).day(7).valueOf();
-            }
+			else if  (opt.batchMode === 'workweek')
+			{
+				opt.start = moment(parseInt(time)).day(1).valueOf();
+				opt.end = moment(parseInt(time)).day(5).valueOf();
+			}
+			else if  (opt.batchMode === 'weekend')
+			{
+				opt.start = moment(parseInt(time)).day(6).valueOf();
+				opt.end = moment(parseInt(time)).day(7).valueOf();
+			}
 			else if (opt.batchMode === 'month')
 			{
 				opt.start = moment(parseInt(time)).startOf('month').valueOf();
