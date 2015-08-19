@@ -1199,7 +1199,7 @@
 
 				if (opt.start && !opt.end)
 				{
-					var days = Math.abs( Math.round( (hoverTime - opt.start) /86400000)) + 1;
+				    var days = countDays(hoverTime, opt.start) + 1;
 					var tooltip = '';
 					if (opt.hoveringTooltip)
 					{
