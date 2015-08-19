@@ -453,7 +453,8 @@
 			{
 				return days > 1 ? days + ' ' + lang('days') : '';
 			},
-			showTopbar: true
+			showTopbar: true,
+            swapTime: true,
 		},opt);
 
 		opt.start = false;
@@ -1093,7 +1094,7 @@
 				var tmp = opt.end;
 				opt.end = handleEnd(opt.start);
 				opt.start = handleStart(tmp);
-				if (opt.time.enabled) {
+				if (opt.time.enabled && opt.swapTime) {
 					swapTime();
 				}
 			}

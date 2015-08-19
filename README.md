@@ -81,7 +81,8 @@ The default configuration object is:
 	beforeShowDay: [function],
 	dayDivAttrs: [],
 	dayTdAttrs: [],
-	applyBtnClass: ''
+	applyBtnClass: '',
+    swapTime: true,
 }
 ```
 
@@ -223,6 +224,8 @@ be the timestamp of that day. Second parameter will be the date of that month.</
 <b>showTopbar (Boolean)</b>
 <i>If show the top bar.</i>
 
+<b>swapTime (Boolean)</b>
+<i>If true and if time is enabled, on choosing first enddate and than startdate, endtime and starttime will be swapped. If this configkey is false, only date will be swapped, time will stay constant. If time is disabled, this config key is not used.</i>
 
 ##Events##
 
