@@ -11,7 +11,7 @@
 			define(['jquery', 'moment'], factory);
 		} else if (typeof exports === 'object' && typeof module !== 'undefined') {
 			// CommonJS. Register as a module
-			module.exports = factory(require('jquery'), require('moment')); 
+			module.exports = factory(require('jquery'), require('moment'));
 		} else {
 			// Browser globals
 			factory(jQuery, moment);
@@ -328,6 +328,43 @@
 			'default-range' : 'Seleziona un intervallo compreso tra i %d e i %d giorni',
 			'default-default': 'Seleziona un intervallo di date'
 		},
+		'no':
+		{
+			'selected': 'Valgt:',
+			'day':'Dag',
+			'days': 'Dager',
+			'apply': 'Lukk',
+			'week-1' : 'ma',
+			'week-2' : 'ti',
+			'week-3' : 'on',
+			'week-4' : 'to',
+			'week-5' : 'fr',
+			'week-6' : 'lø',
+			'week-7' : 'sø',
+			'month-name': ['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'],
+			'shortcuts' : 'Snarveier',
+			'custom-values': 'Egendefinerte Verdier',
+			'past': 'Over', // Not quite sure about the context of this one
+			'following':'Følger',
+			'previous' : 'Forrige',
+			'prev-week' : 'Uke',
+			'prev-month' : 'Måned',
+			'prev-year' : 'År',
+			'next':'Neste',
+			'next-week':'Uke',
+			'next-month':'Måned',
+			'next-year':'År',
+			'less-than' : 'Datoperioden skal ikkje være lengre enn %d dager',
+			'more-than' : 'Datoperioden skal ikkje være kortere enn %d dager',
+			'default-more' : 'Vennligst velg ein datoperiode lengre enn %d dager',
+			'default-single' : 'Vennligst velg ein dato',
+			'default-less' : 'Vennligst velg ein datoperiode mindre enn %d dager',
+			'default-range' : 'Vennligst velg ein datoperiode mellom %d og %d dager',
+			'default-default': 'Vennligst velg ein datoperiode',
+			'time':'Tid',
+			'hour':'Time',
+			'minute':'Minutter'
+		},
 		'nl':
 		{
 			'selected': 'Geselecteerd:',
@@ -575,8 +612,8 @@
 				showMonth(prevMonth(defaultTime),'month1');
 				showMonth(defaultTime,'month2');
 
-			} 
-			else 
+			}
+			else
 			{
 				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
 				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
@@ -585,7 +622,7 @@
 				showMonth(nextMonth(defaultTime),'month2');
 			}
 
-			if (opt.time.enabled) 
+			if (opt.time.enabled)
 			{
 				if ((opt.startDate && opt.endDate) || (opt.start && opt.end)) {
 					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
@@ -994,18 +1031,18 @@
 		function handleStart(time)
 		{
 			var r = time;
-			if  (opt.batchMode === 'week-range') 
+			if  (opt.batchMode === 'week-range')
 			{
-				if (opt.startOfWeek === 'monday') 
+				if (opt.startOfWeek === 'monday')
 				{
 					r = moment(parseInt(time)).startOf('isoweek').valueOf();
-				} 
-				else 
+				}
+				else
 				{
 					r = moment(parseInt(time)).startOf('week').valueOf();
 				}
 			}
-			else if (opt.batchMode === 'month-range') 
+			else if (opt.batchMode === 'month-range')
 			{
 				r = moment(parseInt(time)).startOf('month').valueOf();
 			}
@@ -1015,18 +1052,18 @@
 		function handleEnd(time)
 		{
 			var r = time;
-			if  (opt.batchMode === 'week-range') 
+			if  (opt.batchMode === 'week-range')
 			{
-				if (opt.startOfWeek === 'monday') 
+				if (opt.startOfWeek === 'monday')
 				{
 					r = moment(parseInt(time)).endOf('isoweek').valueOf();
-				} 
-				else 
+				}
+				else
 				{
 					r = moment(parseInt(time)).endOf('week').valueOf();
 				}
-			} 
-			else if (opt.batchMode === 'month') 
+			}
+			else if (opt.batchMode === 'month')
 			{
 				r = moment(parseInt(time)).endOf('month').valueOf();
 			}
@@ -1220,7 +1257,7 @@
 						var _left = posDay.left - posBox.left;
 						var _top = posDay.top - posBox.top;
 						_left += day.width()/2;
-							
+
 
 						var $tip = box.find('.date-range-length-tip');
 						var w = $tip.css({'visibility':'hidden', 'display':'none'}).html(tooltip).width();
@@ -1395,7 +1432,7 @@
 			opt.start = date1.getTime();
 			opt.end = date2.getTime();
 
-			if (opt.time.enabled) 
+			if (opt.time.enabled)
 			{
 				renderTime("time1", date1);
 				renderTime("time2", date2);
@@ -1630,7 +1667,7 @@
 					html += '</div>';
 				}
 
-			
+
 				html += '<div class="error-top">error</div>\
 						<div class="default-top">default</div>\
 						<input type="button" class="apply-btn disabled'+ getApplyBtnClass() +'" value="'+lang('apply')+'" />';
@@ -1640,7 +1677,7 @@
 			html += '<div class="month-wrapper">'
 				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
-			if ( hasMonth2() ) 
+			if ( hasMonth2() )
 			{
 				html += '<div class="gap">'+getGapHTML()+'</div>'
 					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="5" class="month-name">January, 2011</th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
