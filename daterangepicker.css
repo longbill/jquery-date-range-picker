@@ -28,7 +28,7 @@
 	box-shadow:3px 3px 10px rgba(0,0,0,0.5);
 	box-sizing: initial;
 }
-.date-picker-wrapper.inline-wrapper { position: relative; box-shadow: none;}
+.date-picker-wrapper.inline-wrapper { position: relative; box-shadow: none; display:inline-block;}
 .date-picker-wrapper.single-date {
 	width:auto;
 }
@@ -67,6 +67,7 @@
 {
 	width:190px;
 	float:left;
+	table-layout:fixed;
 }
 .date-picker-wrapper .month-wrapper table.month2
 {
@@ -175,9 +176,9 @@
 }
 .date-picker-wrapper .drp_top-bar
 {
-	line-height:40px;
-	height:40px;
+	line-height: 1.4;
 	position:relative;
+	padding: 10px 40px 10px 0;
 }
 .date-picker-wrapper .drp_top-bar .error-top { display:none; }
 .date-picker-wrapper .drp_top-bar .normal-top { display:none; }
@@ -260,3 +261,17 @@
     -o-filter: drop-shadow(0 0 3px rgba(0,0,0,.3)); 
     filter: drop-shadow(0 0 3px rgba(0,0,0,.3));  }
 .date-picker-wrapper .date-range-length-tip:after { content:''; position:absolute; border-left:4px solid transparent; border-right:4px solid transparent; border-top:4px solid yellow; left:50%; margin-left:-4px; bottom:-4px; }
+
+
+.date-picker-wrapper.two-months.no-gap .month1 .next,
+.date-picker-wrapper.two-months.no-gap .month2 .prev { display:none; }
+.date-picker-wrapper .week-number 
+{
+	padding:5px 0;
+	line-height:1;
+	font-size:12px;
+	margin-bottom:1px;
+	color:#999;
+	cursor: pointer;
+}
+.date-picker-wrapper .week-number.week-number-selected { color: #4499EE; font-weight:bold;  }

@@ -399,5 +399,26 @@ $(function()
 		showTopbar: false
 	});
 
+	$('#date-range24').dateRangePicker(
+	{
+		showWeekNumbers: true
+	});
+
+	$('#date-range24-2').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		startOfWeek:'monday'
+	});
+
+	$('#date-range25').dateRangePicker(
+	{
+		selectForward: true
+	});
+
+	$('#date-range26').dateRangePicker(
+	{
+		selectBackward: true
+	});
+
 
 });
