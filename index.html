@@ -603,9 +603,9 @@ $('#date-range16-destroy').click(function(evt)
 	dayTdAttrs: [],
 	applyBtnClass: '',
 	singleMonth: 'auto',
-	hoveringTooltip: function(days)
+	hoveringTooltip: function(days, startTime, hoveringTime)
 	{
-		return days > 1 ? days + ' days' : '';
+		return days > 1 ? days + ' ' + lang('days') : '';
 	},
 	showTopbar: true,
 	selectForward: false,

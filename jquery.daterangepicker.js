@@ -490,7 +490,7 @@
 			selectBackward: false,
 			applyBtnClass: '',
 			singleMonth: 'auto',
-			hoveringTooltip: function(days)
+			hoveringTooltip: function(days, startTime, hoveringTime)
 			{
 				return days > 1 ? days + ' ' + lang('days') : '';
 			},
@@ -1319,7 +1319,7 @@
 					{
 						if (typeof opt.hoveringTooltip == 'function')
 						{
-							tooltip = opt.hoveringTooltip(days);
+							tooltip = opt.hoveringTooltip(days, opt.start, hoverTime);
 						}
 						else if (opt.hoveringTooltip === true && days > 1)
 						{
