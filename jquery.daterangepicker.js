@@ -1,7 +1,7 @@
 // daterangepicker.js
-// version : 0.0.7
+// version : 0.0.8
 // author : Chunlong Liu
-// last updated at: 2015-06-26
+// last updated at: 2015-08-22
 // license : MIT
 // www.jszen.com
 
@@ -518,6 +518,8 @@
 		{
 			opt.singleMonth = $(window).width() < 480;
 		}
+		if (opt.singleMonth) opt.stickyMonths = false;
+		
 		if (!opt.showTopbar) opt.autoClose = true;
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();

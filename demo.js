@@ -417,8 +417,19 @@ $(function()
 
 	$('#date-range26').dateRangePicker(
 	{
-		selectBackward: true
-	});
+format: 'YYYY-MMM-DD',
+batchMode: "week",
+singleMonth: true,
+stickyMonths: false,
+showTopbar: false,
+endDate: moment().format('YYYY-MMM-DD'),
+shortcuts:
+{
+//'prev-days': [3, 5, 7],
+'prev': ['week', 'month', 'year'],
+'next-days': null,
+'next': null
+}});
 
 
 });
