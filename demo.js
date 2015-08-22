@@ -137,6 +137,7 @@ $(function()
 		shortcuts : null,
 		startOfWeek: 'sunday',
 		language:'en',
+		showShortcuts: true,
 		customShortcuts: 
 		[
 			//if return an array of two dates, it will select the date range between the two dates
@@ -169,6 +170,7 @@ $(function()
 
 	$('#date-range101').dateRangePicker(
 	{
+		showShortcuts: true,	
 		shortcuts : 
 		{
 			'next-days': [3,5,7],
@@ -178,6 +180,7 @@ $(function()
 
 	$('#date-range102').dateRangePicker(
 	{
+		showShortcuts: true,
 		shortcuts : 
 		{
 			'prev-days': [3,5,7],
@@ -408,6 +411,17 @@ $(function()
 	{
 		showWeekNumbers: true,
 		startOfWeek:'monday'
+	});
+
+	$('#date-range24-3').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		getWeekNumber: function(day)
+		{
+			var fiscalYearStart = moment('2015-08-16','YYYY-MM-DD');
+			var daysOffset = parseInt(fiscalYearStart.format('DDD'),10);
+			return moment(day).add( -1*daysOffset, 'days').format('W');
+		}
 	});
 
 	$('#date-range25').dateRangePicker(
