@@ -436,6 +436,43 @@
 			'default-less': 'Пожалуйста выберите диапазон меньше %d дней',
 			'default-range': 'Пожалуйста выберите диапазон между %d и %d днями',
 			'default-default': 'Пожалуйста выберите диапазон'
+		},
+		'pl':
+		{
+			'selected': 'Wybrany:',
+			'day':'Dzień',
+			'days': 'Dni',
+			'apply': 'Zamknij',
+			'week-1' : 'pon',
+			'week-2' : 'wt',
+			'week-3' : 'śr',
+			'week-4' : 'czw',
+			'week-5' : 'pt',
+			'week-6' : 'so',
+			'week-7' : 'nd',
+			'month-name': ['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'],
+			'shortcuts' : 'Skróty',
+			'custom-values': 'Niestandardowe wartości',
+			'past': 'Przeszłe',
+			'following':'Następne',
+			'previous' : 'Poprzednie',
+			'prev-week' : 'tydzień',
+			'prev-month' : 'miesiąc',
+			'prev-year' : 'rok',
+			'next':'Następny',
+			'next-week':'tydzień',
+			'next-month':'miesiąc',
+			'next-year':'rok',
+			'less-than' : 'Okres nie powinien być dłuższy niż %d dni',
+			'more-than' : 'Okres nie powinien być krótszy niż  %d ni',
+			'default-more' : 'Wybierz okres dłuższy niż %d dni',
+			'default-single' : 'Wybierz datę',
+			'default-less' : 'Wybierz okres krótszy niż %d dni',
+			'default-range' : 'Wybierz okres trwający od %d do %d dni',
+			'default-default': 'Wybierz okres',
+			'time':'Czas',
+			'hour':'Godzina',
+			'minute':'Minuta'
 		}
 	};
 
@@ -519,7 +556,7 @@
 			opt.singleMonth = $(window).width() < 480;
 		}
 		if (opt.singleMonth) opt.stickyMonths = false;
-		
+
 		if (!opt.showTopbar) opt.autoClose = true;
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
@@ -1222,7 +1259,7 @@
 			box.find('.day.invalid.tmp').removeClass('tmp').removeClass('invalid').addClass('valid');
 			if (opt.start && !opt.end)
 			{
-				var time = opt.start; 
+				var time = opt.start;
 				var firstInvalid = 0, lastInvalid = 143403840000000; //a really large number
 				box.find('.day.toMonth.invalid').not('.tmp').each(function()
 				{
@@ -1251,9 +1288,9 @@
 					{
 						var time = parseInt($(this).attr('time'));
 
-						if ( 
-							(opt.selectForward && time < opt.start ) 
-							|| 
+						if (
+							(opt.selectForward && time < opt.start )
+							||
 							(opt.selectBackward && time > opt.start)
 						)
 						{
@@ -2006,8 +2043,8 @@
 						date: day,
 						type:'lastMonth',
 						day: day.getDate(),
-						time:day.getTime(), 
-						valid:valid 
+						time:day.getTime(),
+						valid:valid
 					});
 				}
 			}
@@ -2023,8 +2060,8 @@
 					date: today,
 					type: today.getMonth() == toMonth ? 'toMonth' : 'nextMonth',
 					day: today.getDate(),
-					time:today.getTime(), 
-					valid:valid 
+					time:today.getTime(),
+					valid:valid
 				});
 			}
 			var html = [];
