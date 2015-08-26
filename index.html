@@ -541,7 +541,12 @@ $('#date-range16-destroy').click(function(evt)
 				<pre class="options">
 {
 	showWeekNumbers: true,
-	startOfWeek: 'monday'
+	getWeekNumber: function(day)
+	{
+		var fiscalYearStart = moment('2015-08-16','YYYY-MM-DD');
+		var daysOffset = parseInt(fiscalYearStart.format('DDD'),10);
+		return moment(day).add( -1*daysOffset, 'days').format('W');
+	}
 }</pre>
 			</div>
 
