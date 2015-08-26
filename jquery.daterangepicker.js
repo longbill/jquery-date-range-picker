@@ -1236,6 +1236,9 @@
 			{
 				opt.startWeek = thisTime;
 				weekNumberDom.addClass('week-number-selected');
+				var date1 = new Date(thisTime);
+				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
+				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
 			}
 			else
 			{
@@ -1245,13 +1248,12 @@
 				opt.startWeek = false;
 				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
 				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
-				updateSelectableRange();
-
-				checkSelectionValid();
-				showSelectedInfo();
-				showSelectedDays();
-				autoclose();
 			}
+			updateSelectableRange();
+			checkSelectionValid();
+			showSelectedInfo();
+			showSelectedDays();
+			autoclose();
 		}
 
 		function updateSelectableRange()
