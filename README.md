@@ -19,7 +19,7 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 
 ##what's new in 0.0.8##
 
-* support for week numbers
+* support week numbers
 * support to select forward/backward
 * support mobile browsers
 * fix many bugs and style issues
