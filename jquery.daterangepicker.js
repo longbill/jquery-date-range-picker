@@ -623,11 +623,11 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-        
-        function IsOwnDatePickerClicked(evt, selfObj)
-        {
-            return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
-        }
+		
+		function IsOwnDatePickerClicked(evt, selfObj)
+		{
+			return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+		}
 
 		function init_datepicker()
 		{

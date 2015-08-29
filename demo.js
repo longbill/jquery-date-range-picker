@@ -190,11 +190,6 @@ $(function()
 		}
 	});
 
-	$('#date-range104').dateRangePicker(
-	{
-		showShortcuts:false
-	});
-
 	$('#date-range103').dateRangePicker(
 	{
 		autoClose: true
@@ -259,17 +254,6 @@ $(function()
 	$('#date-range10').dateRangePicker(
 	{
 		format: 'dddd MMM Do, YYYY'  //more formats at http://momentjs.com/docs/#/displaying/format/
-	});
-
-	$('#date-range11').dateRangePicker(
-	{
-		separator : ' ~ '
-	}).bind('datepicker-change',function(e,r)
-	{
-		try
-		{
-			console.log(r);
-		}catch(e){}
 	});
 
 	$('#date-range12').dateRangePicker(

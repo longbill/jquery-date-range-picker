@@ -292,30 +292,12 @@
 
 
 			<div class="demo">
-				Hide shortcuts: <input id="date-range104" size="60" value="">
-				<a href="#" class="show-option">Show Config</a>
-				<pre class="options">
-{
-	showShortcuts:false
-}				</pre>
-			</div>
-
-			<div class="demo">
 				Auto-close after selection: <input id="date-range103" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
 	autoClose: true
 }				</pre>
-			</div>
-
-			<div class="demo">
-				Change the separator between date strings: <input id="date-range11" size="40" value="">
-				<a href="#" class="show-option">Show Config</a>
-				<pre class="options">
-{
-	separator : ' ~ '
-}	</pre>
 			</div>
 
 			<div class="demo">
@@ -597,13 +579,13 @@ $('#date-range16-destroy').click(function(evt)
 	},
 	minDays: 0,
 	maxDays: 0,
-	showShortcuts: true,
+	showShortcuts: false,
 	shortcuts:
 	{
 		//'prev-days': [1,3,5,7],
-		'next-days': [3,5,7],
+		//'next-days': [3,5,7],
 		//'prev' : ['week','month','year'],
-		'next' : ['week','month','year']
+		//'next' : ['week','month','year']
 	},
 	customShortcuts : [],
 	inline:false,
@@ -623,6 +605,7 @@ $('#date-range16-destroy').click(function(evt)
 		return days > 1 ? days + ' ' + lang('days') : '';
 	},
 	showTopbar: true,
+	swapTime: false,
 	selectForward: false,
 	selectBackward: false,
 	showWeekNumbers: false,
