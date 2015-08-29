@@ -88,7 +88,7 @@
 	line-height:1;
 	font-size:12px;
 	margin-bottom:1px;
-	color:#999;
+	color: #ccc;
 	cursor:default;
 }
 .date-picker-wrapper .month-wrapper table div.day.lastMonth,
