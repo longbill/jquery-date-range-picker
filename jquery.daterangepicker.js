@@ -622,7 +622,11 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-
+        
+        function IsOwnDatePickerClicked(evt, selfObj)
+        {
+            return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+        }
 
 		function init_datepicker()
 		{
@@ -729,7 +733,7 @@
 			//if user click other place of the webpage, close date range picker window
 			$(document).bind('click.datepicker',function(evt)
 			{
-				if (evt.target != self[0]) {
+				if (!IsOwnDatePickerClicked(evt, self[0])) {
 					if (box.is(':visible')) closeDatePicker();
 				}
 			});
