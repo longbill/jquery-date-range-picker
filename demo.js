@@ -190,11 +190,6 @@ $(function()
 		}
 	});
 
-	$('#date-range104').dateRangePicker(
-	{
-		showShortcuts:false
-	});
-
 	$('#date-range103').dateRangePicker(
 	{
 		autoClose: true
@@ -261,17 +256,6 @@ $(function()
 		format: 'dddd MMM Do, YYYY'  //more formats at http://momentjs.com/docs/#/displaying/format/
 	});
 
-	$('#date-range11').dateRangePicker(
-	{
-		separator : ' ~ '
-	}).bind('datepicker-change',function(e,r)
-	{
-		try
-		{
-			console.log(r);
-		}catch(e){}
-	});
-
 	$('#date-range12').dateRangePicker(
 	{
 		inline:true,
@@ -292,7 +276,7 @@ $(function()
 		showShortcuts: false
 	});
 
-  $('#date-range14-2').dateRangePicker(
+	$('#date-range14-2').dateRangePicker(
 	{
 		batchMode: 'week-range',
 		showShortcuts: false
@@ -402,6 +386,12 @@ $(function()
 		showTopbar: false
 	});
 
+	$('#date-range5-2').dateRangePicker(
+	{
+		minDays:3,
+		maxDays:7
+	});
+
 	$('#date-range24').dateRangePicker(
 	{
 		showWeekNumbers: true
@@ -432,6 +422,19 @@ $(function()
 	$('#date-range26').dateRangePicker(
 	{
 		selectBackward: true
+	});
+
+	$('#hotel-booking').dateRangePicker(
+	{
+		startDate: new Date(),
+		selectForward: true,
+		beforeShowDay: function(t)
+		{
+			var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+			var _class = '';
+			var _tooltip = valid ? '' : 'sold out';
+			return [valid,_class,_tooltip];
+		}
 	});
 
 
