@@ -399,5 +399,10 @@ $(function()
 		showTopbar: false
 	});
 
+	$('#date-range5-2').dateRangePicker(
+	{
+		maxDays:3
+	});
+
 
 });

@@ -1067,16 +1067,15 @@
 			autoclose();
 		}
 
-		function isValidTime(time) {
+		function isValidTime(time) 
+		{
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
-			if (opt.start && !opt.end && !opt.singleDate) {
-				var selectedTime = opt.start;
-				var max = (opt.maxDays > 0) ? opt.maxDays * 86400000 : null;
-				var min = (opt.minDays > 0) ? opt.minDays * 86400000 : null;
-				if (max != null && (time > selectedTime + max || time < selectedTime - max)) return false;
-				if (min != null && (time < selectedTime + min && time > selectedTime - min)) return false;
+			if (opt.start && !opt.end && !opt.singleDate) 
+			{
+				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
+				if (opt.minDays > 0 && countDays(time, opt.start) < opt.minDays) return false;
 			}
 
 			return true;
@@ -1088,9 +1087,12 @@
 			{
 				var time = parseInt($(this).attr('time'));
 				if (!isValidTime(time))
-					$(this).addClass('invalid').addClass('tmp').removeClass('valid');
+				{
+					console.log( time, opt.start, countDays(time, opt.start), $(this).text());
+					$(this).addClass('invalid tmp').removeClass('valid');
+				}
 				else
-					$(this).addClass('valid').addClass('tmp').removeClass('invalid');
+					$(this).addClass('valid tmp').removeClass('invalid');
 			});
 		}
 
