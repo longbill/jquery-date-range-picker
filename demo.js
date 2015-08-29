@@ -276,7 +276,7 @@ $(function()
 		showShortcuts: false
 	});
 
-  $('#date-range14-2').dateRangePicker(
+	$('#date-range14-2').dateRangePicker(
 	{
 		batchMode: 'week-range',
 		showShortcuts: false
@@ -388,7 +388,8 @@ $(function()
 
 	$('#date-range5-2').dateRangePicker(
 	{
-		maxDays:3
+		minDays:3,
+		maxDays:7
 	});
 
 	$('#date-range24').dateRangePicker(
@@ -421,6 +422,19 @@ $(function()
 	$('#date-range26').dateRangePicker(
 	{
 		selectBackward: true
+	});
+
+	$('#hotel-booking').dateRangePicker(
+	{
+		startDate: new Date(),
+		selectForward: true,
+		beforeShowDay: function(t)
+		{
+			var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+			var _class = '';
+			var _tooltip = valid ? '' : 'sold out';
+			return [valid,_class,_tooltip];
+		}
 	});
 
 

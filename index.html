@@ -131,11 +131,12 @@
 			</div>
 
 			<div class="demo">
-				Limit date range selected within 3 days: <input id="date-range5-2" size="40" value="">
+				Limit date range selected between 3 days to 7 days: <input id="date-range5-2" size="40" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
-	maxDays: 3
+	maxDays: 7,
+	minDays: 3
 }				</pre>
 			</div>
 
@@ -557,6 +558,30 @@ $('#date-range16-destroy').click(function(evt)
 {
 	selectBackward: true
 }</pre>
+			</div>
+
+			<div class="demo">
+				Typical usage, hotel booking: <input id="hotel-booking" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startDate: new Date(),
+	selectForward: true,
+	showDateFilter: function(time, date)
+	{
+		return '&lt;div style="padding:0 5px;">\
+					&lt;span style="font-weight:bold">'+date+'&lt;/span>\
+					&lt;div style="opacity:0.3;">$'+Math.round(Math.random()*999)+'&lt;/div>\
+				&lt;/div>';
+	},
+	beforeShowDay: function(t)
+	{
+		var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+		var _class = '';
+		var _tooltip = valid ? '' : 'sold out';
+		return [valid,_class,_tooltip];
+	}
+}				</pre>
 			</div>
 
 

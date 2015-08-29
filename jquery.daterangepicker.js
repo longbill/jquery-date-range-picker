@@ -1270,17 +1270,40 @@
 
 		function isValidTime(time) 
 		{
+			time = parseInt(time, 10);
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
 			if (opt.start && !opt.end && !opt.singleDate) 
 			{
+				//check maxDays and minDays setting
 				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
 				if (opt.minDays > 0 && countDays(time, opt.start) < opt.minDays) return false;
 
+				//check selectForward and selectBackward
 				if (opt.selectForward && time < opt.start ) return false;
 				if (opt.selectBackward && time > opt.start) return false;
+
+				//check disabled days
+				if (opt.beforeShowDay && typeof opt.beforeShowDay == 'function')
+				{
+					var valid = true;
+					var timeTmp = time;
+					while( countDays(timeTmp, opt.start) > 1 )
+					{
+						var arr = opt.beforeShowDay( new Date(timeTmp) );
+						if (!arr[0])
+						{
+							valid = false;
+							break;
+						}
+						if (timeTmp > opt.start) timeTmp -= 86400000;
+						if (timeTmp < opt.start) timeTmp += 86400000;
+					}
+					if (!valid) return false;
+				}
 			}
+			return true;
 		}
 
 
@@ -1289,29 +1312,9 @@
 			box.find('.day.invalid.tmp').removeClass('tmp invalid').addClass('valid');
 			if (opt.start && !opt.end)
 			{
-				var time = opt.start;
-				var firstInvalid = 0, lastInvalid = 143403840000000; //a really large number
-				box.find('.day.toMonth.invalid').not('.tmp').each(function()
-				{
-					var _time = parseInt($(this).attr('time'));
-					if (_time > time && _time < lastInvalid)
-					{
-						lastInvalid = _time;
-					}
-					else if (_time < time && _time > firstInvalid)
-					{
-						firstInvalid = _time;
-					}
-				});
-
 				box.find('.day.toMonth.valid').each(function()
 				{
-					var time = parseInt($(this).attr('time'));
-					if ( time <= firstInvalid || time >= lastInvalid)
-					{
-						$(this).addClass('invalid').addClass('tmp').removeClass('valid');
-					}
-				
+					var time = parseInt($(this).attr('time'), 10);
 					if (!isValidTime(time))
 						$(this).addClass('invalid tmp').removeClass('valid');
 					else
@@ -1325,89 +1328,96 @@
 
 		function dayHovering(day)
 		{
-			if (day.hasClass('invalid')) return;
 			var hoverTime = parseInt(day.attr('time'));
+			var tooltip = '';
 
-			if (opt.singleDate)
+			if (day.hasClass('has-tooltip') && day.attr('data-tooltip'))
 			{
-				box.find('.day.hovering').removeClass('hovering');
-				day.addClass('hovering');
+				tooltip = '<span style="white-space:nowrap">'+day.attr('data-tooltip')+'</span>';
+			}
+			else if (!day.hasClass('invalid'))
+			{
+				if (opt.singleDate)
+				{
+					box.find('.day.hovering').removeClass('hovering');
+					day.addClass('hovering');
+				}
+				else
+				{
+					box.find('.day').each(function()
+					{
+						var time = parseInt($(this).attr('time')),
+							start = opt.start,
+							end = opt.end;
+
+						if ( time == hoverTime )
+						{
+							$(this).addClass('hovering');
+						}
+						else
+						{
+							$(this).removeClass('hovering');
+						}
+
+						if (
+							( opt.start && !opt.end )
+							&&
+							(
+								( opt.start < time && hoverTime >= time )
+								||
+								( opt.start > time && hoverTime <= time )
+							)
+						)
+						{
+							$(this).addClass('hovering');
+						}
+						else
+						{
+							$(this).removeClass('hovering');
+						}
+					});
+
+					if (opt.start && !opt.end)
+					{
+						var days = countDays(hoverTime, opt.start);
+						if (opt.hoveringTooltip)
+						{
+							if (typeof opt.hoveringTooltip == 'function')
+							{
+								tooltip = opt.hoveringTooltip(days, opt.start, hoverTime);
+							}
+							else if (opt.hoveringTooltip === true && days > 1)
+							{
+								tooltip = days + ' ' + lang('days');
+							}
+						}
+					}
+				}
+			}
+
+			if (tooltip)
+			{
+				var posDay = day.offset();
+				var posBox = box.offset();
+
+				var _left = posDay.left - posBox.left;
+				var _top = posDay.top - posBox.top;
+				_left += day.width()/2;
+
+
+				var $tip = box.find('.date-range-length-tip');
+				var w = $tip.css({'visibility':'hidden', 'display':'none'}).html(tooltip).width();
+				var h = $tip.height();
+				_left -= w/2;
+				_top -= h;
+				setTimeout(function()
+				{
+					$tip.css({left:_left, top:_top, display:'block','visibility':'visible'});
+				},10);
 			}
 			else
 			{
-				box.find('.day').each(function()
-				{
-					var time = parseInt($(this).attr('time')),
-						start = opt.start,
-						end = opt.end;
-
-					if ( time == hoverTime )
-					{
-						$(this).addClass('hovering');
-					}
-					else
-					{
-						$(this).removeClass('hovering');
-					}
-
-					if (
-						( opt.start && !opt.end )
-						&&
-						(
-							( opt.start < time && hoverTime >= time )
-							||
-							( opt.start > time && hoverTime <= time )
-						)
-					)
-					{
-						$(this).addClass('hovering');
-					}
-					else
-					{
-						$(this).removeClass('hovering');
-					}
-				});
-
-				if (opt.start && !opt.end)
-				{
-					var days = countDays(hoverTime, opt.start);
-					var tooltip = '';
-					if (opt.hoveringTooltip)
-					{
-						if (typeof opt.hoveringTooltip == 'function')
-						{
-							tooltip = opt.hoveringTooltip(days, opt.start, hoverTime);
-						}
-						else if (opt.hoveringTooltip === true && days > 1)
-						{
-							tooltip = days + ' ' + lang('days');
-						}
-					}
-					if (tooltip)
-					{
-						var posDay = day.offset();
-						var posBox = box.offset();
-
-						var _left = posDay.left - posBox.left;
-						var _top = posDay.top - posBox.top;
-						_left += day.width()/2;
-
-
-						var $tip = box.find('.date-range-length-tip');
-						var w = $tip.css({'visibility':'hidden', 'display':'none'}).html(tooltip).width();
-						var h = $tip.height();
-						_left -= w/2;
-						_top -= h;
-						setTimeout(function()
-						{
-							$tip.css({left:_left, top:_top, display:'block','visibility':'visible'});
-						},10);
-					}
-					else
-					{
-						box.find('.date-range-length-tip').hide();
-					}
-				}
+				box.find('.date-range-length-tip').hide();
 			}
 		}
 
@@ -2094,7 +2104,7 @@
 					var highlightToday = moment(today.time).format('L') == moment(now).format('L');
 					today.extraClass = '';
 					today.tooltip = '';
-					if(opt.beforeShowDay && typeof opt.beforeShowDay == 'function')
+					if(today.valid && opt.beforeShowDay && typeof opt.beforeShowDay == 'function')
 					{
 						var _r = opt.beforeShowDay(moment(today.time).toDate());
 						today.valid = _r[0];
@@ -2105,7 +2115,7 @@
 
 					todayDivAttr = {
 						time: today.time,
-						title: today.tooltip,
+						'data-tooltip': today.tooltip,
 						'class': 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
 					};
 
