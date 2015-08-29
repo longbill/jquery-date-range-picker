@@ -137,6 +137,7 @@ $(function()
 		shortcuts : null,
 		startOfWeek: 'sunday',
 		language:'en',
+		showShortcuts: true,
 		customShortcuts: 
 		[
 			//if return an array of two dates, it will select the date range between the two dates
@@ -169,6 +170,7 @@ $(function()
 
 	$('#date-range101').dateRangePicker(
 	{
+		showShortcuts: true,	
 		shortcuts : 
 		{
 			'next-days': [3,5,7],
@@ -178,6 +180,7 @@ $(function()
 
 	$('#date-range102').dateRangePicker(
 	{
+		showShortcuts: true,
 		shortcuts : 
 		{
 			'prev-days': [3,5,7],
@@ -185,11 +188,6 @@ $(function()
 			'next-days':null,
 			'next':null
 		}
-	});
-
-	$('#date-range104').dateRangePicker(
-	{
-		showShortcuts:false
 	});
 
 	$('#date-range103').dateRangePicker(
@@ -256,17 +254,6 @@ $(function()
 	$('#date-range10').dateRangePicker(
 	{
 		format: 'dddd MMM Do, YYYY'  //more formats at http://momentjs.com/docs/#/displaying/format/
-	});
-
-	$('#date-range11').dateRangePicker(
-	{
-		separator : ' ~ '
-	}).bind('datepicker-change',function(e,r)
-	{
-		try
-		{
-			console.log(r);
-		}catch(e){}
 	});
 
 	$('#date-range12').dateRangePicker(
@@ -402,6 +389,38 @@ $(function()
 	$('#date-range5-2').dateRangePicker(
 	{
 		maxDays:3
+	});
+
+	$('#date-range24').dateRangePicker(
+	{
+		showWeekNumbers: true
+	});
+
+	$('#date-range24-2').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		startOfWeek:'monday'
+	});
+
+	$('#date-range24-3').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		getWeekNumber: function(day)
+		{
+			var fiscalYearStart = moment('2015-08-16','YYYY-MM-DD');
+			var daysOffset = parseInt(fiscalYearStart.format('DDD'),10);
+			return moment(day).add( -1*daysOffset, 'days').format('W');
+		}
+	});
+
+	$('#date-range25').dateRangePicker(
+	{
+		selectForward: true
+	});
+
+	$('#date-range26').dateRangePicker(
+	{
+		selectBackward: true
 	});
 
 
