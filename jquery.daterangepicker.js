@@ -454,7 +454,7 @@
 				return days > 1 ? days + ' ' + lang('days') : '';
 			},
 			showTopbar: true,
-            swapTime: true,
+			swapTime: false
 		},opt);
 
 		opt.start = false;
