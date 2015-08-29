@@ -497,6 +497,10 @@
 					$(this).val(s);
 				}
 			},
+			getDateString: function(d)
+			{
+				return moment(d).format(opt.format);
+			},
 			startDate: false,
 			endDate: false,
 			time: {
@@ -821,7 +825,7 @@
 			box.find('.apply-btn').click(function()
 			{
 				closeDatePicker();
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				var dateRange = opt.getDateString(new Date(opt.start))+ opt.separator +opt.getDateString(new Date(opt.end));
 				$(self).trigger('datepicker-apply',
 				{
 					'value': dateRange,
@@ -1500,18 +1504,18 @@
 			box.find('.selected-days').hide();
 			if (opt.start)
 			{
-				box.find('.start-day').html(getDateString(new Date(parseInt(opt.start))));
+				box.find('.start-day').html(opt.getDateString(new Date(parseInt(opt.start))));
 			}
 			if (opt.end)
 			{
-				box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
+				box.find('.end-day').html(opt.getDateString(new Date(parseInt(opt.end))));
 			}
 
 			if (opt.start && opt.singleDate)
 			{
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start));
-				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+				var dateRange = opt.getDateString(new Date(opt.start));
+				opt.setValue.call(selfDom, dateRange, opt.getDateString(new Date(opt.start)), opt.getDateString(new Date(opt.end)));
 
 				if (initiated)
 				{
@@ -1526,8 +1530,8 @@
 			{
 				box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start));
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
-				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+				var dateRange = opt.getDateString(new Date(opt.start))+ opt.separator +opt.getDateString(new Date(opt.end));
+				opt.setValue.call(selfDom,dateRange, opt.getDateString(new Date(opt.start)), opt.getDateString(new Date(opt.end)));
 				if (initiated && !silent)
 				{
 					$(self).trigger('datepicker-change',
@@ -1714,11 +1718,6 @@
 		function nameMonth(m)
 		{
 			return lang('month-name')[m];
-		}
-
-		function getDateString(d)
-		{
-			return moment(d).format(opt.format);
 		}
 
 		function showGap()
