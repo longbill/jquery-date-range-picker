@@ -1158,9 +1158,6 @@
 			{
 				opt.start = time;
 				opt.end = false;
-				if (opt.time.enabled) {
-					changeTime("start", opt.start);
-				}
 			}
 			else if  (opt.batchMode === 'week')
 			{
@@ -1191,9 +1188,6 @@
 			{
 				opt.start = handleStart(time);
 				opt.end = false;
-				if (opt.time.enabled) {
-					changeTime("start", opt.start);
-				}
 			}
 			else if (opt.start)
 			{
@@ -1203,6 +1197,17 @@
 				}
 			}
 
+			//Update time in case it is enabled and timestamps are available
+			if(opt.time.enabled) {
+				if(opt.start) {
+					changeTime("start", opt.start);
+				}
+				if(opt.end) {
+					changeTime("end", opt.end);
+				}
+			}
+
+			//In case the start is after the end, swap the timestamps
 			if (!opt.singleDate && opt.start && opt.end && opt.start > opt.end)
 			{
 				var tmp = opt.end;
