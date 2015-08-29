@@ -532,6 +532,7 @@
 				return days > 1 ? days + ' ' + lang('days') : '';
 			},
 			showTopbar: true,
+			swapTime: false,
 			showWeekNumbers: false,
 			getWeekNumber: function(date) //date will be the first day of a week
 			{
@@ -622,11 +623,11 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-        
-        function IsOwnDatePickerClicked(evt, selfObj)
-        {
-            return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
-        }
+		
+		function IsOwnDatePickerClicked(evt, selfObj)
+		{
+			return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+		}
 
 		function init_datepicker()
 		{
@@ -1213,7 +1214,7 @@
 				var tmp = opt.end;
 				opt.end = handleEnd(opt.start);
 				opt.start = handleStart(tmp);
-				if (opt.time.enabled) {
+				if (opt.time.enabled && opt.swapTime) {
 					swapTime();
 				}
 			}
