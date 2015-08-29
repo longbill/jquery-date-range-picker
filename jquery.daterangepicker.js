@@ -552,11 +552,10 @@
 		if (opt.isTouchDevice) opt.hoveringTooltip = false;
 
 		//show one month on mobile devices
-		if (opt.singleMonth == 'auto')
-		{
-			opt.singleMonth = $(window).width() < 480;
-		}
+		if (opt.singleMonth == 'auto') opt.singleMonth = $(window).width() < 480;
 		if (opt.singleMonth) opt.stickyMonths = false;
+
+		if (opt.singleDate) opt.singleMonth = true;
 
 		if (!opt.showTopbar) opt.autoClose = true;
 
@@ -681,6 +680,14 @@
 
 				showMonth(defaultTime,'month1');
 				showMonth(nextMonth(defaultTime),'month2');
+			}
+
+			if (opt.singleDate)
+			{
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
+
+				showMonth(defaultTime,'month1');
 			}
 
 			if (opt.time.enabled)
