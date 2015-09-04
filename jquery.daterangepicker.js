@@ -572,7 +572,8 @@
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
 			var isOpen = box.is(':visible');
-			if(!isOpen) open(opt.duration);
+			console.log(evt);
+			if(!isOpen) open(opt.duration, evt);
 		}).bind('change.datepicker', function(evt)
 		{
 			checkAndSetDefaultValue();
@@ -622,7 +623,7 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-		
+
 		function IsOwnDatePickerClicked(evt, selfObj)
 		{
 			return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
@@ -998,10 +999,10 @@
 			return box;
 		}
 
-		function open(animationTime)
+		function open(animationTime, evt)
 		{
 			calcPosition();
-			checkAndSetDefaultValue();
+			checkAndSetDefaultValue(evt);
 			box.slideDown(animationTime, function(){
 				$(self).trigger('datepicker-opened', {relatedTarget: box});
 			});
@@ -1010,9 +1011,9 @@
 			updateCalendarWidth();
 		}
 
-		function checkAndSetDefaultValue()
+		function checkAndSetDefaultValue(evt)
 		{
-			var __default_string = opt.getValue.call(selfDom);
+			var __default_string = opt.getValue.call(selfDom, evt);
 			var defaults = __default_string ? __default_string.split( opt.separator ) : '';
 
 			if (defaults && ((defaults.length==1 && opt.singleDate) || defaults.length>=2))
@@ -1070,7 +1071,7 @@
 			renderTime("time2", opt.end);
 		}
 
-		function setTime (name, hour, minute) 
+		function setTime (name, hour, minute)
 		{
 			hour && (box.find("." + name + " .hour-val").text(hour));
 			minute && (box.find("." + name + " .minute-val").text(minute));
@@ -1247,7 +1248,7 @@
 			autoclose();
 		}
 
-		
+
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
@@ -1275,13 +1276,13 @@
 			autoclose();
 		}
 
-		function isValidTime(time) 
+		function isValidTime(time)
 		{
 			time = parseInt(time, 10);
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
-			if (opt.start && !opt.end && !opt.singleDate) 
+			if (opt.start && !opt.end && !opt.singleDate)
 			{
 				//check maxDays and minDays setting
 				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
