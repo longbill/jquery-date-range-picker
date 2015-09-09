@@ -604,6 +604,22 @@
 				}
 				setDateRange(d1,d2,silent);
 			},
+			setStartDate : function(d1)
+                        {
+                            if (typeof d1 == 'string')
+				{
+					d1 = moment(d1,opt.format).toDate();
+				}
+				setStartDate(d1);
+                        },
+                        setEndDate : function(d1)
+                        {
+                            if (typeof d1 == 'string')
+				{
+					d1 = moment(d1,opt.format).toDate();
+				}
+				setEndDate(d1);
+                        },
 			clear: clearSelection,
 			close: closeDatePicker,
 			open: open,
@@ -1647,6 +1663,16 @@
 			showSelectedInfo();
 			autoclose();
 		}
+		
+		function setStartDate(date1)
+		{
+                    opt.startDate = date1;
+                }
+                
+                function setEndDate(date1)
+                {
+                    opt.endDate = date1;
+                }
 
 		function showSelectedDays()
 		{
