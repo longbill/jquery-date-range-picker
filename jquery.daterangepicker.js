@@ -607,6 +607,7 @@
 			clear: clearSelection,
 			close: closeDatePicker,
 			open: open,
+			redraw: redrawDatePicker,
 			getDatePicker: getDatePicker,
 			destroy: function()
 			{
@@ -1007,6 +1008,7 @@
 			});
 			$(self).trigger('datepicker-open', {relatedTarget: box});
 			showGap();
+			redrawDatePicker();
 			updateCalendarWidth();
 		}
 
@@ -1758,6 +1760,12 @@
 			});
 			//$(document).unbind('.datepicker');
 			$(self).trigger('datepicker-close', {relatedTarget: box});
+		}
+
+		function redrawDatePicker()
+		{
+			showMonth(opt.month1, 'month1');
+			showMonth(opt.month2, 'month2');
 		}
 
 		function compare_month(m1,m2)
