@@ -196,7 +196,7 @@
 			'default-default': 'Bitte ein Start- und Enddatum auswählen',
 			'Time': 'Zeit',
 			'hour': 'Stunde',
-			'minute': 'Minute',
+			'minute': 'Minute'
 		},
 		'es':
 		{
@@ -625,7 +625,7 @@
 		
 		function IsOwnDatePickerClicked(evt, selfObj)
 		{
-			return ( evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+			return ( evt.target == selfObj  || (selfObj.childNodes !== undefined && $.inArray(evt.target, selfObj.childNodes)>=0));
 		}
 
 		function init_datepicker()
@@ -854,6 +854,7 @@
 			{
 				var shortcut = $(this).attr('shortcut');
 				var end = new Date(),start = false;
+				var dir;
 				if (shortcut.indexOf('day') != -1)
 				{
 					var day = parseInt(shortcut.split(',',2)[1],10);
@@ -862,12 +863,12 @@
 				}
 				else if (shortcut.indexOf('week')!= -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
-
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					var stopDay;
 					if (dir == 1)
-						var stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
+						stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
 					else
-						var stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
+						stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
 
 					end = new Date(end.getTime() - 86400000);
 					while(end.getDay() != stopDay) end = new Date(end.getTime() + dir*86400000);
@@ -875,7 +876,7 @@
 				}
 				else if (shortcut.indexOf('month') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					if (dir == 1)
 						start = nextMonth(end);
 					else
@@ -887,7 +888,7 @@
 				}
 				else if (shortcut.indexOf('year') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					start = new Date();
 					start.setFullYear(end.getFullYear() + dir);
 					start.setMonth(0);
@@ -909,7 +910,7 @@
 								var data = [];
 								// try
 								// {
-									data = sh['dates'].call();
+									data = sh.dates.call();
 								//}catch(e){}
 								if (data && data.length == 2)
 								{
@@ -1251,19 +1252,20 @@
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
+			var date1, date2;
 			if (!opt.startWeek)
 			{
 				opt.startWeek = thisTime;
 				weekNumberDom.addClass('week-number-selected');
-				var date1 = new Date(thisTime);
+				date1 = new Date(thisTime);
 				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
 				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
 			}
 			else
 			{
 				box.find('.week-number-selected').removeClass('week-number-selected');
-				var date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
-				var date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
+				date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
+				date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
 				opt.startWeek = false;
 				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
 				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
@@ -1505,6 +1507,7 @@
 			box.find('.start-day').html('...');
 			box.find('.end-day').html('...');
 			box.find('.selected-days').hide();
+			var dateRange;
 			if (opt.start)
 			{
 				box.find('.start-day').html(getDateString(new Date(parseInt(opt.start))));
@@ -1517,7 +1520,7 @@
 			if (opt.start && opt.singleDate)
 			{
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start));
+				dateRange = getDateString(new Date(opt.start));
 				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 
 				if (initiated)
@@ -1533,7 +1536,7 @@
 			{
 				box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start));
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 				if (initiated && !silent)
 				{
@@ -1788,15 +1791,18 @@
 
 		function getTimeHTML()
 		{
-			return '<div>\
-						<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>\
-					</div>\
-					<div class="hour">\
-						<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>\
-					</div>\
-					<div class="minute">\
-						<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>\
-					</div>';
+			var html = "";
+			html += '<div>';
+			html += '	<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>';
+			html += '</div>';
+			html += '<div class="hour">';
+			html += '	<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>';
+			html += '</div>';
+			html += '<div class="minute">';
+			html += '	<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>';
+			html += '</div>';
+
+			return html;
 		}
 
 		function createDom()
@@ -1820,39 +1826,39 @@
 				}
 				else
 				{
-					html += '<div class="normal-top">\
-							<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
+					html += '<div class="normal-top">';
+					html += '<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
 					if ( ! opt.singleDate ) {
-						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>'
+						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>';
 					}
 					html += '</div>';
-					html += '<div class="error-top">error</div>\
-						<div class="default-top">default</div>';
+					html += '<div class="error-top">error</div>';
+					html += '<div class="default-top">default</div>';
 				}
 
 				html += '<input type="button" class="apply-btn disabled'+ getApplyBtnClass() +'" value="'+lang('apply')+'" />';
-				html += '</div>'
+				html += '</div>';
 			}
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
-			html += '<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+			html += '<div class="month-wrapper">';
+			html += '<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
 			if ( hasMonth2() )
 			{
-				html += '<div class="gap">'+getGapHTML()+'</div>'
-					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				html += '<div class="gap">'+getGapHTML()+'</div>';
+				html += '<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 			}
 				//+'</div>'
-			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'<div class="time">'
-				+'<div class="time1"></div>'
+			html +=	'<div style="clear:both;height:0;font-size:0;"></div>';
+			html += '<div class="time">';
+			html += '<div class="time1"></div>';
 			if ( ! opt.singleDate ) {
-				html += '<div class="time2"></div>'
+				html += '<div class="time2"></div>';
 			}
-			html += '</div>'
-				+'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'</div>';
+			html += '</div>';
+			html += '<div style="clear:both;height:0;font-size:0;"></div>';
+			html += '</div>';
 
 			html += '<div class="footer">';
 			if (opt.showShortcuts)
@@ -1943,7 +1949,7 @@
 
 		function getApplyBtnClass()
 		{
-			klass = ''
+			klass = '';
 			if (opt.autoClose === true) {
 				klass += ' hide';
 			}
@@ -1956,26 +1962,28 @@
 		function getWeekHead()
 		{
 			var prepend = opt.showWeekNumbers ? '<th>'+lang('week-number')+'</th>' : '';
+			var html = "";
 			if (opt.startOfWeek == 'monday')
 			{
-				return prepend+'<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>\
-					<th>'+lang('week-7')+'</th>';
+				html += prepend+'<th>'+lang('week-1')+'</th>';
+				html += '<th>'+lang('week-2')+'</th>';
+				html += '<th>'+lang('week-3')+'</th>';
+				html += '<th>'+lang('week-4')+'</th>';
+				html += '<th>'+lang('week-5')+'</th>';
+				html += '<th>'+lang('week-6')+'</th>';
+				html += '<th>'+lang('week-7')+'</th>';
 			}
 			else
 			{
-				return prepend+'<th>'+lang('week-7')+'</th>\
-					<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>';
+				html += prepend+'<th>'+lang('week-7')+'</th>';
+				html += '<th>'+lang('week-1')+'</th>';
+				html += '<th>'+lang('week-2')+'</th>';
+				html += '<th>'+lang('week-3')+'</th>';
+				html += '<th>'+lang('week-4')+'</th>';
+				html += '<th>'+lang('week-5')+'</th>';
+				html += '<th>'+lang('week-6')+'</th>';
 			}
+			return html;
 		}
 
 		function isMonthOutOfBounds(month)
@@ -1997,11 +2005,13 @@
 			var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
 			for(var i=0;i<20;i++)
 			{
-				html.push('<div class="gap-line">\
-					<div class="gap-1"></div>\
-					<div class="gap-2"></div>\
-					<div class="gap-3"></div>\
-				</div>');
+				var newHTML = "";
+				newHTML += '<div class="gap-line">';
+				newHTML += '	<div class="gap-1"></div>';
+				newHTML += '	<div class="gap-2"></div>';
+				newHTML += '	<div class="gap-3"></div>';
+				newHTML += '</div>';
+				html.push(newHTML);
 			}
 			html.push('</div>');
 			return html.join('');
