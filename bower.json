@@ -28,7 +28,7 @@
     "tests"
   ],
   "dependencies": {
-    "moment": ">=2.2.0",
+    "moment": ">=2.8.1",
     "jquery": ">=1.3.2"
   }
 }
