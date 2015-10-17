@@ -1150,7 +1150,7 @@
 					r = moment(parseInt(time)).endOf('week').valueOf();
 				}
 			}
-			else if (opt.batchMode === 'month')
+			else if (opt.batchMode === 'month-range')
 			{
 				r = moment(parseInt(time)).endOf('month').valueOf();
 			}
