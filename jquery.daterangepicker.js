@@ -1520,7 +1520,7 @@
 				var dateRange = getDateString(new Date(opt.start));
 				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 
-				if (initiated)
+				if (initiated && !silent)
 				{
 					$(self).trigger('datepicker-change',
 					{
