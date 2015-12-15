@@ -1304,8 +1304,14 @@
 							valid = false;
 							break;
 						}
-						if (timeTmp > opt.start) timeTmp -= 86400000;
-						if (timeTmp < opt.start) timeTmp += 86400000;
+						if (timeTmp > opt.start) 
+						{
+							timeTmp -= 86400000;
+						}
+						else 
+						{
+							timeTmp += 86400000;
+						}
 					}
 					if (!valid) return false;
 				}
