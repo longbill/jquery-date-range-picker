@@ -1,7 +1,7 @@
 // daterangepicker.js
-// version : 0.0.8
+// version : 0.0.9
 // author : Chunlong Liu
-// last updated at: 2015-08-22
+// last updated at: 2015-10-30
 // license : MIT
 // www.jszen.com
 
@@ -1520,7 +1520,7 @@
 				var dateRange = getDateString(new Date(opt.start));
 				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 
-				if (initiated)
+				if (initiated && !silent)
 				{
 					$(self).trigger('datepicker-change',
 					{
@@ -1943,7 +1943,7 @@
 
 		function getApplyBtnClass()
 		{
-			klass = ''
+			var klass = ''
 			if (opt.autoClose === true) {
 				klass += ' hide';
 			}
@@ -2027,7 +2027,7 @@
 				}
 			});
 
-			attrString = '';
+			var attrString = '';
 
 			for(var attr in resultObject){
 				if(resultObject.hasOwnProperty(attr)){
@@ -2120,7 +2120,7 @@
 						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
 					}
 
-					todayDivAttr = {
+					var todayDivAttr = {
 						time: today.time,
 						'data-tooltip': today.tooltip,
 						'class': 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
