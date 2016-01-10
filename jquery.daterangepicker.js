@@ -622,7 +622,7 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-		
+
 		function IsOwnDatePickerClicked(evt, selfObj)
 		{
 			return ( selfObj.contains(evt.target) || evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
@@ -1030,10 +1030,10 @@
 				// set initiated  to avoid triggerring datepicker-change event
 				initiated = false;
 				if(defaults.length >= 2){
-					setDateRange(moment(defaults[0], ___format, moment.locale(opt.language)).toDate(),moment(defaults[1], ___format, moment.locale(opt.language)).toDate());
+					setDateRange(moment(defaults[0], ___format).toDate(),moment(defaults[1], ___format).toDate());
 				}
 				else if(defaults.length==1 && opt.singleDate){
-					setSingleDate(moment(defaults[0], ___format, moment.locale(opt.language)).toDate());
+					setSingleDate(moment(defaults[0], ___format).toDate());
 				}
 
 				initiated = true;
@@ -1070,7 +1070,7 @@
 			renderTime("time2", opt.end);
 		}
 
-		function setTime (name, hour, minute) 
+		function setTime (name, hour, minute)
 		{
 			hour && (box.find("." + name + " .hour-val").text(hour));
 			minute && (box.find("." + name + " .minute-val").text(minute));
@@ -1247,7 +1247,7 @@
 			autoclose();
 		}
 
-		
+
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
@@ -1275,13 +1275,13 @@
 			autoclose();
 		}
 
-		function isValidTime(time) 
+		function isValidTime(time)
 		{
 			time = parseInt(time, 10);
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
-			if (opt.start && !opt.end && !opt.singleDate) 
+			if (opt.start && !opt.end && !opt.singleDate)
 			{
 				//check maxDays and minDays setting
 				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
@@ -2162,6 +2162,7 @@
 			}
 			else if ( opt.language && opt.language in $.dateRangePickerLanguages)
 			{
+				moment.locale(opt.language);
 				return $.dateRangePickerLanguages[opt.language];
 			}
 			else
