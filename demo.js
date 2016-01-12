@@ -102,7 +102,18 @@ $(function()
 			enabled: true
 		}
 	});
-	
+		$('#date-range1-1').dateRangePicker(
+	{
+		startOfWeek: 'monday',
+		separator : ' ~ ',
+		format: 'DD.MM.YYYY HH:mm',
+		autoClose: false,
+		time: {
+			enabled: true
+		},
+		defaultTime: moment().startOf('day').toDate(),
+		defaultEndTime: moment().endOf('day').toDate()
+	});
 	$('#date-range2').dateRangePicker();
 
 	$('#date-range3').dateRangePicker(

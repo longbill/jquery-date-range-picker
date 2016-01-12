@@ -88,6 +88,23 @@
 			</div>
 
 			<div class="demo">
+				Default settings with default start/end time value: <input id="date-range1-1" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startOfWeek: 'monday',
+	separator : ' ~ ',
+	format: 'DD.MM.YYYY HH:mm',
+	autoClose: false,
+	time: {
+		enabled: true
+	},
+	defaultTime: moment().startOf('day').toDate(),
+	defaultEndTime: moment().endOf('day').toDate()
+}</pre>
+			</div>
+
+			<div class="demo">
 				Default settings with default value: <input id="date-range2" size="40" value="2013-10-01 to 2013-11-04">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">

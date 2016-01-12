@@ -696,8 +696,9 @@
 					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
 					showTime(moment(opt.end || opt.endDate).toDate(),'time2');
 				} else {
+					var defaultEndTime = opt.defaultEndTime ? opt.defaultEndTime : defaultTime;
 					showTime(defaultTime,'time1');
-					showTime(defaultTime,'time2');
+					showTime(defaultEndTime,'time2');
 				}
 			}
 
