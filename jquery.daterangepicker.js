@@ -608,6 +608,7 @@
 			close: closeDatePicker,
 			open: open,
 			getDatePicker: getDatePicker,
+			resetMonthsView: resetMonthsView,
 			destroy: function()
 			{
 				$(self).unbind('.datepicker');
@@ -663,32 +664,8 @@
 				box.find('.apply-btn').hide();
 			}
 
-			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
-			if (opt.lookBehind)
-			{
-				if (opt.startDate && compare_month(defaultTime, opt.startDate) < 0 ) defaultTime = nextMonth(moment(opt.startDate).toDate());
-				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
-
-				showMonth(prevMonth(defaultTime),'month1');
-				showMonth(defaultTime,'month2');
-
-			}
-			else
-			{
-				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
-				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
-
-				showMonth(defaultTime,'month1');
-				showMonth(nextMonth(defaultTime),'month2');
-			}
-
-			if (opt.singleDate)
-			{
-				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
-				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
-
-				showMonth(defaultTime,'month1');
-			}
+			var defaultTime = getDefaultTime();
+			resetMonthsView(defaultTime);
 
 			if (opt.time.enabled)
 			{
@@ -2182,6 +2159,55 @@
 			return re;
 		}
 
+		function getDefaultTime()
+		{
+			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
+
+			if (opt.lookBehind)
+			{
+				if (opt.startDate && compare_month(defaultTime, opt.startDate) < 0 ) defaultTime = nextMonth(moment(opt.startDate).toDate());
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
+			}
+			else
+			{
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
+			}
+
+			if (opt.singleDate)
+			{
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
+			}
+
+			return defaultTime;
+		}
+
+		function resetMonthsView(time)
+		{
+			if (!time) {
+				time = getDefaultTime();
+			}
+
+			if (opt.lookBehind)
+			{
+				showMonth(prevMonth(time),'month1');
+				showMonth(time,'month2');
+			}
+			else
+			{
+				showMonth(time,'month1');
+				showMonth(nextMonth(time),'month2');
+			}
+
+			if (opt.singleDate)
+			{
+				showMonth(time,'month1');
+			}
+
+			showSelectedDays();
+			showGap();
+		}
 
 	};
 }));
