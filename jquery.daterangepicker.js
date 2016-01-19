@@ -978,14 +978,14 @@
 				}
 			});
 
-			box.find(".time1 input[type=range]").bind("change mousemove", function (e) {
+			box.find(".time1 input[type=range]").bind("change touchmove mousemove", function (e) {
 				var target = e.target,
 					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
 					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
 				setTime("time1", hour, min);
 			});
 
-			box.find(".time2 input[type=range]").bind("change mousemove", function (e) {
+			box.find(".time2 input[type=range]").bind("change touchmove mousemove", function (e) {
 				var target = e.target,
 					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
 					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
