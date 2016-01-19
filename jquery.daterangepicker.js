@@ -1285,8 +1285,8 @@
 				opt.startWeek = thisTime;
 				weekNumberDom.addClass('week-number-selected');
 				var date1 = new Date(thisTime);
-				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
-				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
+				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
+				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
 			}
 			else
 			{
@@ -1294,8 +1294,8 @@
 				var date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
 				var date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
 				opt.startWeek = false;
-				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
-				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
+				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
+				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
 			}
 			updateSelectableRange();
 			checkSelectionValid();
