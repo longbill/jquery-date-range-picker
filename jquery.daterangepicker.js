@@ -1344,6 +1344,7 @@
 							valid = false;
 							break;
 						}
+						if (Math.abs(timeTmp - opt.start) < 86400000) break;
 						if (timeTmp > opt.start) timeTmp -= 86400000;
 						if (timeTmp < opt.start) timeTmp += 86400000;
 					}
