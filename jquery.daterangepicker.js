@@ -1040,13 +1040,13 @@
 		function open(animationTime)
 		{
 			calcPosition();
+			redrawDatePicker();
 			checkAndSetDefaultValue();
 			box.slideDown(animationTime, function(){
 				$(self).trigger('datepicker-opened', {relatedTarget: box});
 			});
 			$(self).trigger('datepicker-open', {relatedTarget: box});
 			showGap();
-			redrawDatePicker();
 			updateCalendarWidth();
 		}
 
