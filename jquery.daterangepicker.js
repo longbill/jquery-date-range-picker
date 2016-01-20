@@ -473,6 +473,43 @@
 			'time':'Czas',
 			'hour':'Godzina',
 			'minute':'Minuta'
+		},
+		'se':
+		{
+			'selected': 'Vald:',
+			'day':'dag',
+			'days': 'dagar',
+			'apply': 'godkänn',
+			'week-1' : 'ma',
+			'week-2' : 'ti',
+			'week-3' : 'on',
+			'week-4' : 'to',
+			'week-5' : 'fr',
+			'week-6' : 'lö',
+			'week-7' : 'sö',
+			'month-name': ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'],
+			'shortcuts' : 'genvägar',
+			'custom-values': 'Anpassade värden',
+			'past': 'över',
+			'following':'följande',
+			'previous' : 'förra',
+			'prev-week' : 'vecka',
+			'prev-month' : 'månad',
+			'prev-year' : 'år',
+			'next':'nästa',
+			'next-week':'vecka',
+			'next-month':'måned',
+			'next-year':'år',
+			'less-than' : 'Datumintervall bör inte vara mindre än %d dagar',
+			'more-than' : 'Datumintervall bör inte vara mer än %d dagar',
+			'default-more' : 'Välj ett datumintervall längre än %d dagar',
+			'default-single' : 'Välj ett datum',
+			'default-less' : 'Välj ett datumintervall mindre än %d dagar',
+			'default-range' : 'Välj ett datumintervall mellan %d och %d dagar',
+			'default-default': 'Välj ett datumintervall',
+			'time':'tid',
+			'hour':'timme',
+			'minute':'minut'
 		}
 	};
 
@@ -607,6 +644,7 @@
 			clear: clearSelection,
 			close: closeDatePicker,
 			open: open,
+			redraw: redrawDatePicker,
 			getDatePicker: getDatePicker,
 			destroy: function()
 			{
@@ -696,8 +734,9 @@
 					showTime(moment(opt.start || opt.startDate).toDate(),'time1');
 					showTime(moment(opt.end || opt.endDate).toDate(),'time2');
 				} else {
+					var defaultEndTime = opt.defaultEndTime ? opt.defaultEndTime : defaultTime;
 					showTime(defaultTime,'time1');
-					showTime(defaultTime,'time2');
+					showTime(defaultEndTime,'time2');
 				}
 			}
 
@@ -939,14 +978,14 @@
 				}
 			});
 
-			box.find(".time1 input[type=range]").bind("change mousemove", function (e) {
+			box.find(".time1 input[type=range]").bind("change touchmove mousemove", function (e) {
 				var target = e.target,
 					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
 					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
 				setTime("time1", hour, min);
 			});
 
-			box.find(".time2 input[type=range]").bind("change mousemove", function (e) {
+			box.find(".time2 input[type=range]").bind("change touchmove mousemove", function (e) {
 				var target = e.target,
 					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
 					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
@@ -1007,6 +1046,7 @@
 			});
 			$(self).trigger('datepicker-open', {relatedTarget: box});
 			showGap();
+			redrawDatePicker();
 			updateCalendarWidth();
 		}
 
@@ -1150,7 +1190,7 @@
 					r = moment(parseInt(time)).endOf('week').valueOf();
 				}
 			}
-			else if (opt.batchMode === 'month')
+			else if (opt.batchMode === 'month-range')
 			{
 				r = moment(parseInt(time)).endOf('month').valueOf();
 			}
@@ -1304,6 +1344,7 @@
 							valid = false;
 							break;
 						}
+						if (Math.abs(timeTmp - opt.start) < 86400000) break;
 						if (timeTmp > opt.start) timeTmp -= 86400000;
 						if (timeTmp < opt.start) timeTmp += 86400000;
 					}
@@ -1758,6 +1799,12 @@
 			});
 			//$(document).unbind('.datepicker');
 			$(self).trigger('datepicker-close', {relatedTarget: box});
+		}
+
+		function redrawDatePicker()
+		{
+			showMonth(opt.month1, 'month1');
+			showMonth(opt.month2, 'month2');
 		}
 
 		function compare_month(m1,m2)
