@@ -435,6 +435,11 @@ $(function()
 		selectBackward: true
 	});
 
+	$('#date-range27').dateRangePicker(
+	{
+		fadeAnimation: true
+	});
+
 	$('#hotel-booking').dateRangePicker(
 	{
 		startDate: new Date(),

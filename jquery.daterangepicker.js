@@ -557,6 +557,7 @@
 			lookBehind: false,
 			batchMode: false,
 			duration: 200,
+			fadeAnimation: false,
 			stickyMonths: false,
 			dayDivAttrs: [],
 			dayTdAttrs: [],
@@ -1042,9 +1043,17 @@
 			calcPosition();
 			redrawDatePicker();
 			checkAndSetDefaultValue();
-			box.slideDown(animationTime, function(){
+
+			var afterAnimation = function(){
 				$(self).trigger('datepicker-opened', {relatedTarget: box});
-			});
+			};
+
+			if (opt.fadeAnimation) {
+				box.fadeIn(animationTime, afterAnimation);
+			} else {
+				box.slideDown(animationTime, afterAnimation);
+			}
+
 			$(self).trigger('datepicker-open', {relatedTarget: box});
 			showGap();
 			updateCalendarWidth();
@@ -1792,12 +1801,18 @@
 		function closeDatePicker()
 		{
 			if (opt.alwaysOpen) return;
-			$(box).slideUp(opt.duration,function()
-			{
-				$(self).data('date-picker-opened',false);
+
+			var afterAnimation = function() {
+				$(self).data('date-picker-opened', false);
 				$(self).trigger('datepicker-closed', {relatedTarget: box});
-			});
-			//$(document).unbind('.datepicker');
+			};
+
+			if (opt.fadeAnimation) {
+				$(box).fadeOut(opt.duration, afterAnimation);
+			} else {
+				$(box).slideUp(opt.duration, afterAnimation);
+			}
+
 			$(self).trigger('datepicker-close', {relatedTarget: box});
 		}
 
