@@ -449,4 +449,17 @@ $(function()
 	});
 
 
+	$('#date-range50').dateRangePicker(
+	{
+		customOpenAnimation: function(cb)
+		{
+			$(this).fadeIn(300, cb);
+		},
+		customCloseAnimation: function(cb)
+		{
+			$(this).fadeOut(300, cb);
+		}
+	});
+
+
 });

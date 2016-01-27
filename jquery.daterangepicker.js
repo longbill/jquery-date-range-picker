@@ -574,7 +574,9 @@
 			getWeekNumber: function(date) //date will be the first day of a week
 			{
 				return moment(date).format('w');
-			}
+			},
+			customOpenAnimation: null,
+			customCloseAnimation: null
 		},opt);
 
 		opt.start = false;
@@ -1042,9 +1044,19 @@
 			calcPosition();
 			redrawDatePicker();
 			checkAndSetDefaultValue();
-			box.slideDown(animationTime, function(){
-				$(self).trigger('datepicker-opened', {relatedTarget: box});
-			});
+			if (opt.customOpenAnimation)
+			{
+				opt.customOpenAnimation.call(box.get(0), function()
+				{
+					$(self).trigger('datepicker-opened', {relatedTarget: box});
+				});
+			}
+			else
+			{
+				box.slideDown(animationTime, function(){
+					$(self).trigger('datepicker-opened', {relatedTarget: box});
+				});
+			}
 			$(self).trigger('datepicker-open', {relatedTarget: box});
 			showGap();
 			updateCalendarWidth();
@@ -1792,12 +1804,20 @@
 		function closeDatePicker()
 		{
 			if (opt.alwaysOpen) return;
-			$(box).slideUp(opt.duration,function()
+
+			var afterAnim = function()
 			{
 				$(self).data('date-picker-opened',false);
 				$(self).trigger('datepicker-closed', {relatedTarget: box});
-			});
-			//$(document).unbind('.datepicker');
+			};
+			if (opt.customCloseAnimation)
+			{
+				opt.customCloseAnimation.call(box.get(0), afterAnim);
+			}
+			else
+			{
+				$(box).slideUp(opt.duration, afterAnim);
+			}
 			$(self).trigger('datepicker-close', {relatedTarget: box});
 		}
 

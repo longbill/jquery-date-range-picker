@@ -604,6 +604,22 @@ $('#date-range16-destroy').click(function(evt)
 }				</pre>
 			</div>
 
+			<div class="demo">
+				Custome open/close animation: <input id="date-range50" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	customOpenAnimation: function(cb)
+	{
+		$(this).fadeIn(300, cb);
+	},
+	customCloseAnimation: function(cb)
+	{
+		$(this).fadeOut(300, cb);
+	}
+}</pre>
+			</div>
+
 
 			<h2>Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
