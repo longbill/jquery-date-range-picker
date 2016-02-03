@@ -1059,13 +1059,21 @@
 				// set initiated  to avoid triggerring datepicker-change event
 				initiated = false;
 				if(defaults.length >= 2){
-					setDateRange(moment(defaults[0], ___format, moment.locale(opt.language)).toDate(),moment(defaults[1], ___format, moment.locale(opt.language)).toDate());
+					setDateRange(getValidValue(defaults[0], ___format, moment.locale(opt.language)),getValidValue(defaults[1], ___format, moment.locale(opt.language)));
 				}
 				else if(defaults.length==1 && opt.singleDate){
-					setSingleDate(moment(defaults[0], ___format, moment.locale(opt.language)).toDate());
+					setSingleDate(getValidValue(defaults[0], ___format, moment.locale(opt.language)));
 				}
 
 				initiated = true;
+
+				function getValidValue(date, format, locale) {
+					if (moment(date, format, locale).isValid()) {
+						return moment(date, format, locale).toDate();
+					} else {
+						return moment().toDate()
+					}
+				}
 			}
 		}
 
