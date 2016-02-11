@@ -686,6 +686,9 @@
 			box.delegate('.day', 'mouseleave', function()
 			{
 				box.find('.date-range-length-tip').hide();
+				if (opt.singleDate) {
+				    clearHovering();
+				}
 			});
 
 			$(opt.container).append(box);
