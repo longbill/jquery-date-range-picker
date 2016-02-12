@@ -1635,8 +1635,14 @@
 			if (opt.endDate && compare_day(date2,opt.endDate) > 0) valid = false;
 			if (!valid)
 			{
-				showMonth(opt.startDate,'month1');
-				showMonth(nextMonth(opt.startDate),'month2');
+				if (opt.startDate) {
+					showMonth(opt.startDate,'month1');
+					showMonth(nextMonth(opt.startDate),'month2');
+				} else if (opt.endDate) {
+					showMonth(opt.endDate,'month2');
+					showMonth(prevMonth(opt.endDate),'month1');
+				}
+
 				showGap();
 				return;
 			}
