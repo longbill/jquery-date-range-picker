@@ -576,7 +576,8 @@
 				return moment(date).format('w');
 			},
 			customOpenAnimation: null,
-			customCloseAnimation: null
+			customCloseAnimation: null,
+			valueFormat: null
 		},opt);
 
 		opt.start = false;
@@ -607,6 +608,35 @@
 		var self = this;
 		var selfDom = $(self).get(0);
 		var domChangeTimer;
+
+
+		if (opt.valueFormat)
+		{
+			var valueDom = $(this).clone().removeAttr('id').css('display','none').get(0);
+			if ($(this).val())
+			{
+				var dates = $(this).val().split(opt.separator);
+				if (dates.length == 2)
+				{
+					var d1 = moment(dates[0], opt.valueFormat);
+					var d2 = moment(dates[1], opt.valueFormat);
+					var r1 = d1.format(opt.format);
+					var r2 = d2.format(opt.format);
+					$(this).val(r1+opt.separator+r2);
+				}
+			}
+			$(selfDom).removeAttr('name');
+			$(this).after(valueDom);
+			var oldSetValue = opt.setValue;
+			opt.setValue = function(s)
+			{
+				oldSetValue.call(selfDom, s);
+				var r1 = moment(new Date(opt.start)).format(opt.valueFormat);
+				var r2 = moment(new Date(opt.end)).format(opt.valueFormat);
+				$(valueDom).val(r1+opt.separator+r2);
+			};
+		}
+
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{

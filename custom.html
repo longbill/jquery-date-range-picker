@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Date Picker Demo</title>
+	<link rel="stylesheet" href="daterangepicker.css" />
+	<script src="jquery-1.11.2.min.js"></script>
+	<script src="moment.min.js"></script>
+	<script src="jquery.daterangepicker.js"></script>
+	<style>
+	#wrapper
+	{
+		width:800px;
+		margin:0 auto;
+		color:#333;
+		font-family:Tahoma;
+		line-height:1.5;
+		font-size:14px;
+	}
+	.demo { margin:30px 0;}
+	.date-picker-wrapper .month-wrapper table .day.lalala { background-color:orange; }
+	.options { display:none; border-left:6px solid #8ae; padding:10px; font-size:12px; line-height:1.4; background-color:#eee; border-radius:4px;}
+	.date-picker-wrapper.date-range-picker19 .day.first-date-selected { background-color: red !important; }
+	.date-picker-wrapper.date-range-picker19 .day.last-date-selected { background-color: orange !important; }
+	</style>
+</head>
+<body>
+plese check the source code of this page to see instructions.
+<form action="custom.html" method="get">
+	date range: <input name="range" type="text" id="date-range" size="50" value="2016-02-02 to 2016-03-24"> <br>
+	<input type="submit" value="submit">
+</form>
+<script>
+$(function()
+{
+	$('#date-range').dateRangePicker(
+	{
+		// the valueFormat option is the value format that will be post to your server
+		// if you set the default date range value to the input dom, use this format
+    	valueFormat: 'YYYY-MM-DD',
+
+    	// the format option should be set to the displaying format
+    	format: 'MMMM Do YYYY'
+	});
+});
+</script>
+</body>
+</html>
