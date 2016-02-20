@@ -62,6 +62,7 @@
 	cursor:default;
 	position:relative;
 	_overflow:hidden;
+	width: 415px;
 }
 .date-picker-wrapper .month-wrapper table
 {
