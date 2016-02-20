@@ -1200,10 +1200,6 @@
 				var w3 = box.find('.month2').width();
 				box.find('.month-wrapper').width(w1 + w2 + w3);
 			}
-			else
-			{
-				box.find('.month-wrapper').width(415);
-			}
 		}
 
 		function renderTime (name, date) {
