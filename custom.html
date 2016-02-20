@@ -28,22 +28,28 @@
 <body>
 plese check the source code of this page to see instructions.
 <form action="custom.html" method="get">
-	date range: <input name="range" type="text" id="date-range" size="50" value="2016-02-02 to 2016-03-24"> <br>
+	date range: 
+	<span id="two-inputs">
+		<input name="date-from" type="text" size="50" value="2016-02-02"> 
+		to 
+		<input name="date-to" type="text" size="50" value="2016-02-21">
+	</span>
+	<br>
 	<input type="submit" value="submit">
 </form>
 <script>
 $(function()
 {
-	$('#date-range').dateRangePicker(
+	$('#two-inputs').customDateRangePicker(
 	{
-		// the valueFormat option is the value format that will be post to your server
-		// if you set the default date range value to the input dom, use this format
-    	valueFormat: 'YYYY-MM-DD',
+		//the value format
+		format: 'YYYY-MM-DD',
 
-    	// the format option should be set to the displaying format
-    	format: 'MMMM Do YYYY'
+		//the display format
+		displayFormat: 'MMMM Do YYYY'
 	});
 });
+
 </script>
 </body>
 </html>

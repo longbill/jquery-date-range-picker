@@ -513,6 +513,102 @@
 		}
 	};
 
+	$.fn.customDateRangePicker = function(options)
+	{
+		if (!options) options = {};
+		options = $.extend(true,
+		{
+			displayFormat: 'YYYY-MM-DD',
+			autoClose: false,
+			format: 'YYYY-MM-DD',
+			separator: ' to ',
+			language: 'auto',
+			startOfWeek: 'sunday',// or monday
+			startDate: false,
+			endDate: false,
+			time: { enabled: false },
+			minDays: 0,
+			maxDays: 0,
+			showShortcuts: false,
+			shortcuts:{},
+			customShortcuts : [],
+			inline:false,
+			container:'body',
+			alwaysOpen:false,
+			singleDate:false,
+			lookBehind: false,
+			batchMode: false,
+			duration: 200,
+			stickyMonths: false,
+			dayDivAttrs: [],
+			dayTdAttrs: [],
+			selectForward: false,
+			selectBackward: false,
+			applyBtnClass: '',
+			singleMonth: 'auto',
+			showTopbar: true,
+			swapTime: false,
+			showWeekNumbers: false
+		},options);
+
+		var container = this;
+		$(container).find('input').each(function()
+		{
+			var style = window.getComputedStyle(this);
+			var overlay = $('<span></span>').attr('style', style.cssText).appendTo(this.offsetParent);
+			
+			$(this).css(
+			{
+				position: 'relative',
+				zIndex:1,
+				opacity: 0
+			}).bind('updated', function()
+			{
+				transformDisplayValue();
+			});
+			var self = this;
+			transformDisplayValue();
+			function transformDisplayValue()
+			{
+				var d = $(self).val();
+				var v = d ? moment(d, options.format).format(options.displayFormat) : '';
+				$(overlay).html( v );
+			}
+
+			function calcPosition()
+			{
+				var offset = $(self).offset();
+				$(overlay).css(
+				{
+					position: 'absolute',
+					left: offset.left,
+					top: offset.top,
+					zIndex:0
+				});
+			}
+			calcPosition();
+			$(window).bind('resize', calcPosition);
+		});
+
+		options.getValue = function()
+		{
+			var d1 = $(container).find('input').eq(0).val();
+			var d2 = $(container).find('input').eq(1).val();
+			if ( d1 && d2 )
+				return d1 + ' to ' + d2;
+			else
+				return '';
+		};
+
+		options.setValue = function(s,s1,s2)
+		{
+			$(container).find('input').eq(0).val(s1).trigger('updated');
+			$(container).find('input').eq(1).val(s2).trigger('updated');
+		};
+
+		return $(container).dateRangePicker(options);
+	};
+
 	$.fn.dateRangePicker = function(opt)
 	{
 		if (!opt) opt = {};
@@ -576,8 +672,7 @@
 				return moment(date).format('w');
 			},
 			customOpenAnimation: null,
-			customCloseAnimation: null,
-			valueFormat: null
+			customCloseAnimation: null
 		},opt);
 
 		opt.start = false;
@@ -608,35 +703,6 @@
 		var self = this;
 		var selfDom = $(self).get(0);
 		var domChangeTimer;
-
-
-		if (opt.valueFormat)
-		{
-			var valueDom = $(this).clone().removeAttr('id').css('display','none').get(0);
-			if ($(this).val())
-			{
-				var dates = $(this).val().split(opt.separator);
-				if (dates.length == 2)
-				{
-					var d1 = moment(dates[0], opt.valueFormat);
-					var d2 = moment(dates[1], opt.valueFormat);
-					var r1 = d1.format(opt.format);
-					var r2 = d2.format(opt.format);
-					$(this).val(r1+opt.separator+r2);
-				}
-			}
-			$(selfDom).removeAttr('name');
-			$(this).after(valueDom);
-			var oldSetValue = opt.setValue;
-			opt.setValue = function(s)
-			{
-				oldSetValue.call(selfDom, s);
-				var r1 = moment(new Date(opt.start)).format(opt.valueFormat);
-				var r2 = moment(new Date(opt.end)).format(opt.valueFormat);
-				$(valueDom).val(r1+opt.separator+r2);
-			};
-		}
-
 
 		$(this).unbind('.datepicker').bind('click.datepicker',function(evt)
 		{
