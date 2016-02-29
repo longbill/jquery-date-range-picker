@@ -34,6 +34,12 @@ plese check the source code of this page to see instructions.
 		to 
 		<input name="date-to" type="text" size="50" value="2016-02-21">
 	</span>
+
+	<div id="two-inputs-2" style="position:absolute; right:0; top:0;">
+		<input name="date-from2" type="text" size="50" value="2016-02-02"> 
+		to 
+		<input name="date-to2" type="text" size="50" value="2016-02-21">
+	</div>
 	<br>
 	<input type="submit" value="submit">
 </form>
@@ -41,6 +47,18 @@ plese check the source code of this page to see instructions.
 $(function()
 {
 	$('#two-inputs').customDateRangePicker(
+	{
+		//the value format
+		format: 'YYYY-MM-DD',
+
+		//the display format
+		displayFormat: 'MMMM Do YYYY',
+
+		autoWidth: false,
+		singleMonth: false
+	});
+
+	$('#two-inputs-2').customDateRangePicker(
 	{
 		//the value format
 		format: 'YYYY-MM-DD',

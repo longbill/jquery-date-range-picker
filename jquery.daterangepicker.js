@@ -577,12 +577,11 @@
 
 			function calcPosition()
 			{
-				var offset = $(self).offset();
 				$(overlay).css(
 				{
 					position: 'absolute',
-					left: offset.left,
-					top: offset.top,
+					left: self.offsetLeft,
+					top: self.offsetTop,
 					zIndex:0
 				});
 			}
