@@ -1,6 +1,6 @@
 {
   "name": "jquery-date-range-picker",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "homepage": "https://github.com/longbill/jquery-date-range-picker",
   "authors": [
     "<longbill.cn@gmail.com>"
@@ -28,7 +28,7 @@
     "tests"
   ],
   "dependencies": {
-    "moment": ">=2.2.0",
+    "moment": ">=2.8.1",
     "jquery": ">=1.3.2"
   }
 }

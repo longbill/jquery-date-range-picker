@@ -38,7 +38,7 @@
 				Requires <a href="http://jquery.com/" target=_blank>jQuery</a> 1.3.2+ (MIT LICENSE), <a href="http://momentjs.com/" target=_blank>Moment</a> 2.2.0+ (MIT LICENSE)
 			</p>
 			<p>
-				Supports IE6+, Firefox, Chrome, Safari and other standard HTML5 browsers.
+				Supports IE8+, Firefox, Chrome, Safari and other standard HTML5 browsers.
 			</p>
 			<p>
 				Supports multi-language, you can choose a defined language or set it to auto-detect mode. <br>
@@ -88,6 +88,23 @@
 			</div>
 
 			<div class="demo">
+				Default settings with default start/end time value: <input id="date-range1-1" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startOfWeek: 'monday',
+	separator : ' ~ ',
+	format: 'DD.MM.YYYY HH:mm',
+	autoClose: false,
+	time: {
+		enabled: true
+	},
+	defaultTime: moment().startOf('day').toDate(),
+	defaultEndTime: moment().endOf('day').toDate()
+}</pre>
+			</div>
+
+			<div class="demo">
 				Default settings with default value: <input id="date-range2" size="40" value="2013-10-01 to 2013-11-04">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
@@ -127,6 +144,16 @@
 				<pre class="options">
 {
 	startDate: '2014-11-20'
+}				</pre>
+			</div>
+
+			<div class="demo">
+				Limit date range selected between 3 days to 7 days: <input id="date-range5-2" size="40" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	maxDays: 7,
+	minDays: 3
 }				</pre>
 			</div>
 
@@ -209,7 +236,8 @@
 				Use future date shortcuts: <input id="date-range101" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
-{
+{	
+	showShortcuts: true,
 	shortcuts : 
 	{
 		'next-days': [3,5,7],
@@ -223,6 +251,7 @@
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
+	showShortcuts: true,
 	shortcuts : 
 	{
 		'prev-days': [3,5,7],
@@ -238,6 +267,7 @@
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
+	showShortcuts: true,
 	shortcuts : null,
 	startOfWeek: 'sunday',
 	language:'en',
@@ -292,30 +322,12 @@
 
 
 			<div class="demo">
-				Hide shortcuts: <input id="date-range104" size="60" value="">
-				<a href="#" class="show-option">Show Config</a>
-				<pre class="options">
-{
-	showShortcuts:false
-}				</pre>
-			</div>
-
-			<div class="demo">
 				Auto-close after selection: <input id="date-range103" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
 	autoClose: true
 }				</pre>
-			</div>
-
-			<div class="demo">
-				Change the separator between date strings: <input id="date-range11" size="40" value="">
-				<a href="#" class="show-option">Show Config</a>
-				<pre class="options">
-{
-	separator : ' ~ '
-}	</pre>
 			</div>
 
 			<div class="demo">
@@ -516,6 +528,98 @@ $('#date-range16-destroy').click(function(evt)
 }</pre>
 			</div>
 
+			<div class="demo">
+				Show Week Numbers: <input id="date-range24" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showWeekNumbers: true
+}</pre>
+			</div>
+
+			<div class="demo">
+				Show Week Numbers (start from monday): <input id="date-range24-2" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showWeekNumbers: true,
+	startOfWeek: 'monday'
+}</pre>
+			</div>
+
+			<div class="demo">
+				Show Week Numbers ( support fiscal year, start from 2015-08-16): <input id="date-range24-3" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	showWeekNumbers: true,
+	getWeekNumber: function(day)
+	{
+		var fiscalYearStart = moment('2015-08-16','YYYY-MM-DD');
+		var daysOffset = parseInt(fiscalYearStart.format('DDD'),10);
+		return moment(day).add( -1*daysOffset, 'days').format('W');
+	}
+}</pre>
+			</div>
+
+			<div class="demo">
+				Select forward: <input id="date-range25" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	selectForward: true
+}</pre>
+			</div>
+
+			<div class="demo">
+				Select backward: <input id="date-range26" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	selectBackward: true
+}</pre>
+			</div>
+
+			<div class="demo">
+				Typical usage, hotel booking: <input id="hotel-booking" size="60" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	startDate: new Date(),
+	selectForward: true,
+	showDateFilter: function(time, date)
+	{
+		return '&lt;div style="padding:0 5px;">\
+					&lt;span style="font-weight:bold">'+date+'&lt;/span>\
+					&lt;div style="opacity:0.3;">$'+Math.round(Math.random()*999)+'&lt;/div>\
+				&lt;/div>';
+	},
+	beforeShowDay: function(t)
+	{
+		var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+		var _class = '';
+		var _tooltip = valid ? '' : 'sold out';
+		return [valid,_class,_tooltip];
+	}
+}				</pre>
+			</div>
+
+			<div class="demo">
+				Custome open/close animation: <input id="date-range50" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	customOpenAnimation: function(cb)
+	{
+		$(this).fadeIn(300, cb);
+	},
+	customCloseAnimation: function(cb)
+	{
+		$(this).fadeOut(300, cb);
+	}
+}</pre>
+			</div>
+
 
 			<h2>Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
@@ -545,13 +649,13 @@ $('#date-range16-destroy').click(function(evt)
 	},
 	minDays: 0,
 	maxDays: 0,
-	showShortcuts: true,
+	showShortcuts: false,
 	shortcuts:
 	{
 		//'prev-days': [1,3,5,7],
-		'next-days': [3,5,7],
+		//'next-days': [3,5,7],
 		//'prev' : ['week','month','year'],
-		'next' : ['week','month','year']
+		//'next' : ['week','month','year']
 	},
 	customShortcuts : [],
 	inline:false,
@@ -566,11 +670,19 @@ $('#date-range16-destroy').click(function(evt)
 	dayTdAttrs: [],
 	applyBtnClass: '',
 	singleMonth: 'auto',
-	hoveringTooltip: function(days)
+	hoveringTooltip: function(days, startTime, hoveringTime)
 	{
-		return days > 1 ? days + ' days' : '';
+		return days > 1 ? days + ' ' + lang('days') : '';
 	},
-	showTopbar: true
+	showTopbar: true,
+	swapTime: false,
+	selectForward: false,
+	selectBackward: false,
+	showWeekNumbers: false,
+	getWeekNumber: function(date) //date will be the first day of a week
+	{
+		return moment(date).format('w');
+	}
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -672,6 +784,21 @@ $('#date-range16-destroy').click(function(evt)
 
 <b>showTopbar (Boolean)</b>
 	<i>If show the top bar.</i>
+
+<b>swapTime (Boolean)</b>
+	<i>If true and if time is enabled, on choosing first enddate and than startdate, endtime and starttime will be swapped. If this configkey is false, only date will be swapped, time will stay constant. If time is disabled, this config key is not used.</i>
+
+<b>selectForward (Boolean) Default: false</b>
+	<i>If this is true, you can only select second date after the first selected date.</i>
+
+<b>selectBackward (Boolean) Default: false</b>
+	<i>If this is true, you can only select second date before the first selected date.</i>
+
+<b>showWeekNumbers (Boolean) Default: false</b>
+	<i>If this is true, it will show week number of the year in the calendar.</i>
+
+<b>getWeekNumber (Function( Date object ) )</b>
+	<i>the function called to generate the week number. the first parameter will be the first day of a week</i>
 
 </pre>
 

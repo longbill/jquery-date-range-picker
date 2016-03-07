@@ -102,7 +102,18 @@ $(function()
 			enabled: true
 		}
 	});
-	
+		$('#date-range1-1').dateRangePicker(
+	{
+		startOfWeek: 'monday',
+		separator : ' ~ ',
+		format: 'DD.MM.YYYY HH:mm',
+		autoClose: false,
+		time: {
+			enabled: true
+		},
+		defaultTime: moment().startOf('day').toDate(),
+		defaultEndTime: moment().endOf('day').toDate()
+	});
 	$('#date-range2').dateRangePicker();
 
 	$('#date-range3').dateRangePicker(
@@ -137,6 +148,7 @@ $(function()
 		shortcuts : null,
 		startOfWeek: 'sunday',
 		language:'en',
+		showShortcuts: true,
 		customShortcuts: 
 		[
 			//if return an array of two dates, it will select the date range between the two dates
@@ -169,6 +181,7 @@ $(function()
 
 	$('#date-range101').dateRangePicker(
 	{
+		showShortcuts: true,	
 		shortcuts : 
 		{
 			'next-days': [3,5,7],
@@ -178,6 +191,7 @@ $(function()
 
 	$('#date-range102').dateRangePicker(
 	{
+		showShortcuts: true,
 		shortcuts : 
 		{
 			'prev-days': [3,5,7],
@@ -185,11 +199,6 @@ $(function()
 			'next-days':null,
 			'next':null
 		}
-	});
-
-	$('#date-range104').dateRangePicker(
-	{
-		showShortcuts:false
 	});
 
 	$('#date-range103').dateRangePicker(
@@ -258,17 +267,6 @@ $(function()
 		format: 'dddd MMM Do, YYYY'  //more formats at http://momentjs.com/docs/#/displaying/format/
 	});
 
-	$('#date-range11').dateRangePicker(
-	{
-		separator : ' ~ '
-	}).bind('datepicker-change',function(e,r)
-	{
-		try
-		{
-			console.log(r);
-		}catch(e){}
-	});
-
 	$('#date-range12').dateRangePicker(
 	{
 		inline:true,
@@ -289,7 +287,7 @@ $(function()
 		showShortcuts: false
 	});
 
-  $('#date-range14-2').dateRangePicker(
+	$('#date-range14-2').dateRangePicker(
 	{
 		batchMode: 'week-range',
 		showShortcuts: false
@@ -397,6 +395,70 @@ $(function()
 		singleMonth: true,
 		showShortcuts: false,
 		showTopbar: false
+	});
+
+	$('#date-range5-2').dateRangePicker(
+	{
+		minDays:3,
+		maxDays:7
+	});
+
+	$('#date-range24').dateRangePicker(
+	{
+		showWeekNumbers: true
+	});
+
+	$('#date-range24-2').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		startOfWeek:'monday'
+	});
+
+	$('#date-range24-3').dateRangePicker(
+	{
+		showWeekNumbers: true,
+		getWeekNumber: function(day)
+		{
+			var fiscalYearStart = moment('2015-08-16','YYYY-MM-DD');
+			var daysOffset = parseInt(fiscalYearStart.format('DDD'),10);
+			return moment(day).add( -1*daysOffset, 'days').format('W');
+		}
+	});
+
+	$('#date-range25').dateRangePicker(
+	{
+		selectForward: true
+	});
+
+	$('#date-range26').dateRangePicker(
+	{
+		selectBackward: true
+	});
+
+	$('#hotel-booking').dateRangePicker(
+	{
+		startDate: new Date(),
+		selectForward: true,
+		beforeShowDay: function(t)
+		{
+			var valid = !(t.getDay() == 0 || t.getDay() == 6);  //disable saturday and sunday
+			var _class = '';
+			var _tooltip = valid ? '' : 'sold out';
+			return [valid,_class,_tooltip];
+		}
+	});
+
+
+	$('#date-range50').dateRangePicker(
+	{
+		customOpenAnimation: function(cb)
+		{
+			$(this).fadeIn(300, cb);
+		},
+		customCloseAnimation: function(cb)
+		{
+			$(this).fadeOut(300, cb);
+		}
 	});
 
 
