@@ -1069,17 +1069,17 @@
 				}
 
 				initiated = true;
-
-				function getValidValue(date, format, locale) {
-					if (moment(date, format, locale).isValid()) {
-						return moment(date, format, locale).toDate();
-					} else {
-						return moment().toDate()
-					}
-				}
 			}
 		}
 
+		function getValidValue(date, format, locale) {
+			if (moment(date, format, locale).isValid()) {
+				return moment(date, format, locale).toDate();
+			} else {
+				return moment().toDate()
+			}
+		}
+		
 		function updateCalendarWidth()
 		{
 			var gapMargin = box.find('.gap').css('margin-left');
