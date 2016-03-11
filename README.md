@@ -5,7 +5,7 @@ v0.1.0
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
 * Requires jQuery 1.3.2+, Moment 2.2.0+
-* Supports IE8+, Firefox, Chrome, Safari and other standard HTML5 browsers.
+* Supports IE7+, Firefox, Chrome, Safari and other standard HTML5 browsers.
 * Supports multi-language
 * Fully CSS styled
 * Written by Chunlong ( jszen.com )
