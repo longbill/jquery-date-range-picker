@@ -861,10 +861,11 @@ $('#date-range16-destroy').click(function(evt)
 
 $(dom).data('dateRangePicker')
 	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object, set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
-	.clear(); 	// clear date range
-	.close(); 	// close date range picker overlay
-	.open();	// open date range picker overlay
-	.destroy();	// destroy all date range picker related things
+	.clear();		// clear date range
+	.close();		// close date range picker overlay
+	.open();		// open date range picker overlay
+	.resetMonthsView();	// reset to default months
+	.destroy();		// destroy all date range picker related things
 </pre>
 
 	<h2>License</h2>
