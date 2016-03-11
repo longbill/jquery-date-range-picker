@@ -196,7 +196,7 @@
 			'default-default': 'Bitte ein Start- und Enddatum auswählen',
 			'Time': 'Zeit',
 			'hour': 'Stunde',
-			'minute': 'Minute',
+			'minute': 'Minute'
 		},
 		'es':
 		{
