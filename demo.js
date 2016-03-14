@@ -349,6 +349,12 @@ $(function()
 		$('#date-range16').data('dateRangePicker').destroy();
 	});
 
+	$('#date-range16-reset').click(function(evt)
+    {
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').resetMonthsView();
+    });
+
 	$('#date-range17').dateRangePicker(
 	{
 		stickyMonths: true,

@@ -87,6 +87,8 @@
 }</pre>
 			</div>
 
+
+
 			<div class="demo">
 				Default settings with default start/end time value: <input id="date-range1-1" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
@@ -397,7 +399,8 @@
 				<button id="date-range16-set">Set Date Range</button> 
 				<button id="date-range16-set-silent">Set Date Range (no event / silent: true)</button> 
 				<button id="date-range16-clear">Clear Selection</button> 
-				<button id="date-range16-destroy">Destroy</button> 
+				<button id="date-range16-destroy">Destroy</button>
+				<button id="date-range16-reset">Reset months</button>
 				<br>
 				<input id="date-range16" size="60" value="">
 
@@ -444,8 +447,15 @@ $('#date-range16-clear').click(function(evt)
 $('#date-range16-destroy').click(function(evt)
 {
 	evt.stopPropagation();
-	$('#date-range16').data('dateRangePicker').destroy();
-});				</pre>
+	$('#date-range16').data('dateRangePicker');
+});
+
+$('#date-range16-reset').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').resetMonthsView();
+});
+				</pre>
 			</div>
 
 			<div class="demo">
@@ -861,10 +871,11 @@ $('#date-range16-destroy').click(function(evt)
 
 $(dom).data('dateRangePicker')
 	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object, set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
-	.clear(); 	// clear date range
-	.close(); 	// close date range picker overlay
-	.open();	// open date range picker overlay
-	.destroy();	// destroy all date range picker related things
+	.clear();		// clear date range
+	.close();		// close date range picker overlay
+	.open();		// open date range picker overlay
+	.resetMonthsView();	// reset to default months
+	.destroy();		// destroy all date range picker related things
 </pre>
 
 	<h2>License</h2>
