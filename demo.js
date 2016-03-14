@@ -116,13 +116,6 @@ $(function()
 	});
 	$('#date-range2').dateRangePicker();
 
-	$('#date-range2-1').dateRangePicker();
-	$('#date-range2-1-reset').click(function(evt)
-    {
-    	evt.stopPropagation();
-    	$('#date-range2-1').data('dateRangePicker').resetMonthsView();
-    });
-
 	$('#date-range3').dateRangePicker(
 	{
 		language:'cn'
@@ -355,6 +348,12 @@ $(function()
 		evt.stopPropagation();
 		$('#date-range16').data('dateRangePicker').destroy();
 	});
+
+	$('#date-range16-reset').click(function(evt)
+    {
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').resetMonthsView();
+    });
 
 	$('#date-range17').dateRangePicker(
 	{

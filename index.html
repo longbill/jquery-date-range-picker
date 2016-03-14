@@ -114,21 +114,6 @@
 			</div>
 
 			<div class="demo">
-				Reset to default months:
-				<button id="date-range2-1-reset">Reset</button>
-				<input id="date-range2-1" size="40" value="">
-				<a href="#" class="show-option">Show Config</a>
-				<pre class="options">
-{
-$('#date-range2-1-reset').click(function(evt)
-{
-	evt.stopPropagation();
-	$('#date-range2-1').data('dateRangePicker').resetMonthsView();
-});
-}</pre>
-			</div>
-
-			<div class="demo">
 				Force to Chinese: <input id="date-range3" size="40" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
@@ -414,7 +399,8 @@ $('#date-range2-1-reset').click(function(evt)
 				<button id="date-range16-set">Set Date Range</button> 
 				<button id="date-range16-set-silent">Set Date Range (no event / silent: true)</button> 
 				<button id="date-range16-clear">Clear Selection</button> 
-				<button id="date-range16-destroy">Destroy</button> 
+				<button id="date-range16-destroy">Destroy</button>
+				<button id="date-range16-reset">Reset months</button>
 				<br>
 				<input id="date-range16" size="60" value="">
 
@@ -462,7 +448,14 @@ $('#date-range16-destroy').click(function(evt)
 {
 	evt.stopPropagation();
 	$('#date-range16').data('dateRangePicker');
-});				</pre>
+});
+
+$('#date-range16-reset').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').resetMonthsView();
+});
+				</pre>
 			</div>
 
 			<div class="demo">
