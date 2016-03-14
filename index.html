@@ -87,6 +87,8 @@
 }</pre>
 			</div>
 
+
+
 			<div class="demo">
 				Default settings with default start/end time value: <input id="date-range1-1" size="60" value="">
 				<a href="#" class="show-option">Show Config</a>
@@ -109,6 +111,21 @@
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {}</pre>
+			</div>
+
+			<div class="demo">
+				Reset to default months:
+				<button id="date-range2-1-reset">Reset</button>
+				<input id="date-range2-1" size="40" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+$('#date-range2-1-reset').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range2-1').data('dateRangePicker').resetMonthsView();
+});
+}</pre>
 			</div>
 
 			<div class="demo">
@@ -444,7 +461,7 @@ $('#date-range16-clear').click(function(evt)
 $('#date-range16-destroy').click(function(evt)
 {
 	evt.stopPropagation();
-	$('#date-range16').data('dateRangePicker').destroy();
+	$('#date-range16').data('dateRangePicker');
 });				</pre>
 			</div>
 
