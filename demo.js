@@ -116,6 +116,13 @@ $(function()
 	});
 	$('#date-range2').dateRangePicker();
 
+	$('#date-range2-1').dateRangePicker();
+	$('#date-range2-1-reset').click(function(evt)
+    {
+    	evt.stopPropagation();
+    	$('#date-range2-1').data('dateRangePicker').resetMonthsView();
+    });
+
 	$('#date-range3').dateRangePicker(
 	{
 		language:'cn'
