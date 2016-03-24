@@ -699,7 +699,7 @@
 			}
 			else
 			{
-				box.addClass("inline-wrapper");
+				box.addClass('inline-wrapper');
 			}
 
 			if (opt.alwaysOpen)
@@ -960,18 +960,18 @@
 				}
 			});
 
-			box.find(".time1 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time1 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time1", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time1', hour, min);
 			});
 
-			box.find(".time2 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time2 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time2", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time2', hour, min);
 			});
 
 		}
@@ -982,7 +982,7 @@
 			if (!opt.inline)
 			{
 				var offset = $(self).offset();
-				if ($(opt.container).css("position") == "relative")
+				if ($(opt.container).css('position') == 'relative')
 				{
 					var containerOffset = $(opt.container).offset();
 					box.css(
@@ -1091,50 +1091,50 @@
 		}
 
 		function renderTime (name, date) {
-			box.find("." + name + " input[type=range].hour-range").val(moment(date).hours());
-			box.find("." + name + " input[type=range].minute-range").val(moment(date).minutes());
-			setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			box.find('.' + name + ' input[type=range].hour-range').val(moment(date).hours());
+			box.find('.' + name + ' input[type=range].minute-range').val(moment(date).minutes());
+			setTime(name, moment(date).format('HH'), moment(date).format('mm'));
 		}
 
 		function changeTime (name, date) {
 			opt[name] = parseInt(
 				moment(parseInt(date))
 					.startOf('day')
-					.add(moment(opt[name + "Time"]).format("HH"), 'h')
-					.add(moment(opt[name + "Time"]).format("mm"), 'm').valueOf()
+					.add(moment(opt[name + 'Time']).format('HH'), 'h')
+					.add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
 				);
 		}
 
 		function swapTime () {
-			renderTime("time1", opt.start);
-			renderTime("time2", opt.end);
+			renderTime('time1', opt.start);
+			renderTime('time2', opt.end);
 		}
 
 		function setTime (name, hour, minute)
 		{
-			hour && (box.find("." + name + " .hour-val").text(hour));
-			minute && (box.find("." + name + " .minute-val").text(minute));
+			hour && (box.find('.' + name + ' .hour-val').text(hour));
+			minute && (box.find('.' + name + ' .minute-val').text(minute));
 			switch (name) {
-				case "time1":
+				case 'time1':
 					if (opt.start) {
-						setRange("start", moment(opt.start));
+						setRange('start', moment(opt.start));
 					}
-					setRange("startTime", moment(opt.startTime || moment().valueOf()));
+					setRange('startTime', moment(opt.startTime || moment().valueOf()));
 					break;
-				case "time2":
+				case 'time2':
 					if (opt.end) {
-						setRange("end", moment(opt.end));
+						setRange('end', moment(opt.end));
 					}
-					setRange("endTime", moment(opt.endTime || moment().valueOf()));
+					setRange('endTime', moment(opt.endTime || moment().valueOf()));
 					break;
 			}
 			function setRange(name, timePoint) {
-				var h = timePoint.format("HH"),
-					m = timePoint.format("mm");
+				var h = timePoint.format('HH'),
+					m = timePoint.format('mm');
 				opt[name] = timePoint
 					.startOf('day')
-					.add(hour || h, "h")
-					.add(minute || m, "m")
+					.add(hour || h, 'h')
+					.add(minute || m, 'm')
 					.valueOf();
 			}
 			checkSelectionValid();
@@ -1242,17 +1242,17 @@
 			{
 				opt.end = handleEnd(time);
 				if (opt.time.enabled) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
 			//Update time in case it is enabled and timestamps are available
 			if(opt.time.enabled) {
 				if(opt.start) {
-					changeTime("start", opt.start);
+					changeTime('start', opt.start);
 				}
 				if(opt.end) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
@@ -1625,8 +1625,8 @@
 
 			if (opt.time.enabled)
 			{
-				renderTime("time1", date1);
-				renderTime("time2", date2);
+				renderTime('time1', date1);
+				renderTime('time2', date2);
 			}
 
 			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) === 0))
@@ -1678,7 +1678,7 @@
 
 
 			if (opt.time.enabled) {
-				renderTime("time1", date1);
+				renderTime('time1', date1);
 
 			}
 			showMonth(date1,'month1');
