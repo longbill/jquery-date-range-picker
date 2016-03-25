@@ -1,5 +1,5 @@
 // daterangepicker.js
-// version : 0.0.9
+// version : 0.1.3
 // author : Chunlong Liu
 // last updated at: 2015-10-30
 // license : MIT
@@ -663,10 +663,10 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-		
+
 		function IsOwnDatePickerClicked(evt, selfObj)
 		{
-			return ( selfObj.contains(evt.target) || evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+			return ( selfObj.contains(evt.target) || evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0));
 		}
 
 		function init_datepicker()
@@ -699,7 +699,7 @@
 			}
 			else
 			{
-				box.addClass("inline-wrapper");
+				box.addClass('inline-wrapper');
 			}
 
 			if (opt.alwaysOpen)
@@ -960,18 +960,18 @@
 				}
 			});
 
-			box.find(".time1 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time1 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time1", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time1', hour, min);
 			});
 
-			box.find(".time2 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time2 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time2", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time2', hour, min);
 			});
 
 		}
@@ -982,34 +982,34 @@
 			if (!opt.inline)
 			{
 				var offset = $(self).offset();
-						if ($(opt.container).css("position") == "relative")
+				if ($(opt.container).css('position') == 'relative')
+				{
+					var containerOffset = $(opt.container).offset();
+					box.css(
+					{
+						top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
+						left: offset.left - containerOffset.left
+					});
+				}
+				else
+				{
+					if (offset.left < 460) //left to right
+					{
+						box.css(
 						{
-							var containerOffset = $(opt.container).offset();
-							box.css(
-							{
-								top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
-								left: offset.left - containerOffset.left
-							});
-						}
-						else
+							top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+							left: offset.left
+						});
+					}
+					else
+					{
+						box.css(
 						{
-							if (offset.left < 460) //left to right
-							{
-								box.css(
-								{
-									top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-									left: offset.left
-								});
-							}
-							else
-							{
-								box.css(
-								{
-									top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-									left: offset.left + $(self).width() - box.width() - 16
-								});
-							}
-						}
+							top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+							left: offset.left + $(self).width() - box.width() - 16
+						});
+					}
+				}
 			}
 		}
 
@@ -1076,10 +1076,10 @@
 			if (moment(date, format, locale).isValid()) {
 				return moment(date, format, locale).toDate();
 			} else {
-				return moment().toDate()
+				return moment().toDate();
 			}
 		}
-		
+
 		function updateCalendarWidth()
 		{
 			var gapMargin = box.find('.gap').css('margin-left');
@@ -1091,50 +1091,50 @@
 		}
 
 		function renderTime (name, date) {
-			box.find("." + name + " input[type=range].hour-range").val(moment(date).hours());
-			box.find("." + name + " input[type=range].minute-range").val(moment(date).minutes());
-			setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			box.find('.' + name + ' input[type=range].hour-range').val(moment(date).hours());
+			box.find('.' + name + ' input[type=range].minute-range').val(moment(date).minutes());
+			setTime(name, moment(date).format('HH'), moment(date).format('mm'));
 		}
 
 		function changeTime (name, date) {
 			opt[name] = parseInt(
 				moment(parseInt(date))
 					.startOf('day')
-					.add(moment(opt[name + "Time"]).format("HH"), 'h')
-					.add(moment(opt[name + "Time"]).format("mm"), 'm').valueOf()
+					.add(moment(opt[name + 'Time']).format('HH'), 'h')
+					.add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
 				);
 		}
 
 		function swapTime () {
-			renderTime("time1", opt.start);
-			renderTime("time2", opt.end);
+			renderTime('time1', opt.start);
+			renderTime('time2', opt.end);
 		}
 
-		function setTime (name, hour, minute) 
+		function setTime (name, hour, minute)
 		{
-			hour && (box.find("." + name + " .hour-val").text(hour));
-			minute && (box.find("." + name + " .minute-val").text(minute));
+			hour && (box.find('.' + name + ' .hour-val').text(hour));
+			minute && (box.find('.' + name + ' .minute-val').text(minute));
 			switch (name) {
-				case "time1":
+				case 'time1':
 					if (opt.start) {
-						setRange("start", moment(opt.start));
+						setRange('start', moment(opt.start));
 					}
-					setRange("startTime", moment(opt.startTime || moment().valueOf()));
+					setRange('startTime', moment(opt.startTime || moment().valueOf()));
 					break;
-				case "time2":
+				case 'time2':
 					if (opt.end) {
-						setRange("end", moment(opt.end));
+						setRange('end', moment(opt.end));
 					}
-					setRange("endTime", moment(opt.endTime || moment().valueOf()));
+					setRange('endTime', moment(opt.endTime || moment().valueOf()));
 					break;
 			}
 			function setRange(name, timePoint) {
-				var h = timePoint.format("HH"),
-					m = timePoint.format("mm");
+				var h = timePoint.format('HH'),
+					m = timePoint.format('mm');
 				opt[name] = timePoint
 					.startOf('day')
-					.add(hour || h, "h")
-					.add(minute || m, "m")
+					.add(hour || h, 'h')
+					.add(minute || m, 'm')
 					.valueOf();
 			}
 			checkSelectionValid();
@@ -1242,17 +1242,17 @@
 			{
 				opt.end = handleEnd(time);
 				if (opt.time.enabled) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
 			//Update time in case it is enabled and timestamps are available
 			if(opt.time.enabled) {
 				if(opt.start) {
-					changeTime("start", opt.start);
+					changeTime('start', opt.start);
 				}
 				if(opt.end) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
@@ -1287,7 +1287,7 @@
 			autoclose();
 		}
 
-		
+
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
@@ -1315,13 +1315,13 @@
 			autoclose();
 		}
 
-		function isValidTime(time) 
+		function isValidTime(time)
 		{
 			time = parseInt(time, 10);
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
-			if (opt.start && !opt.end && !opt.singleDate) 
+			if (opt.start && !opt.end && !opt.singleDate)
 			{
 				//check maxDays and minDays setting
 				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
@@ -1408,11 +1408,9 @@
 						}
 
 						if (
-							( opt.start && !opt.end )
-							&&
+							( opt.start && !opt.end ) &&
 							(
-								( opt.start < time && hoverTime >= time )
-								||
+								( opt.start < time && hoverTime >= time ) ||
 								( opt.start > time && hoverTime <= time )
 							)
 						)
@@ -1531,9 +1529,10 @@
 
 			if (opt.batchMode)
 			{
-				if ( (opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0)
-					|| (opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)  )
-				{
+				if (
+					(opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0) ||
+					(opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)
+				) {
 					opt.start = false;
 					opt.end = false;
 					box.find('.day').removeClass('checked');
@@ -1626,11 +1625,11 @@
 
 			if (opt.time.enabled)
 			{
-				renderTime("time1", date1);
-				renderTime("time2", date2);
+				renderTime('time1', date1);
+				renderTime('time2', date2);
 			}
 
-			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0))
+			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) === 0))
 			{
 				if (opt.lookBehind) {
 					date1 = prevMonth(date2);
@@ -1645,7 +1644,7 @@
 			}
 
 			if (!opt.stickyMonths) {
-				if (compare_month(date1,date2) == 0)
+				if (compare_month(date1,date2) === 0)
 				{
 					if (opt.lookBehind) {
 						date1 = prevMonth(date2);
@@ -1679,7 +1678,7 @@
 
 
 			if (opt.time.enabled) {
-				renderTime("time1", date1);
+				renderTime('time1', date1);
 
 			}
 			showMonth(date1,'month1');
@@ -1703,8 +1702,8 @@
 					end = moment(end || moment().valueOf()).startOf('day').valueOf();
 				}
 				if (
-					(opt.start && opt.end && end >= time && start <= time )
-					|| ( opt.start && !opt.end && moment(start).format('YYYY-MM-DD') == moment(time).format('YYYY-MM-DD') )
+					(opt.start && opt.end && end >= time && start <= time ) ||
+					( opt.start && !opt.end && moment(start).format('YYYY-MM-DD') == moment(time).format('YYYY-MM-DD') )
 				)
 				{
 					$(this).addClass('checked');
@@ -1819,7 +1818,7 @@
 		{
 			var p = parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
 			if (p > 0 ) return 1;
-			if (p == 0) return 0;
+			if (p === 0) return 0;
 			return -1;
 		}
 
@@ -1827,7 +1826,7 @@
 		{
 			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
 			if (p > 0 ) return 1;
-			if (p == 0) return 0;
+			if (p === 0) return 0;
 			return -1;
 		}
 
@@ -1843,15 +1842,15 @@
 
 		function getTimeHTML()
 		{
-			return '<div>\
-						<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>\
-					</div>\
-					<div class="hour">\
-						<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>\
-					</div>\
-					<div class="minute">\
-						<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>\
-					</div>';
+			return '<div>' +
+					'<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
+				'</div>' +
+				'<div class="hour">' +
+					'<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
+				'</div>' +
+				'<div class="minute">' +
+					'<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
+				'</div>';
 		}
 
 		function createDom()
@@ -1875,39 +1874,39 @@
 				}
 				else
 				{
-					html += '<div class="normal-top">\
-							<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
+					html += '<div class="normal-top">' +
+							'<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
 					if ( ! opt.singleDate ) {
-						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>'
+						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>';
 					}
 					html += '</div>';
-					html += '<div class="error-top">error</div>\
-						<div class="default-top">default</div>';
+					html += '<div class="error-top">error</div>' +
+						'<div class="default-top">default</div>';
 				}
 
 				html += '<input type="button" class="apply-btn disabled'+ getApplyBtnClass() +'" value="'+lang('apply')+'" />';
-				html += '</div>'
+				html += '</div>';
 			}
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
-			html += '<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+			html += '<div class="month-wrapper">' +
+				'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
 			if ( hasMonth2() )
 			{
-				html += '<div class="gap">'+getGapHTML()+'</div>'
-					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				html += '<div class="gap">'+getGapHTML()+'</div>' +
+					'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 			}
 				//+'</div>'
-			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'<div class="time">'
-				+'<div class="time1"></div>'
+			html +=	'<div style="clear:both;height:0;font-size:0;"></div>' +
+				'<div class="time">' +
+				'<div class="time1"></div>';
 			if ( ! opt.singleDate ) {
-				html += '<div class="time2"></div>'
+				html += '<div class="time2"></div>';
 			}
-			html += '</div>'
-				+'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'</div>';
+			html += '</div>' +
+				'<div style="clear:both;height:0;font-size:0;"></div>' +
+				'</div>';
 
 			html += '<div class="footer">';
 			if (opt.showShortcuts)
@@ -1941,24 +1940,24 @@
 						html+= '</span>';
 					}
 
-					if (data['prev'] && data['prev'].length > 0)
+					if (data.prev && data.prev.length > 0)
 					{
 						html += '&nbsp;<span class="prev-buttons">'+lang('previous');
-						for(var i=0;i<data['prev'].length; i++)
+						for(var i=0;i<data.prev.length; i++)
 						{
-							var name = lang('prev-'+data['prev'][i]);
-							html += ' <a href="javascript:;" shortcut="prev,'+data['prev'][i]+'">'+name+'</a>';
+							var name = lang('prev-'+data.prev[i]);
+							html += ' <a href="javascript:;" shortcut="prev,'+data.prev[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
 					}
 
-					if (data['next'] && data['next'].length > 0)
+					if (data.next && data.next.length > 0)
 					{
 						html += '&nbsp;<span class="next-buttons">'+lang('next');
-						for(var i=0;i<data['next'].length; i++)
+						for(var i=0;i<data.next.length; i++)
 						{
-							var name = lang('next-'+data['next'][i]);
-							html += ' <a href="javascript:;" shortcut="next,'+data['next'][i]+'">'+name+'</a>';
+							var name = lang('next-'+data.next[i]);
+							html += ' <a href="javascript:;" shortcut="next,'+data.next[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
 					}
@@ -1998,7 +1997,7 @@
 
 		function getApplyBtnClass()
 		{
-			var klass = ''
+			var klass = '';
 			if (opt.autoClose === true) {
 				klass += ' hide';
 			}
@@ -2013,29 +2012,29 @@
 			var prepend = opt.showWeekNumbers ? '<th>'+lang('week-number')+'</th>' : '';
 			if (opt.startOfWeek == 'monday')
 			{
-				return prepend+'<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>\
-					<th>'+lang('week-7')+'</th>';
+				return prepend+'<th>'+lang('week-1')+'</th>' +
+					'<th>'+lang('week-2')+'</th>' +
+					'<th>'+lang('week-3')+'</th>' +
+					'<th>'+lang('week-4')+'</th>' +
+					'<th>'+lang('week-5')+'</th>' +
+					'<th>'+lang('week-6')+'</th>' +
+					'<th>'+lang('week-7')+'</th>';
 			}
 			else
 			{
-				return prepend+'<th>'+lang('week-7')+'</th>\
-					<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>';
+				return prepend+'<th>'+lang('week-7')+'</th>' +
+					'<th>'+lang('week-1')+'</th>' +
+					'<th>'+lang('week-2')+'</th>' +
+					'<th>'+lang('week-3')+'</th>' +
+					'<th>'+lang('week-4')+'</th>' +
+					'<th>'+lang('week-5')+'</th>' +
+					'<th>'+lang('week-6')+'</th>';
 			}
 		}
 
 		function isMonthOutOfBounds(month)
 		{
-			var month = moment(month);
+			month = moment(month);
 			if (opt.startDate && month.endOf('month').isBefore(opt.startDate))
 			{
 				return true;
@@ -2052,11 +2051,11 @@
 			var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
 			for(var i=0;i<20;i++)
 			{
-				html.push('<div class="gap-line">\
-					<div class="gap-1"></div>\
-					<div class="gap-2"></div>\
-					<div class="gap-3"></div>\
-				</div>');
+				html.push('<div class="gap-line">' +
+					'<div class="gap-1"></div>' +
+					'<div class="gap-2"></div>' +
+					'<div class="gap-3"></div>' +
+				'</div>');
 			}
 			html.push('</div>');
 			return html.join('');
@@ -2115,7 +2114,7 @@
 			var now = new Date();
 
 			var dayOfWeek = d.getDay();
-			if((dayOfWeek == 0) && (opt.startOfWeek == 'monday')) {
+			if((dayOfWeek === 0) && (opt.startOfWeek === 'monday')) {
 				// add one week
 				dayOfWeek = 7;
 			}
@@ -2172,7 +2171,7 @@
 						today.valid = _r[0];
 						today.extraClass = _r[1] || '';
 						today.tooltip = _r[2] || '';
-						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
+						if (today.tooltip !== '') today.extraClass += ' has-tooltip ';
 					}
 
 					var todayDivAttr = {
@@ -2181,7 +2180,7 @@
 						'class': 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
 					};
 
-					if (day == 0 && opt.showWeekNumbers)
+					if (day === 0 && opt.showWeekNumbers)
 					{
 						html.push('<td><div class="week-number" data-start-time="'+today.time+'">'+opt.getWeekNumber(today.date)+'</div></td>');
 					}
@@ -2205,10 +2204,10 @@
 			{
 				var language = navigator.language ? navigator.language : navigator.browserLanguage;
 				if (!language) return $.dateRangePickerLanguages['default'];
-				var language = language.toLowerCase();
+				language = language.toLowerCase();
 				for(var key in $.dateRangePickerLanguages)
 				{
-					if (language.indexOf(key) != -1)
+					if (language.indexOf(key) !== -1)
 					{
 						return $.dateRangePickerLanguages[key];
 					}
