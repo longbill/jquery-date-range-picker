@@ -594,8 +594,6 @@
 		if (opt.singleMonth == 'auto') opt.singleMonth = $(window).width() < 480;
 		if (opt.singleMonth) opt.stickyMonths = false;
 
-		if (opt.singleDate) opt.singleMonth = true;
-
 		if (!opt.showTopbar) opt.autoClose = true;
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
@@ -2063,7 +2061,7 @@
 
 		function hasMonth2()
 		{
-			return ( !opt.singleDate && !opt.singleMonth);
+			return (!opt.singleMonth);
 		}
 
 		function attributesCallbacks(initialObject,callbacksArray,today)
