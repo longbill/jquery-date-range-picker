@@ -1680,7 +1680,10 @@
 
 			}
 			showMonth(date1,'month1');
-			//showMonth(date2,'month2');
+			if (opt.singleMonth !== true) {
+      				date2 = nextMonth(date1);
+      				showMonth(date2, 'month2');
+    			}
 			showGap();
 			showSelectedInfo();
 			autoclose();
