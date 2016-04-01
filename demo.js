@@ -280,6 +280,14 @@ $(function()
 		singleDate : true,
 		showShortcuts: false 
 	});
+	
+	$('#date-range13-2').dateRangePicker(
+	{
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false,
+		singleMonth: true
+	});
 
 	$('#date-range14').dateRangePicker(
 	{
