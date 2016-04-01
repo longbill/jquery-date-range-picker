@@ -354,6 +354,20 @@
 	showShortcuts: false
 }				</pre>
 			</div>
+			
+			
+			<div class="demo">
+				Single Date mode with single month: <input id="date-range13-2" size="40" value="2015-03-01">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+	autoClose: true,
+	singleDate : true,
+	showShortcuts: false,
+	singleMonth: true
+}				</pre>
+			</div>
+			
 
 			<div class="demo">
 				 Batch mode ( week ): <input id="date-range14" size="60" value="">
@@ -759,7 +773,8 @@ $('#date-range16-reset').click(function(evt)
 	</i>
 
 <b>singleDate (Boolean)</b>
-	<i>choose a single date instead of a date range.
+	<i>choose a single date instead of a date range. If `singleMonth` option is set to true it will show
+	only one month instead of two months.
 	</i>
 
 <b>batchMode (false / 'week' / 'month')</b>
