@@ -1,7 +1,5 @@
 // daterangepicker.js
-// version : 0.1.3
 // author : Chunlong Liu
-// last updated at: 2015-10-30
 // license : MIT
 // www.jszen.com
 
