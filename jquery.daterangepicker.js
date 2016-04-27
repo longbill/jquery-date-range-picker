@@ -509,7 +509,7 @@
 			'hour':'timme',
 			'minute':'minut'
 		},
-		'pt':  //default language: English
+		'pt':  //Portuguese (European)
 		{
 			'selected': 'Selecionado:',
 			'day':'Dia',
