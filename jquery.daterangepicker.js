@@ -199,8 +199,8 @@
 		'es':
 		{
 			'selected': 'Seleccionado:',
-			'day':'Dia',
-			'days': 'Dias',
+			'day':'Día',
+			'days': 'Días',
 			'apply': 'Cerrar',
 			'week-1' : 'lu',
 			'week-2' : 'ma',
@@ -221,12 +221,12 @@
 			'next-week':'Semana',
 			'next-month':'Mes',
 			'next-year':'Año',
-			'less-than' : 'El rango no deberia ser mayor de %d dias',
-			'more-than' : 'El rango no deberia ser menor de %d dias',
-			'default-more' : 'Por favor selecciona un rango mayor a %d dias',
-			'default-single' : 'Por favor selecciona un dia',
-			'default-less' : 'Por favor selecciona un rango menor a %d dias',
-			'default-range' : 'Por favor selecciona un rango entre %d y %d dias',
+			'less-than' : 'El rango no debería ser mayor de %d días',
+			'more-than' : 'El rango no debería ser menor de %d días',
+			'default-more' : 'Por favor selecciona un rango mayor a %d días',
+			'default-single' : 'Por favor selecciona un día',
+			'default-less' : 'Por favor selecciona un rango menor a %d días',
+			'default-range' : 'Por favor selecciona un rango entre %d y %d días',
 			'default-default': 'Por favor selecciona un rango de fechas.'
 		},
 		'fr':
