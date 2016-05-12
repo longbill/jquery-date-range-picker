@@ -717,6 +717,7 @@
 			clear: clearSelection,
 			close: closeDatePicker,
 			open: open,
+			toggle: toggle,
 			redraw: redrawDatePicker,
 			getDatePicker: getDatePicker,
 			resetMonthsView: resetMonthsView,
@@ -1088,6 +1089,13 @@
 		function getDatePicker()
 		{
 			return box;
+		}
+
+		function toggle(animationTime) {
+			if(box.is(':visible'))
+				closeDatePicker();
+			else
+				open();
 		}
 
 		function open(animationTime)
