@@ -333,6 +333,12 @@ $(function()
 		$('#date-range16').data('dateRangePicker').close();
 	});
 
+	$('#date-range16-toggle').click(function(evt)
+	{
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').toggle();
+	});
+
 	$('#date-range16-set').click(function(evt)
 	{
 		evt.stopPropagation();

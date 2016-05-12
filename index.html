@@ -410,6 +410,7 @@
 				Control by script:
 				<button id="date-range16-open">Open</button>
 				<button id="date-range16-close">Close</button>
+				<button id="date-range16-toggle">Toggle</button>
 				<button id="date-range16-set">Set Date Range</button>
 				<button id="date-range16-set-silent">Set Date Range (no event / silent: true)</button>
 				<button id="date-range16-clear">Clear Selection</button>
@@ -438,6 +439,12 @@ $('#date-range16-close').click(function(evt)
 {
 	evt.stopPropagation();
 	$('#date-range16').data('dateRangePicker').close();
+});
+
+$('#date-range16-toggle').click(function(evt)
+{
+	evt.stopPropagation();
+	$('#date-range16').data('dateRangePicker').toggle();
 });
 
 $('#date-range16-set').click(function(evt)
