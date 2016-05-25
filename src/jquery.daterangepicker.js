@@ -1,4 +1,4 @@
-// daterangepicker.js
+// jquery.daterangepicker.js
 // author : Chunlong Liu
 // license : MIT
 // www.jszen.com
@@ -16,7 +16,7 @@
 		}
 }(function ($, moment)
 {
-
+    'use strict';
 	$.dateRangePickerLanguages =
 	{
 		'default':  //default language: English
@@ -946,6 +946,7 @@
 			{
 				var shortcut = $(this).attr('shortcut');
 				var end = new Date(),start = false;
+                var dir;
 				if (shortcut.indexOf('day') != -1)
 				{
 					var day = parseInt(shortcut.split(',',2)[1],10);
@@ -954,12 +955,12 @@
 				}
 				else if (shortcut.indexOf('week')!= -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
-
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+                    var stopDay;
 					if (dir == 1)
-						var stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
+						 stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
 					else
-						var stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
+						 stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
 
 					end = new Date(end.getTime() - 86400000);
 					while(end.getDay() != stopDay) end = new Date(end.getTime() + dir*86400000);
@@ -967,7 +968,7 @@
 				}
 				else if (shortcut.indexOf('month') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					if (dir == 1)
 						start = nextMonth(end);
 					else
@@ -979,7 +980,7 @@
 				}
 				else if (shortcut.indexOf('year') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					start = new Date();
 					start.setFullYear(end.getFullYear() + dir);
 					start.setMonth(0);
@@ -1013,7 +1014,7 @@
 								// move calendars to show this date's month and next months
 								if (data && data.length == 1)
 								{
-									movetodate = data[0];
+									var movetodate = data[0];
 									showMonth(movetodate,'month1');
 									showMonth(nextMonth(movetodate),'month2');
 									showGap();
@@ -1362,19 +1363,20 @@
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
+            var date1,date2;
 			if (!opt.startWeek)
 			{
 				opt.startWeek = thisTime;
 				weekNumberDom.addClass('week-number-selected');
-				var date1 = new Date(thisTime);
+				date1 = new Date(thisTime);
 				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
 				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
 			}
 			else
 			{
 				box.find('.week-number-selected').removeClass('week-number-selected');
-				var date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
-				var date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
+				date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
+				date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
 				opt.startWeek = false;
 				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
 				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
@@ -1624,11 +1626,11 @@
 			{
 				box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
 			}
-
+            var dateRange;
 			if (opt.start && opt.singleDate)
 			{
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start));
+				dateRange = getDateString(new Date(opt.start));
 				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 
 				if (initiated && !silent)
@@ -1644,7 +1646,7 @@
 			{
 				box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start));
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 				if (initiated && !silent)
 				{
@@ -1754,7 +1756,7 @@
 			}
 			showMonth(date1,'month1');
 			if (opt.singleMonth !== true) {
-      				date2 = nextMonth(date1);
+      				var date2 = nextMonth(date1);
       				showMonth(date2, 'month2');
     			}
 			showGap();
@@ -1989,13 +1991,13 @@
 
 				var data = opt.shortcuts;
 				if (data)
-				{
+				{   var name;
 					if (data['prev-days'] && data['prev-days'].length > 0)
 					{
 						html += '&nbsp;<span class="prev-days">'+lang('past');
 						for(var i=0;i<data['prev-days'].length; i++)
 						{
-							var name = data['prev-days'][i];
+							name = data['prev-days'][i];
 							name += (data['prev-days'][i] > 1) ? lang('days') : lang('day');
 							html += ' <a href="javascript:;" shortcut="day,-'+data['prev-days'][i]+'">'+name+'</a>';
 						}
@@ -2007,7 +2009,7 @@
 						html += '&nbsp;<span class="next-days">'+lang('following');
 						for(var i=0;i<data['next-days'].length; i++)
 						{
-							var name = data['next-days'][i];
+							name = data['next-days'][i];
 							name += (data['next-days'][i] > 1) ? lang('days') : lang('day');
 							html += ' <a href="javascript:;" shortcut="day,'+data['next-days'][i]+'">'+name+'</a>';
 						}
@@ -2019,7 +2021,7 @@
 						html += '&nbsp;<span class="prev-buttons">'+lang('previous');
 						for(var i=0;i<data.prev.length; i++)
 						{
-							var name = lang('prev-'+data.prev[i]);
+							name = lang('prev-'+data.prev[i]);
 							html += ' <a href="javascript:;" shortcut="prev,'+data.prev[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
@@ -2030,7 +2032,7 @@
 						html += '&nbsp;<span class="next-buttons">'+lang('next');
 						for(var i=0;i<data.next.length; i++)
 						{
-							var name = lang('next-'+data.next[i]);
+							name = lang('next-'+data.next[i]);
 							html += ' <a href="javascript:;" shortcut="next,'+data.next[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
@@ -2192,13 +2194,14 @@
 				// add one week
 				dayOfWeek = 7;
 			}
+            var today,valid;
 
 			if (dayOfWeek > 0)
 			{
 				for (var i = dayOfWeek; i > 0; i--)
 				{
 					var day = new Date(d.getTime() - 86400000*i);
-					var valid = isValidTime(day.getTime());
+					valid = isValidTime(day.getTime());
 					if (opt.startDate && compare_day(day,opt.startDate) < 0) valid = false;
 					if (opt.endDate && compare_day(day,opt.endDate) > 0) valid = false;
 					days.push(
@@ -2214,8 +2217,8 @@
 			var toMonth = d.getMonth();
 			for(var i=0; i<40; i++)
 			{
-				var today = moment(d).add(i, 'days').toDate();
-				var valid = isValidTime(today.getTime());
+				today = moment(d).add(i, 'days').toDate();
+				valid = isValidTime(today.getTime());
 				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
 				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
 				days.push(
@@ -2232,10 +2235,11 @@
 			{
 				if (days[week*7].type == 'nextMonth') break;
 				html.push('<tr>');
+
 				for(var day = 0; day<7; day++)
 				{
 					var _day = (opt.startOfWeek == 'monday') ? day+1 : day;
-					var today = days[week*7+_day];
+					today = days[week*7+_day];
 					var highlightToday = moment(today.time).format('L') == moment(now).format('L');
 					today.extraClass = '';
 					today.tooltip = '';
