@@ -9,13 +9,13 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js" type="text/javascript"></script>
 		<script src="jquery.daterangepicker.js"></script>
 		<script src="demo.js"></script>
-		<style>
+		<style type="text/css">
 		#wrapper
 		{
 			width:800px;
 			margin:0 auto;
 			color:#333;
-			font-family:Tahoma;
+            font-family:Tahoma,Verdana,sans-serif;
 			line-height:1.5;
 			font-size:14px;
 		}
@@ -55,7 +55,7 @@
 			<p>Fork me on Github <a href="https://github.com/longbill/jquery-date-range-picker">https://github.com/longbill/jquery-date-range-picker</a></p>
 
 
-			<h2>Installation</h2>
+            <h2 id="installation">Installation</h2>
 
 			<pre>&lt;link rel="stylesheet" href="daterangepicker.css" />
 &lt;script src="moment.min.js">&lt;/script>
@@ -63,7 +63,7 @@
 			</pre>
 
 
-			<h2>Demonstrations</h2>
+            <h2 id="demonstrations">Demonstrations</h2>
 
 			<div class="demo">
 				Default settings: <input id="date-range0" size="40" value="">
@@ -354,8 +354,8 @@
 	showShortcuts: false
 }				</pre>
 			</div>
-			
-			
+
+
 			<div class="demo">
 				Single Date mode with single month: <input id="date-range13-2" size="40" value="2015-03-01">
 				<a href="#" class="show-option">Show Config</a>
@@ -367,7 +367,7 @@
 	singleMonth: true
 }				</pre>
 			</div>
-			
+
 
 			<div class="demo">
 				 Batch mode ( week ): <input id="date-range14" size="60" value="">
@@ -645,7 +645,7 @@ $('#date-range16-reset').click(function(evt)
 			</div>
 
 
-			<h2>Configuration</h2>
+            <h2 id="configuration">Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
 			<p>
 				The default configuration object is:<br>
@@ -811,7 +811,9 @@ $('#date-range16-reset').click(function(evt)
 	<i>If show the top bar.</i>
 
 <b>swapTime (Boolean)</b>
-	<i>If true and if time is enabled, on choosing first enddate and than startdate, endtime and starttime will be swapped. If this configkey is false, only date will be swapped, time will stay constant. If time is disabled, this config key is not used.</i>
+	<i>If true and if time is enabled, on choosing first enddate and than startdate, endtime and starttime will be swapped.
+        If this configkey is false, only date will be swapped, time will stay constant.
+        If time is disabled, this config key is not used.</i>
 
 <b>selectForward (Boolean) Default: false</b>
 	<i>If this is true, you can only select second date after the first selected date.</i>
@@ -885,7 +887,9 @@ $('#date-range16-reset').click(function(evt)
 <pre>//after you called  $(dom).dateRangePicker();
 
 $(dom).data('dateRangePicker')
-	.setDateRange('2013-11-20','2013-11-25');  //set date range, two date strings should follow the `format` in config object, set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
+    //set date range, two date strings should follow the `format` in config object,
+    //set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
+	.setDateRange('2013-11-20','2013-11-25');
 	.clear();		// clear date range
 	.close();		// close date range picker overlay
 	.open();		// open date range picker overlay
@@ -910,6 +914,6 @@ This date range picker plugin is under MIT LICENSE
 		});
 	})
 	</script>
-
+     </div>
 	</body>
 </html>
