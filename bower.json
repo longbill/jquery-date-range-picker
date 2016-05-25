@@ -5,7 +5,10 @@
     "<longbill.cn@gmail.com>"
   ],
   "description": "jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.",
-  "main": ["./jquery.daterangepicker.js", "./daterangepicker.css"],
+  "main": [
+    "./src/jquery.daterangepicker.js",
+    "./src/daterangepicker.css"
+  ],
   "moduleType": [
     "amd",
     "globals"
