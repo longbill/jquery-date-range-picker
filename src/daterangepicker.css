@@ -7,7 +7,7 @@
 	line-height:25px;
 	padding-left:10px;
 	font-size:12px;
-	font-family:Arial;
+	font-family:Arial,sans-serif;
 	font-weight:bold;
 	cursor:pointer;
 	color:#303030;
@@ -24,7 +24,7 @@
 	font-size:12px;
 	line-height:20px;
 	color:#aaa;
-	font-family:Arial;
+	font-family:Arial,sans-serif;
 	box-shadow:3px 3px 10px rgba(0,0,0,0.5);
 	box-sizing: initial;
 }
