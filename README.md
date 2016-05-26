@@ -1,6 +1,6 @@
 ## jQuery Date Range Picker Plugin
 
-[![Bower Version](https://img.shields.io/bower/v/jquery-date-range-picker.svg?maxAge=2592000)]()
+[![Bower Version](https://img.shields.io/bower/v/jquery-date-range-picker.svg?maxAge=3600)]()
 [![License](https://img.shields.io/github/license/longbill/jquery-date-range-picker.svg?maxAge=2592000)]()
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
@@ -39,7 +39,7 @@ npm install
 ```
 gulp
 ```
-* Above command will generate new files by reading from ```src```
+* Above command will generate new files by reading from ```src``` folder
 
 ### Change log
 * See [changelog](CHANGELOG.md)

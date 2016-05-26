@@ -21,13 +21,20 @@
     "picker",
     "range"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/longbill/jquery-date-range-picker.git"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "preview.jpg",
+    "CHANGELOG.md",
+    "gulpfile.js"
   ],
   "dependencies": {
     "moment": ">=2.8.1",
