@@ -1,0 +1,18 @@
+# https://git-scm.com/book/en/Customizing-Git-Git-Attributes
+# https://help.github.com/articles/dealing-with-line-endings
+
+
+# Auto detect text files and perform LF normalization
+#* text=auto
+
+# Don't diff or textually merge source maps
+*.map   binary
+
+# Avoid unreadable diffs for generated text files, eg: *.min.js
+*.min.* binary
+
+# Export ignores
+tests export-ignore
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore

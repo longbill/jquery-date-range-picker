@@ -39,6 +39,30 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 * fixed some position issues
 * fixed some time related bugs
 
+#### How to setup this project on your development machine
+* Install node.js [Ubuntu/Mac](https://github.com/creationix/nvm) , [Windows](https://nodejs.org/en/download/)
+* Update npm to latest version
+```
+npm install -g npm
+```
+* Install gulp v3.9.1 (global install)
+```
+npm install -g gulp@3.9.1
+```
+* Clone this project
+```
+git clone https://github.com/longbill/jquery-date-range-picker.git
+cd jquery-date-range-picker
+```
+* Install local dependencies
+```
+npm install
+```
+* How to generate minified (dist) files ?
+```
+gulp
+```
+* Above command will generate new files by reading from ```src```
 
 ###LICENSE###
 This date range picker plugin is under MIT LICENSE
