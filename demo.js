@@ -280,6 +280,14 @@ $(function()
 		singleDate : true,
 		showShortcuts: false 
 	});
+	
+	$('#date-range13-2').dateRangePicker(
+	{
+		autoClose: true,
+		singleDate : true,
+		showShortcuts: false,
+		singleMonth: true
+	});
 
 	$('#date-range14').dateRangePicker(
 	{
@@ -348,6 +356,12 @@ $(function()
 		evt.stopPropagation();
 		$('#date-range16').data('dateRangePicker').destroy();
 	});
+
+	$('#date-range16-reset').click(function(evt)
+    {
+		evt.stopPropagation();
+		$('#date-range16').data('dateRangePicker').resetMonthsView();
+    });
 
 	$('#date-range17').dateRangePicker(
 	{

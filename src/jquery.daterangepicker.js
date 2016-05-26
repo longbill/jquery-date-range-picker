@@ -1,7 +1,5 @@
-// daterangepicker.js
-// version : 0.0.9
+// jquery.daterangepicker.js
 // author : Chunlong Liu
-// last updated at: 2015-10-30
 // license : MIT
 // www.jszen.com
 
@@ -18,7 +16,7 @@
 		}
 }(function ($, moment)
 {
-
+    'use strict';
 	$.dateRangePickerLanguages =
 	{
 		'default':  //default language: English
@@ -196,13 +194,13 @@
 			'default-default': 'Bitte ein Start- und Enddatum auswählen',
 			'Time': 'Zeit',
 			'hour': 'Stunde',
-			'minute': 'Minute',
+			'minute': 'Minute'
 		},
 		'es':
 		{
 			'selected': 'Seleccionado:',
-			'day':'Dia',
-			'days': 'Dias',
+			'day':'Día',
+			'days': 'Días',
 			'apply': 'Cerrar',
 			'week-1' : 'lu',
 			'week-2' : 'ma',
@@ -223,12 +221,12 @@
 			'next-week':'Semana',
 			'next-month':'Mes',
 			'next-year':'Año',
-			'less-than' : 'El rango no deberia ser mayor de %d dias',
-			'more-than' : 'El rango no deberia ser menor de %d dias',
-			'default-more' : 'Por favor selecciona un rango mayor a %d dias',
-			'default-single' : 'Por favor selecciona un dia',
-			'default-less' : 'Por favor selecciona un rango menor a %d dias',
-			'default-range' : 'Por favor selecciona un rango entre %d y %d dias',
+			'less-than' : 'El rango no debería ser mayor de %d días',
+			'more-than' : 'El rango no debería ser menor de %d días',
+			'default-more' : 'Por favor selecciona un rango mayor a %d días',
+			'default-single' : 'Por favor selecciona un día',
+			'default-less' : 'Por favor selecciona un rango menor a %d días',
+			'default-range' : 'Por favor selecciona un rango entre %d y %d días',
 			'default-default': 'Por favor selecciona un rango de fechas.'
 		},
 		'fr':
@@ -329,6 +327,43 @@
 			'default-less' : 'Seleziona un intervallo minore di %d giorni',
 			'default-range' : 'Seleziona un intervallo compreso tra i %d e i %d giorni',
 			'default-default': 'Seleziona un intervallo di date'
+		},
+		'ko':
+		{
+			'selected': '기간:',
+			'day':'일',
+			'days': '일간',
+			'apply': '닫기',
+			'week-1' : '월',
+			'week-2' : '화',
+			'week-3' : '수',
+			'week-4' : '목',
+			'week-5' : '금',
+			'week-6' : '토',
+			'week-7' : '일',
+			'week-number' : '주',
+			'month-name': ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			'shortcuts' : '단축키들',
+			'past': '지난(오늘기준)',
+			'following':'이후(오늘기준)',
+			'previous' : '이전',
+			'prev-week' : '1주',
+			'prev-month' : '1달',
+			'prev-year' : '1년',
+			'next':'다음',
+			'next-week':'1주',
+			'next-month':'1달',
+			'next-year':'1년',
+			'less-than' : '날짜 범위는 %d 일보다 많을 수 없습니다',
+			'more-than' : '날짜 범위는 %d 일보다 작을 수 없습니다',
+			'default-more' : '날짜 범위를 %d 일보다 길게 선택해 주세요',
+			'default-single' : '날짜를 선택해 주세요',
+			'default-less' : '%d 일보다 작은 날짜를 선택해 주세요',
+			'default-range' : '%d와 %d 일 사이의 날짜 범위를 선택해 주세요',
+			'default-default': '날짜 범위를 선택해 주세요',
+			'time': '시각',
+			'hour': '시',
+			'minute': '분'
 		},
 		'no':
 		{
@@ -510,6 +545,44 @@
 			'time':'tid',
 			'hour':'timme',
 			'minute':'minut'
+		},
+		'pt':  //Portuguese (European)
+		{
+			'selected': 'Selecionado:',
+			'day':'Dia',
+			'days': 'Dias',
+			'apply': 'Fechar',
+			'week-1' : 'seg',
+			'week-2' : 'ter',
+			'week-3' : 'qua',
+			'week-4' : 'qui',
+			'week-5' : 'sex',
+			'week-6' : 'sab',
+			'week-7' : 'dom',
+			'week-number': 'N',
+			'month-name': ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'],
+			'shortcuts' : 'Atalhos',
+			'custom-values': 'Valores Personalizados',
+			'past': 'Passado',
+			'following':'Seguinte',
+			'previous' : 'Anterior',
+			'prev-week' : 'Semana',
+			'prev-month' : 'Mês',
+			'prev-year' : 'Ano',
+			'next':'Próximo',
+			'next-week':'Próxima Semana',
+			'next-month':'Próximo Mês',
+			'next-year':'Próximo Ano',
+			'less-than' : 'O período selecionado não deve ser maior que %d dias',
+			'more-than' : 'O período selecionado não deve ser menor que %d dias',
+			'default-more' : 'Selecione um período superior a %d dias',
+			'default-single' : 'Selecione uma data',
+			'default-less' : 'Selecione um período inferior a %d dias',
+			'default-range' : 'Selecione um período de %d a %d dias',
+			'default-default': 'Selecione um período',
+			'time':'Tempo',
+			'hour':'Hora',
+			'minute':'Minuto'
 		}
 	};
 
@@ -594,8 +667,6 @@
 		if (opt.singleMonth == 'auto') opt.singleMonth = $(window).width() < 480;
 		if (opt.singleMonth) opt.stickyMonths = false;
 
-		if (opt.singleDate) opt.singleMonth = true;
-
 		if (!opt.showTopbar) opt.autoClose = true;
 
 		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
@@ -648,6 +719,7 @@
 			open: open,
 			redraw: redrawDatePicker,
 			getDatePicker: getDatePicker,
+			resetMonthsView: resetMonthsView,
 			destroy: function()
 			{
 				$(self).unbind('.datepicker');
@@ -662,10 +734,10 @@
 		$(window).bind('resize.datepicker',calcPosition);
 
 		return this;
-		
+
 		function IsOwnDatePickerClicked(evt, selfObj)
 		{
-			return ( selfObj.contains(evt.target) || evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0))
+			return ( selfObj.contains(evt.target) || evt.target == selfObj  || (selfObj.childNodes != undefined && $.inArray(evt.target, selfObj.childNodes)>=0));
 		}
 
 		function init_datepicker()
@@ -685,6 +757,9 @@
 			box.delegate('.day', 'mouseleave', function()
 			{
 				box.find('.date-range-length-tip').hide();
+				if (opt.singleDate) {
+				    clearHovering();
+				}
 			});
 
 			$(opt.container).append(box);
@@ -695,7 +770,7 @@
 			}
 			else
 			{
-				box.addClass("inline-wrapper");
+				box.addClass('inline-wrapper');
 			}
 
 			if (opt.alwaysOpen)
@@ -703,32 +778,8 @@
 				box.find('.apply-btn').hide();
 			}
 
-			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
-			if (opt.lookBehind)
-			{
-				if (opt.startDate && compare_month(defaultTime, opt.startDate) < 0 ) defaultTime = nextMonth(moment(opt.startDate).toDate());
-				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
-
-				showMonth(prevMonth(defaultTime),'month1');
-				showMonth(defaultTime,'month2');
-
-			}
-			else
-			{
-				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
-				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
-
-				showMonth(defaultTime,'month1');
-				showMonth(nextMonth(defaultTime),'month2');
-			}
-
-			if (opt.singleDate)
-			{
-				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
-				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
-
-				showMonth(defaultTime,'month1');
-			}
+			var defaultTime = getDefaultTime();
+			resetMonthsView(defaultTime);
 
 			if (opt.time.enabled)
 			{
@@ -895,6 +946,7 @@
 			{
 				var shortcut = $(this).attr('shortcut');
 				var end = new Date(),start = false;
+                var dir;
 				if (shortcut.indexOf('day') != -1)
 				{
 					var day = parseInt(shortcut.split(',',2)[1],10);
@@ -903,12 +955,12 @@
 				}
 				else if (shortcut.indexOf('week')!= -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
-
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+                    var stopDay;
 					if (dir == 1)
-						var stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
+						 stopDay = opt.startOfWeek == 'monday' ? 1 : 0;
 					else
-						var stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
+						 stopDay = opt.startOfWeek == 'monday' ? 0 : 6;
 
 					end = new Date(end.getTime() - 86400000);
 					while(end.getDay() != stopDay) end = new Date(end.getTime() + dir*86400000);
@@ -916,7 +968,7 @@
 				}
 				else if (shortcut.indexOf('month') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					if (dir == 1)
 						start = nextMonth(end);
 					else
@@ -928,7 +980,7 @@
 				}
 				else if (shortcut.indexOf('year') != -1)
 				{
-					var dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
+					dir = shortcut.indexOf('prev,') != -1 ? -1 : 1;
 					start = new Date();
 					start.setFullYear(end.getFullYear() + dir);
 					start.setMonth(0);
@@ -962,7 +1014,7 @@
 								// move calendars to show this date's month and next months
 								if (data && data.length == 1)
 								{
-									movetodate = data[0];
+									var movetodate = data[0];
 									showMonth(movetodate,'month1');
 									showMonth(nextMonth(movetodate),'month2');
 									showGap();
@@ -980,18 +1032,18 @@
 				}
 			});
 
-			box.find(".time1 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time1 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time1", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time1', hour, min);
 			});
 
-			box.find(".time2 input[type=range]").bind("change touchmove mousemove", function (e) {
+			box.find('.time2 input[type=range]').bind('change touchmove mousemove', function (e) {
 				var target = e.target,
-					hour = target.name == "hour" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined,
-					min = target.name == "minute" ? $(target).val().replace(/^(\d{1})$/, "0$1") : undefined;
-				setTime("time2", hour, min);
+					hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+					min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+				setTime('time2', hour, min);
 			});
 
 		}
@@ -1002,34 +1054,34 @@
 			if (!opt.inline)
 			{
 				var offset = $(self).offset();
-						if ($(opt.container).css("position") == "relative")
+				if ($(opt.container).css('position') == 'relative')
+				{
+					var containerOffset = $(opt.container).offset();
+					box.css(
+					{
+						top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
+						left: offset.left - containerOffset.left
+					});
+				}
+				else
+				{
+					if (offset.left < 460) //left to right
+					{
+						box.css(
 						{
-							var containerOffset = $(opt.container).offset();
-							box.css(
-							{
-								top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
-								left: offset.left - containerOffset.left
-							});
-						}
-						else
+							top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+							left: offset.left
+						});
+					}
+					else
+					{
+						box.css(
 						{
-							if (offset.left < 460) //left to right
-							{
-								box.css(
-								{
-									top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-									left: offset.left
-								});
-							}
-							else
-							{
-								box.css(
-								{
-									top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
-									left: offset.left + $(self).width() - box.width() - 16
-								});
-							}
-						}
+							top: offset.top+$(self).outerHeight() + parseInt($('body').css('border-top') || 0,10 ),
+							left: offset.left + $(self).width() - box.width() - 16
+						});
+					}
+				}
 			}
 		}
 
@@ -1082,13 +1134,21 @@
 				// set initiated  to avoid triggerring datepicker-change event
 				initiated = false;
 				if(defaults.length >= 2){
-					setDateRange(moment(defaults[0], ___format, moment.locale(opt.language)).toDate(),moment(defaults[1], ___format, moment.locale(opt.language)).toDate());
+					setDateRange(getValidValue(defaults[0], ___format, moment.locale(opt.language)),getValidValue(defaults[1], ___format, moment.locale(opt.language)));
 				}
 				else if(defaults.length==1 && opt.singleDate){
-					setSingleDate(moment(defaults[0], ___format, moment.locale(opt.language)).toDate());
+					setSingleDate(getValidValue(defaults[0], ___format, moment.locale(opt.language)));
 				}
 
 				initiated = true;
+			}
+		}
+
+		function getValidValue(date, format, locale) {
+			if (moment(date, format, locale).isValid()) {
+				return moment(date, format, locale).toDate();
+			} else {
+				return moment().toDate();
 			}
 		}
 
@@ -1103,50 +1163,50 @@
 		}
 
 		function renderTime (name, date) {
-			box.find("." + name + " input[type=range].hour-range").val(moment(date).hours());
-			box.find("." + name + " input[type=range].minute-range").val(moment(date).minutes());
-			setTime(name, moment(date).format("HH"), moment(date).format("mm"));
+			box.find('.' + name + ' input[type=range].hour-range').val(moment(date).hours());
+			box.find('.' + name + ' input[type=range].minute-range').val(moment(date).minutes());
+			setTime(name, moment(date).format('HH'), moment(date).format('mm'));
 		}
 
 		function changeTime (name, date) {
 			opt[name] = parseInt(
 				moment(parseInt(date))
 					.startOf('day')
-					.add(moment(opt[name + "Time"]).format("HH"), 'h')
-					.add(moment(opt[name + "Time"]).format("mm"), 'm').valueOf()
+					.add(moment(opt[name + 'Time']).format('HH'), 'h')
+					.add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
 				);
 		}
 
 		function swapTime () {
-			renderTime("time1", opt.start);
-			renderTime("time2", opt.end);
+			renderTime('time1', opt.start);
+			renderTime('time2', opt.end);
 		}
 
-		function setTime (name, hour, minute) 
+		function setTime (name, hour, minute)
 		{
-			hour && (box.find("." + name + " .hour-val").text(hour));
-			minute && (box.find("." + name + " .minute-val").text(minute));
+			hour && (box.find('.' + name + ' .hour-val').text(hour));
+			minute && (box.find('.' + name + ' .minute-val').text(minute));
 			switch (name) {
-				case "time1":
+				case 'time1':
 					if (opt.start) {
-						setRange("start", moment(opt.start));
+						setRange('start', moment(opt.start));
 					}
-					setRange("startTime", moment(opt.startTime || moment().valueOf()));
+					setRange('startTime', moment(opt.startTime || moment().valueOf()));
 					break;
-				case "time2":
+				case 'time2':
 					if (opt.end) {
-						setRange("end", moment(opt.end));
+						setRange('end', moment(opt.end));
 					}
-					setRange("endTime", moment(opt.endTime || moment().valueOf()));
+					setRange('endTime', moment(opt.endTime || moment().valueOf()));
 					break;
 			}
 			function setRange(name, timePoint) {
-				var h = timePoint.format("HH"),
-					m = timePoint.format("mm");
+				var h = timePoint.format('HH'),
+					m = timePoint.format('mm');
 				opt[name] = timePoint
 					.startOf('day')
-					.add(hour || h, "h")
-					.add(minute || m, "m")
+					.add(hour || h, 'h')
+					.add(minute || m, 'm')
 					.valueOf();
 			}
 			checkSelectionValid();
@@ -1254,17 +1314,17 @@
 			{
 				opt.end = handleEnd(time);
 				if (opt.time.enabled) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
 			//Update time in case it is enabled and timestamps are available
 			if(opt.time.enabled) {
 				if(opt.start) {
-					changeTime("start", opt.start);
+					changeTime('start', opt.start);
 				}
 				if(opt.end) {
-					changeTime("end", opt.end);
+					changeTime('end', opt.end);
 				}
 			}
 
@@ -1299,26 +1359,27 @@
 			autoclose();
 		}
 
-		
+
 		function weekNumberClicked(weekNumberDom)
 		{
 			var thisTime = parseInt(weekNumberDom.attr('data-start-time'),10);
+            var date1,date2;
 			if (!opt.startWeek)
 			{
 				opt.startWeek = thisTime;
 				weekNumberDom.addClass('week-number-selected');
-				var date1 = new Date(thisTime);
-				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
-				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
+				date1 = new Date(thisTime);
+				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
+				opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
 			}
 			else
 			{
 				box.find('.week-number-selected').removeClass('week-number-selected');
-				var date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
-				var date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
+				date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
+				date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
 				opt.startWeek = false;
-				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).toDate();
-				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).toDate();
+				opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
+				opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
 			}
 			updateSelectableRange();
 			checkSelectionValid();
@@ -1327,13 +1388,13 @@
 			autoclose();
 		}
 
-		function isValidTime(time) 
+		function isValidTime(time)
 		{
 			time = parseInt(time, 10);
 			if (opt.startDate && compare_day(time, opt.startDate) < 0) return false;
 			if (opt.endDate && compare_day(time, opt.endDate) > 0) return false;
 
-			if (opt.start && !opt.end && !opt.singleDate) 
+			if (opt.start && !opt.end && !opt.singleDate)
 			{
 				//check maxDays and minDays setting
 				if (opt.maxDays > 0 && countDays(time, opt.start) > opt.maxDays) return false;
@@ -1420,11 +1481,9 @@
 						}
 
 						if (
-							( opt.start && !opt.end )
-							&&
+							( opt.start && !opt.end ) &&
 							(
-								( opt.start < time && hoverTime >= time )
-								||
+								( opt.start < time && hoverTime >= time ) ||
 								( opt.start > time && hoverTime <= time )
 							)
 						)
@@ -1543,9 +1602,10 @@
 
 			if (opt.batchMode)
 			{
-				if ( (opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0)
-					|| (opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)  )
-				{
+				if (
+					(opt.start && opt.startDate && compare_day(opt.start, opt.startDate) < 0) ||
+					(opt.end && opt.endDate && compare_day(opt.end, opt.endDate) > 0)
+				) {
 					opt.start = false;
 					opt.end = false;
 					box.find('.day').removeClass('checked');
@@ -1566,11 +1626,11 @@
 			{
 				box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
 			}
-
+            var dateRange;
 			if (opt.start && opt.singleDate)
 			{
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start));
+				dateRange = getDateString(new Date(opt.start));
 				opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 
 				if (initiated && !silent)
@@ -1586,7 +1646,7 @@
 			{
 				box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start));
 				box.find('.apply-btn').removeClass('disabled');
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
 				opt.setValue.call(selfDom,dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
 				if (initiated && !silent)
 				{
@@ -1638,11 +1698,11 @@
 
 			if (opt.time.enabled)
 			{
-				renderTime("time1", date1);
-				renderTime("time2", date2);
+				renderTime('time1', date1);
+				renderTime('time2', date2);
 			}
 
-			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) == 0))
+			if (opt.stickyMonths || (compare_day(date1,date2) > 0 && compare_month(date1,date2) === 0))
 			{
 				if (opt.lookBehind) {
 					date1 = prevMonth(date2);
@@ -1657,7 +1717,7 @@
 			}
 
 			if (!opt.stickyMonths) {
-				if (compare_month(date1,date2) == 0)
+				if (compare_month(date1,date2) === 0)
 				{
 					if (opt.lookBehind) {
 						date1 = prevMonth(date2);
@@ -1691,11 +1751,14 @@
 
 
 			if (opt.time.enabled) {
-				renderTime("time1", date1);
+				renderTime('time1', date1);
 
 			}
 			showMonth(date1,'month1');
-			//showMonth(date2,'month2');
+			if (opt.singleMonth !== true) {
+      				var date2 = nextMonth(date1);
+      				showMonth(date2, 'month2');
+    			}
 			showGap();
 			showSelectedInfo();
 			autoclose();
@@ -1715,8 +1778,8 @@
 					end = moment(end || moment().valueOf()).startOf('day').valueOf();
 				}
 				if (
-					(opt.start && opt.end && end >= time && start <= time )
-					|| ( opt.start && !opt.end && moment(start).format('YYYY-MM-DD') == moment(time).format('YYYY-MM-DD') )
+					(opt.start && opt.end && end >= time && start <= time ) ||
+					( opt.start && !opt.end && moment(start).format('YYYY-MM-DD') == moment(time).format('YYYY-MM-DD') )
 				)
 				{
 					$(this).addClass('checked');
@@ -1831,7 +1894,7 @@
 		{
 			var p = parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
 			if (p > 0 ) return 1;
-			if (p == 0) return 0;
+			if (p === 0) return 0;
 			return -1;
 		}
 
@@ -1839,7 +1902,7 @@
 		{
 			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
 			if (p > 0 ) return 1;
-			if (p == 0) return 0;
+			if (p === 0) return 0;
 			return -1;
 		}
 
@@ -1855,15 +1918,15 @@
 
 		function getTimeHTML()
 		{
-			return '<div>\
-						<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>\
-					</div>\
-					<div class="hour">\
-						<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>\
-					</div>\
-					<div class="minute">\
-						<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>\
-					</div>';
+			return '<div>' +
+					'<span>'+lang('Time')+': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
+				'</div>' +
+				'<div class="hour">' +
+					'<label>'+lang('Hour')+': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
+				'</div>' +
+				'<div class="minute">' +
+					'<label>'+lang('Minute')+': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
+				'</div>';
 		}
 
 		function createDom()
@@ -1887,39 +1950,39 @@
 				}
 				else
 				{
-					html += '<div class="normal-top">\
-							<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
+					html += '<div class="normal-top">' +
+							'<span style="color:#333">'+lang('selected')+' </span> <b class="start-day">...</b>';
 					if ( ! opt.singleDate ) {
-						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>'
+						html += ' <span class="separator-day">'+opt.separator+'</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> '+lang('days')+')</i>';
 					}
 					html += '</div>';
-					html += '<div class="error-top">error</div>\
-						<div class="default-top">default</div>';
+					html += '<div class="error-top">error</div>' +
+						'<div class="default-top">default</div>';
 				}
 
 				html += '<input type="button" class="apply-btn disabled'+ getApplyBtnClass() +'" value="'+lang('apply')+'" />';
-				html += '</div>'
+				html += '</div>';
 			}
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
-			html += '<div class="month-wrapper">'
-				+'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+			html += '<div class="month-wrapper">' +
+				'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 
 			if ( hasMonth2() )
 			{
-				html += '<div class="gap">'+getGapHTML()+'</div>'
-					+'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>'
+				html += '<div class="gap">'+getGapHTML()+'</div>' +
+					'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
 			}
 				//+'</div>'
-			html +=	'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'<div class="time">'
-				+'<div class="time1"></div>'
+			html +=	'<div style="clear:both;height:0;font-size:0;"></div>' +
+				'<div class="time">' +
+				'<div class="time1"></div>';
 			if ( ! opt.singleDate ) {
-				html += '<div class="time2"></div>'
+				html += '<div class="time2"></div>';
 			}
-			html += '</div>'
-				+'<div style="clear:both;height:0;font-size:0;"></div>'
-				+'</div>';
+			html += '</div>' +
+				'<div style="clear:both;height:0;font-size:0;"></div>' +
+				'</div>';
 
 			html += '<div class="footer">';
 			if (opt.showShortcuts)
@@ -1928,13 +1991,13 @@
 
 				var data = opt.shortcuts;
 				if (data)
-				{
+				{   var name;
 					if (data['prev-days'] && data['prev-days'].length > 0)
 					{
 						html += '&nbsp;<span class="prev-days">'+lang('past');
 						for(var i=0;i<data['prev-days'].length; i++)
 						{
-							var name = data['prev-days'][i];
+							name = data['prev-days'][i];
 							name += (data['prev-days'][i] > 1) ? lang('days') : lang('day');
 							html += ' <a href="javascript:;" shortcut="day,-'+data['prev-days'][i]+'">'+name+'</a>';
 						}
@@ -1946,31 +2009,31 @@
 						html += '&nbsp;<span class="next-days">'+lang('following');
 						for(var i=0;i<data['next-days'].length; i++)
 						{
-							var name = data['next-days'][i];
+							name = data['next-days'][i];
 							name += (data['next-days'][i] > 1) ? lang('days') : lang('day');
 							html += ' <a href="javascript:;" shortcut="day,'+data['next-days'][i]+'">'+name+'</a>';
 						}
 						html+= '</span>';
 					}
 
-					if (data['prev'] && data['prev'].length > 0)
+					if (data.prev && data.prev.length > 0)
 					{
 						html += '&nbsp;<span class="prev-buttons">'+lang('previous');
-						for(var i=0;i<data['prev'].length; i++)
+						for(var i=0;i<data.prev.length; i++)
 						{
-							var name = lang('prev-'+data['prev'][i]);
-							html += ' <a href="javascript:;" shortcut="prev,'+data['prev'][i]+'">'+name+'</a>';
+							name = lang('prev-'+data.prev[i]);
+							html += ' <a href="javascript:;" shortcut="prev,'+data.prev[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
 					}
 
-					if (data['next'] && data['next'].length > 0)
+					if (data.next && data.next.length > 0)
 					{
 						html += '&nbsp;<span class="next-buttons">'+lang('next');
-						for(var i=0;i<data['next'].length; i++)
+						for(var i=0;i<data.next.length; i++)
 						{
-							var name = lang('next-'+data['next'][i]);
-							html += ' <a href="javascript:;" shortcut="next,'+data['next'][i]+'">'+name+'</a>';
+							name = lang('next-'+data.next[i]);
+							html += ' <a href="javascript:;" shortcut="next,'+data.next[i]+'">'+name+'</a>';
 						}
 						html+='</span>';
 					}
@@ -2010,7 +2073,7 @@
 
 		function getApplyBtnClass()
 		{
-			var klass = ''
+			var klass = '';
 			if (opt.autoClose === true) {
 				klass += ' hide';
 			}
@@ -2025,29 +2088,29 @@
 			var prepend = opt.showWeekNumbers ? '<th>'+lang('week-number')+'</th>' : '';
 			if (opt.startOfWeek == 'monday')
 			{
-				return prepend+'<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>\
-					<th>'+lang('week-7')+'</th>';
+				return prepend+'<th>'+lang('week-1')+'</th>' +
+					'<th>'+lang('week-2')+'</th>' +
+					'<th>'+lang('week-3')+'</th>' +
+					'<th>'+lang('week-4')+'</th>' +
+					'<th>'+lang('week-5')+'</th>' +
+					'<th>'+lang('week-6')+'</th>' +
+					'<th>'+lang('week-7')+'</th>';
 			}
 			else
 			{
-				return prepend+'<th>'+lang('week-7')+'</th>\
-					<th>'+lang('week-1')+'</th>\
-					<th>'+lang('week-2')+'</th>\
-					<th>'+lang('week-3')+'</th>\
-					<th>'+lang('week-4')+'</th>\
-					<th>'+lang('week-5')+'</th>\
-					<th>'+lang('week-6')+'</th>';
+				return prepend+'<th>'+lang('week-7')+'</th>' +
+					'<th>'+lang('week-1')+'</th>' +
+					'<th>'+lang('week-2')+'</th>' +
+					'<th>'+lang('week-3')+'</th>' +
+					'<th>'+lang('week-4')+'</th>' +
+					'<th>'+lang('week-5')+'</th>' +
+					'<th>'+lang('week-6')+'</th>';
 			}
 		}
 
 		function isMonthOutOfBounds(month)
 		{
-			var month = moment(month);
+			month = moment(month);
 			if (opt.startDate && month.endOf('month').isBefore(opt.startDate))
 			{
 				return true;
@@ -2064,11 +2127,11 @@
 			var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
 			for(var i=0;i<20;i++)
 			{
-				html.push('<div class="gap-line">\
-					<div class="gap-1"></div>\
-					<div class="gap-2"></div>\
-					<div class="gap-3"></div>\
-				</div>');
+				html.push('<div class="gap-line">' +
+					'<div class="gap-1"></div>' +
+					'<div class="gap-2"></div>' +
+					'<div class="gap-3"></div>' +
+				'</div>');
 			}
 			html.push('</div>');
 			return html.join('');
@@ -2076,7 +2139,7 @@
 
 		function hasMonth2()
 		{
-			return ( !opt.singleDate && !opt.singleMonth);
+			return (!opt.singleMonth);
 		}
 
 		function attributesCallbacks(initialObject,callbacksArray,today)
@@ -2127,17 +2190,18 @@
 			var now = new Date();
 
 			var dayOfWeek = d.getDay();
-			if((dayOfWeek == 0) && (opt.startOfWeek == 'monday')) {
+			if((dayOfWeek === 0) && (opt.startOfWeek === 'monday')) {
 				// add one week
 				dayOfWeek = 7;
 			}
+            var today,valid;
 
 			if (dayOfWeek > 0)
 			{
 				for (var i = dayOfWeek; i > 0; i--)
 				{
 					var day = new Date(d.getTime() - 86400000*i);
-					var valid = isValidTime(day.getTime());
+					valid = isValidTime(day.getTime());
 					if (opt.startDate && compare_day(day,opt.startDate) < 0) valid = false;
 					if (opt.endDate && compare_day(day,opt.endDate) > 0) valid = false;
 					days.push(
@@ -2153,8 +2217,8 @@
 			var toMonth = d.getMonth();
 			for(var i=0; i<40; i++)
 			{
-				var today = moment(d).add(i, 'days').toDate();
-				var valid = isValidTime(today.getTime());
+				today = moment(d).add(i, 'days').toDate();
+				valid = isValidTime(today.getTime());
 				if (opt.startDate && compare_day(today,opt.startDate) < 0) valid = false;
 				if (opt.endDate && compare_day(today,opt.endDate) > 0) valid = false;
 				days.push(
@@ -2171,10 +2235,11 @@
 			{
 				if (days[week*7].type == 'nextMonth') break;
 				html.push('<tr>');
+
 				for(var day = 0; day<7; day++)
 				{
 					var _day = (opt.startOfWeek == 'monday') ? day+1 : day;
-					var today = days[week*7+_day];
+					today = days[week*7+_day];
 					var highlightToday = moment(today.time).format('L') == moment(now).format('L');
 					today.extraClass = '';
 					today.tooltip = '';
@@ -2184,7 +2249,7 @@
 						today.valid = _r[0];
 						today.extraClass = _r[1] || '';
 						today.tooltip = _r[2] || '';
-						if (today.tooltip != '') today.extraClass += ' has-tooltip ';
+						if (today.tooltip !== '') today.extraClass += ' has-tooltip ';
 					}
 
 					var todayDivAttr = {
@@ -2193,7 +2258,7 @@
 						'class': 'day '+today.type+' '+today.extraClass+' '+(today.valid ? 'valid' : 'invalid')+' '+(highlightToday?'real-today':'')
 					};
 
-					if (day == 0 && opt.showWeekNumbers)
+					if (day === 0 && opt.showWeekNumbers)
 					{
 						html.push('<td><div class="week-number" data-start-time="'+today.time+'">'+opt.getWeekNumber(today.date)+'</div></td>');
 					}
@@ -2217,10 +2282,10 @@
 			{
 				var language = navigator.language ? navigator.language : navigator.browserLanguage;
 				if (!language) return $.dateRangePickerLanguages['default'];
-				var language = language.toLowerCase();
+				language = language.toLowerCase();
 				for(var key in $.dateRangePickerLanguages)
 				{
-					if (language.indexOf(key) != -1)
+					if (language.indexOf(key) !== -1)
 					{
 						return $.dateRangePickerLanguages[key];
 					}
@@ -2249,6 +2314,55 @@
 			return re;
 		}
 
+		function getDefaultTime()
+		{
+			var defaultTime = opt.defaultTime ? opt.defaultTime : new Date();
+
+			if (opt.lookBehind)
+			{
+				if (opt.startDate && compare_month(defaultTime, opt.startDate) < 0 ) defaultTime = nextMonth(moment(opt.startDate).toDate());
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
+			}
+			else
+			{
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(nextMonth(defaultTime),opt.endDate) > 0 ) defaultTime = prevMonth(moment(opt.endDate).toDate());
+			}
+
+			if (opt.singleDate)
+			{
+				if (opt.startDate && compare_month(defaultTime,opt.startDate) < 0 ) defaultTime = moment(opt.startDate).toDate();
+				if (opt.endDate && compare_month(defaultTime,opt.endDate) > 0 ) defaultTime = moment(opt.endDate).toDate();
+			}
+
+			return defaultTime;
+		}
+
+		function resetMonthsView(time)
+		{
+			if (!time) {
+				time = getDefaultTime();
+			}
+
+			if (opt.lookBehind)
+			{
+				showMonth(prevMonth(time),'month1');
+				showMonth(time,'month2');
+			}
+			else
+			{
+				showMonth(time,'month1');
+				showMonth(nextMonth(time),'month2');
+			}
+
+			if (opt.singleDate)
+			{
+				showMonth(time,'month1');
+			}
+
+			showSelectedDays();
+			showGap();
+		}
 
 	};
 }));
