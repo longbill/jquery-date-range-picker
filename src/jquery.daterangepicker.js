@@ -1900,7 +1900,7 @@
 
 		function compare_day(m1,m2)
 		{
-			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
+			var p = parseInt(moment(m1).locale('en').format('YYYYMMDD')) - parseInt(moment(m2).locale('en').format('YYYYMMDD'));
 			if (p > 0 ) return 1;
 			if (p === 0) return 0;
 			return -1;
