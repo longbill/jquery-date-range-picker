@@ -1892,6 +1892,10 @@
 
 		function compare_month(m1,m2)
 		{
+			if(!m2 || !m1) {
+				return -1;
+			}
+
 			var p = parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
 			if (p > 0 ) return 1;
 			if (p === 0) return 0;
@@ -1900,6 +1904,11 @@
 
 		function compare_day(m1,m2)
 		{
+
+			if(!m2 || !m1) {
+				return -1;
+			}
+
 			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
 			if (p > 0 ) return 1;
 			if (p === 0) return 0;
