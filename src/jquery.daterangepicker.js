@@ -1892,27 +1892,28 @@
 
 		function compare_month(m1,m2)
 		{
-			if(!m2 || !m1) {
+
+			if( m1 && m2 )
+			{
+				return parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
+			}
+			else
+			{
 				return -1;
 			}
-
-			var p = parseInt(moment(m1).format('YYYYMM')) - parseInt(moment(m2).format('YYYYMM'));
-			if (p > 0 ) return 1;
-			if (p === 0) return 0;
-			return -1;
 		}
 
 		function compare_day(m1,m2)
 		{
-
-			if(!m2 || !m1) {
+			
+			if( m1 && m2 )
+			{
+				return parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
+			}
+			else
+			{
 				return -1;
 			}
-
-			var p = parseInt(moment(m1).format('YYYYMMDD')) - parseInt(moment(m2).format('YYYYMMDD'));
-			if (p > 0 ) return 1;
-			if (p === 0) return 0;
-			return -1;
 		}
 
 		function nextMonth(month)
