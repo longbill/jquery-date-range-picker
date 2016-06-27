@@ -2144,9 +2144,9 @@
 
 		function attributesCallbacks(initialObject,callbacksArray,today)
 		{
-			var resultObject = jQuery.extend(true, {}, initialObject);
+			var resultObject = $.extend(true, {}, initialObject);
 
-			jQuery.each(callbacksArray, function(cbAttrIndex, cbAttr){
+			$.each(callbacksArray, function(cbAttrIndex, cbAttr){
 				var addAttributes = cbAttr(today);
 				for(var attr in addAttributes){
 					if(resultObject.hasOwnProperty(attr)){
