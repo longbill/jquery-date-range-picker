@@ -856,7 +856,9 @@ $('#date-range16-reset').click(function(evt)
 })
 .bind('datepicker-apply',function(event,obj)
 {
-	/* This event will be triggered when user clicks on the apply button */
+	/* This event will be triggered when user clicks on the apply button.
+	If opt.autoClose is true or opt.showTopbar is false this will also
+	be triggered when the final date is clicked */
 	console.log(obj);
 })
 .bind('datepicker-close',function()
