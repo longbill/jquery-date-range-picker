@@ -920,13 +920,7 @@
 			box.find('.apply-btn').click(function()
 			{
 				closeDatePicker();
-				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
-				$(self).trigger('datepicker-apply',
-				{
-					'value': dateRange,
-					'date1' : new Date(opt.start),
-					'date2' : new Date(opt.end)
-				});
+				triggerApply();
 			});
 
 			box.find('[custom]').click(function()
