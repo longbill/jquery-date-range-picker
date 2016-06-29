@@ -707,13 +707,11 @@
 		{
 			setStart: function(d1)
 			{
-				var end = new Date()
-				end.setTime(opt.end);
 				if (typeof d1 == 'string')
 				{
 					d1 = moment(d1,opt.format).toDate();
 				}
-				setDateRange(d1, end);
+				setSingleDate(d1);
 				return this;
 			},
 			setEnd: function(d2)
