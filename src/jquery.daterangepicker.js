@@ -1357,6 +1357,7 @@
 			showSelectedInfo();
 			showSelectedDays();
 			autoclose();
+			if (opt.start && opt.end) triggerApply();
 		}
 
 
@@ -1386,6 +1387,7 @@
 			showSelectedInfo();
 			showSelectedDays();
 			autoclose();
+			triggerApply();
 		}
 
 		function isValidTime(time)
@@ -1557,6 +1559,26 @@
 				{
 					if (opt.autoClose) closeDatePicker();
 				}
+			}
+		}
+		
+		function triggerApply()
+		{
+			if (opt.singleDate === true) {
+				var dateRange = getDateString(new Date(opt.start));
+				$(self).trigger('datepicker-apply',
+				{
+					'value': dateRange,
+					'date1' : new Date(opt.start)
+				});
+			} else {
+				var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+				$(self).trigger('datepicker-apply',
+				{
+					'value': dateRange,
+					'date1' : new Date(opt.start),
+					'date2' : new Date(opt.end)
+				});
 			}
 		}
 
