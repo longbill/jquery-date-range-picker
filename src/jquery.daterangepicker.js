@@ -706,8 +706,8 @@
 
 		if (!opt.showTopbar) opt.autoClose = true;
 
-		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
-		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format).toDate();
+		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format,moment.locale(opt.language)).toDate();
+		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format,moment.locale(opt.language)).toDate();
 
 		var langs = getLanguages();
 		var box;
