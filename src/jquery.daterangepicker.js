@@ -746,8 +746,8 @@
 			{
 				if (typeof d1 == 'string' && typeof d2 == 'string')
 				{
-					d1 = moment(d1,opt.format).toDate();
-					d2 = moment(d2,opt.format).toDate();
+					d1 = moment(d1,opt.format, moment.locale(opt.language)).toDate();
+					d2 = moment(d2,opt.format, moment.locale(opt.language)).toDate();
 				}
 				setDateRange(d1,d2,silent);
 			},
