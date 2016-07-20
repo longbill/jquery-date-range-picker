@@ -1720,6 +1720,7 @@
 				tmp = null;
 			}
 			var valid = true;
+
 			if (opt.startDate && compare_day(date1,opt.startDate) < 0) valid = false;
 			if (opt.endDate && compare_day(date2,opt.endDate) > 0) valid = false;
 			if (!valid)
