@@ -1748,7 +1748,7 @@
 				}
 			}
 
-			if(opt.stickyMonths && opt.endDate === false || compare_month(date2,opt.endDate) > 0) {
+			if(opt.stickyMonths && opt.endDate !== false && compare_month(date2,opt.endDate) > 0) {
 				date1 = prevMonth(date1);
 				date2 = prevMonth(date2);
 			}
