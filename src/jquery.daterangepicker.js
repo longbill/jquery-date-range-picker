@@ -706,8 +706,8 @@
 
 		if (!opt.showTopbar) opt.autoClose = true;
 
-		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format).toDate();
-		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format).toDate();
+		if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate,opt.format,moment.locale(opt.language)).toDate();
+		if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate,opt.format,moment.locale(opt.language)).toDate();
 
 		var langs = getLanguages();
 		var box;
@@ -746,8 +746,8 @@
 			{
 				if (typeof d1 == 'string' && typeof d2 == 'string')
 				{
-					d1 = moment(d1,opt.format).toDate();
-					d2 = moment(d2,opt.format).toDate();
+					d1 = moment(d1,opt.format, moment.locale(opt.language)).toDate();
+					d2 = moment(d2,opt.format, moment.locale(opt.language)).toDate();
 				}
 				setDateRange(d1,d2,silent);
 			},
@@ -1720,6 +1720,7 @@
 				tmp = null;
 			}
 			var valid = true;
+
 			if (opt.startDate && compare_day(date1,opt.startDate) < 0) valid = false;
 			if (opt.endDate && compare_day(date2,opt.endDate) > 0) valid = false;
 			if (!valid)

@@ -475,5 +475,10 @@ $(function()
 		}
 	});
 
-
+	$('#date-range51').dateRangePicker(
+	{
+		format: 'DD MMMM',
+		startDate: moment().format('DD MMMM'),
+		language:'ru'
+	});
 });
