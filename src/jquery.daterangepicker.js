@@ -656,7 +656,44 @@
 	            	'time': '時間',
 	            	'hour': '時間',
 	            	'minute': '分'
-	        }
+	        },
+		'da':
+		{
+			'selected': 'Valgt:',
+			'day':'Dag',
+			'days': 'Dage',
+			'apply': 'Luk',
+			'week-1' : 'ma',
+			'week-2' : 'ti',
+			'week-3' : 'on',
+			'week-4' : 'to',
+			'week-5' : 'fr',
+			'week-6' : 'lö',
+			'week-7' : 'sö',
+			'month-name': ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'],
+			'shortcuts' : 'genveje',
+			'custom-values': 'Brugerdefinerede værdier',
+			'past': 'Forbi',
+			'following':'Følgende',
+			'previous' : 'Forrige',
+			'prev-week' : 'uge',
+			'prev-month' : 'månad',
+			'prev-year' : 'år',
+			'next':'Næste',
+			'next-week':'Næste uge',
+			'next-month':'Næste måned',
+			'next-year':'Næste år',
+			'less-than' : 'Dato interval bør ikke være med end %d dage',
+			'more-than' : 'Dato interval bør ikke være mindre end %d dage',
+			'default-more' : 'Vælg datointerval længere end %d dage',
+			'default-single' : 'Vælg dato',
+			'default-less' : 'Vælg datointerval mindre end %d dage',
+			'default-range' : 'Vælg datointerval mellem %d og %d dage',
+			'default-default': 'Vælg datointerval',
+			'time':'tid',
+			'hour':'time',
+			'minute':'minut'
+		}
 	};
 
 	$.fn.dateRangePicker = function(opt)
