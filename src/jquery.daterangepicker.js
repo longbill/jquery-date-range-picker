@@ -415,7 +415,7 @@
 			'week-5' : 'vr',
 			'week-6' : 'za',
 			'week-7' : 'zo',
-			'month-name': ['januari','februari','maart','april','mei','juni','juli','augustus','september','october','november','december'],
+			'month-name': ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
 			'shortcuts' : 'Snelkoppelingen',
 			'custom-values': 'Aangepaste waarden',
 			'past': 'Verleden',
