@@ -815,6 +815,29 @@
 		// expose some api
 		$(this).data('dateRangePicker',
 		{
+			setStart: function(d1)
+			{
+				if (typeof d1 == 'string')
+				{
+					d1 = moment(d1,opt.format).toDate();
+				}
+
+				opt.end = false;
+				setSingleDate(d1);
+
+				return this;
+			},
+			setEnd: function(d2, silent)
+			{
+				var start = new Date();
+				start.setTime(opt.start);
+				if (typeof d2 == 'string')
+				{
+					d2 = moment(d2,opt.format).toDate();
+				}
+				setDateRange(start, d2, silent);
+				return this;
+			},
 			setDateRange : function(d1,d2,silent)
 			{
 				if (typeof d1 == 'string' && typeof d2 == 'string')
