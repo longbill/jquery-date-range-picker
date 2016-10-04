@@ -686,7 +686,8 @@
 				return moment(date).format('w');
 			},
 			customOpenAnimation: null,
-			customCloseAnimation: null
+			customCloseAnimation: null,
+			customClass: ''
 		},opt);
 
 		opt.start = false;
@@ -1970,10 +1971,11 @@
 		{
 			var html = '<div class="date-picker-wrapper';
 			if ( opt.extraClass ) html += ' '+opt.extraClass+' ';
+			if ( opt.customClass ) html += ' ' + opt.customClass + ' ';
 			if ( opt.singleDate ) html += ' single-date ';
 			if ( !opt.showShortcuts ) html += ' no-shortcuts ';
 			if ( !opt.showTopbar ) html += ' no-topbar ';
-			if ( opt.customTopBar) html += ' custom-topbar ';
+			if ( opt.customTopBar ) html += ' custom-topbar ';
 			html += '">';
 
 			if (opt.showTopbar)
