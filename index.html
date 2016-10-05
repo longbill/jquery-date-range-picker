@@ -630,7 +630,7 @@ $('#date-range16-reset').click(function(evt)
 			</div>
 
 			<div class="demo">
-				Custome open/close animation: <input id="date-range50" size="30" value="">
+				Custom open/close animation: <input id="date-range50" size="30" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
@@ -643,6 +643,18 @@ $('#date-range16-reset').click(function(evt)
 		$(this).fadeOut(300, cb);
 	}
 }</pre>
+			</div>
+
+			<div class="demo">
+				Custom arrow symbol: <input id="date-range51" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+// To make this demo work completely, the FontAwesome stylesheets are required 				
+{		
+    customArrowPrevSymbol: '&lt;i class="fa fa-arrow-circle-left"&gt;&lt;/i&gt;',
+    customArrowNextSymbol: '&lt;i class="fa fa-arrow-circle-right"&gt;&lt;/i&gt;'
+}
+				</pre>
 			</div>
 
 
@@ -807,6 +819,12 @@ $('#date-range16-reset').click(function(evt)
 
 <b>extraClass (String)</b>
 	<i>Set extra class name to the date range picker dom.</i>
+
+<b>customArrowPrevSymbol (String / String HTML)</b>
+	<i>Set custom previous symbol, you can use html snippet too.</i>
+
+<b>customArrowNextSymbol (String / String HTML)</b>
+	<i>Set custom next symbol, you can use html snippet too.</i>
 
 <b>showTopbar (Boolean)</b>
 	<i>If show the top bar.</i>
