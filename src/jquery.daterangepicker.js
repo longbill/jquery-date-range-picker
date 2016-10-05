@@ -687,8 +687,8 @@
 			},
 			customOpenAnimation: null,
 			customCloseAnimation: null,
-            customArrowPrevSymbol: '',
-            customArrowNextSymbol: '',
+            customArrowPrevSymbol: null,
+            customArrowNextSymbol: null
 		},opt);
 
 		opt.start = false;
