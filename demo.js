@@ -475,5 +475,11 @@ $(function()
 		}
 	});
 
+	$('#date-range51').dateRangePicker(
+	{		
+        customArrowPrevSymbol: '<i class="fa fa-arrow-circle-left">&#8592;</i>',
+        customArrowNextSymbol: '<i class="fa fa-arrow-circle-right">&#8594;</i>',
+	});
+
 
 });

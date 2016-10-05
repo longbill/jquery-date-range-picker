@@ -686,7 +686,9 @@
 				return moment(date).format('w');
 			},
 			customOpenAnimation: null,
-			customCloseAnimation: null
+			customCloseAnimation: null,
+            customArrowPrevSymbol: '',
+            customArrowNextSymbol: '',
 		},opt);
 
 		opt.start = false;
@@ -2002,13 +2004,53 @@
 			}
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
-			html += '<div class="month-wrapper">' +
-				'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+
+            var arrowPrev = '&lt;';
+            if(opt.customArrowPrevSymbol) arrowPrev = opt.customArrowPrevSymbol;
+            
+            var arrowNext = '&gt;';
+            if(opt.customArrowNextSymbol) arrowNext = opt.customArrowNextSymbol;
+
+            html += '<div class="month-wrapper">' +
+                    '   <table class="month1" cellspacing="0" border="0" cellpadding="0">'+
+                    '       <thead>'+
+                    '           <tr class="caption">'+
+                    '               <th style="width:27px;">'+
+                    '                   <span class="prev">'+
+                                            arrowPrev +
+                    '                   </span>'+
+                    '               </th>'+
+                    '               <th colspan="' + _colspan + '" class="month-name">'+
+                    '               </th>'+
+                    '               <th style="width:27px;">' + 
+                                    (opt.singleDate || !opt.stickyMonths ? '<span class="next">' + arrowNext + '</span>' : '') + 
+                    '               </th>'+
+                    '           </tr>'+
+                    '           <tr class="week-name">' + getWeekHead() + 
+                    '       </thead>'+
+                    '       <tbody></tbody>'+
+                    '   </table>';
 
 			if ( hasMonth2() )
 			{
-				html += '<div class="gap">'+getGapHTML()+'</div>' +
-					'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+				html += '<div class="gap">' + getGapHTML() + '</div>' +
+                        '<table class="month2" cellspacing="0" border="0" cellpadding="0">'+
+                        '   <thead>'+
+                        '   <tr class="caption">'+
+                        '       <th style="width:27px;">' + 
+                                (!opt.stickyMonths ? '<span class="prev">' + arrowPrev + '</span>' : '') + 
+                        '       </th>'+
+                        '       <th colspan="' + _colspan + '" class="month-name">'+
+                        '       </th>'+
+                        '       <th style="width:27px;">'+
+                        '           <span class="next">' + arrowNext + '</span>'+
+                        '       </th>'+
+                        '   </tr>'+
+                        '   <tr class="week-name">' + getWeekHead() + 
+                        '   </thead>'+
+                        '   <tbody></tbody>'+
+                        '</table>';
+
 			}
 				//+'</div>'
 			html +=	'<div style="clear:both;height:0;font-size:0;"></div>' +
