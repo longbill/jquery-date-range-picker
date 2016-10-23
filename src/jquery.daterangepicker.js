@@ -927,13 +927,6 @@
 
 			box = createDom().hide();
 			box.append('<div class="date-range-length-tip"></div>');
-			box.delegate('.day', 'mouseleave', function()
-			{
-				box.find('.date-range-length-tip').hide();
-				if (opt.singleDate) {
-				    clearHovering();
-				}
-			});
 
 			$(opt.container).append(box);
 
@@ -1067,21 +1060,6 @@
 				showMonth(prevMonth1, 'month1');
 				showSelectedDays();
 			}
-
-			box.delegate('.day','click', function(evt)
-			{
-				dayClicked($(this));
-			});
-
-			box.delegate('.day','mouseenter',function(evt)
-			{
-				dayHovering($(this));
-			});
-
-			box.delegate('.week-number', 'click', function(evt)
-			{
-				weekNumberClicked($(this));
-			});
 
 			box.attr('unselectable', 'on')
 			.css('user-select', 'none')
@@ -1999,6 +1977,29 @@
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
 			opt[month] = date;
 			updateSelectableRange();
+			bindDayEvents();
+		}
+		
+		function bindDayEvents()
+		{
+		    box.find('.day').unbind("click").click(function (evt) {
+			dayClicked($(this));
+		    });
+
+		    box.find('.day').unbind("mouseenter").mouseenter(function (evt) {
+			dayHovering($(this));
+		    });
+
+		    box.find('.day').unbind("mouseleave").mouseleave(function (evt) {
+			box.find('.date-range-length-tip').hide();
+			if (opt.singleDate) {
+			    clearHovering();
+			}
+		    });
+
+		    box.find('.week-number').unbind("click").click(function (evt) {
+			weekNumberClicked($(this));
+		    });
 		}
 
 		function showTime(date,name)
