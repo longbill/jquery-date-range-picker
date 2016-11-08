@@ -740,7 +740,7 @@
                 {
                         'selected': 'Valittu:',
                         'day':'Päivä',
-                        'days': 'Päivät',
+                        'days': 'Päivää',
                         'apply': 'Sulje',
                         'week-1' : 'ma',
                         'week-2' : 'ti',
