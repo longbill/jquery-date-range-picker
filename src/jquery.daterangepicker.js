@@ -57,6 +57,44 @@
 			'hour':'Hour',
 			'minute':'Minute'
 		},
+		'id':
+		{
+			'selected': 'Terpilih:',
+			'day': 'Hari',
+			'days': 'Hari',
+			'apply': 'Tutup',
+			'week-1': 'sen',
+			'week-2': 'sel',
+			'week-3': 'rab',
+			'week-4': 'kam',
+			'week-5': 'jum',
+			'week-6': 'sab',
+			'week-7': 'min',
+			'week-number': 'W',
+			'month-name': ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'],
+			'shortcuts': 'Pintas',
+			'custom-values': 'Nilai yang ditentukan',
+			'past': 'Yang Lalu',
+			'following': 'Mengikuti',
+			'previous': 'Sebelumnya',
+			'prev-week': 'Minggu',
+			'prev-month': 'Bulan',
+			'prev-year': 'Tahun',
+			'next': 'Selanjutnya',
+			'next-week': 'Minggu',
+			'next-month': 'Bulan',
+			'next-year': 'Tahun',
+			'less-than': 'Tanggal harus lebih dari %d hari',
+			'more-than': 'Tanggal harus kurang dari %d hari',
+			'default-more': 'Jarak tanggal harus lebih lama dari %d hari',
+			'default-single': 'Silakan pilih tanggal',
+			'default-less': 'Jarak rentang tanggal tidak boleh lebih lama dari %d hari',
+			'default-range': 'Rentang tanggal harus antara %d dan %d hari',
+			'default-default': 'Silakan pilih rentang tanggal',
+			'time': 'Waktu',
+			'hour': 'Jam',
+			'minute': 'Menit'
+		},
 		'az':
 		{
 			'selected': 'Seçildi:',
@@ -415,7 +453,7 @@
 			'week-5' : 'vr',
 			'week-6' : 'za',
 			'week-7' : 'zo',
-			'month-name': ['januari','februari','maart','april','mei','juni','juli','augustus','september','october','november','december'],
+			'month-name': ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
 			'shortcuts' : 'Snelkoppelingen',
 			'custom-values': 'Aangepaste waarden',
 			'past': 'Verleden',
@@ -444,7 +482,7 @@
 			'selected': 'Выбрано:',
 			'day': 'День',
 			'days': 'Дней',
-			'apply': 'Закрыть',
+			'apply': 'Применить',
 			'week-1': 'пн',
 			'week-2': 'вт',
 			'week-3': 'ср',
@@ -454,6 +492,7 @@
 			'week-7': 'вс',
 			'month-name': ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'],
 			'shortcuts': 'Быстрый выбор',
+			'custom-values': 'Пользовательские значения',
 			'past': 'Прошедшие',
 			'following': 'Следующие',
 			'previous': '&nbsp;&nbsp;&nbsp;',
@@ -470,7 +509,10 @@
 			'default-single': 'Пожалуйста выберите дату',
 			'default-less': 'Пожалуйста выберите диапазон меньше %d дней',
 			'default-range': 'Пожалуйста выберите диапазон между %d и %d днями',
-			'default-default': 'Пожалуйста выберите диапазон'
+			'default-default': 'Пожалуйста выберите диапазон',
+			'time':'Время',
+			'hour':'Часы',
+			'minute':'Минуты'
 		},
 		'pl':
 		{
@@ -620,7 +662,118 @@
 			'time': '日期',
 			'hour': '小時',
 			'minute': '分鐘'
-		}
+		},
+		'ja':
+        	{
+            		'selected': '選択しました:',
+	            	'day':'日',
+	            	'days': '日々',
+	            	'apply': '閉じる',
+	            	'week-1' : '日',
+	            	'week-2' : '月',
+	            	'week-3' : '火',
+	            	'week-4' : '水',
+	            	'week-5' : '木',
+	            	'week-6' : '金',
+	            	'week-7' : '土',
+	            	'month-name': ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	            	'shortcuts' : 'クイック選択',
+	            	'past': '過去',
+	            	'following':'将来',
+	            	'previous' : '&nbsp;&nbsp;&nbsp;',
+	            	'prev-week' : '先週、',
+	            	'prev-month' : '先月',
+	            	'prev-year' : '昨年',
+	            	'next': '&nbsp;&nbsp;&nbsp;',
+	            	'next-week':'来週',
+	            	'next-month':'来月',
+	            	'next-year':'来年',
+	            	'less-than' : '日付の範囲は ％d 日以上にすべきではありません',
+	            	'more-than' : '日付の範囲は ％d 日を下回ってはいけません',
+	            	'default-more' : '％d 日よりも長い期間を選択してください',
+	            	'default-less' : '％d 日未満の期間を選択してください',
+	            	'default-range' : '％d と％ d日の間の日付範囲を選択してください',
+	            	'default-single':'日付を選択してください',
+	            	'default-default': '日付範囲を選択してください',
+	            	'time': '時間',
+	            	'hour': '時間',
+	            	'minute': '分'
+	        },
+		'da':
+		{
+			'selected': 'Valgt:',
+			'day':'Dag',
+			'days': 'Dage',
+			'apply': 'Luk',
+			'week-1' : 'ma',
+			'week-2' : 'ti',
+			'week-3' : 'on',
+			'week-4' : 'to',
+			'week-5' : 'fr',
+			'week-6' : 'lö',
+			'week-7' : 'sö',
+			'month-name': ['januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december'],
+			'shortcuts' : 'genveje',
+			'custom-values': 'Brugerdefinerede værdier',
+			'past': 'Forbi',
+			'following':'Følgende',
+			'previous' : 'Forrige',
+			'prev-week' : 'uge',
+			'prev-month' : 'månad',
+			'prev-year' : 'år',
+			'next':'Næste',
+			'next-week':'Næste uge',
+			'next-month':'Næste måned',
+			'next-year':'Næste år',
+			'less-than' : 'Dato interval bør ikke være med end %d dage',
+			'more-than' : 'Dato interval bør ikke være mindre end %d dage',
+			'default-more' : 'Vælg datointerval længere end %d dage',
+			'default-single' : 'Vælg dato',
+			'default-less' : 'Vælg datointerval mindre end %d dage',
+			'default-range' : 'Vælg datointerval mellem %d og %d dage',
+			'default-default': 'Vælg datointerval',
+			'time':'tid',
+			'hour':'time',
+			'minute':'minut'
+		},
+		'fi':  // Finnish
+                {
+                        'selected': 'Valittu:',
+                        'day':'Päivä',
+                        'days': 'Päivää',
+                        'apply': 'Sulje',
+                        'week-1' : 'ma',
+                        'week-2' : 'ti',
+                        'week-3' : 'ke',
+                        'week-4' : 'to',
+                        'week-5' : 'pe',
+                        'week-6' : 'la',
+                        'week-7' : 'su',
+                        'week-number': 'V',
+                        'month-name': ['tammikuu','helmikuu','maaliskuu','huhtikuu','toukokuu','kesäkuu','heinäkuu','elokuu','syyskuu','lokakuu','marraskuu','joulukuu'],
+                        'shortcuts' : 'Pikavalinnat',
+                        'custom-values': 'Mukautetut Arvot',
+                        'past': 'Menneet',
+                        'following':'Tulevat',
+                        'previous' : 'Edellinen',
+                        'prev-week' : 'Viikko',
+                        'prev-month' : 'Kuukausi',
+                        'prev-year' : 'Vuosi',
+                        'next':'Seuraava',
+                        'next-week':'Viikko',
+                        'next-month':'Kuukausi',
+                        'next-year':'Vuosi',
+                        'less-than' : 'Aikajakson tulisi olla vähemmän kuin %d päivää',
+                        'more-than' : 'Aikajakson ei tulisi olla vähempää kuin %d päivää',
+                        'default-more' : 'Valitse pidempi aikajakso kuin %d päivää',
+                        'default-single' : 'Valitse päivä',
+                        'default-less' : 'Valitse lyhyempi aikajakso kuin %d päivää',
+                        'default-range' : 'Valitse aikajakso %d ja %d päivän väliltä',
+                        'default-default': 'Valitse aikajakso',
+                        'time':'Aika',
+                        'hour':'Tunti',
+                        'minute':'Minuutti'
+                }
 	};
 
 	$.fn.dateRangePicker = function(opt)
@@ -686,7 +839,9 @@
 				return moment(date).format('w');
 			},
 			customOpenAnimation: null,
-			customCloseAnimation: null
+			customCloseAnimation: null,
+            customArrowPrevSymbol: null,
+            customArrowNextSymbol: null
 		},opt);
 
 		opt.start = false;
@@ -742,6 +897,29 @@
 		// expose some api
 		$(this).data('dateRangePicker',
 		{
+			setStart: function(d1)
+			{
+				if (typeof d1 == 'string')
+				{
+					d1 = moment(d1,opt.format).toDate();
+				}
+
+				opt.end = false;
+				setSingleDate(d1);
+
+				return this;
+			},
+			setEnd: function(d2, silent)
+			{
+				var start = new Date();
+				start.setTime(opt.start);
+				if (typeof d2 == 'string')
+				{
+					d2 = moment(d2,opt.format).toDate();
+				}
+				setDateRange(start, d2, silent);
+				return this;
+			},
 			setDateRange : function(d1,d2,silent)
 			{
 				if (typeof d1 == 'string' && typeof d2 == 'string')
@@ -791,13 +969,6 @@
 
 			box = createDom().hide();
 			box.append('<div class="date-range-length-tip"></div>');
-			box.delegate('.day', 'mouseleave', function()
-			{
-				box.find('.date-range-length-tip').hide();
-				if (opt.singleDate) {
-				    clearHovering();
-				}
-			});
 
 			$(opt.container).append(box);
 
@@ -931,21 +1102,6 @@
 				showMonth(prevMonth1, 'month1');
 				showSelectedDays();
 			}
-
-			box.delegate('.day','click', function(evt)
-			{
-				dayClicked($(this));
-			});
-
-			box.delegate('.day','mouseenter',function(evt)
-			{
-				dayHovering($(this));
-			});
-
-			box.delegate('.week-number', 'click', function(evt)
-			{
-				weekNumberClicked($(this));
-			});
 
 			box.attr('unselectable', 'on')
 			.css('user-select', 'none')
@@ -1863,6 +2019,29 @@
 			box.find('.'+month+' tbody').html(createMonthHTML(date));
 			opt[month] = date;
 			updateSelectableRange();
+			bindDayEvents();
+		}
+		
+		function bindDayEvents()
+		{
+		    box.find('.day').unbind("click").click(function (evt) {
+			dayClicked($(this));
+		    });
+
+		    box.find('.day').unbind("mouseenter").mouseenter(function (evt) {
+			dayHovering($(this));
+		    });
+
+		    box.find('.day').unbind("mouseleave").mouseleave(function (evt) {
+			box.find('.date-range-length-tip').hide();
+			if (opt.singleDate) {
+			    clearHovering();
+			}
+		    });
+
+		    box.find('.week-number').unbind("click").click(function (evt) {
+			weekNumberClicked($(this));
+		    });
 		}
 
 		function showTime(date,name)
@@ -2002,13 +2181,53 @@
 			}
 
 			var _colspan = opt.showWeekNumbers ? 6 : 5;
-			html += '<div class="month-wrapper">' +
-				'<table class="month1" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;"><span class="prev">&lt;</span></th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;">' + (opt.singleDate || !opt.stickyMonths ? '<span class="next">&gt;</span>': '') + '</th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+
+            var arrowPrev = '&lt;';
+            if(opt.customArrowPrevSymbol) arrowPrev = opt.customArrowPrevSymbol;
+            
+            var arrowNext = '&gt;';
+            if(opt.customArrowNextSymbol) arrowNext = opt.customArrowNextSymbol;
+
+            html += '<div class="month-wrapper">' +
+                    '   <table class="month1" cellspacing="0" border="0" cellpadding="0">'+
+                    '       <thead>'+
+                    '           <tr class="caption">'+
+                    '               <th style="width:27px;">'+
+                    '                   <span class="prev">'+
+                                            arrowPrev +
+                    '                   </span>'+
+                    '               </th>'+
+                    '               <th colspan="' + _colspan + '" class="month-name">'+
+                    '               </th>'+
+                    '               <th style="width:27px;">' + 
+                                    (opt.singleDate || !opt.stickyMonths ? '<span class="next">' + arrowNext + '</span>' : '') + 
+                    '               </th>'+
+                    '           </tr>'+
+                    '           <tr class="week-name">' + getWeekHead() + 
+                    '       </thead>'+
+                    '       <tbody></tbody>'+
+                    '   </table>';
 
 			if ( hasMonth2() )
 			{
-				html += '<div class="gap">'+getGapHTML()+'</div>' +
-					'<table class="month2" cellspacing="0" border="0" cellpadding="0"><thead><tr class="caption"><th style="width:27px;">' + (!opt.stickyMonths ? '<span class="prev">&lt;</span>': '') + '</th><th colspan="'+_colspan+'" class="month-name"></th><th style="width:27px;"><span class="next">&gt;</span></th></tr><tr class="week-name">'+getWeekHead()+'</thead><tbody></tbody></table>';
+				html += '<div class="gap">' + getGapHTML() + '</div>' +
+                        '<table class="month2" cellspacing="0" border="0" cellpadding="0">'+
+                        '   <thead>'+
+                        '   <tr class="caption">'+
+                        '       <th style="width:27px;">' + 
+                                (!opt.stickyMonths ? '<span class="prev">' + arrowPrev + '</span>' : '') + 
+                        '       </th>'+
+                        '       <th colspan="' + _colspan + '" class="month-name">'+
+                        '       </th>'+
+                        '       <th style="width:27px;">'+
+                        '           <span class="next">' + arrowNext + '</span>'+
+                        '       </th>'+
+                        '   </tr>'+
+                        '   <tr class="week-name">' + getWeekHead() + 
+                        '   </thead>'+
+                        '   <tbody></tbody>'+
+                        '</table>';
+
 			}
 				//+'</div>'
 			html +=	'<div style="clear:both;height:0;font-size:0;"></div>' +

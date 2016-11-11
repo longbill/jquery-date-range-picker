@@ -630,7 +630,7 @@ $('#date-range16-reset').click(function(evt)
 			</div>
 
 			<div class="demo">
-				Custome open/close animation: <input id="date-range50" size="30" value="">
+				Custom open/close animation: <input id="date-range50" size="30" value="">
 				<a href="#" class="show-option">Show Config</a>
 				<pre class="options">
 {
@@ -643,6 +643,18 @@ $('#date-range16-reset').click(function(evt)
 		$(this).fadeOut(300, cb);
 	}
 }</pre>
+			</div>
+
+			<div class="demo">
+				Custom arrow symbol: <input id="date-range51" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+// To make this demo work completely, the FontAwesome stylesheets are required 				
+{		
+    customArrowPrevSymbol: '&lt;i class="fa fa-arrow-circle-left"&gt;&lt;/i&gt;',
+    customArrowNextSymbol: '&lt;i class="fa fa-arrow-circle-right"&gt;&lt;/i&gt;'
+}
+				</pre>
 			</div>
 
 
@@ -808,6 +820,12 @@ $('#date-range16-reset').click(function(evt)
 <b>extraClass (String)</b>
 	<i>Set extra class name to the date range picker dom.</i>
 
+<b>customArrowPrevSymbol (String / String HTML)</b>
+	<i>Set custom previous symbol, you can use html snippet too.</i>
+
+<b>customArrowNextSymbol (String / String HTML)</b>
+	<i>Set custom next symbol, you can use html snippet too.</i>
+
 <b>showTopbar (Boolean)</b>
 	<i>If show the top bar.</i>
 
@@ -891,6 +909,11 @@ $(dom).data('dateRangePicker')
     //set date range, two date strings should follow the `format` in config object,
     //set the third argument to be `true` if you don't want this method to trigger a `datepicker-change` event.
 	.setDateRange('2013-11-20','2013-11-25');
+	//set the start date to the specified date
+	.setStart('2013-11-20');
+	//set the end date to the specified date
+	//set the second argument to `true` if you don't want this method to trigger a `datepicker-change` event.
+	.setEnd('2013-11-25');
 	.clear();		// clear date range
 	.close();		// close date range picker overlay
 	.open();		// open date range picker overlay
