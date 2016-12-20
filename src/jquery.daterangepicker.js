@@ -1863,7 +1863,7 @@
 
 		function countDays(start,end)
 		{
-			return Math.abs( daysFrom1970(start) - daysFrom1970(end) ) + 1;
+			return moment(start).diff(moment(end), 'd') + 1;
 		}
 
 		function setDateRange(date1,date2,silent)
@@ -2021,7 +2021,7 @@
 			updateSelectableRange();
 			bindDayEvents();
 		}
-		
+
 		function bindDayEvents()
 		{
 		    box.find('.day').unbind("click").click(function (evt) {
@@ -2184,7 +2184,7 @@
 
             var arrowPrev = '&lt;';
             if(opt.customArrowPrevSymbol) arrowPrev = opt.customArrowPrevSymbol;
-            
+
             var arrowNext = '&gt;';
             if(opt.customArrowNextSymbol) arrowNext = opt.customArrowNextSymbol;
 
@@ -2199,11 +2199,11 @@
                     '               </th>'+
                     '               <th colspan="' + _colspan + '" class="month-name">'+
                     '               </th>'+
-                    '               <th style="width:27px;">' + 
-                                    (opt.singleDate || !opt.stickyMonths ? '<span class="next">' + arrowNext + '</span>' : '') + 
+                    '               <th style="width:27px;">' +
+                                    (opt.singleDate || !opt.stickyMonths ? '<span class="next">' + arrowNext + '</span>' : '') +
                     '               </th>'+
                     '           </tr>'+
-                    '           <tr class="week-name">' + getWeekHead() + 
+                    '           <tr class="week-name">' + getWeekHead() +
                     '       </thead>'+
                     '       <tbody></tbody>'+
                     '   </table>';
@@ -2214,8 +2214,8 @@
                         '<table class="month2" cellspacing="0" border="0" cellpadding="0">'+
                         '   <thead>'+
                         '   <tr class="caption">'+
-                        '       <th style="width:27px;">' + 
-                                (!opt.stickyMonths ? '<span class="prev">' + arrowPrev + '</span>' : '') + 
+                        '       <th style="width:27px;">' +
+                                (!opt.stickyMonths ? '<span class="prev">' + arrowPrev + '</span>' : '') +
                         '       </th>'+
                         '       <th colspan="' + _colspan + '" class="month-name">'+
                         '       </th>'+
@@ -2223,7 +2223,7 @@
                         '           <span class="next">' + arrowNext + '</span>'+
                         '       </th>'+
                         '   </tr>'+
-                        '   <tr class="week-name">' + getWeekHead() + 
+                        '   <tr class="week-name">' + getWeekHead() +
                         '   </thead>'+
                         '   <tbody></tbody>'+
                         '</table>';
