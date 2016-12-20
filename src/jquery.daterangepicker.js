@@ -773,7 +773,45 @@
                         'time':'Aika',
                         'hour':'Tunti',
                         'minute':'Minuutti'
-                }
+                },
+				'cat': // Catala
+			        {
+			            'selected': 'Seleccionats:',
+			            'day': 'Dia',
+			            'days': 'Dies',
+			            'apply': 'Tanca',
+			            'week-1': 'Dl',
+			            'week-2': 'Dm',
+			            'week-3': 'Dc',
+			            'week-4': 'Dj',
+			            'week-5': 'Dv',
+			            'week-6': 'Ds',
+			            'week-7': 'Dg',
+			            'week-number': 'S',
+			            'month-name': ['gener', 'febrer', 'març', 'abril', 'maig', 'juny', 'juliol', 'agost', 'setembre', 'octubre', 'novembre', 'desembre'],
+			            'shortcuts': 'Dreçeres',
+			            'custom-values': 'Valors personalitzats',
+			            'past': 'Passat',
+			            'following': 'Futur',
+			            'previous': 'Anterior',
+			            'prev-week': 'Setmana',
+			            'prev-month': 'Mes',
+			            'prev-year': 'Any',
+			            'next': 'Següent',
+			            'next-week': 'Setmana',
+			            'next-month': 'Mes',
+			            'next-year': 'Any',
+			            'less-than': 'El període no hauria de ser de més de %d dies',
+			            'more-than': 'El període no hauria de ser de menys de %d dies',
+			            'default-more': 'Perfavor selecciona un període més gran de %d dies',
+			            'default-single': 'Perfavor selecciona una data',
+			            'default-less': 'Perfavor selecciona un període de menys de %d dies',
+			            'default-range': 'Perfavor selecciona un període d\'entre %d i %d dies',
+			            'default-default': 'Perfavor selecciona un període',
+			            'time': 'Temps',
+			            'hour': 'Hora',
+			            'minute': 'Minut'
+			        }
 	};
 
 	$.fn.dateRangePicker = function(opt)
