@@ -1743,12 +1743,29 @@
 			if (opt.singleDate === true) {
 				if (initiated && opt.start )
 				{
-					if (opt.autoClose) closeDatePicker();
+					if (opt.autoClose) {
+						var dateRange = getDateString(new Date(opt.start));
+						$(self).trigger('datepicker-apply',
+						{
+							'value': dateRange,
+							'date1' : new Date(opt.start)
+						});
+						closeDatePicker();
+					}
 				}
 			} else {
 				if (initiated && opt.start && opt.end)
 				{
-					if (opt.autoClose) closeDatePicker();
+					if (opt.autoClose) {
+						var dateRange = getDateString(new Date(opt.start))+ opt.separator +getDateString(new Date(opt.end));
+						$(self).trigger('datepicker-apply',
+						{
+							'value': dateRange,
+							'date1' : new Date(opt.start),
+							'date2' : new Date(opt.end)
+						});
+						closeDatePicker();
+					}
 				}
 			}
 		}
