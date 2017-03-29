@@ -914,7 +914,7 @@
         if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate, opt.format).toDate();
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
 
-        var langs = getLanguages();
+        var languages = getLanguages();
         var box;
         var initiated = false;
         var self = this;
@@ -2374,7 +2374,7 @@
          */
         function lang(translationKey) {
             var translationKeyLowerCase = translationKey.toLowerCase();
-            var result = (translationKey in langs) ? langs[translationKey] : (translationKeyLowerCase in langs) ? langs[translationKeyLowerCase] : null;
+            var result = (translationKey in languages) ? languages[translationKey] : (translationKeyLowerCase in languages) ? languages[translationKeyLowerCase] : null;
             var defaultLanguage = $.dateRangePickerLanguages['default'];
             if (result == null) result = (translationKey in defaultLanguage) ? defaultLanguage[translationKey] : (translationKeyLowerCase in defaultLanguage) ? defaultLanguage[translationKeyLowerCase] : '';
 
