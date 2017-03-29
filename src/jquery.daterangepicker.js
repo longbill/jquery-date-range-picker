@@ -2369,14 +2369,15 @@
         }
 
         /**
-         * translate language string
+         * Translate language string, try both the provided translation key, as the lower case version
          */
-        function lang(t) {
-            var _t = t.toLowerCase();
-            var re = (t in langs) ? langs[t] : (_t in langs) ? langs[_t] : null;
+        function lang(translationKey) {
+            var translationKeyLowerCase = translationKey.toLowerCase();
+            var result = (translationKey in langs) ? langs[translationKey] : (translationKeyLowerCase in langs) ? langs[translationKeyLowerCase] : null;
             var defaultLanguage = $.dateRangePickerLanguages['default'];
-            if (re == null) re = (t in defaultLanguage) ? defaultLanguage[t] : (_t in defaultLanguage) ? defaultLanguage[_t] : '';
-            return re;
+            if (result == null) result = (translationKey in defaultLanguage) ? defaultLanguage[translationKey] : (translationKeyLowerCase in defaultLanguage) ? defaultLanguage[translationKeyLowerCase] : '';
+
+            return result;
         }
 
         function getDefaultTime() {
