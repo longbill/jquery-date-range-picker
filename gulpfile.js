@@ -5,6 +5,7 @@
         gutil = require("gulp-util"),
         del = require('del'),
         beautify = require("gulp-jsbeautifier"),
+        jsonmin = require("gulp-jsonmin"),
         uglify = require("gulp-uglify"),
         minifyCSS = require("gulp-minify-css"),
         rename = require("gulp-rename"),
@@ -34,20 +35,26 @@
             .pipe(minifyCSS())
             .pipe(rename('daterangepicker.min.css'))
             .pipe(gulp.dest('./dist'))
-            .on('error', gutil.log)
+            .on('error', gutil.log);
     });
 
-    gulp.task('dist:script', ['dist:clean'], function () {
+    gulp.task('dist:scripts', ['dist:clean'], function () {
         return gulp.src('./src/*.js')
             .pipe(uglify())
             .pipe(rename('jquery.daterangepicker.min.js'))
             .pipe(header(banner, {pkg: pkg}))
             .pipe(gulp.dest('./dist'))
-            .on('error', gutil.log)
+            .on('error', gutil.log);
     });
 
+    gulp.task('dist:locales', ['dist:clean'], function () {
+        return gulp.src('./locales/*.json')
+            .pipe(jsonmin())
+            .pipe(gulp.dest('./dist'))
+            .on('error', gutil.log);
+    });
 
-    gulp.task('default', ['dist:clean', 'dist:styles', 'dist:script'], function (cb) {
+    gulp.task('default', ['dist:clean', 'dist:styles', 'dist:scripts', 'dist:locales'], function (cb) {
         gutil.log('Info :', gutil.colors.green('Distribution files are ready!'));
         cb(null)
     });
