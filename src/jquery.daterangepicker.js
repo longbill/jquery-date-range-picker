@@ -879,7 +879,7 @@
             applyBtnClass: '',
             singleMonth: 'auto',
             hoveringTooltip: function(days, startTime, hoveringTime) {
-                return days > 1 ? days + ' ' + lang('days') : '';
+                return days > 1 ? days + ' ' + translate('days') : '';
             },
             showTopbar: true,
             swapTime: false,
@@ -1037,15 +1037,15 @@
 
             var defaultTopText = '';
             if (opt.singleDate)
-                defaultTopText = lang('default-single');
+                defaultTopText = translate('default-single');
             else if (opt.minDays && opt.maxDays)
-                defaultTopText = lang('default-range');
+                defaultTopText = translate('default-range');
             else if (opt.minDays)
-                defaultTopText = lang('default-more');
+                defaultTopText = translate('default-more');
             else if (opt.maxDays)
-                defaultTopText = lang('default-less');
+                defaultTopText = translate('default-less');
             else
-                defaultTopText = lang('default-default');
+                defaultTopText = translate('default-default');
 
             box.find('.default-top').html(defaultTopText.replace(/\%d/, opt.minDays).replace(/\%d/, opt.maxDays));
             if (opt.singleMonth) {
@@ -1625,7 +1625,7 @@
                             if (typeof opt.hoveringTooltip == 'function') {
                                 tooltip = opt.hoveringTooltip(days, opt.start, hoverTime);
                             } else if (opt.hoveringTooltip === true && days > 1) {
-                                tooltip = days + ' ' + lang('days');
+                                tooltip = days + ' ' + translate('days');
                             }
                         }
                     }
@@ -1690,12 +1690,12 @@
                 opt.start = false;
                 opt.end = false;
                 box.find('.day').removeClass('checked');
-                box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html(lang('less-than').replace('%d', opt.maxDays));
+                box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html(translate('less-than').replace('%d', opt.maxDays));
             } else if (opt.minDays && days < opt.minDays) {
                 opt.start = false;
                 opt.end = false;
                 box.find('.day').removeClass('checked');
-                box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html(lang('more-than').replace('%d', opt.minDays));
+                box.find('.drp_top-bar').removeClass('normal').addClass('error').find('.error-top').html(translate('more-than').replace('%d', opt.minDays));
             } else {
                 if (opt.start || opt.end)
                     box.find('.drp_top-bar').removeClass('error').addClass('normal');
@@ -1927,7 +1927,7 @@
         }
 
         function nameMonth(m) {
-            return lang('month-name')[m];
+            return translate('month-name')[m];
         }
 
         function getDateString(d) {
@@ -1998,13 +1998,13 @@
 
         function getTimeHTML() {
             return '<div>' +
-                '<span>' + lang('Time') + ': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
+                '<span>' + translate('Time') + ': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
                 '</div>' +
                 '<div class="hour">' +
-                '<label>' + lang('Hour') + ': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
+                '<label>' + translate('Hour') + ': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
                 '</div>' +
                 '<div class="minute">' +
-                '<label>' + lang('Minute') + ': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
+                '<label>' + translate('Minute') + ': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
                 '</div>';
         }
 
@@ -2025,16 +2025,16 @@
                     html += '<div class="custom-top">' + opt.customTopBar + '</div>';
                 } else {
                     html += '<div class="normal-top">' +
-                        '<span style="color:#333">' + lang('selected') + ' </span> <b class="start-day">...</b>';
+                        '<span style="color:#333">' + translate('selected') + ' </span> <b class="start-day">...</b>';
                     if (!opt.singleDate) {
-                        html += ' <span class="separator-day">' + opt.separator + '</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> ' + lang('days') + ')</i>';
+                        html += ' <span class="separator-day">' + opt.separator + '</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> ' + translate('days') + ')</i>';
                     }
                     html += '</div>';
                     html += '<div class="error-top">error</div>' +
                         '<div class="default-top">default</div>';
                 }
 
-                html += '<input type="button" class="apply-btn disabled' + getApplyBtnClass() + '" value="' + lang('apply') + '" />';
+                html += '<input type="button" class="apply-btn disabled' + getApplyBtnClass() + '" value="' + translate('apply') + '" />';
                 html += '</div>';
             }
 
@@ -2099,44 +2099,44 @@
 
             html += '<div class="footer">';
             if (opt.showShortcuts) {
-                html += '<div class="shortcuts"><b>' + lang('shortcuts') + '</b>';
+                html += '<div class="shortcuts"><b>' + translate('shortcuts') + '</b>';
 
                 var data = opt.shortcuts;
                 if (data) {
                     var name;
                     if (data['prev-days'] && data['prev-days'].length > 0) {
-                        html += '&nbsp;<span class="prev-days">' + lang('past');
+                        html += '&nbsp;<span class="prev-days">' + translate('past');
                         for (var i = 0; i < data['prev-days'].length; i++) {
                             name = data['prev-days'][i];
-                            name += (data['prev-days'][i] > 1) ? lang('days') : lang('day');
+                            name += (data['prev-days'][i] > 1) ? translate('days') : translate('day');
                             html += ' <a href="javascript:;" shortcut="day,-' + data['prev-days'][i] + '">' + name + '</a>';
                         }
                         html += '</span>';
                     }
 
                     if (data['next-days'] && data['next-days'].length > 0) {
-                        html += '&nbsp;<span class="next-days">' + lang('following');
+                        html += '&nbsp;<span class="next-days">' + translate('following');
                         for (var i = 0; i < data['next-days'].length; i++) {
                             name = data['next-days'][i];
-                            name += (data['next-days'][i] > 1) ? lang('days') : lang('day');
+                            name += (data['next-days'][i] > 1) ? translate('days') : translate('day');
                             html += ' <a href="javascript:;" shortcut="day,' + data['next-days'][i] + '">' + name + '</a>';
                         }
                         html += '</span>';
                     }
 
                     if (data.prev && data.prev.length > 0) {
-                        html += '&nbsp;<span class="prev-buttons">' + lang('previous');
+                        html += '&nbsp;<span class="prev-buttons">' + translate('previous');
                         for (var i = 0; i < data.prev.length; i++) {
-                            name = lang('prev-' + data.prev[i]);
+                            name = translate('prev-' + data.prev[i]);
                             html += ' <a href="javascript:;" shortcut="prev,' + data.prev[i] + '">' + name + '</a>';
                         }
                         html += '</span>';
                     }
 
                     if (data.next && data.next.length > 0) {
-                        html += '&nbsp;<span class="next-buttons">' + lang('next');
+                        html += '&nbsp;<span class="next-buttons">' + translate('next');
                         for (var i = 0; i < data.next.length; i++) {
-                            name = lang('next-' + data.next[i]);
+                            name = translate('next-' + data.next[i]);
                             html += ' <a href="javascript:;" shortcut="next,' + data.next[i] + '">' + name + '</a>';
                         }
                         html += '</span>';
@@ -2154,7 +2154,7 @@
 
             // Add Custom Values Dom
             if (opt.showCustomValues) {
-                html += '<div class="customValues"><b>' + (opt.customValueLabel || lang('custom-values')) + '</b>';
+                html += '<div class="customValues"><b>' + (opt.customValueLabel || translate('custom-values')) + '</b>';
 
                 if (opt.customValues) {
                     for (var i = 0; i < opt.customValues.length; i++) {
@@ -2182,23 +2182,23 @@
         }
 
         function getWeekHead() {
-            var prepend = opt.showWeekNumbers ? '<th>' + lang('week-number') + '</th>' : '';
+            var prepend = opt.showWeekNumbers ? '<th>' + translate('week-number') + '</th>' : '';
             if (opt.startOfWeek == 'monday') {
-                return prepend + '<th>' + lang('week-1') + '</th>' +
-                    '<th>' + lang('week-2') + '</th>' +
-                    '<th>' + lang('week-3') + '</th>' +
-                    '<th>' + lang('week-4') + '</th>' +
-                    '<th>' + lang('week-5') + '</th>' +
-                    '<th>' + lang('week-6') + '</th>' +
-                    '<th>' + lang('week-7') + '</th>';
+                return prepend + '<th>' + translate('week-1') + '</th>' +
+                    '<th>' + translate('week-2') + '</th>' +
+                    '<th>' + translate('week-3') + '</th>' +
+                    '<th>' + translate('week-4') + '</th>' +
+                    '<th>' + translate('week-5') + '</th>' +
+                    '<th>' + translate('week-6') + '</th>' +
+                    '<th>' + translate('week-7') + '</th>';
             } else {
-                return prepend + '<th>' + lang('week-7') + '</th>' +
-                    '<th>' + lang('week-1') + '</th>' +
-                    '<th>' + lang('week-2') + '</th>' +
-                    '<th>' + lang('week-3') + '</th>' +
-                    '<th>' + lang('week-4') + '</th>' +
-                    '<th>' + lang('week-5') + '</th>' +
-                    '<th>' + lang('week-6') + '</th>';
+                return prepend + '<th>' + translate('week-7') + '</th>' +
+                    '<th>' + translate('week-1') + '</th>' +
+                    '<th>' + translate('week-2') + '</th>' +
+                    '<th>' + translate('week-3') + '</th>' +
+                    '<th>' + translate('week-4') + '</th>' +
+                    '<th>' + translate('week-5') + '</th>' +
+                    '<th>' + translate('week-6') + '</th>';
             }
         }
 
@@ -2372,7 +2372,7 @@
         /**
          * Translate language string, try both the provided translation key, as the lower case version
          */
-        function lang(translationKey) {
+        function translate(translationKey) {
             var translationKeyLowerCase = translationKey.toLowerCase();
             var result = (translationKey in languages) ? languages[translationKey] : (translationKeyLowerCase in languages) ? languages[translationKeyLowerCase] : null;
             var defaultLanguage = $.dateRangePickerLanguages['default'];
