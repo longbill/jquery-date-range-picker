@@ -2353,13 +2353,14 @@
         function getLanguages() {
             if (opt.language == 'auto') {
                 var language = navigator.language ? navigator.language : navigator.browserLanguage;
-                if (!language) return $.dateRangePickerLanguages['default'];
-                language = language.toLowerCase();
-                for (var key in $.dateRangePickerLanguages) {
-                    if (language.indexOf(key) !== -1) {
-                        return $.dateRangePickerLanguages[key];
-                    }
+                if (!language) {
+                    return $.dateRangePickerLanguages['default'];
                 }
+                language = language.toLowerCase();
+                if(language in $.dateRangePickerLanguages){
+                    return $.dateRangePickerLanguages[language];
+                }
+
                 return $.dateRangePickerLanguages['default'];
             } else if (opt.language && opt.language in $.dateRangePickerLanguages) {
                 return $.dateRangePickerLanguages[opt.language];
