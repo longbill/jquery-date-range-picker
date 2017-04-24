@@ -13,7 +13,7 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 * Written by Chunlong ( jszen.com )
 * I accept further customization job if you require more functions. Please contact me via longbill.cn@gmail.com
 
-##[Documentation & Demo](http://longbill.github.io/jquery-date-range-picker/)
+## [Documentation & Demo](http://longbill.github.io/jquery-date-range-picker/)
 
 ![screenshot](https://raw.github.com/longbill/jquery-date-range-picker/master/preview.jpg)
 
