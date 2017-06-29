@@ -1250,9 +1250,10 @@
                 var offset = $(self).offset();
                 if ($(opt.container).css('position') == 'relative') {
                     var containerOffset = $(opt.container).offset();
+                    var leftIndent = Math.max(0, offset.left + box.outerWidth() - $('body').width() + 16);
                     box.css({
                         top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
-                        left: offset.left - containerOffset.left
+                        left: offset.left - containerOffset.left - leftIndent
                     });
                 } else {
                     if (offset.left < 460) //left to right
@@ -1277,7 +1278,6 @@
         }
 
         function open(animationTime) {
-            calcPosition();
             redrawDatePicker();
             checkAndSetDefaultValue();
             if (opt.customOpenAnimation) {
@@ -1298,6 +1298,7 @@
             });
             showGap();
             updateCalendarWidth();
+            calcPosition();
         }
 
         function checkAndSetDefaultValue() {
