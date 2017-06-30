@@ -4,6 +4,7 @@
     var gulp = require('gulp'),
         gutil = require("gulp-util"),
         del = require('del'),
+        beautify = require("gulp-jsbeautifier"),
         uglify = require("gulp-uglify"),
         minifyCSS = require("gulp-minify-css"),
         rename = require("gulp-rename"),
@@ -17,6 +18,12 @@
         ' * @license <%= pkg.license %>',
         ' */',
         ''].join('\n');
+
+    gulp.task('beautify', function() {
+        gulp.src(['./src/*.css', './src/*.js'])
+            .pipe(beautify())
+            .pipe(gulp.dest('./src'));
+    });
 
     gulp.task('dist:clean', function () {
         del.sync('./dist', {force: true});
