@@ -1248,7 +1248,7 @@
         function calcPosition() {
             if (!opt.inline) {
                 var offset = $(self).offset();
-                if ($(opt.container).css('position') == 'relative') {
+                if ($(opt.container).css('position') === 'relative') {
                     var containerOffset = $(opt.container).offset();
                     var leftIndent = Math.max(0, offset.left + box.outerWidth() - $('body').width() + 16);
                     box.css({
@@ -1256,16 +1256,21 @@
                         left: offset.left - containerOffset.left - leftIndent
                     });
                 } else {
-                    if (offset.left < 460) //left to right
+                    var $body = $('body');
+                    var bodyBorderTop = parseInt($body.css('border-top') || 0, 10);
+                    var boxWidth = box.width();
+
+                    if (offset.left + boxWidth <= $body.width()) // normal case - box not longer body
                     {
                         box.css({
-                            top: offset.top + $(self).outerHeight() + parseInt($('body').css('border-top') || 0, 10),
+                            top: offset.top + $(self).outerHeight() + bodyBorderTop,
                             left: offset.left
                         });
                     } else {
+                        var boxLeft = offset.left + $(self).width() - boxWidth - 16;
                         box.css({
-                            top: offset.top + $(self).outerHeight() + parseInt($('body').css('border-top') || 0, 10),
-                            left: offset.left + $(self).width() - box.width() - 16
+                            top: offset.top + $(self).outerHeight() + bodyBorderTop,
+                            left: boxLeft > 0 ? boxLeft : 0
                         });
                     }
                 }
