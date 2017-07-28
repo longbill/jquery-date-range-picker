@@ -44,8 +44,6 @@ $(function()
 
 	$('#date-range0').dateRangePicker(
 		{
-			monthSelect: true,
-			yearSelect: [1900, 2017],
 		}).bind('datepicker-first-date-selected', function(event, obj)
 		{
 			/* This event will be triggered when first date is selected */
@@ -220,10 +218,8 @@ $(function()
 
 	$('#date-range6').dateRangePicker(
 		{
-			startDate: '2013-11-10',
-			endDate: '2014-02-10',
-			monthSelect: true,
-			yearSelect: true,
+			startDate: '2013-01-10',
+			endDate: '2013-02-10'
 		});
 
 	$('#date-range7').dateRangePicker(
@@ -369,8 +365,6 @@ $(function()
 
 	$('#date-range17').dateRangePicker(
 		{
-			monthSelect: true,
-			yearSelect: true,
 			stickyMonths: true,
 			showShortcuts: false
 		});
@@ -401,8 +395,6 @@ $(function()
 
 	$('#date-range22').dateRangePicker(
 		{
-			monthSelect: true,
-			yearSelect: true,
 			showDateFilter: function(time, date)
 			{
 				return '<div style="padding:0 5px;">\
@@ -489,5 +481,24 @@ $(function()
 			customArrowNextSymbol: '<i class="fa fa-arrow-circle-right"></i>'
 		});
 
+	$('#date-range52').dateRangePicker(
+		{
+			monthSelect: true,
+			yearSelect: true
+		});
+
+	$('#date-range53').dateRangePicker(
+		{
+			monthSelect: true,
+			yearSelect: [1900, moment().get('year')]
+		});
+
+	$('#date-range54').dateRangePicker(
+		{
+			monthSelect: true,
+			yearSelect: function(current) {
+				return [current - 10, current + 10];
+			}
+		});
 
 });
