@@ -891,7 +891,9 @@
             customOpenAnimation: null,
             customCloseAnimation: null,
             customArrowPrevSymbol: null,
-            customArrowNextSymbol: null
+            customArrowNextSymbol: null,
+            monthSelect: false,
+            yearSelect: false
         }, opt);
 
         opt.start = false;
@@ -913,6 +915,10 @@
 
         if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate, opt.format).toDate();
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
+
+        if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
+            opt.yearSelect = function(current) { return [current - 5, current + 5]; }
+        }
 
         var languages = getLanguages();
         var box;
@@ -1668,6 +1674,39 @@
             box.find('.date-range-length-tip').hide();
         }
 
+        function dateChanged(date) {
+            var value = date.val();
+            var name = date.attr('name');
+            var type = date.parents('table').hasClass('month1') ? 'month1' : 'month2';
+            var oppositeType = type === 'month1' ? 'month2' : 'month1';
+            var startDate = opt.startDate ? moment(opt.startDate) : false;
+            var endDate = opt.endDate ? moment(opt.endDate) : false;
+            var newDate = moment(opt[type])[name](value);
+
+
+            if (startDate && newDate.isSameOrBefore(startDate)) {
+                newDate = startDate.add(type === 'month2' ? 1 : 0, 'month');
+            }
+
+            if (endDate && newDate.isSameOrAfter(endDate)) {
+                newDate = endDate.add(!opt.singleMonth && type === 'month1' ? -1 : 0, 'month');
+            }
+
+            showMonth(newDate, type);
+
+            if (type === 'month1') {
+                if (opt.stickyMonths || moment(newDate).isSameOrAfter(opt[oppositeType], 'month')) {
+                    showMonth(moment(newDate).add(1, 'month'), oppositeType);
+                }
+            } else {
+                if (opt.stickyMonths || moment(newDate).isSameOrBefore(opt[oppositeType], 'month')) {
+                    showMonth(moment(newDate).add(-1, 'month'), oppositeType);
+                }
+            }
+
+            showGap();
+        }
+
         function autoclose() {
             if (opt.singleDate === true) {
                 if (initiated && opt.start) {
@@ -1893,15 +1932,105 @@
 
         function showMonth(date, month) {
             date = moment(date).toDate();
-            var monthName = nameMonth(date.getMonth());
-            box.find('.' + month + ' .month-name').html(monthName + ' ' + date.getFullYear());
+            var monthElement = generateMonthElement(date, month);
+            var yearElement = generateYearElement(date, month);
+
+            box.find('.' + month + ' .month-name').html(monthElement + ' ' + yearElement);
             box.find('.' + month + ' tbody').html(createMonthHTML(date));
             opt[month] = date;
             updateSelectableRange();
-            bindDayEvents();
+            bindEvents();
         }
 
-        function bindDayEvents() {
+        function generateMonthElement(date, month) {
+            var range;
+            var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
+            var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
+            date = moment(date);
+
+            if (!opt.monthSelect ||
+                startDate && endDate && startDate.isSame(endDate, 'month')) {
+                return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
+            }
+
+            range = [
+                startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                endDate && date.isSame(endDate, 'year') ? endDate.get('month') : 11
+            ];
+
+            if (range[0] === range[1]) {
+                return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
+            }
+
+            return generateSelect(
+                'month',
+                generateSelectData(
+                    range,
+                    date.get('month'),
+                    function(value) { return nameMonth(value); }
+                )
+            );
+        }
+
+        function generateYearElement(date, month) {
+            date = moment(date);
+            var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
+            var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
+            var fullYear = date.get('year');
+            var isYearFunction = opt.yearSelect && typeof opt.yearSelect === 'function';
+            var range;
+
+            if (!opt.yearSelect ||
+                startDate && endDate && startDate.isSame(moment(endDate), 'year')) {
+                return '<div class="month-element">' + fullYear + '</div>';
+            }
+
+            range = isYearFunction ? opt.yearSelect(fullYear) : opt.yearSelect.slice();
+
+            range = [
+                startDate ? Math.max(range[0], startDate.get('year')) : Math.min(range[0], fullYear),
+                endDate ? Math.min(range[1], endDate.get('year')) : Math.max(range[1], fullYear)
+            ];
+
+            return generateSelect('year', generateSelectData(range, fullYear));
+        }
+
+
+        function generateSelectData(range, current, valueBeautifier) {
+            var data = [];
+            valueBeautifier = valueBeautifier || function(value) { return value; };
+
+            for (var i = range[0]; i <= range[1]; i++) {
+                data.push({
+                    value: i,
+                    text: valueBeautifier(i),
+                    isCurrent: i === current
+                });
+            }
+
+            return data;
+        }
+
+        function generateSelect(name, data) {
+            var select = '<div class="select-wrapper"><select class="' + name + '" name="' + name + '">';
+            var current;
+
+            for (var i = 0, l = data.length; i < l; i++) {
+                select += '<option value="' + data[i].value + '"' + (data[i].isCurrent ? ' selected' : '') + '>';
+                select += data[i].text;
+                select += '</option>';
+
+                if (data[i].isCurrent) {
+                    current = data[i].text;
+                }
+            }
+
+            select += '</select>' + current + '</div>';
+
+            return select;
+        }
+
+        function bindEvents() {
             box.find('.day').unbind("click").click(function(evt) {
                 dayClicked($(this));
             });
@@ -1919,6 +2048,14 @@
 
             box.find('.week-number').unbind("click").click(function(evt) {
                 weekNumberClicked($(this));
+            });
+
+            box.find('.month').unbind("change").change(function(evt) {
+                dateChanged($(this));
+            });
+
+            box.find('.year').unbind("change").change(function(evt) {
+                dateChanged($(this));
             });
         }
 

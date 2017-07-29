@@ -65,6 +65,45 @@
     text-transform: uppercase;
 }
 
+.date-picker-wrapper .select-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.date-picker-wrapper .select-wrapper:hover {
+    text-decoration: underline;
+}
+
+.date-picker-wrapper .month-element {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.date-picker-wrapper .select-wrapper select {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: -1px;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    color: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
+    filter: alpha(opacity=1);
+    opacity: 0.01;
+}
+
 .date-picker-wrapper .month-wrapper {
     border: 1px solid #bfbfbf;
     border-radius: 3px;

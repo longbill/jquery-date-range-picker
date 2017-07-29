@@ -658,6 +658,41 @@ $('#date-range16-reset').click(function(evt)
 				</pre>
 			</div>
 
+			<div class="demo">
+				Month and year select: <input id="date-range52" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+    monthSelect: true,
+    yearSelect: true
+}
+				</pre>
+			</div>
+
+			<div class="demo">
+				Month and year select with year range by array: <input id="date-range53" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+    monthSelect: true,
+    yearSelect: [1900, moment().get('year')]
+}
+				</pre>
+			</div>
+
+			<div class="demo">
+				Month and year select with year range by function: <input id="date-range54" size="30" value="">
+				<a href="#" class="show-option">Show Config</a>
+				<pre class="options">
+{
+    monthSelect: true,
+    yearSelect: function(current) {
+        return [current - 10, current + 10];
+    }
+}
+				</pre>
+			</div>
+
 
             <h2 id="configuration">Configuration</h2>
 			<pre><b>Usage:</b> $('#dom-id').dateRangePicker(configObject);</pre>
@@ -720,7 +755,9 @@ $('#date-range16-reset').click(function(evt)
 	getWeekNumber: function(date) //date will be the first day of a week
 	{
 		return moment(date).format('w');
-	}
+	},
+	monthSelect: false,
+	yearSelect: false
 }</pre>
 			</p>
 			<h3>You can use the following keys in the configObject to overwrite the default configuration:</h3>
@@ -847,6 +884,17 @@ $('#date-range16-reset').click(function(evt)
 <b>getWeekNumber (Function( Date object ) )</b>
 	<i>the function called to generate the week number. the first parameter will be the first day of a week</i>
 
+<b>monthSelect (Boolean) Default: false</b>
+	<i>If this is true, you can quickly change month by clicking on month name</i>
+
+<b>yearSelect (Boolean || Array || Function) Default: false</b>
+	<i>If this is true, you can quickly change year by clicking on year number.
+        By default select will contain years from "current year - 5" to "current year + 5" but you can change this.
+        You can set year range by array like this [1900, 2017].
+        And if you want more control you can set function which get selected year and should return array. For example:
+            function(current) {
+                return [current - 10, current + 10];
+            }</i>
 </pre>
 
 	<h2>Events</h2>

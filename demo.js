@@ -481,5 +481,25 @@ $(function()
         customArrowNextSymbol: '<i class="fa fa-arrow-circle-right"></i>'
 	});
 
+	$('#date-range52').dateRangePicker(
+	{
+		monthSelect: true,
+		yearSelect: true
+	});
+
+	$('#date-range53').dateRangePicker(
+	{
+		monthSelect: true,
+		yearSelect: [1900, moment().get('year')]
+	});
+
+	$('#date-range54').dateRangePicker(
+	{
+		monthSelect: true,
+		yearSelect: function(current) {
+			return [current - 10, current + 10];
+		}
+	});
+
 
 });
