@@ -1366,8 +1366,10 @@
         }
 
         function swapTime() {
-            renderTime('time1', opt.start);
-            renderTime('time2', opt.end);
+            const temp_start = opt.end;
+            const temp_end = opt.start;
+            renderTime('time1', temp_start);
+            renderTime('time2', temp_end);
         }
 
         function setTime(name, hour, minute) {
