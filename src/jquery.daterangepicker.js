@@ -1366,13 +1366,25 @@
         }
 
         function swapTime() {
-            renderTime('time1', opt.start);
-            renderTime('time2', opt.end);
+            var temp_end = opt.start;
+            var temp_start = opt.end;
+            renderTime('time1', temp_start);
+            renderTime('time2', temp_end);
         }
 
         function setTime(name, hour, minute) {
-            hour && (box.find('.' + name + ' .hour-val').text(hour));
+            var num_hours = hour;
+            var time_suffix = " PM";
+            if (num_hours > 12) {
+                  num_hours -= 12;
+            } else if (num_hours < 12) {
+                  time_suffix = " AM";
+            }
+            hour && (box.find('.' + name + ' .hour-val').text(num_hours));
             minute && (box.find('.' + name + ' .minute-val').text(minute));
+
+            var minutes_with_suffix = box.find('.' + name + ' .minute-val').text().replace(/AM|PM/, "") + time_suffix;
+            box.find('.' + name + ' .minute-val').text(minutes_with_suffix);
             switch (name) {
                 case 'time1':
                     if (opt.start) {
