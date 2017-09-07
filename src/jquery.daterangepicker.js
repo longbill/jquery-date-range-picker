@@ -1351,28 +1351,33 @@
         }
 
         function swapTime() {
-            console.log("swap");
             var temp_end = opt.start;
             var temp_start = opt.end;
             renderTime('time1', temp_start);
             renderTime('time2', temp_end);
         }
 
-        function setTime(name, hour, minute) {
-            /*
-            var num_hours = hour;
-            var time_suffix = " PM";
-            if (num_hours > 12) {
-                  num_hours -= 12;
-            } else if (num_hours < 12) {
+        function localizeTime(name, hour, minute) {
+            var time_suffix;
+            if (hour > 12) {
+                  time_suffix = " PM";
+                  hour = hour - 12;
+            } else if (hour < 12) {
                   time_suffix = " AM";
-                  num_hours = (num_hours == 0 ? 12 : num_hours)
-            }*/
+                  hour = (hour == 0 ? 12 : hour);
+            }
+
             hour && (box.find('.' + name + ' .hour-val').text(hour));
             minute && (box.find('.' + name + ' .minute-val').text(minute));
 
-            //var minutes_with_suffix = box.find('.' + name + ' .minute-val').text().replace(/AM|PM/, "") + time_suffix;
-            //box.find('.' + name + ' .minute-val').text(minutes_with_suffix);
+            hour && (box.find('.' + name + '.minute-val .time_suffix').remove());
+            hour && (box.find('.' + name + '.minute-val').append("<span> " + time_suffix + "</span>"));
+        }
+
+        function setTime(name, hour, minute) {
+
+            localizeTime(name, hour, minute);
+
             switch (name) {
                 case 'time1':
                     if (opt.start) {
