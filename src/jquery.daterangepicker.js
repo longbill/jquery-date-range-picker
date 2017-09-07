@@ -1358,6 +1358,7 @@
         }
 
         function localizeTime(name, hour, minute) {
+            console.log("3");
             var time_suffix;
             if (hour > 12) {
                   time_suffix = " PM";
@@ -1366,18 +1367,19 @@
                   time_suffix = " AM";
                   hour = (hour == 0 ? 12 : hour);
             }
-
+            console.log("4");
             hour && (box.find('.' + name + ' .hour-val').text(hour));
             minute && (box.find('.' + name + ' .minute-val').text(minute));
-
+            console.log("5");
             hour && (box.find('.' + name + '.minute-val .time_suffix').remove());
             hour && (box.find('.' + name + '.minute-val').append("<span> " + time_suffix + "</span>"));
+            console.log("6");
         }
 
         function setTime(name, hour, minute) {
-
+            console.log("1");
             localizeTime(name, hour, minute);
-
+            console.log("2");
             switch (name) {
                 case 'time1':
                     if (opt.start) {
