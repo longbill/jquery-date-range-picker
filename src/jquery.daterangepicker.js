@@ -1359,9 +1359,8 @@
 
         function localizeTime(name, hour, minute) {
             console.log("3");
-            var time_suffix;
+            var time_suffix = " PM";
             if (hour > 12) {
-                  time_suffix = " PM";
                   hour = hour - 12;
             } else if (hour < 12) {
                   time_suffix = " AM";
@@ -1371,8 +1370,8 @@
             hour && (box.find('.' + name + ' .hour-val').text(hour));
             minute && (box.find('.' + name + ' .minute-val').text(minute));
             console.log("5");
-            hour && (box.find('.' + name + '.minute-val .time_suffix').remove());
-            hour && (box.find('.' + name + '.minute-val').append("<span> " + time_suffix + "</span>"));
+            box.find('.' + name + '.minute-val .time_suffix').remove();
+            box.find('.' + name + '.minute-val').append("<span> " + time_suffix + "</span>");
             console.log("6");
         }
 
