@@ -1253,6 +1253,7 @@
         function calcPosition() {
             if (!opt.inline) {
                 var offset = $(self).offset();
+                offset.top += 7;
                 if ($(opt.container).css('position') == 'relative') {
                     var containerOffset = $(opt.container).offset();
                     box.css({
