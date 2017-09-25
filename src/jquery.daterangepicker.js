@@ -1803,7 +1803,7 @@
         }
 
         function countDays(start, end) {
-            return moment(end).diff(moment(start), 'days');
+            return Math.abs(moment(end).diff(moment(start), 'days'));
         }
 
         function setDateRange(date1, date2, silent) {
