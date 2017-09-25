@@ -1720,7 +1720,7 @@
         }
 
         function checkSelectionValid() {
-            var days = Math.ceil((opt.end - opt.start) / 86400000) + 1;
+            var days = countDays(opt.end, opt.start);
             if (opt.singleDate) { // Validate if only start is there
                 if (opt.start && !opt.end)
                     box.find('.drp_top-bar').removeClass('error').addClass('normal');
@@ -1803,7 +1803,7 @@
         }
 
         function countDays(start, end) {
-            return Math.abs(daysFrom1970(start) - daysFrom1970(end)) + 1;
+            return moment(end).diff(moment(start), 'days');
         }
 
         function setDateRange(date1, date2, silent) {
@@ -2391,18 +2391,6 @@
             }
 
             return attrString;
-        }
-
-        function daysFrom1970(t) {
-            return Math.floor(toLocalTimestamp(t) / 86400000);
-        }
-
-        function toLocalTimestamp(t) {
-            if (moment.isMoment(t)) t = t.toDate().getTime();
-            if (typeof t == 'object' && t.getTime) t = t.getTime();
-            if (typeof t == 'string' && !t.match(/\d{13}/)) t = moment(t, opt.format).toDate().getTime();
-            t = parseInt(t, 10) - new Date().getTimezoneOffset() * 60 * 1000;
-            return t;
         }
 
         function createMonthHTML(d) {
