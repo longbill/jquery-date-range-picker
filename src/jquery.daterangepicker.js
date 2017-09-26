@@ -1720,7 +1720,7 @@
         }
 
         function checkSelectionValid() {
-            var days = countDays(opt.end, opt.start);
+            var days = countDays(opt.end, opt.start) + 1;
             if (opt.singleDate) { // Validate if only start is there
                 if (opt.start && !opt.end)
                     box.find('.drp_top-bar').removeClass('error').addClass('normal');
