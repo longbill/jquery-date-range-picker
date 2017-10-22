@@ -833,6 +833,8 @@
         }
     };
 
+    $.dateRangePickerWeekDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
     $.fn.dateRangePicker = function(opt) {
         if (!opt) opt = {};
         opt = $.extend(true, {
@@ -919,6 +921,15 @@
         if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
             opt.yearSelect = function(current) { return [current - 5, current + 5]; }
         }
+
+        if (!opt.weekRangeStart) opt.weekRangeStart = opt.startWeek;
+        if (!opt.weekRangeEnd) {
+            if (opt.startOfWeek == 'monday') {
+                opt.weekRangeEnd = 'sunday';
+            } else {
+                opt.weekRangeEnd = 'saturday';
+            }
+        } 
 
         var languages = getLanguages();
         var box;
@@ -1451,13 +1462,15 @@
                 opt.start = time;
                 opt.end = false;
             } else if (opt.batchMode === 'week') {
-                if (opt.startOfWeek === 'monday') {
-                    opt.start = moment(parseInt(time)).startOf('isoweek').valueOf();
-                    opt.end = moment(parseInt(time)).endOf('isoweek').valueOf();
-                } else {
-                    opt.end = moment(parseInt(time)).endOf('week').valueOf();
-                    opt.start = moment(parseInt(time)).startOf('week').valueOf();
+                var weekDayStart = $.dateRangePickerWeekDays.indexOf(opt.weekRangeStart) + 1;
+                var weekDayEnd = $.dateRangePickerWeekDays.indexOf(opt.weekRangeEnd) + 1;
+
+                if (weekDayEnd <= weekDayStart) {
+                    weekDayEnd = weekDayEnd + 7;
                 }
+
+                opt.start = moment(parseInt(time)).day(weekDayStart).valueOf();
+                opt.end = moment(parseInt(time)).day(weekDayEnd).valueOf();
             } else if (opt.batchMode === 'workweek') {
                 opt.start = moment(parseInt(time)).day(1).valueOf();
                 opt.end = moment(parseInt(time)).day(5).valueOf();
@@ -1523,15 +1536,31 @@
                 opt.startWeek = thisTime;
                 weekNumberDom.addClass('week-number-selected');
                 date1 = new Date(thisTime);
-                opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
-                opt.end = moment(date1).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
+
+                var weekDayStart = $.dateRangePickerWeekDays.indexOf(opt.weekRangeStart) + 1;
+                var weekDayEnd = $.dateRangePickerWeekDays.indexOf(opt.weekRangeEnd) + 1;
+
+                if (weekDayEnd <= weekDayStart) {
+                    weekDayEnd = weekDayEnd + 7;
+                }
+
+                opt.start = moment(date1).day(weekDayStart).valueOf();
+                opt.end = moment(date1).day(weekDayEnd).valueOf();
             } else {
                 box.find('.week-number-selected').removeClass('week-number-selected');
                 date1 = new Date(thisTime < opt.startWeek ? thisTime : opt.startWeek);
                 date2 = new Date(thisTime < opt.startWeek ? opt.startWeek : thisTime);
                 opt.startWeek = false;
-                opt.start = moment(date1).day(opt.startOfWeek == 'monday' ? 1 : 0).valueOf();
-                opt.end = moment(date2).day(opt.startOfWeek == 'monday' ? 7 : 6).valueOf();
+
+                var weekDayStart = $.dateRangePickerWeekDays.indexOf(opt.weekRangeStart) + 1;
+                var weekDayEnd = $.dateRangePickerWeekDays.indexOf(opt.weekRangeEnd) + 1;
+
+                if (weekDayEnd <= weekDayStart) {
+                    weekDayEnd = weekDayEnd + 7;
+                }
+
+                opt.start = moment(date1).day(weekDayStart).valueOf();
+                opt.end = moment(date2).day(weekDayEnd).valueOf();
             }
             updateSelectableRange();
             checkSelectionValid();
