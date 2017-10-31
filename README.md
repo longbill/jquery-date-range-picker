@@ -1,8 +1,8 @@
-## jQuery Date Range Picker Plugin
+# jQuery Date Range Picker Plugin - Semantic UI Port
 
-[![CDNJS](https://img.shields.io/cdnjs/v/jquery-date-range-picker.svg)](https://cdnjs.com/libraries/jquery-date-range-picker)
-[![Bower Version](https://img.shields.io/bower/v/jquery-date-range-picker.svg?maxAge=3600)]()
-[![License](https://img.shields.io/github/license/longbill/jquery-date-range-picker.svg?maxAge=2592000)]()
+## Description
+
+This plugin is a `Semantic UI` based on the [jQuery Date Range Picker](https://github.com/longbill/jquery-date-range-picker) plugin
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
@@ -12,6 +12,12 @@ jQuery Date Range Picker is a jQuery plugin that allows user to select a date ra
 * Fully CSS styled
 * Written by Chunlong ( jszen.com )
 * I accept further customization job if you require more functions. Please contact me via longbill.cn@gmail.com
+
+### Changes Made compared to Original
+
+- Added `Semantic UI` CSS and JS in `index.html`
+
+- Removed `data-tooltip` attribute inside the date item as it generates a unwanted default tooltip the date items.
 
 ## [Documentation & Demo](http://longbill.github.io/jquery-date-range-picker/)
 
