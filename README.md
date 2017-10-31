@@ -2,7 +2,7 @@
 
 ## Description
 
-This plugin is a `Semantic UI` based on the [jQuery Date Range Picker](https://github.com/longbill/jquery-date-range-picker) plugin
+This plugin is a `Semantic UI` port based on the [jQuery Date Range Picker](https://github.com/longbill/jquery-date-range-picker) plugin
 
 jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.
 
