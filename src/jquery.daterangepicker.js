@@ -835,9 +835,11 @@
 
     $.fn.dateRangePicker = function(opt) {
         if (!opt) opt = {};
+        if (!opt.format2 && opt.format) {opt.format2 = opt.format;} //keep the same if not defined
         opt = $.extend(true, {
             autoClose: false,
             format: 'YYYY-MM-DD',
+            format2: 'YYYY-MM-DD',
             separator: ' to ',
             language: 'auto',
             startOfWeek: 'sunday', // or monday
@@ -914,7 +916,7 @@
         if (!opt.showTopbar) opt.autoClose = true;
 
         if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate, opt.format).toDate();
-        if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
+        if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format2).toDate();
 
         if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
             opt.yearSelect = function(current) { return [current - 5, current + 5]; }
@@ -963,7 +965,7 @@
                 var start = new Date();
                 start.setTime(opt.start);
                 if (typeof d2 == 'string') {
-                    d2 = moment(d2, opt.format).toDate();
+                    d2 = moment(d2, opt.format2).toDate();
                 }
                 setDateRange(start, d2, silent);
                 return this;
@@ -971,7 +973,7 @@
             setDateRange: function(d1, d2, silent) {
                 if (typeof d1 == 'string' && typeof d2 == 'string') {
                     d1 = moment(d1, opt.format).toDate();
-                    d2 = moment(d2, opt.format).toDate();
+                    d2 = moment(d2, opt.format2).toDate();
                 }
                 setDateRange(d1, d2, silent);
             },
@@ -1139,7 +1141,7 @@
 
             box.find('.apply-btn').click(function() {
                 closeDatePicker();
-                var dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString(new Date(opt.end));
+                var dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString2(new Date(opt.end));
                 $(self).trigger('datepicker-apply', {
                     'value': dateRange,
                     'date1': new Date(opt.start),
@@ -1769,13 +1771,13 @@
                 box.find('.start-day').html(getDateString(new Date(parseInt(opt.start))));
             }
             if (opt.end) {
-                box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
+                box.find('.end-day').html(getDateString2(new Date(parseInt(opt.end))));
             }
             var dateRange;
             if (opt.start && opt.singleDate) {
                 box.find('.apply-btn').removeClass('disabled');
                 dateRange = getDateString(new Date(opt.start));
-                opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+                opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString2(new Date(opt.end)));
 
                 if (initiated && !silent) {
                     $(self).trigger('datepicker-change', {
@@ -1786,8 +1788,8 @@
             } else if (opt.start && opt.end) {
                 box.find('.selected-days').show().find('.selected-days-num').html(countDays(opt.end, opt.start));
                 box.find('.apply-btn').removeClass('disabled');
-                dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString(new Date(opt.end));
-                opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString(new Date(opt.end)));
+                dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString2(new Date(opt.end));
+                opt.setValue.call(selfDom, dateRange, getDateString(new Date(opt.start)), getDateString2(new Date(opt.end)));
                 if (initiated && !silent) {
                     $(self).trigger('datepicker-change', {
                         'value': dateRange,
@@ -2070,6 +2072,10 @@
 
         function getDateString(d) {
             return moment(d).format(opt.format);
+        }
+
+        function getDateString2(d) {
+            return moment(d).format(opt.format2);
         }
 
         function showGap() {
