@@ -1596,7 +1596,7 @@
             var tooltip = '';
 
             if (day.hasClass('has-tooltip') && day.attr('data-tooltip')) {
-                tooltip = '<span style="white-space:nowrap">' + day.attr('data-tooltip') + '</span>';
+                tooltip = '<span class="tooltip-content">' + day.attr('data-tooltip') + '</span>';
             } else if (!day.hasClass('invalid')) {
                 if (opt.singleDate) {
                     box.find('.day.hovering').removeClass('hovering');
@@ -2163,7 +2163,7 @@
                     html += '<div class="custom-top">' + opt.customTopBar + '</div>';
                 } else {
                     html += '<div class="normal-top">' +
-                        '<span style="color:#333">' + translate('selected') + ' </span> <b class="start-day">...</b>';
+                        '<span class="selection-top">' + translate('selected') + ' </span> <b class="start-day">...</b>';
                     if (!opt.singleDate) {
                         html += ' <span class="separator-day">' + opt.separator + '</span> <b class="end-day">...</b> <i class="selected-days">(<span class="selected-days-num">3</span> ' + translate('days') + ')</i>';
                     }
@@ -2188,14 +2188,14 @@
                 '   <table class="month1" cellspacing="0" border="0" cellpadding="0">' +
                 '       <thead>' +
                 '           <tr class="caption">' +
-                '               <th style="width:27px;">' +
+                '               <th>' +
                 '                   <span class="prev">' +
                 arrowPrev +
                 '                   </span>' +
                 '               </th>' +
                 '               <th colspan="' + _colspan + '" class="month-name">' +
                 '               </th>' +
-                '               <th style="width:27px;">' +
+                '               <th>' +
                 (opt.singleDate || !opt.stickyMonths ? '<span class="next">' + arrowNext + '</span>' : '') +
                 '               </th>' +
                 '           </tr>' +
@@ -2209,12 +2209,12 @@
                     '<table class="month2" cellspacing="0" border="0" cellpadding="0">' +
                     '   <thead>' +
                     '   <tr class="caption">' +
-                    '       <th style="width:27px;">' +
+                    '       <th>' +
                     (!opt.stickyMonths ? '<span class="prev">' + arrowPrev + '</span>' : '') +
                     '       </th>' +
                     '       <th colspan="' + _colspan + '" class="month-name">' +
                     '       </th>' +
-                    '       <th style="width:27px;">' +
+                    '       <th>' +
                     '           <span class="next">' + arrowNext + '</span>' +
                     '       </th>' +
                     '   </tr>' +
@@ -2225,14 +2225,14 @@
 
             }
             //+'</div>'
-            html += '<div style="clear:both;height:0;font-size:0;"></div>' +
+            html += '<div class="dp-clearfix"></div>' +
                 '<div class="time">' +
                 '<div class="time1"></div>';
             if (!opt.singleDate) {
                 html += '<div class="time2"></div>';
             }
             html += '</div>' +
-                '<div style="clear:both;height:0;font-size:0;"></div>' +
+                '<div class="dp-clearfix"></div>' +
                 '</div>';
 
             html += '<div class="footer">';
