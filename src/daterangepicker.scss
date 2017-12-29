@@ -91,10 +91,6 @@ $daterangepicker-selected-radius:       4px;
     width: auto;
   }
 
-  &.no-shortcuts {
-    padding-bottom: 0;
-  }
-
   &.no-topbar {
     padding-top: 0;
   }
@@ -105,12 +101,18 @@ $daterangepicker-selected-radius:       4px;
     font-size: 11px;
 
     .shortcuts {
-      @include flexbox;
-      @include justify-content(space-between);
+      display: flex;
+      justify-content: space-between;
     }
 
     .btn {
       width: 100%;
+    }
+  }
+
+  &.no-shortcuts {
+    & > footer {
+      display: none;
     }
   }
 
@@ -199,6 +201,12 @@ $daterangepicker-selected-radius:       4px;
     grid-gap: 1px;
   }
 
+  &.single-month {
+    .month-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+
   section {
     min-width: 200px;
     outline: 1px solid $daterangepicker-border-color;
@@ -235,7 +243,7 @@ $daterangepicker-selected-radius:       4px;
     grid-template-rows: 1fr;
   }
 
-  .days-wrapper, {
+  .days-wrapper {
     display: grid;
     padding: $daterangepicker-padding;
     grid-template-columns: repeat(7, 1fr);
@@ -271,7 +279,8 @@ $daterangepicker-selected-radius:       4px;
     .nextMonth {
       color: #999;
       cursor: default;
-      display: none;
+      visibility: hidden;
+      opacity: 0;
     }
 
     .has-tooltip {
@@ -330,6 +339,19 @@ $daterangepicker-selected-radius:       4px;
     }
   }
 
+  &.has-weeknumber {
+    .days-wrapper,
+    .week-name {
+      grid-template-columns: repeat(8, 1fr);
+    }
+  }
+
+  &.single-date {
+    .first-date-selected {
+      border-radius: $daterangepicker-selected-radius;
+    }
+  }
+
   .selected-days {
     display: none;
   }
@@ -347,7 +369,9 @@ $daterangepicker-selected-radius:       4px;
       content: '';
     }
 
-    .custom-top {
+    .custom-top,
+    .default-top,
+    .normal-top {
       float: left;
 
       .clear {
@@ -384,16 +408,17 @@ $daterangepicker-selected-radius:       4px;
 
   /*time styling*/
   .time {
-    position: relative;
+    grid-column: 1 / 3;
   }
 
-  &.single-month .time {
-    display: block;
+  &.single-month {
+    .time {
+      grid-column: 1 / 2;
+    }
   }
 
   .time input[type=range] {
     vertical-align: middle;
-    width: 129px;
     padding: 0;
     margin: 0;
     height: 20px;
@@ -401,8 +426,7 @@ $daterangepicker-selected-radius:       4px;
 
   .time1,
   .time2 {
-    width: 180px;
-    padding: 0 5px;
+    padding: 10px;
     text-align: center;
   }
 
@@ -455,7 +479,7 @@ $daterangepicker-selected-radius:       4px;
   }
 
   .week-number {
-    padding: 5px 0;
+    padding: .8em 0;
     line-height: 1;
     font-size: 12px;
     margin-bottom: 1px;

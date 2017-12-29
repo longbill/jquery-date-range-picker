@@ -893,7 +893,8 @@
             customArrowPrevSymbol: null,
             customArrowNextSymbol: null,
             monthSelect: false,
-            yearSelect: false
+            yearSelect: false,
+            booking: false
         }, opt);
 
         opt.start = false;
@@ -989,7 +990,7 @@
                 $(window).unbind('resize.datepicker', calcPosition);
                 $(document).unbind('click.datepicker', closeDatePicker);
             },
-            getDaysLength: function () { //Added by Okzea
+            getDaysLength: function () {
               return countDays(opt.end, opt.start);
             }
         });
@@ -1065,7 +1066,6 @@
 
 
             setTimeout(function() {
-                updateCalendarWidth();
                 initiated = true;
             }, 0);
 
@@ -1309,7 +1309,6 @@
                 relatedTarget: box
             });
             showGap();
-            updateCalendarWidth();
             calcPosition();
         }
 
@@ -1345,15 +1344,6 @@
             } else {
                 return moment().toDate();
             }
-        }
-
-        function updateCalendarWidth() {
-            var gapMargin = box.find('.gap').css('margin-left');
-            if (gapMargin) gapMargin = parseInt(gapMargin);
-            var w1 = box.find('.month1').width();
-            var w2 = box.find('.gap').width() + (gapMargin ? gapMargin * 2 : 0);
-            var w3 = box.find('.month2').width();
-            box.find('.month-wrapper').width(w1 + w2 + w3);
         }
 
         function renderTime(name, date) {
@@ -1810,7 +1800,7 @@
         }
 
         function countDays(start, end) {
-            return Math.abs(daysFrom1970(start) - daysFrom1970(end));
+            return Math.abs(daysFrom1970(start) - daysFrom1970(end)) + ((!opt.booking) ? 1 : 0);
         }
 
         function setDateRange(date1, date2, silent) {
@@ -2091,13 +2081,10 @@
             var p = Math.abs(m1 - m2);
             var shouldShow = (p > 1 && p != 89);
             if (shouldShow) {
-                box.addClass('has-gap').removeClass('no-gap').find('.gap').css('visibility', 'visible');
+                box.addClass('has-gap').removeClass('no-gap');
             } else {
-                box.removeClass('has-gap').addClass('no-gap').find('.gap').css('visibility', 'hidden');
+                box.removeClass('has-gap').addClass('no-gap');
             }
-            var h1 = box.find('section.month1').height();
-            var h2 = box.find('section.month2').height();
-            box.find('.gap').height(Math.max(h1, h2) + 10);
         }
 
         function closeDatePicker() {
@@ -2165,6 +2152,7 @@
             if (!opt.showShortcuts) html += ' no-shortcuts ';
             if (!opt.showTopbar) html += ' no-topbar ';
             if (opt.customTopBar) html += ' custom-topbar ';
+            if (opt.showWeekNumbers) html += ' has-weeknumber';
             html += '">';
 
             if (opt.showTopbar) {
@@ -2187,8 +2175,6 @@
                 html += '<a href="javascript:;" class="apply-btn disabled' + getApplyBtnClass() + '">' + translate('apply') + '</a>';
                 html += '</header>';
             }
-
-            var _colspan = opt.showWeekNumbers ? 6 : 5;
 
             var arrowPrev = '&lt;';
             if (opt.customArrowPrevSymbol) arrowPrev = opt.customArrowPrevSymbol;
@@ -2339,19 +2325,6 @@
                 return true;
             }
             return false;
-        }
-
-        function getGapHTML() {
-            var html = ['<div class="gap-top-mask"></div><div class="gap-bottom-mask"></div><div class="gap-lines">'];
-            for (var i = 0; i < 20; i++) {
-                html.push('<div class="gap-line">' +
-                    '<div class="gap-1"></div>' +
-                    '<div class="gap-2"></div>' +
-                    '<div class="gap-3"></div>' +
-                    '</div>');
-            }
-            html.push('</div>');
-            return html.join('');
         }
 
         function hasMonth2() {
