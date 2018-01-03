@@ -147,7 +147,6 @@ $daterangepicker-selected-radius:       4px;
 
   section {
     flex: 1;
-    float: left;
     background: $daterangepicker-bg-color;
     outline: 1px solid $daterangepicker-border-color;
 
@@ -357,7 +356,20 @@ $daterangepicker-selected-radius:       4px;
   /*time styling*/
   .time {
     display: flex;
-    flex-direction: row;
+  }
+
+  .time1,
+  .time2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    background: $daterangepicker-bg-color;
+    outline: 1px solid $daterangepicker-border-color;
   }
 
   .time input[type=range] {
@@ -365,14 +377,6 @@ $daterangepicker-selected-radius:       4px;
     padding: 0;
     margin: 0;
     height: 20px;
-  }
-
-  .time1,
-  .time2 {
-    float: left;
-    padding: 10px;
-    text-align: center;
-    box-sizing: border-box;
   }
 
   .hour,
