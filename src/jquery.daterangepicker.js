@@ -870,7 +870,7 @@
             singleDate: false,
             lookBehind: false,
             batchMode: false,
-            duration: 200,
+            duration: 250,
             stickyMonths: false,
             dayDivAttrs: [],
             dayTdAttrs: [],
@@ -1063,7 +1063,6 @@
             } else {
                 box.addClass('two-months');
             }
-
 
             setTimeout(function() {
                 initiated = true;
@@ -2206,7 +2205,8 @@
                     '   </div>';
 
             }
-            //+'</div>'
+
+            html += '</div>';
 
             if (opt.time.enabled) {
               html += '<div class="time">' +
@@ -2216,8 +2216,6 @@
               }
               html += '</div>';
             }
-
-            html += '</div>';
 
                 html += '<footer>';
                 if (opt.showShortcuts) {

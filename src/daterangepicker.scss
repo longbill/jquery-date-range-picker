@@ -1,60 +1,3 @@
-// Mixins
-@mixin box-shadow($shadow...) {
-  -webkit-box-shadow: $shadow;
-  box-shadow: $shadow;
-}
-
-// Flexbox Mixins
-// http://philipwalton.github.io/solved-by-flexbox/
-// https://github.com/philipwalton/solved-by-flexbox
-//
-// Copyright (c) 2013 Brian Franco
-
-@mixin flexbox {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flexbox;
-	display: flex;
-}
-
-@mixin justify-content($value: flex-start) {
-	@if $value == flex-start {
-		-webkit-box-pack: start;
-		-ms-flex-pack: start;
-	} @else if $value == flex-end {
-		-webkit-box-pack: end;
-		-ms-flex-pack: end;
-	} @else if $value == space-between {
-		-webkit-box-pack: justify;
-		-ms-flex-pack: justify;
-	} @else if $value == space-around {
-		-ms-flex-pack: distribute;
-	} @else {
-		-webkit-box-pack: $value;
-		-ms-flex-pack: $value;
-	}
-	-webkit-justify-content: $value;
-	-moz-justify-content: $value;
-	justify-content: $value;
-}
-
-@mixin align-items($value: stretch) {
-	@if $value == flex-start {
-		-webkit-box-align: start;
-		-ms-flex-align: start;
-	} @else if $value == flex-end {
-		-webkit-box-align: end;
-		-ms-flex-align: end;
-	} @else {
-		-webkit-box-align: $value;
-		-ms-flex-align: $value;
-	}
-	-webkit-align-items: $value;
-	-moz-align-items: $value;
-	align-items: $value;
-}
-
 // Date Range Picker Variables
 $brand-primary:                         #2A6EBB;
 $brand-secondary:                       #FAAF2B;
@@ -62,6 +5,7 @@ $text-color:                            #212121;
 $gray:                                  #54585A;
 
 $daterangepicker-color:                 $text-color;
+$daterangepicker-color-light:           #fff;
 $daterangepicker-bg-color:              #fff;
 $daterangepicker-border-color:          #ddd;
 $daterangepicker-border-radius:         4px;
@@ -71,20 +15,21 @@ $daterangepicker-selected-radius:       4px;
 
 // Date Range Picker
 .date-range-picker {
-  @include box-shadow($daterangepicker-box-shadow);
   position: absolute;
+  width: 38em;
   border: 1px solid $daterangepicker-border-color;
   border-radius: $daterangepicker-border-radius;
   background-color: $daterangepicker-bg-color;
   color: $daterangepicker-color;
   font-size: 12px;
+  box-shadow: $daterangepicker-box-shadow;
   overflow: hidden;
   z-index: 1;
 
   &.inline-wrapper {
-    @include box-shadow(none);
     display: inline-block;
     position: relative;
+    box-shadow: none;
   }
 
   &.single-date {
@@ -98,7 +43,8 @@ $daterangepicker-selected-radius:       4px;
   footer {
     padding: $daterangepicker-padding;
     background: inherit;
-    font-size: 11px;
+    font-size: .9em;
+    text-align: center;
 
     .shortcuts {
       display: flex;
@@ -150,19 +96,20 @@ $daterangepicker-selected-radius:       4px;
     left: 0;
     background: #fff;
     z-index: 100;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 1px;
 
     &.visible {
-      display: grid;
+      display: block;
     }
 
     .month,
     .year {
-      @include flexbox;
-      @include align-items(center);
-      @include justify-content(center);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      float: left;
+      width: percentage(1 / 4);
+      height: percentage(1 / 3);
+      background: $daterangepicker-bg-color;
       outline: 1px solid $daterangepicker-border-color;
       font-size: .8em;
       text-transform: uppercase;
@@ -178,7 +125,7 @@ $daterangepicker-selected-radius:       4px;
 
   .month-name {
     text-transform: capitalize;
-    font-size: 16px;
+    font-size: 1.25em;
   }
 
   .month-element {
@@ -192,74 +139,89 @@ $daterangepicker-selected-radius:       4px;
   }
 
   .month-wrapper {
-    display: grid;
+    display: flex;
     position: relative;
     text-align: center;
     cursor: default;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-gap: 1px;
-  }
-
-  &.single-month {
-    .month-wrapper {
-      grid-template-columns: 1fr;
-    }
   }
 
   section {
-    min-width: 200px;
+    flex: 1;
+    float: left;
+    background: $daterangepicker-bg-color;
     outline: 1px solid $daterangepicker-border-color;
 
     header {
-      display: grid;
+      display: flex;
+      justify-content: space-between;
       padding: $daterangepicker-padding;
-      grid-template-columns: 1fr 5fr 1fr;
-      grid-template-rows: 1fr;
       border-bottom: 1px solid $daterangepicker-border-color;
 
-      .next,
-      .prev {
-        @include flexbox;
-        @include justify-content(center);
-        @include align-items(center);
+      .prev,
+      .next {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        min-width: 15%;
         cursor: pointer;
 
         &:hover {
           color: $brand-primary;
         }
       }
+
+      .next {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &.single-month {
+    section {
+      width: 100%;
+    }
+  }
+
+  .week-name,
+  .days-wrapper {
+    > div {
+      float: left;
+      width: percentage(1 / 7);
+      height: auto;
+    }
+  }
+
+  &.has-weeknumber {
+    .week-name,
+    .days-wrapper {
+      > div {
+        width: percentage(1 / 8);
+      }
     }
   }
 
   .week-name {
-    display: grid;
     padding: $daterangepicker-padding $daterangepicker-padding 0;
     font-size: .8em;
     font-weight: 100;
-    line-height: 20px;
+    line-height: 1.95em;
     text-transform: uppercase;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 1fr;
   }
 
   .days-wrapper {
-    display: grid;
     padding: $daterangepicker-padding;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-gap: 0;
 
     .day {
       margin-bottom: 1px;
       padding: .8em 0;
       color: #ccc;
-      font-size: 12px;
+      font-size: .9em;
       line-height: 1;
       cursor: default;
     }
 
     .real-today {
+      color: $daterangepicker-color-light;
       background-color: $brand-secondary;
 
       &:not(.checked):not(.hovering) {
@@ -339,13 +301,6 @@ $daterangepicker-selected-radius:       4px;
     }
   }
 
-  &.has-weeknumber {
-    .days-wrapper,
-    .week-name {
-      grid-template-columns: repeat(8, 1fr);
-    }
-  }
-
   &.single-date {
     .first-date-selected {
       border-radius: $daterangepicker-selected-radius;
@@ -357,17 +312,10 @@ $daterangepicker-selected-radius:       4px;
   }
 
   .drp_top-bar {
-    line-height: 1.4;
     position: relative;
+    line-height: 1.4;
     padding: 10px;
-
-    &::after {
-      display: table;
-      height: 0;
-      clear: both;
-      font-size: 0;
-      content: '';
-    }
+    box-sizing: border-box;
 
     .custom-top,
     .default-top,
@@ -408,13 +356,8 @@ $daterangepicker-selected-radius:       4px;
 
   /*time styling*/
   .time {
-    grid-column: 1 / 3;
-  }
-
-  &.single-month {
-    .time {
-      grid-column: 1 / 2;
-    }
+    display: flex;
+    flex-direction: row;
   }
 
   .time input[type=range] {
@@ -426,16 +369,10 @@ $daterangepicker-selected-radius:       4px;
 
   .time1,
   .time2 {
+    float: left;
     padding: 10px;
     text-align: center;
-  }
-
-  .time1 {
-    float: left;
-  }
-
-  .time2 {
-    float: right;
+    box-sizing: border-box;
   }
 
   .hour,
@@ -448,7 +385,7 @@ $daterangepicker-selected-radius:       4px;
   }
 
   .date-range-length-tip {
-    @include box-shadow(0 0 3px rgba(0, 0, 0, .3));
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
     position: absolute;
     margin-top: -4px;
     margin-left: -7px;
@@ -456,8 +393,8 @@ $daterangepicker-selected-radius:       4px;
     background: $brand-secondary;
     padding: 2px 6px;
     border-radius: 2px;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 1em;
+    line-height: 1.2em;
     color: initial;
 
     &::after {
@@ -479,16 +416,26 @@ $daterangepicker-selected-radius:       4px;
   }
 
   .week-number {
-    padding: .8em 0;
-    line-height: 1;
-    font-size: 12px;
-    margin-bottom: 1px;
+    @extend .day;
     color: #999;
     cursor: pointer;
 
     &.week-number-selected {
       color: #4499EE;
       font-weight: bold;
+    }
+  }
+
+  .month-wrapper,
+  .week-name,
+  .days-wrapper,
+  .drp_top-bar {
+    &::after {
+      display: table;
+      height: 0;
+      clear: both;
+      font-size: 0;
+      content: '';
     }
   }
 }
