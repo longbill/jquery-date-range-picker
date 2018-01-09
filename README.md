@@ -1,9 +1,9 @@
----- PlacePass Edits
-When pushing changes to the date range picker, in order to apply them to a repository (Marriott Moments) you must run /yarn cache clean, followed by rm yarn.lock, then followed by ./bin/fix-elm
-
-Otherwise the hash's for the commits get messed up and the local version of Marriott Moments will always point to an outdated version. Also, if tried to upload to Heroku the build will fail.
-----
-
+### PlacePass Edits
+When done editting the jquery-date-range-picker run
+```
+yarn add https://github.com/ETMAInc/jquery-date-range-picker.git
+```
+to apply the latest version of the date range picker to the repository it is implemented in.
 
 ## jQuery Date Range Picker Plugin
 
