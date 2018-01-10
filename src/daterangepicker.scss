@@ -4,6 +4,7 @@ $brand-secondary:                       #FAAF2B;
 $text-color:                            #212121;
 $gray:                                  #54585A;
 
+$daterangepicker-width:                 35em;
 $daterangepicker-color:                 $text-color;
 $daterangepicker-color-light:           #fff;
 $daterangepicker-bg-color:              #fff;
@@ -16,7 +17,7 @@ $daterangepicker-selected-radius:       4px;
 // Date Range Picker
 .date-range-picker {
   position: absolute;
-  width: 38em;
+  width: $daterangepicker-width;
   border: 1px solid $daterangepicker-border-color;
   border-radius: $daterangepicker-border-radius;
   background-color: $daterangepicker-bg-color;
