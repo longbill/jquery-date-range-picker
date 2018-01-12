@@ -911,8 +911,6 @@
         if (opt.singleMonth == 'auto') opt.singleMonth = $(window).width() < 480;
         if (opt.singleMonth) opt.stickyMonths = false;
 
-        if (!opt.showTopbar) opt.autoClose = true;
-
         if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate, opt.format).toDate();
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
 
@@ -1062,7 +1060,6 @@
 
 
             setTimeout(function() {
-                updateCalendarWidth();
                 initiated = true;
             }, 0);
 
@@ -1234,14 +1231,14 @@
                 }
             });
 
-            box.find('.time1 input[type=range]').bind('change touchmove', function(e) {
+            box.find('.time1 input[type=range]').on('touchmove input change', function(e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
                 setTime('time1', hour, min);
             });
 
-            box.find('.time2 input[type=range]').bind('change touchmove', function(e) {
+            box.find('.time2 input[type=range]').on('touchmove input change', function(e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
@@ -1254,24 +1251,21 @@
         function calcPosition() {
             if (!opt.inline) {
                 var offset = $(self).offset();
+                offset.top += 7;
                 if ($(opt.container).css('position') == 'relative') {
                     var containerOffset = $(opt.container).offset();
-                    var leftIndent = Math.max(0, offset.left + box.outerWidth() - $('body').width() + 16);
                     box.css({
                         top: offset.top - containerOffset.top + $(self).outerHeight() + 4,
-                        left: offset.left - containerOffset.left - leftIndent
                     });
                 } else {
                     if (offset.left < 460) //left to right
                     {
                         box.css({
                             top: offset.top + $(self).outerHeight() + parseInt($('body').css('border-top') || 0, 10),
-                            left: offset.left
                         });
                     } else {
                         box.css({
                             top: offset.top + $(self).outerHeight() + parseInt($('body').css('border-top') || 0, 10),
-                            left: offset.left + $(self).width() - box.width() - 16
                         });
                     }
                 }
@@ -1303,7 +1297,6 @@
                 relatedTarget: box
             });
             showGap();
-            updateCalendarWidth();
             calcPosition();
         }
 
@@ -1341,15 +1334,6 @@
             }
         }
 
-        function updateCalendarWidth() {
-            var gapMargin = box.find('.gap').css('margin-left');
-            if (gapMargin) gapMargin = parseInt(gapMargin);
-            var w1 = box.find('.month1').width();
-            var w2 = box.find('.gap').width() + (gapMargin ? gapMargin * 2 : 0);
-            var w3 = box.find('.month2').width();
-            box.find('.month-wrapper').width(w1 + w2 + w3);
-        }
-
         function renderTime(name, date) {
             box.find('.' + name + ' input[type=range].hour-range').val(moment(date).hours());
             box.find('.' + name + ' input[type=range].minute-range').val(moment(date).minutes());
@@ -1366,13 +1350,30 @@
         }
 
         function swapTime() {
-            renderTime('time1', opt.start);
-            renderTime('time2', opt.end);
+            var temp_end = opt.start;
+            var temp_start = opt.end;
+            renderTime('time1', temp_start);
+            renderTime('time2', temp_end);
+        }
+
+        function localizeTime(name, hour, minute) {
+            var time_suffix = " PM";
+            if (hour > 12) {
+                  hour = hour - 12;
+            } else if (hour < 12) {
+                  time_suffix = " AM";
+                  hour = (hour == 0 ? 12 : hour);
+            }
+
+            hour && (box.find('.' + name + ' .hour-val').text(hour));
+            minute && (box.find('.' + name + ' .minute-val').text(minute));
+
+            box.find('.' + name + ' .minute-val .time-suffix').remove();
+            box.find('.' + name + ' .minute-val').append("<span class='time-suffix'>" + time_suffix + "</span>");
         }
 
         function setTime(name, hour, minute) {
-            hour && (box.find('.' + name + ' .hour-val').text(hour));
-            minute && (box.find('.' + name + ' .minute-val').text(minute));
+            localizeTime(name, hour, minute);
             switch (name) {
                 case 'time1':
                     if (opt.start) {

@@ -1,3 +1,10 @@
+### PlacePass Edits
+When done editting the jquery-date-range-picker run
+```
+yarn add https://github.com/ETMAInc/jquery-date-range-picker.git
+```
+to apply the latest version of the date range picker to the repository it is implemented in.
+
 ## jQuery Date Range Picker Plugin
 
 [![CDNJS](https://img.shields.io/cdnjs/v/jquery-date-range-picker.svg)](https://cdnjs.com/libraries/jquery-date-range-picker)
