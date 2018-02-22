@@ -1,8 +1,8 @@
 {
-  "name": "jquery-date-range-picker",
-  "homepage": "https://github.com/longbill/jquery-date-range-picker",
+  "name": "date-range-picker-dashboard-tp",
+  "homepage": "https://github.com/evgenij9241/jquery-date-range-picker",
   "authors": [
-    "<longbill.cn@gmail.com>"
+    "<ep@tetpilot.co>"
   ],
   "description": "jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.",
   "main": [
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/longbill/jquery-date-range-picker.git"
+    "url": "git://github.com/evgenij9241/date-range-picker-dashboard-tp.git"
   },
   "license": "MIT",
   "ignore": [
