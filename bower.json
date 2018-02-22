@@ -1,8 +1,8 @@
 {
-  "name": "jquery-date-range-picker",
-  "homepage": "https://github.com/longbill/jquery-date-range-picker",
+  "name": "jquery-date-range-picker-dashboard",
+  "homepage": "https://github.com/evgenij9241/jquery-date-range-picker",
   "authors": [
-    "<longbill.cn@gmail.com>"
+    "<ep@tetpilot.co>"
   ],
   "description": "jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.",
   "main": [
