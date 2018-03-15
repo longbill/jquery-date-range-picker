@@ -1316,9 +1316,9 @@
                 if (___format.match(/Do/)) {
 
                     ___format = ___format.replace(/Do/, 'D');
-                    defaults[0] = defaults[0].replace(/(\d+)(th|nd|st)/, '$1');
+                    defaults[0] = defaults[0].replace(/(\d+)(th|rd|nd|st)/, '$1');
                     if (defaults.length >= 2) {
-                        defaults[1] = defaults[1].replace(/(\d+)(th|nd|st)/, '$1');
+                        defaults[1] = defaults[1].replace(/(\d+)(th|rd|nd|st)/, '$1');
                     }
                 }
                 // set initiated  to avoid triggerring datepicker-change event
