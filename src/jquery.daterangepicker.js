@@ -1675,7 +1675,7 @@
         }
 
         function dateChanged(date) {
-            var value = date.val();
+            var value = parseInt(date.val(), 10);
             var name = date.attr('name');
             var type = date.parents('table').hasClass('month1') ? 'month1' : 'month2';
             var oppositeType = type === 'month1' ? 'month2' : 'month1';
