@@ -2393,18 +2393,6 @@
             return attrString;
         }
 
-        function daysFrom1970(t) {
-            return Math.floor(toLocalTimestamp(t) / 86400000);
-        }
-
-        function toLocalTimestamp(t) {
-            if (moment.isMoment(t)) t = t.toDate().getTime();
-            if (typeof t == 'object' && t.getTime) t = t.getTime();
-            if (typeof t == 'string' && !t.match(/\d{13}/)) t = moment(t, opt.format).toDate().getTime();
-            t = parseInt(t, 10) - new Date().getTimezoneOffset() * 60 * 1000;
-            return t;
-        }
-
         function createMonthHTML(d) {
             var days = [];
             d.setDate(1);
