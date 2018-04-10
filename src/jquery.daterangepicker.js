@@ -1955,7 +1955,7 @@
 
             range = [
                 startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
-                endDate && date.isSame(endDate, 'year') ? endDate.get('month') : 11
+                date ? date.get('month') : 11
             ];
 
             if (range[0] === range[1]) {
