@@ -37,11 +37,16 @@ cd jquery-date-range-picker
 ```
 npm install
 ```
-* Generate minified (dist) files
+* Generate new minified (dist) files by reading from the `src` folder
 ```
 gulp
 ```
-* Above command will generate new files by reading from the `src` folder
+
+* Build and tag a new version using [`npm version` command](https://docs.npmjs.com/cli/version) according to [Semantic Versioning](https://semver.org) best practices.
+
+```
+npm version <patch|minor|major>
+```
 
 ## Change log
 * See [changelog](CHANGELOG.md)
