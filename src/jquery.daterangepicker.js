@@ -2543,7 +2543,7 @@
             showGap();
         }
 
-        function outsideClickClose() {
+        function outsideClickClose(evt) {
             if (!IsOwnDatePickerClicked(evt, self[0])) {
                 if (box.is(':visible')) closeDatePicker();
             }
