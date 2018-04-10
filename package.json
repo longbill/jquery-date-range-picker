@@ -23,7 +23,10 @@
   "scripts": {
     "dist": "gulp",
     "dev": "gulp dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preversion": "gulp test",
+    "version": "gulp && git add -A dist",
+    "postversion": "git push && git push --tags"
   },
   "engines": {
     "node": "0.12.x",
