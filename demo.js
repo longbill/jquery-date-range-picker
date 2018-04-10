@@ -6,7 +6,14 @@ $(function()
 		window.console = {};
 		window.console.log = function(){};
 	}
-		
+
+    /**
+	 * Assign an id to each of the demo elements for easy reference.
+     */
+	$('li.demo').each(function(index) {
+        $(this).attr('id', 'demo' + (index + 1));
+    });
+
 	/*
 	define a new language named "custom"
 	*/
