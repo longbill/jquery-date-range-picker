@@ -927,12 +927,12 @@
         var selfDom = $(self).get(0);
         var domChangeTimer;
 
-        $(this).unbind('.datepicker').bind('click.datepicker', function(evt) {
+        $(this).off('.datepicker').on('click.datepicker', function(evt) {
             var isOpen = box.is(':visible');
             if (!isOpen) open(opt.duration);
-        }).bind('change.datepicker', function(evt) {
+        }).on('change.datepicker', function(evt) {
             checkAndSetDefaultValue();
-        }).bind('keyup.datepicker', function() {
+        }).on('keyup.datepicker', function() {
             try {
                 clearTimeout(domChangeTimer);
             } catch (e) {}
@@ -982,16 +982,16 @@
             getDatePicker: getDatePicker,
             resetMonthsView: resetMonthsView,
             destroy: function() {
-                $(self).unbind('.datepicker');
+                $(self).off('.datepicker');
                 $(self).data('dateRangePicker', '');
                 $(self).data('date-picker-opened', null);
                 box.remove();
-                $(window).unbind('resize.datepicker', calcPosition);
-                $(document).unbind('click.datepicker', outsideClickClose);
+                $(window).off('resize.datepicker', calcPosition);
+                $(document).off('click.datepicker', outsideClickClose);
             }
         });
 
-        $(window).bind('resize.datepicker', calcPosition);
+        $(window).on('resize.datepicker', calcPosition);
 
         return this;
 
@@ -1071,7 +1071,7 @@
             });
 
             //if user click other place of the webpage, close date range picker window
-            $(document).bind('click.datepicker', outsideClickClose);
+            $(document).on('click.datepicker', outsideClickClose);
 
             box.find('.next').click(function() {
                 if (!opt.stickyMonths)
@@ -1128,7 +1128,7 @@
 
             box.attr('unselectable', 'on')
                 .css('user-select', 'none')
-                .bind('selectstart', function(e) {
+                .on('selectstart', function(e) {
                     e.preventDefault();
                     return false;
                 });
@@ -1230,14 +1230,14 @@
                 }
             });
 
-            box.find('.time1 input[type=range]').bind('change touchmove', function(e) {
+            box.find('.time1 input[type=range]').on('change touchmove', function(e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
                 setTime('time1', hour, min);
             });
 
-            box.find('.time2 input[type=range]').bind('change touchmove', function(e) {
+            box.find('.time2 input[type=range]').on('change touchmove', function(e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
@@ -2027,30 +2027,30 @@
         }
 
         function bindEvents() {
-            box.find('.day').unbind("click").click(function(evt) {
+            box.find('.day').off("click").click(function(evt) {
                 dayClicked($(this));
             });
 
-            box.find('.day').unbind("mouseenter").mouseenter(function(evt) {
+            box.find('.day').off("mouseenter").mouseenter(function(evt) {
                 dayHovering($(this));
             });
 
-            box.find('.day').unbind("mouseleave").mouseleave(function(evt) {
+            box.find('.day').off("mouseleave").mouseleave(function(evt) {
                 box.find('.date-range-length-tip').hide();
                 if (opt.singleDate) {
                     clearHovering();
                 }
             });
 
-            box.find('.week-number').unbind("click").click(function(evt) {
+            box.find('.week-number').off("click").click(function(evt) {
                 weekNumberClicked($(this));
             });
 
-            box.find('.month').unbind("change").change(function(evt) {
+            box.find('.month').off("change").change(function(evt) {
                 dateChanged($(this));
             });
 
-            box.find('.year').unbind("change").change(function(evt) {
+            box.find('.year').off("change").change(function(evt) {
                 dateChanged($(this));
             });
         }

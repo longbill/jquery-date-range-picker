@@ -51,7 +51,7 @@ $(function()
 	
 	$('#date-range0').dateRangePicker(
 	{
-	}).bind('datepicker-first-date-selected', function(event, obj)
+	}).on('datepicker-first-date-selected', function(event, obj)
 	{
 		/* This event will be triggered when first date is selected */
 		console.log('first-date-selected',obj);
@@ -60,7 +60,7 @@ $(function()
 		// 		date1: (Date object of the earlier date)
 		// }
 	})
-	.bind('datepicker-change',function(event,obj)
+	.on('datepicker-change',function(event,obj)
 	{
 		/* This event will be triggered when second date is selected */
 		console.log('change',obj);
@@ -71,27 +71,27 @@ $(function()
 		//	 	value: "2013-06-05 to 2013-06-07"
 		// }
 	})
-	.bind('datepicker-apply',function(event,obj)
+	.on('datepicker-apply',function(event,obj)
 	{
 		/* This event will be triggered when user clicks on the apply button */
 		console.log('apply',obj);
 	})
-	.bind('datepicker-close',function()
+	.on('datepicker-close',function()
 	{
 		/* This event will be triggered before date range picker close animation */
 		console.log('before close');
 	})
-	.bind('datepicker-closed',function()
+	.on('datepicker-closed',function()
 	{
 		/* This event will be triggered after date range picker close animation */
 		console.log('after close');
 	})
-	.bind('datepicker-open',function()
+	.on('datepicker-open',function()
 	{
 		/* This event will be triggered before date range picker open animation */
 		console.log('before open');
 	})
-	.bind('datepicker-opened',function()
+	.on('datepicker-opened',function()
 	{
 		/* This event will be triggered after date range picker open animation */
 		console.log('after open');
@@ -181,7 +181,7 @@ $(function()
 				}
 			}
 		]
-	}).bind('datepicker-apply',function(event,obj)
+	}).on('datepicker-apply',function(event,obj)
 	{
 		console.log(obj);
 	});
@@ -324,7 +324,7 @@ $(function()
 	{
 		showShortcuts: false,
 		format: 'YYYY-MM-DD'
-	}).bind('datepicker-change', function(evt, obj) {
+	}).on('datepicker-change', function(evt, obj) {
 		alert('date1: ' + obj.date1 + ' / date2: ' + obj.date2);
 	});
 
