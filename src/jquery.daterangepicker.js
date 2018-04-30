@@ -870,6 +870,7 @@
     };
 
     $.fn.dateRangePicker = function(opt) {
+        moment.locale(opt.language);
         if (!opt) opt = {};
         opt = $.extend(true, {
             autoClose: false,
