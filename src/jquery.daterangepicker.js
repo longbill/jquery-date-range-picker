@@ -1100,6 +1100,7 @@
             setTimeout(function() {
                 updateCalendarWidth();
                 initiated = true;
+                $(self).trigger('datepicker-init', {});
             }, 0);
 
             box.click(function(evt) {

@@ -969,6 +969,11 @@ $('#date-range16-reset').click(function(evt)
 	/* This event will be triggered after date range picker open animation */
 	console.log('after open');
 })
+.bind('datepicker-init',function()
+{
+	/* This event will be triggered after date range picker is initiated */
+	console.log('after init');
+})
 </pre>
 
         <br>
