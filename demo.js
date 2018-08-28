@@ -508,5 +508,25 @@ $(function()
 		}
 	});
 
+	$('#date-range55').dateRangePicker(
+	{
+		format: 'YYYY-MM-DD',
+		startDate: '2020-01-01',
+		endDate: '2020-01-31',
+		disableDates: ['2020-01-05', '2020-01-07', '2020-01-12']
+	});
+
+	$('#date-range56').dateRangePicker(
+	{
+		format: 'YYYY-MM-DD',
+		optionalDates: ['2020-01-01', '2020-01-05', '2020-01-07', '2020-01-12', '2020-01-14', '2020-01-18', '2020-01-30']
+	});
+
+	$('#date-range57').dateRangePicker(
+	{
+		format: 'YYYY-MM-DD',
+		disableDates: ['2020-01-05', '2020-01-07', '2020-01-12'],
+		optionalDates: ['2020-01-01', '2020-01-05', '2020-01-07', '2020-01-12', '2020-01-14', '2020-01-18', '2020-01-30']
+	});
 
 });
