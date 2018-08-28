@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>jQuery Date Range Picker Demo</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="dist/daterangepicker.min.css"/>
     <style type="text/css">
         #wrapper {
@@ -715,6 +715,43 @@ $('#date-range16-reset').click(function(evt)
 }
 				</pre>
             </li>
+
+            <li class="demo">
+                Disable dates by array: <input id="date-range55" size="30" value="">
+                <a href="#" class="show-option">Show Config</a>
+                <pre class="options">
+{
+        format: 'YYYY-MM-DD',
+        startDate; '2020-01-01',
+        endDate : '2020-01-31',
+        disableDates: ['2020-01-05', '2020-01-07', '2020-01-12']
+}
+                </pre>
+            </li>
+
+            <li class="demo">
+                Optional dates by array: <input id="date-range56" size="30" value="">
+                <a href="#" class="show-option">Show Config</a>
+                <pre class="options">
+{
+        format: 'YYYY-MM-DD',
+        optionalDates: ['2020-01-01', '2020-01-05', '2020-01-07', '2020-01-12', '2020-01-14', '2020-01-18', '2020-01-30']
+}
+                </pre>
+            </li>
+
+            <li class="demo">
+                Disable dates by array && Optional dates by array: <input id="date-range57" size="30" value="">
+                <a href="#" class="show-option">Show Config</a>
+                <pre class="options">
+{
+        format: 'YYYY-MM-DD',
+        disableDates: ['2020-01-05', '2020-01-07', '2020-01-12'],
+        optionalDates: ['2020-01-01', '2020-01-05', '2020-01-07', '2020-01-12', '2020-01-14', '2020-01-18', '2020-01-30']
+}
+                </pre>
+            </li>
+
         </ol>
     </section>
     <section>
@@ -917,6 +954,15 @@ $('#date-range16-reset').click(function(evt)
             function(current) {
                 return [current - 10, current + 10];
             }</i>
+
+<b>disableDates (Array)</b>
+        <i>You can set the disable dates by array like this ['2020-01-01', '2020-12-20'], same format as `format`</i>
+
+<b>optionalDates (Array)</b>
+        <i>You can set the optional dates by array like this ['2020-01-01', '2020-12-20'], same format as `format`.
+        The earliest date will be the minimum of the optional dates.
+        The latest date will be the maximum of the optional dates.</i>
+
 </pre>
     </section>
     <section>
@@ -1001,8 +1047,8 @@ $(dom).data('dateRangePicker')
         </p>
     </section>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js" type="text/javascript"></script>
     <script src="src/jquery.daterangepicker.js"></script>
     <script src="demo.js"></script>
 

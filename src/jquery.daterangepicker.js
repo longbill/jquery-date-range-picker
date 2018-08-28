@@ -929,13 +929,68 @@
             customArrowPrevSymbol: null,
             customArrowNextSymbol: null,
             monthSelect: false,
-            yearSelect: false
+            yearSelect: false,
+            disableDates: [],
+            optionalDates: []
         }, opt);
 
         opt.start = false;
         opt.end = false;
 
         opt.startWeek = false;
+
+        //if there are optional dates or disabled dates
+        if ((Array.isArray(opt.disableDates) && opt.disableDates.length > 0) || (Array.isArray(opt.optionalDates) && opt.optionalDates.length > 0)) {
+          var GetDateStr = function(d_) {
+            return moment(d_).format(opt.format);
+          }
+          if (Array.isArray(opt.optionalDates) && opt.optionalDates.length > 0) {
+            opt.optionalDates = opt.optionalDates.map(function(date) {
+              return GetDateStr(date);
+            });
+            if (Array.isArray(opt.disableDates) && opt.disableDates.length > 0) {
+              opt.disableDates = opt.disableDates.map(function(date) {
+                return GetDateStr(date);
+              });
+              opt.optionalDates = opt.optionalDates.filter(function(v) { return opt.disableDates.indexOf(v) == -1 });
+            }
+            var optionalDates = opt.optionalDates.map(function(date) {
+              return moment(date, opt.format).toDate();
+            });
+            var minDate = Math.min.apply(null, optionalDates);
+            var maxDate = Math.max.apply(null, optionalDates);
+            if (!opt.startDate || new Date(opt.startDate).getTime() < minDate) {
+              opt.startDate = new Date(minDate);
+            }
+            if (!opt.endDate || new Date(opt.endDate).getTime() > maxDate) {
+              opt.endDate = new Date(maxDate);
+            }
+            opt.beforeShowDay = function(t) {
+              var time = new Date(GetDateStr(t)).getTime();
+              var valid = false;
+              for (var i = 0; i < opt.optionalDates.length; i++) {
+                if (time == new Date(GetDateStr(opt.optionalDates[i])).getTime()) {
+                  valid = true;
+                  break;
+                }
+              }
+              return [valid, '', ''];
+            }
+
+          } else if (Array.isArray(opt.disableDates) && opt.disableDates.length > 0) {
+            opt.beforeShowDay = function(t) {
+              var time = new Date(GetDateStr(t)).getTime();
+              var valid = true
+              for (var i = 0; i < opt.disableDates.length; i++) {
+                if (time == new Date(GetDateStr(opt.disableDates[i])).getTime()) {
+                  valid = false;
+                  break;
+                }
+              }
+              return [valid, '', ''];
+            }
+          }
+        }
 
         //detect a touch device
         opt.isTouchDevice = 'ontouchstart' in window || navigator.msMaxTouchPoints;
@@ -953,7 +1008,7 @@
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
 
         if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
-            opt.yearSelect = function(current) { return [current - 5, current + 5]; }
+          opt.yearSelect = function(current) { return [current - 5, current + 5]; }
         }
 
         var languages = getLanguages();
