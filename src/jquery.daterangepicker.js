@@ -3,7 +3,7 @@
 // license : MIT
 // www.jszen.com
 
-(function(factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['jquery', 'moment'], factory);
@@ -14,7 +14,7 @@
         // Browser globals
         factory(jQuery, moment);
     }
-}(function($, moment) {
+}(function ($, moment) {
     'use strict';
     $.dateRangePickerLanguages = {
         "default": //default language: English
@@ -869,7 +869,7 @@
         }
     };
 
-    $.fn.dateRangePicker = function(opt) {
+    $.fn.dateRangePicker = function (opt) {
         if (!opt) opt = {};
         opt = $.extend(true, {
             autoClose: false,
@@ -877,10 +877,10 @@
             separator: ' to ',
             language: 'auto',
             startOfWeek: 'sunday', // or monday
-            getValue: function() {
+            getValue: function () {
                 return $(this).val();
             },
-            setValue: function(s) {
+            setValue: function (s) {
                 if (!$(this).attr('readonly') && !$(this).is(':disabled') && s != $(this).val()) {
                     $(this).val(s);
                 }
@@ -914,13 +914,13 @@
             selectBackward: false,
             applyBtnClass: '',
             singleMonth: 'auto',
-            hoveringTooltip: function(days, startTime, hoveringTime) {
+            hoveringTooltip: function (days, startTime, hoveringTime) {
                 return days > 1 ? days + ' ' + translate('days') : '';
             },
             showTopbar: true,
             swapTime: false,
             showWeekNumbers: false,
-            getWeekNumber: function(date) //date will be the first day of a week
+            getWeekNumber: function (date) //date will be the first day of a week
             {
                 return moment(date).format('w');
             },
@@ -953,7 +953,7 @@
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
 
         if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
-            opt.yearSelect = function(current) { return [current - 5, current + 5]; }
+            opt.yearSelect = function (current) { return [current - 5, current + 5]; }
         }
 
         var languages = getLanguages();
@@ -963,16 +963,16 @@
         var selfDom = $(self).get(0);
         var domChangeTimer;
 
-        $(this).off('.datepicker').on('click.datepicker', function(evt) {
+        $(this).off('.datepicker').on('click.datepicker', function (evt) {
             var isOpen = box.is(':visible');
             if (!isOpen) open(opt.duration);
-        }).on('change.datepicker', function(evt) {
+        }).on('change.datepicker', function (evt) {
             checkAndSetDefaultValue();
-        }).on('keyup.datepicker', function() {
+        }).on('keyup.datepicker', function () {
             try {
                 clearTimeout(domChangeTimer);
-            } catch (e) {}
-            domChangeTimer = setTimeout(function() {
+            } catch (e) { }
+            domChangeTimer = setTimeout(function () {
                 checkAndSetDefaultValue();
             }, 2000);
         });
@@ -985,7 +985,7 @@
 
         // expose some api
         $(this).data('dateRangePicker', {
-            setStart: function(d1) {
+            setStart: function (d1) {
                 if (typeof d1 == 'string') {
                     d1 = moment(d1, opt.format).toDate();
                 }
@@ -995,7 +995,7 @@
 
                 return this;
             },
-            setEnd: function(d2, silent) {
+            setEnd: function (d2, silent) {
                 var start = new Date();
                 start.setTime(opt.start);
                 if (typeof d2 == 'string') {
@@ -1004,7 +1004,7 @@
                 setDateRange(start, d2, silent);
                 return this;
             },
-            setDateRange: function(d1, d2, silent) {
+            setDateRange: function (d1, d2, silent) {
                 if (typeof d1 == 'string' && typeof d2 == 'string') {
                     d1 = moment(d1, opt.format).toDate();
                     d2 = moment(d2, opt.format).toDate();
@@ -1017,7 +1017,7 @@
             redraw: redrawDatePicker,
             getDatePicker: getDatePicker,
             resetMonthsView: resetMonthsView,
-            destroy: function() {
+            destroy: function () {
                 $(self).off('.datepicker');
                 $(self).data('dateRangePicker', '');
                 $(self).data('date-picker-opened', null);
@@ -1097,19 +1097,19 @@
             }
 
 
-            setTimeout(function() {
+            setTimeout(function () {
                 updateCalendarWidth();
                 initiated = true;
             }, 0);
 
-            box.click(function(evt) {
+            box.click(function (evt) {
                 evt.stopPropagation();
             });
 
             //if user click other place of the webpage, close date range picker window
             $(document).on('click.datepicker', outsideClickClose);
 
-            box.find('.next').click(function() {
+            box.find('.next').click(function () {
                 if (!opt.stickyMonths)
                     gotoNextMonth(this);
                 else
@@ -1136,7 +1136,7 @@
             }
 
 
-            box.find('.prev').click(function() {
+            box.find('.prev').click(function () {
                 if (!opt.stickyMonths)
                     gotoPrevMonth(this);
                 else
@@ -1164,12 +1164,12 @@
 
             box.attr('unselectable', 'on')
                 .css('user-select', 'none')
-                .on('selectstart', function(e) {
+                .on('selectstart', function (e) {
                     e.preventDefault();
                     return false;
                 });
 
-            box.find('.apply-btn').click(function() {
+            box.find('.apply-btn').click(function () {
                 closeDatePicker();
                 var dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString(new Date(opt.end));
                 $(self).trigger('datepicker-apply', {
@@ -1179,7 +1179,7 @@
                 });
             });
 
-            box.find('[custom]').click(function() {
+            box.find('[custom]').click(function () {
                 var valueName = $(this).attr('custom');
                 opt.start = false;
                 opt.end = false;
@@ -1191,7 +1191,7 @@
                 if (opt.autoClose) closeDatePicker();
             });
 
-            box.find('[shortcut]').click(function() {
+            box.find('[shortcut]').click(function () {
                 var shortcut = $(this).attr('shortcut');
                 var end = new Date(),
                     start = false;
@@ -1266,14 +1266,14 @@
                 }
             });
 
-            box.find('.time1 input[type=range]').on('change touchmove', function(e) {
+            box.find('.time1 input[type=range]').on('change touchmove', function (e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
                 setTime('time1', hour, min);
             });
 
-            box.find('.time2 input[type=range]').on('change touchmove', function(e) {
+            box.find('.time2 input[type=range]').on('change touchmove', function (e) {
                 var target = e.target,
                     hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
                     min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
@@ -1319,13 +1319,13 @@
             redrawDatePicker();
             checkAndSetDefaultValue();
             if (opt.customOpenAnimation) {
-                opt.customOpenAnimation.call(box.get(0), function() {
+                opt.customOpenAnimation.call(box.get(0), function () {
                     $(self).trigger('datepicker-opened', {
                         relatedTarget: box
                     });
                 });
             } else {
-                box.slideDown(animationTime, function() {
+                box.slideDown(animationTime, function () {
                     $(self).trigger('datepicker-opened', {
                         relatedTarget: box
                     });
@@ -1391,9 +1391,9 @@
         function changeTime(name, date) {
             opt[name] = parseInt(
                 moment(parseInt(date))
-                .startOf('day')
-                .add(moment(opt[name + 'Time']).format('HH'), 'h')
-                .add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
+                    .startOf('day')
+                    .add(moment(opt[name + 'Time']).format('HH'), 'h')
+                    .add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
             );
         }
 
@@ -1610,7 +1610,7 @@
         function updateSelectableRange() {
             box.find('.day.invalid.tmp').removeClass('tmp invalid').addClass('valid');
             if (opt.start && !opt.end) {
-                box.find('.day.toMonth.valid').each(function() {
+                box.find('.day.toMonth.valid').each(function () {
                     var time = parseInt($(this).attr('time'), 10);
                     if (!isValidTime(time))
                         $(this).addClass('invalid tmp').removeClass('valid');
@@ -1634,7 +1634,7 @@
                     box.find('.day.hovering').removeClass('hovering');
                     day.addClass('hovering');
                 } else {
-                    box.find('.day').each(function() {
+                    box.find('.day').each(function () {
                         var time = parseInt($(this).attr('time')),
                             start = opt.start,
                             end = opt.end;
@@ -1688,7 +1688,7 @@
                 var h = $tip.height();
                 _left -= w / 2;
                 _top -= h;
-                setTimeout(function() {
+                setTimeout(function () {
                     $tip.css({
                         left: _left,
                         top: _top,
@@ -1923,7 +1923,7 @@
 
         function showSelectedDays() {
             if (!opt.start && !opt.end) return;
-            box.find('.day').each(function() {
+            box.find('.day').each(function () {
                 var time = parseInt($(this).attr('time')),
                     start = opt.start,
                     end = opt.end;
@@ -1955,7 +1955,7 @@
                 }
             });
 
-            box.find('.week-number').each(function() {
+            box.find('.week-number').each(function () {
                 if ($(this).attr('data-start-time') == opt.startWeek) {
                     $(this).addClass('week-number-selected');
                 }
@@ -1978,17 +1978,43 @@
             var range;
             var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
             var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
-            date = moment(date);
+            var shortcuts = opt.shortcuts.prev || opt.shortcuts['prev-days'] ? true : false;
 
+            date = moment(date);
             if (!opt.monthSelect ||
                 startDate && endDate && startDate.isSame(endDate, 'month')) {
                 return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
             }
+            
+            // month dropdown range for no end date
+            if (!endDate) {
+                range = [
+                    startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                    11];
+            }
 
-            range = [
-                startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
-                date ? date.get('month') : 11
-            ];
+            // month dropdown range for end date and no previous shortcuts
+            if (endDate && !shortcuts) {
+                range = [
+                    startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                    date ? endDate.get('month') : 11
+                ]
+            }
+
+            // month dropdown range for end date and previous shortcuts
+            if (endDate && shortcuts) {
+                if (date.get('month') < endDate.get('month')) {
+                    range = [
+                        startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                        date ? endDate.get('month') : 11
+                    ]
+                } else {
+                    range = [
+                        startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                        date ? date.get('month') : 11
+                    ]
+                }
+            }
 
             if (range[0] === range[1]) {
                 return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
@@ -1999,7 +2025,7 @@
                 generateSelectData(
                     range,
                     date.get('month'),
-                    function(value) { return nameMonth(value); }
+                    function (value) { return nameMonth(value); }
                 )
             );
         }
@@ -2030,7 +2056,7 @@
 
         function generateSelectData(range, current, valueBeautifier) {
             var data = [];
-            valueBeautifier = valueBeautifier || function(value) { return value; };
+            valueBeautifier = valueBeautifier || function (value) { return value; };
 
             for (var i = range[0]; i <= range[1]; i++) {
                 data.push({
@@ -2063,30 +2089,30 @@
         }
 
         function bindEvents() {
-            box.find('.day').off("click").click(function(evt) {
+            box.find('.day').off("click").click(function (evt) {
                 dayClicked($(this));
             });
 
-            box.find('.day').off("mouseenter").mouseenter(function(evt) {
+            box.find('.day').off("mouseenter").mouseenter(function (evt) {
                 dayHovering($(this));
             });
 
-            box.find('.day').off("mouseleave").mouseleave(function(evt) {
+            box.find('.day').off("mouseleave").mouseleave(function (evt) {
                 box.find('.date-range-length-tip').hide();
                 if (opt.singleDate) {
                     clearHovering();
                 }
             });
 
-            box.find('.week-number').off("click").click(function(evt) {
+            box.find('.week-number').off("click").click(function (evt) {
                 weekNumberClicked($(this));
             });
 
-            box.find('.month').off("change").change(function(evt) {
+            box.find('.month').off("change").change(function (evt) {
                 dateChanged($(this));
             });
 
-            box.find('.year').off("change").change(function(evt) {
+            box.find('.year').off("change").change(function (evt) {
                 dateChanged($(this));
             });
         }
@@ -2123,7 +2149,7 @@
         function closeDatePicker() {
             if (opt.alwaysOpen) return;
 
-            var afterAnim = function() {
+            var afterAnim = function () {
                 $(self).data('date-picker-opened', false);
                 $(self).trigger('datepicker-closed', {
                     relatedTarget: box
@@ -2403,7 +2429,7 @@
         function attributesCallbacks(initialObject, callbacksArray, today) {
             var resultObject = $.extend(true, {}, initialObject);
 
-            $.each(callbacksArray, function(cbAttrIndex, cbAttr) {
+            $.each(callbacksArray, function (cbAttrIndex, cbAttr) {
                 var addAttributes = cbAttr(today);
                 for (var attr in addAttributes) {
                     if (resultObject.hasOwnProperty(attr)) {
@@ -2515,7 +2541,7 @@
                     return $.dateRangePickerLanguages['default'];
                 }
                 language = language.toLowerCase();
-                if(language in $.dateRangePickerLanguages){
+                if (language in $.dateRangePickerLanguages) {
                     return $.dateRangePickerLanguages[language];
                 }
 
