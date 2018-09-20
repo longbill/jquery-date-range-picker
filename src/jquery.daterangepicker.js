@@ -1978,6 +1978,7 @@
             var range;
             var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
             var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
+            var shortcuts = opt.shortcuts.prev || opt.shortcuts['prev-days'] ? true : false;
             date = moment(date);
 
             if (!opt.monthSelect ||
@@ -1985,10 +1986,35 @@
                 return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
             }
 
-            range = [
-                startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
-                date ? date.get('month') : 11
-            ];
+            // month dropdown range for no end date
+            if (!endDate) {
+                range = [
+                    startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                    11];
+            }
+
+            // month dropdown range for end date and no previous shortcuts
+            if (endDate && !shortcuts) {
+                range = [
+                    startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                    date ? endDate.get('month') : 11
+                ]
+            }
+
+            // month dropdown range for end date and previous shortcuts
+            if (endDate && shortcuts) {
+                if (date.get('month') < endDate.get('month')) {
+                    range = [
+                        startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                        date ? endDate.get('month') : 11
+                    ]
+                } else {
+                    range = [
+                        startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
+                        date ? date.get('month') : 11
+                    ]
+                }
+            }
 
             if (range[0] === range[1]) {
                 return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
