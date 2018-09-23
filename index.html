@@ -673,8 +673,8 @@ $('#date-range16-reset').click(function(evt)
                 Custom arrow symbol: <input id="date-range51" size="30" value="">
                 <a href="#" class="show-option">Show Config</a>
                 <pre class="options">
-// To make this demo work completely, the FontAwesome stylesheets are required 				
-{		
+// To make this demo work completely, the FontAwesome stylesheets are required
+{
     customArrowPrevSymbol: '&lt;i class="fa fa-arrow-circle-left"&gt;&lt;/i&gt;',
     customArrowNextSymbol: '&lt;i class="fa fa-arrow-circle-right"&gt;&lt;/i&gt;'
 }
@@ -712,6 +712,19 @@ $('#date-range16-reset').click(function(evt)
     yearSelect: function(current) {
         return [current - 10, current + 10];
     }
+}
+                </pre>
+            </li>
+
+            <li class="demo">
+                Month and year select min and max dates: <input id="date-range55" size="30" value="">
+                <a href="#" class="show-option">Show Config</a>
+                <pre class="options">
+{
+    monthSelect: true,
+    yearSelect: true,
+    startDate: moment().subtract(3, 'months').format('YYYY-MM-DD'),
+    endDate: moment().endOf('day').format('YYYY-MM-DD'),
 }
 				</pre>
             </li>

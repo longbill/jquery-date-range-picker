@@ -18,7 +18,7 @@ $(function()
 	define a new language named "custom"
 	*/
 
-	$.dateRangePickerLanguages['custom'] = 
+	$.dateRangePickerLanguages['custom'] =
 	{
 		'selected': 'Choosed:',
 		'days': 'Days',
@@ -48,7 +48,7 @@ $(function()
 		'default-range' : 'Please select a date range between %d and %d days',
 		'default-default': 'This is costom language'
 	};
-	
+
 	$('#date-range0').dateRangePicker(
 	{
 	}).on('datepicker-first-date-selected', function(event, obj)
@@ -156,7 +156,7 @@ $(function()
 		startOfWeek: 'sunday',
 		language:'en',
 		showShortcuts: true,
-		customShortcuts: 
+		customShortcuts:
 		[
 			//if return an array of two dates, it will select the date range between the two dates
 			{
@@ -188,8 +188,8 @@ $(function()
 
 	$('#date-range101').dateRangePicker(
 	{
-		showShortcuts: true,	
-		shortcuts : 
+		showShortcuts: true,
+		shortcuts :
 		{
 			'next-days': [3,5,7],
 			'next': ['week','month','year']
@@ -199,7 +199,7 @@ $(function()
 	$('#date-range102').dateRangePicker(
 	{
 		showShortcuts: true,
-		shortcuts : 
+		shortcuts :
 		{
 			'prev-days': [3,5,7],
 			'prev': ['week','month','year'],
@@ -277,17 +277,17 @@ $(function()
 	$('#date-range12').dateRangePicker(
 	{
 		inline:true,
-		container: '#date-range12-container', 
-		alwaysOpen:true 
+		container: '#date-range12-container',
+		alwaysOpen:true
 	});
 
 	$('#date-range13').dateRangePicker(
 	{
 		autoClose: true,
 		singleDate : true,
-		showShortcuts: false 
+		showShortcuts: false
 	});
-	
+
 	$('#date-range13-2').dateRangePicker(
 	{
 		autoClose: true,
@@ -483,7 +483,7 @@ $(function()
 	});
 
 	$('#date-range51').dateRangePicker(
-	{		
+	{
         customArrowPrevSymbol: '<i class="fa fa-arrow-circle-left"></i>',
         customArrowNextSymbol: '<i class="fa fa-arrow-circle-right"></i>'
 	});
@@ -500,13 +500,19 @@ $(function()
 		yearSelect: [1900, moment().get('year')]
 	});
 
-	$('#date-range54').dateRangePicker(
+    $('#date-range54').dateRangePicker(
+    {
+        monthSelect: true,
+        yearSelect: function(current) {
+            return [current - 10, current + 10];
+        }
+    });
+
+	$('#date-range55').dateRangePicker(
 	{
 		monthSelect: true,
-		yearSelect: function(current) {
-			return [current - 10, current + 10];
-		}
+        yearSelect: true,
+        startDate: moment().subtract(3, 'months').format('YYYY-MM-DD'),
+        endDate: moment().endOf('day').format('YYYY-MM-DD'),
 	});
-
-
 });
