@@ -1975,56 +1975,65 @@
         }
 
         function generateMonthElement(date, month) {
-            var range;
+            date = moment(date);
+            var currentMonth = date.get('month');
+            var currentMonthName = nameMonth(currentMonth);
+            var nonSelectableMonth = '<div class="month-element">' + currentMonthName + '</div>';
+
+            if (!opt.monthSelect) { return nonSelectableMonth; }
+
             var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
             var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
-            date = moment(date);
 
-            if (!opt.monthSelect ||
-                startDate && endDate && startDate.isSame(endDate, 'month')) {
-                return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
-            }
+            var minSelectableMonth = startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0;
+            var maxSelectableMonth = endDate && date.isSame(endDate, 'year') ? endDate.get('month') : 11;
+            var minVisibleMonth = Math.min(minSelectableMonth, currentMonth);
+            var maxVisibleMonth = Math.max(maxSelectableMonth, currentMonth);
 
-            range = [
-                startDate && date.isSame(startDate, 'year') ? startDate.get('month') : 0,
-                date ? date.get('month') : 11
-            ];
+            if (minVisibleMonth === maxVisibleMonth) { return nonSelectableMonth; }
 
-            if (range[0] === range[1]) {
-                return '<div class="month-element">' + nameMonth(date.get('month')) + '</div>';
-            }
-
-            return generateSelect(
-                'month',
-                generateSelectData(
-                    range,
-                    date.get('month'),
-                    function(value) { return nameMonth(value); }
-                )
-            );
+            var selectData = generateSelectData(
+                {
+                    minSelectable: minSelectableMonth,
+                    maxSelectable: maxSelectableMonth,
+                    minVisible: minVisibleMonth,
+                    maxVisible: maxVisibleMonth,
+                },
+                currentMonth,
+                function (value) { return nameMonth(value); }
+            )
+            return generateSelect('month', selectData);
         }
 
         function generateYearElement(date, month) {
             date = moment(date);
+            var currentYear = date.get('year');
+            var nonSelectableMonth = '<div class="month-element">' + currentYear + '</div>';
+
+            if (!opt.yearSelect) { return nonSelectableMonth; }
+
+            var isYearFunction = opt.yearSelect && typeof opt.yearSelect === 'function';
             var startDate = opt.startDate ? moment(opt.startDate).add(!opt.singleMonth && month === 'month2' ? 1 : 0, 'month') : false;
             var endDate = opt.endDate ? moment(opt.endDate).add(!opt.singleMonth && month === 'month1' ? -1 : 0, 'month') : false;
-            var fullYear = date.get('year');
-            var isYearFunction = opt.yearSelect && typeof opt.yearSelect === 'function';
-            var range;
+            var range = isYearFunction ? opt.yearSelect(currentYear) : opt.yearSelect.slice();
 
-            if (!opt.yearSelect ||
-                startDate && endDate && startDate.isSame(moment(endDate), 'year')) {
-                return '<div class="month-element">' + fullYear + '</div>';
-            }
+            var minSelectableYear = startDate ? Math.max(range[0], startDate.get('year')) : Math.min(range[0], currentYear);
+            var maxSelectableYear = endDate ? Math.min(range[1], endDate.get('year')) : Math.max(range[1], currentYear);
+            var minVisibleYear = Math.min(minSelectableYear, currentYear);
+            var maxVisibleYear = Math.max(maxSelectableYear, currentYear);
 
-            range = isYearFunction ? opt.yearSelect(fullYear) : opt.yearSelect.slice();
+            if (minVisibleYear === maxVisibleYear) { return nonSelectableMonth; }
 
-            range = [
-                startDate ? Math.max(range[0], startDate.get('year')) : Math.min(range[0], fullYear),
-                endDate ? Math.min(range[1], endDate.get('year')) : Math.max(range[1], fullYear)
-            ];
-
-            return generateSelect('year', generateSelectData(range, fullYear));
+            var selectData = generateSelectData(
+                {
+                    minSelectable: minSelectableYear,
+                    maxSelectable: maxSelectableYear,
+                    minVisible: minVisibleYear,
+                    maxVisible: maxVisibleYear,
+                },
+                currentYear
+            )
+            return generateSelect('year', selectData);
         }
 
 
@@ -2032,11 +2041,12 @@
             var data = [];
             valueBeautifier = valueBeautifier || function(value) { return value; };
 
-            for (var i = range[0]; i <= range[1]; i++) {
+            for (var i = range.minVisible; i <= range.maxVisible; i++) {
                 data.push({
                     value: i,
                     text: valueBeautifier(i),
-                    isCurrent: i === current
+                    selected: i === current,
+                    disabled: ((i < range.minSelectable) || (i > range.maxSelectable)),
                 });
             }
 
@@ -2048,12 +2058,14 @@
             var current;
 
             for (var i = 0, l = data.length; i < l; i++) {
-                select += '<option value="' + data[i].value + '"' + (data[i].isCurrent ? ' selected' : '') + '>';
-                select += data[i].text;
-                select += '</option>';
+                var item = data[i];
+                select += '<option value="' + item.value + '"' +
+                    (item.selected ? ' selected' : '') +
+                    (item.disabled ? ' disabled' : '') + '>' +
+                    item.text + '</option>';
 
-                if (data[i].isCurrent) {
-                    current = data[i].text;
+                if (item.selected) {
+                    current = item.text;
                 }
             }
 
