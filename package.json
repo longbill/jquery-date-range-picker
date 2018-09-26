@@ -1,7 +1,7 @@
 {
   "name": "jquery-date-range-picker",
   "description": "jQuery Date Range Picker is a jQuery plugin that allows user to select a date range.",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "license": "MIT",
   "main": "src/jquery.daterangepicker.js",
   "keywords": [
