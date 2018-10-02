@@ -354,7 +354,7 @@
             "next-month": "Hónap",
             "next-year": "Év",
             "less-than": "A kiválasztás nem lehet több %d napnál",
-            "more-than": "A kiválasztás nem lehet több %d napnál",
+            "more-than": "A kiválasztás nem lehet kevesebb %d napnál",
             "default-more": "Válassz ki egy időszakot ami hosszabb mint %d nap",
             "default-single": "Válassz egy napot",
             "default-less": "Válassz ki egy időszakot ami rövidebb mint %d nap",
