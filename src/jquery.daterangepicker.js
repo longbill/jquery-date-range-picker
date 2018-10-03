@@ -354,7 +354,7 @@
             "next-month": "Hónap",
             "next-year": "Év",
             "less-than": "A kiválasztás nem lehet több %d napnál",
-            "more-than": "A kiválasztás nem lehet több %d napnál",
+            "more-than": "A kiválasztás nem lehet kevesebb %d napnál",
             "default-more": "Válassz ki egy időszakot ami hosszabb mint %d nap",
             "default-single": "Válassz egy napot",
             "default-less": "Válassz ki egy időszakot ami rövidebb mint %d nap",
@@ -892,6 +892,7 @@
             },
             minDays: 0,
             maxDays: 0,
+            dayMode: 'days',
             showShortcuts: false,
             shortcuts: {
                 //'prev-days': [1,3,5,7],
@@ -914,9 +915,7 @@
             selectBackward: false,
             applyBtnClass: '',
             singleMonth: 'auto',
-            hoveringTooltip: function(days, startTime, hoveringTime) {
-                return days > 1 ? days + ' ' + translate('days') : '';
-            },
+            hoveringTooltip: true,
             showTopbar: true,
             swapTime: false,
             showWeekNumbers: false,
@@ -1663,8 +1662,12 @@
                         if (opt.hoveringTooltip) {
                             if (typeof opt.hoveringTooltip == 'function') {
                                 tooltip = opt.hoveringTooltip(days, opt.start, hoverTime);
-                            } else if (opt.hoveringTooltip === true && days > 1) {
-                                tooltip = days + ' ' + translate('days');
+                            } else if (opt.hoveringTooltip === true) {
+                                if(days > 1) {
+                                    tooltip = days + ' ' + translate('days');
+                                } else if (opt.dayMode == 'nights' && days == 1) {
+                                    tooltip = days + ' ' + translate('day');
+                                }
                             }
                         }
                     }
@@ -1835,7 +1838,11 @@
         }
 
         function countDays(start, end) {
-            return Math.abs(moment(start).diff(moment(end), 'd')) + 1;
+            var days = Math.abs(moment(start).diff(moment(end), 'd'));
+            if(opt.dayMode != 'nights') {
+                days++;
+            }
+            return days;
         }
 
         function setDateRange(date1, date2, silent) {
