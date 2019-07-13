@@ -929,7 +929,8 @@
             customArrowPrevSymbol: null,
             customArrowNextSymbol: null,
             monthSelect: false,
-            yearSelect: false
+            yearSelect: false,
+            focusDate: false
         }, opt);
 
         opt.start = false;
@@ -951,6 +952,7 @@
 
         if (opt.startDate && typeof opt.startDate == 'string') opt.startDate = moment(opt.startDate, opt.format).toDate();
         if (opt.endDate && typeof opt.endDate == 'string') opt.endDate = moment(opt.endDate, opt.format).toDate();
+        if (opt.focusDate && typeof opt.focusDate == 'string') opt.focusDate = moment(opt.focusDate, opt.format).toDate();
 
         if (opt.yearSelect && typeof opt.yearSelect === 'boolean') {
             opt.yearSelect = function(current) { return [current - 5, current + 5]; }
@@ -2152,6 +2154,10 @@
         }
 
         function redrawDatePicker() {
+            if (opt.focusDate) {
+                opt.month1 = moment(opt.focusDate).startOf('month') || opt.month1;
+                opt.month2 = nextMonth(opt.focusDate) || opt.month2;
+            }
             showMonth(opt.month1, 'month1');
             showMonth(opt.month2, 'month2');
         }
