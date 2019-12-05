@@ -906,6 +906,7 @@
             singleDate: false,
             lookBehind: false,
             batchMode: false,
+            lockedStart: false,
             duration: 200,
             stickyMonths: false,
             dayDivAttrs: [],
@@ -1499,7 +1500,10 @@
             } else if (opt.batchMode === 'month') {
                 opt.start = moment(parseInt(time)).startOf('month').valueOf();
                 opt.end = moment(parseInt(time)).endOf('month').valueOf();
-            } else if ((opt.start && opt.end) || (!opt.start && !opt.end)) {
+            } else if (opt.lockedStart) {
+				opt.start = opt.startDate.getTime();
+				opt.end = handleStart(time);
+			} else if ((opt.start && opt.end) || (!opt.start && !opt.end)) {
                 opt.start = handleStart(time);
                 opt.end = false;
             } else if (opt.start) {
