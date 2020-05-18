@@ -963,6 +963,8 @@
         var selfDom = $(self).get(0);
         var domChangeTimer;
 
+        var selectable = true;
+
         $(this).off('.datepicker').on('click.datepicker', function(evt) {
             var isOpen = box.is(':visible');
             if (!isOpen) open(opt.duration);
@@ -1024,7 +1026,8 @@
                 box.remove();
                 $(window).off('resize.datepicker', calcPosition);
                 $(document).off('click.datepicker', outsideClickClose);
-            }
+            },
+            disableSelect: disableSelect
         });
 
         $(window).on('resize.datepicker', calcPosition);
@@ -1359,6 +1362,10 @@
                     setDateRange(getValidValue(defaults[0], ___format, moment.locale(opt.language)), getValidValue(defaults[1], ___format, moment.locale(opt.language)));
                 } else if (defaults.length == 1 && opt.singleDate) {
                     setSingleDate(getValidValue(defaults[0], ___format, moment.locale(opt.language)));
+                }
+
+                if (! selectable) {
+                    disableSelect();
                 }
 
                 initiated = true;
@@ -1960,6 +1967,10 @@
                     $(this).addClass('week-number-selected');
                 }
             });
+
+            if (! selectable) {
+                disableSelect();
+            }
         }
 
         function showMonth(date, month) {
@@ -2101,6 +2112,10 @@
             box.find('.year').off("change").change(function(evt) {
                 dateChanged($(this));
             });
+
+            if (! selectable) {
+                disableSelect();
+            }
         }
 
         function showTime(date, name) {
@@ -2595,6 +2610,22 @@
             if (!IsOwnDatePickerClicked(evt, self[0])) {
                 if (box.is(':visible')) closeDatePicker();
             }
+        }
+
+        function disableSelect() {
+            if (selectable) {
+                selectable = false;
+            }
+
+            box.find('.day.last-date-selected').removeClass('last-date-selected');
+            box.find('.day.first-date-selected').removeClass('first-date-selected');
+            box.find('.day.real-today').removeClass('real-today');
+
+            box.find('.day').off('click');
+            box.find('.day').off('mouseenter');
+            box.find('.day').off('mouseleave');
+
+            box.find('.day.valid').css('cursor', 'default');
         }
 
     };
