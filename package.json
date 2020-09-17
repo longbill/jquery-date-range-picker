@@ -36,8 +36,7 @@
   "contributors": [],
   "dependencies": {
     "jquery": ">=1.7",
-    "moment": ">=2.8.1",
-    "npm": "^5.8.0"
+    "moment": ">=2.8.1"
   },
   "devDependencies": {
     "browser-sync": "^2.18.12",
