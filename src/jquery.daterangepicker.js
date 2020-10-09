@@ -1102,14 +1102,14 @@
                 initiated = true;
             }, 0);
 
-            box.click(function(evt) {
+            box.on('click', function(evt) {
                 evt.stopPropagation();
             });
 
             //if user click other place of the webpage, close date range picker window
             $(document).on('click.datepicker', outsideClickClose);
 
-            box.find('.next').click(function() {
+            box.find('.next').on('click', function() {
                 if (!opt.stickyMonths)
                     gotoNextMonth(this);
                 else
@@ -1136,7 +1136,7 @@
             }
 
 
-            box.find('.prev').click(function() {
+            box.find('.prev').on('click', function() {
                 if (!opt.stickyMonths)
                     gotoPrevMonth(this);
                 else
@@ -1169,7 +1169,7 @@
                     return false;
                 });
 
-            box.find('.apply-btn').click(function() {
+            box.find('.apply-btn').on('click', function() {
                 closeDatePicker();
                 var dateRange = getDateString(new Date(opt.start)) + opt.separator + getDateString(new Date(opt.end));
                 $(self).trigger('datepicker-apply', {
@@ -1179,7 +1179,7 @@
                 });
             });
 
-            box.find('[custom]').click(function() {
+            box.find('[custom]').on('click', function() {
                 var valueName = $(this).attr('custom');
                 opt.start = false;
                 opt.end = false;
@@ -1191,7 +1191,7 @@
                 if (opt.autoClose) closeDatePicker();
             });
 
-            box.find('[shortcut]').click(function() {
+            box.find('[shortcut]').on('click', function() {
                 var shortcut = $(this).attr('shortcut');
                 var end = new Date(),
                     start = false;
@@ -2073,30 +2073,30 @@
         }
 
         function bindEvents() {
-            box.find('.day').off("click").click(function(evt) {
+            box.find('.day').off("click").on('click', function(evt) {
                 dayClicked($(this));
             });
 
-            box.find('.day').off("mouseenter").mouseenter(function(evt) {
+            box.find('.day').off("mouseenter").on('mouseenter', function(evt) {
                 dayHovering($(this));
             });
 
-            box.find('.day').off("mouseleave").mouseleave(function(evt) {
+            box.find('.day').off("mouseleave").on('mouseleave', function(evt) {
                 box.find('.date-range-length-tip').hide();
                 if (opt.singleDate) {
                     clearHovering();
                 }
             });
 
-            box.find('.week-number').off("click").click(function(evt) {
+            box.find('.week-number').off("click").on('click', function(evt) {
                 weekNumberClicked($(this));
             });
 
-            box.find('.month').off("change").change(function(evt) {
+            box.find('.month').off("change").on('change', function(evt) {
                 dateChanged($(this));
             });
 
-            box.find('.year').off("change").change(function(evt) {
+            box.find('.year').off("change").on('change', function(evt) {
                 dateChanged($(this));
             });
         }
