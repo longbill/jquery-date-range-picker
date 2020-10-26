@@ -1391,9 +1391,8 @@
         function changeTime(name, date) {
             opt[name] = parseInt(
                 moment(parseInt(date))
-                .startOf('day')
-                .add(moment(opt[name + 'Time']).format('HH'), 'h')
-                .add(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
+                .hour(moment(opt[name + 'Time']).format('HH'), 'h')
+                .minute(moment(opt[name + 'Time']).format('mm'), 'm').valueOf()
             );
         }
 
@@ -1424,9 +1423,8 @@
                 var h = timePoint.format('HH'),
                     m = timePoint.format('mm');
                 opt[name] = timePoint
-                    .startOf('day')
-                    .add(hour || h, 'h')
-                    .add(minute || m, 'm')
+                    .hour(hour || h, 'h')
+                    .minute(minute || m, 'm')
                     .valueOf();
             }
             checkSelectionValid();
