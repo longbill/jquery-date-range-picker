@@ -903,7 +903,39 @@
             "time": "Čas",
             "hour": "Hodina",
             "minute": "Minúta"
-        }
+        },
+        "tr": {
+            "selected": "Seçildi:",
+            "day": " gün",
+            "days": " gün",
+            "apply": "Uygula",
+            "week-1": "1",
+            "week-2": "2",
+            "week-3": "3",
+            "week-4": "4",
+            "week-5": "5",
+            "week-6": "6",
+            "week-7": "7",
+            "month-name": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
+            "shortcuts": "Kısayollar",
+            "past": "Geçmiş",
+            "following": "Sonraki",
+            "previous": "&nbsp;&nbsp;&nbsp;",
+            "prev-week": "Önceki Hafta",
+            "prev-month": "Önceki Ay",
+            "prev-year": "Öncəki Yıl",
+            "next": "&nbsp;&nbsp;&nbsp;",
+            "next-week": "Sonraki Hafta",
+            "next-month": "Sonraki Ay",
+            "next-year": "Sonraki Yıl",
+            "less-than": "Tarih aralığı %d günden çok olmamalıdır",
+            "more-than": "Tarih aralığı %d günden az olmamalıdır",
+            "default-more": "%d günden çok bir tarih seçin",
+            "default-single": "Tarih seçin",
+            "default-less": "%d günden az bir tarih seçin",
+            "default-range": "%d ve %d gün aralığında tarihler seçin",
+            "default-default": "Tarih aralığı seçin"
+        },
     };
 
     $.fn.dateRangePicker = function(opt) {
