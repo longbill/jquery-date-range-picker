@@ -918,6 +918,7 @@
             "week-7": "7",
             "month-name": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
             "shortcuts": "Kısayollar",
+            "custom-values": "Özel Değerler",
             "past": "Geçmiş",
             "following": "Sonraki",
             "previous": "&nbsp;&nbsp;&nbsp;",
@@ -934,7 +935,10 @@
             "default-single": "Tarih seçin",
             "default-less": "%d günden az bir tarih seçin",
             "default-range": "%d ve %d gün aralığında tarihler seçin",
-            "default-default": "Tarih aralığı seçin"
+            "default-default": "Tarih aralığı seçin",
+            "time": "Zaman",
+            "hour": "Saat",
+            "minute": "Dakika"
         },
     };
 
