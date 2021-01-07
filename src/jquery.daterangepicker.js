@@ -1342,15 +1342,15 @@
 
             box.find('.time1 input[type=range]').on('change touchmove', function(e) {
                 var target = e.target,
-                    hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
-                    min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+                    hour = $(target).hasClass('hour-range') ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+                    min = $(target).hasClass('minute-range') ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
                 setTime('time1', hour, min);
             });
 
             box.find('.time2 input[type=range]').on('change touchmove', function(e) {
                 var target = e.target,
-                    hour = target.name == 'hour' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
-                    min = target.name == 'minute' ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
+                    hour = $(target).hasClass('hour-range') ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined,
+                    min = $(target).hasClass('minute-range') ? $(target).val().replace(/^(\d{1})$/, '0$1') : undefined;
                 setTime('time2', hour, min);
             });
 
@@ -2255,10 +2255,10 @@
                 '<span>' + translate('Time') + ': <span class="hour-val">00</span>:<span class="minute-val">00</span></span>' +
                 '</div>' +
                 '<div class="hour">' +
-                '<label>' + translate('Hour') + ': <input type="range" class="hour-range" name="hour" min="0" max="23"></label>' +
+                '<label>' + translate('Hour') + ': <input type="range" class="hour-range" min="0" max="23"></label>' +
                 '</div>' +
                 '<div class="minute">' +
-                '<label>' + translate('Minute') + ': <input type="range" class="minute-range" name="minute" min="0" max="59"></label>' +
+                '<label>' + translate('Minute') + ': <input type="range" class="minute-range" min="0" max="59"></label>' +
                 '</div>';
         }
 
