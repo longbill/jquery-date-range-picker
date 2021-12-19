@@ -779,10 +779,7 @@ $('#date-range16-reset').click(function(evt)
 	dayTdAttrs: [],
 	applyBtnClass: '',
 	singleMonth: 'auto',
-	hoveringTooltip: function(days, startTime, hoveringTime)
-	{
-		return days > 1 ? days + ' ' + lang('days') : '';
-	},
+	hoveringTooltip: true,
 	showTopbar: true,
 	swapTime: false,
 	selectForward: false,
@@ -829,6 +826,10 @@ $('#date-range16-reset').click(function(evt)
 <b>minDays (Number)</b>
 	<i>This number defines the minimum days of the selected range
 	if this is 0, means do not limit minimum days</i>
+
+<b>dayMode ('days' || 'nights')</b>
+	<i>Whether to count the nights instead of days in the selected date range. Of you choose 'nights',
+    you can define a custom language to change the text of the tooltip and the top bar. </i>
 
 <b>maxDays (Number)</b>
 	<i>This number defines the maximum days of the selected range
@@ -882,6 +883,10 @@ $('#date-range16-reset').click(function(evt)
 	<i>If true, it will show only one month instead of two months. You can select date range
 	in the one month view. If this is set to 'auto', it will be changed to true if the screen width
 	is lower than 480.</i>
+
+<b>hoveringTooltip (Boolean || Function) Default: true</b>
+	<i>If true, it will show a tooltip when you select a date range. You can define a callback function
+    to customize the content of the tooltip.</i>
 
 <b>showDateFilter ( Function(Int time, Int date) )</b>
 	<i>This is a callback function when creating each date element in the calendar. First paramter will
