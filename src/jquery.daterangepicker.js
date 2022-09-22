@@ -295,7 +295,10 @@
             "default-single": "Por favor selecciona un día",
             "default-less": "Por favor selecciona un rango menor a %d días",
             "default-range": "Por favor selecciona un rango entre %d y %d días",
-            "default-default": "Por favor selecciona un rango de fechas."
+            "default-default": "Por favor selecciona un rango de fechas.",
+            "Time": "Hora",
+            "hour": "Horas",
+            "minute": "Minutos"
         },
         "fr": {
             "selected": "Sélection:",
