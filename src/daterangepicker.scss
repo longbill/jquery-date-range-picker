@@ -164,10 +164,7 @@
       &.hovering {
         background-color: #cdecfa;
       }
-    }
-    &.nextMonth, &.lastMonth {
-      display: none;
-    }
+    }    
     &.real-today {
       background-color: rgb(255, 230, 132);
       &.checked, &.hovering {
