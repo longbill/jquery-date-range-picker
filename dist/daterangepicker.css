@@ -187,10 +187,6 @@
   background-color: #cdecfa;
 }
 
-.date-picker-wrapper .month-wrapper table .day.nextMonth, .date-picker-wrapper .month-wrapper table .day.lastMonth {
-  display: none;
-}
-
 .date-picker-wrapper .month-wrapper table .day.real-today {
   background-color: #ffe684;
 }
