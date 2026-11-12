@@ -1548,7 +1548,7 @@
 
 
         function dayClicked(day) {
-            if (day.hasClass('invalid')) return;
+            if ($(selfDom).is(':disabled') || day.hasClass('invalid')) return;
             var time = day.attr('time');
             day.addClass('checked');
             if (opt.singleDate) {
